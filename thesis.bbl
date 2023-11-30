@@ -1,0 +1,58 @@
+\begin{thebibliography}{1}
+
+\bibitem{mell2009nist}
+P.~Mell and T.~Grance.
+\newblock The nist definition of cloud computing.
+\newblock {\em National Institute of Standards and Technology, Information
+  Technology Laboratory}, 2011.
+
+\bibitem{cloudstackabout}
+Apache~Software Foundation.
+\newblock Apache cloudstack: About.
+\newblock \url{https://cloudstack.apache.org/about.html}.
+\newblock Accessed: 2023-11-19.
+
+\bibitem{scarfone2009nist}
+M.~Scarfone, K.~Souppaya and P.~Hoffman.
+\newblock Guide to security for full virtualization technologies.
+\newblock {\em National Institute of Standards and Technology, Information
+  Technology Laboratory}, 2011.
+
+\bibitem{whatiskvm}
+Amazon Web~Services Inc.
+\newblock What is kvm (kernel-based virtual machine)?
+\newblock \url{https://aws.amazon.com/what-is/kvm/}.
+\newblock Accessed: 2023-11-19.
+
+\bibitem{Buyya_Broberg_Goscinski_2011}
+Rajkumar Buyya, James Broberg, and Andrzej~M. Goscinski.
+\newblock {\em Cloud computing: Principles and Paradigms}.
+\newblock Wiley, March 2011.
+
+\bibitem{techtargetcloudstack}
+TechTarget.
+\newblock Cloudstack.
+\newblock \url{https://www.techtarget.com/whatis/definition/CloudStack}, July
+  2019.
+\newblock Accessed: 2023-11-20.
+
+\bibitem{MacPherson_2023}
+Jordan MacPherson.
+\newblock
+  \url{https://www.parkplacetechnologies.com/blog/what-is-hypervisor-types-benefits/},
+  April 2023.
+\newblock Accessed: 2023-11-20.
+
+\bibitem{hypervisor1vs2}
+Amazon Web~Services Inc.
+\newblock What’s the difference between type 1 and type 2 hypervisors?
+\newblock
+  \url{https://aws.amazon.com/compare/the-difference-between-type-1-and-type-2-hypervisors/}.
+\newblock Accessed: 2023-11-20.
+
+\bibitem{Abeni2020}
+Luca Abeni and Dario Faggioli.
+\newblock Using xen and kvm as real-time hypervisors.
+\newblock {\em Journal of Systems Architecture}, 106:101709, June 2020.
+
+\end{thebibliography}

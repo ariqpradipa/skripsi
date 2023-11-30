@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: thesis.aux
+The style file: unsrt.bst
+Database file #1: pustaka.bib
+Warning--entry type for "cloudstackabout" isn't style-file defined
+--line 11 of file pustaka.bib
+Warning--entry type for "whatiskvm" isn't style-file defined
+--line 25 of file pustaka.bib
+Warning--entry type for "techtargetcloudstack" isn't style-file defined
+--line 39 of file pustaka.bib
+Warning--entry type for "MacPherson_2023" isn't style-file defined
+--line 49 of file pustaka.bib
+Warning--I didn't find a database entry for "lankton2008introduction"
+Warning--I didn't find a database entry for "chin2000learning"
+Warning--I didn't find a database entry for "barto1995learning"
+You've used 9 entries,
+            1791 wiz_defined-function locations,
+            497 strings with 4943 characters,
+and the built_in function-call counts, 1390 in all, are:
+= -- 118
+> -- 55
+< -- 0
++ -- 23
+- -- 14
+* -- 44
+:= -- 234
+add.period$ -- 32
+call.type$ -- 9
+change.case$ -- 8
+chr.to.int$ -- 0
+cite$ -- 9
+duplicate$ -- 60
+empty$ -- 160
+format.name$ -- 14
+if$ -- 315
+int.to.chr$ -- 0
+int.to.str$ -- 9
+missing$ -- 5
+newline$ -- 53
+num.names$ -- 9
+pop$ -- 47
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 24
+stack$ -- 0
+substring$ -- 18
+swap$ -- 9
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 10
+width$ -- 10
+write$ -- 100
+(There were 7 warnings)

@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{binary\PYGZus{}accuracy}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{,} \PYG{n}{y\PYGZus{}pred}\PYG{p}{):}
+    \PYG{k}{return} \PYG{n}{K}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{equal}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{,} \PYG{n}{K}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{y\PYGZus{}pred}\PYG{p}{)),} \PYG{n}{axis}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+
+
+\PYG{k}{def} \PYG{n+nf}{categorical\PYGZus{}accuracy}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{,} \PYG{n}{y\PYGZus{}pred}\PYG{p}{):}
+    \PYG{k}{return} \PYG{n}{K}\PYG{o}{.}\PYG{n}{cast}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{equal}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{,} \PYG{n}{axis}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{),}
+                          \PYG{n}{K}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{y\PYGZus{}pred}\PYG{p}{,} \PYG{n}{axis}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)),}
+                  \PYG{n}{K}\PYG{o}{.}\PYG{n}{floatx}\PYG{p}{())}
+
+
+\PYG{k}{def} \PYG{n+nf}{sparse\PYGZus{}categorical\PYGZus{}accuracy}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{,} \PYG{n}{y\PYGZus{}pred}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} reshape in case it\PYGZsq{}s in shape (num\PYGZus{}samples, 1) instead of (num\PYGZus{}samples,)}
+    \PYG{k}{if} \PYG{n}{K}\PYG{o}{.}\PYG{n}{ndim}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{)} \PYG{o}{==} \PYG{n}{K}\PYG{o}{.}\PYG{n}{ndim}\PYG{p}{(}\PYG{n}{y\PYGZus{}pred}\PYG{p}{):}
+        \PYG{n}{y\PYGZus{}true} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{squeeze}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} convert dense predictions to labels}
+    \PYG{n}{y\PYGZus{}pred\PYGZus{}labels} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{y\PYGZus{}pred}\PYG{p}{,} \PYG{n}{axis}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{n}{y\PYGZus{}pred\PYGZus{}labels} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{cast}\PYG{p}{(}\PYG{n}{y\PYGZus{}pred\PYGZus{}labels}\PYG{p}{,} \PYG{n}{K}\PYG{o}{.}\PYG{n}{floatx}\PYG{p}{())}
+    \PYG{k}{return} \PYG{n}{K}\PYG{o}{.}\PYG{n}{cast}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{equal}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{,} \PYG{n}{y\PYGZus{}pred\PYGZus{}labels}\PYG{p}{),} \PYG{n}{K}\PYG{o}{.}\PYG{n}{floatx}\PYG{p}{())}
+
+
+\PYG{k}{def} \PYG{n+nf}{top\PYGZus{}k\PYGZus{}categorical\PYGZus{}accuracy}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{,} \PYG{n}{y\PYGZus{}pred}\PYG{p}{,} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{):}
+    \PYG{k}{return} \PYG{n}{K}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{in\PYGZus{}top\PYGZus{}k}\PYG{p}{(}\PYG{n}{y\PYGZus{}pred}\PYG{p}{,} \PYG{n}{K}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{,} \PYG{n}{axis}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{),} \PYG{n}{k}\PYG{p}{),} \PYG{n}{axis}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+
+
+\PYG{k}{def} \PYG{n+nf}{sparse\PYGZus{}top\PYGZus{}k\PYGZus{}categorical\PYGZus{}accuracy}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{,} \PYG{n}{y\PYGZus{}pred}\PYG{p}{,} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} If the shape of y\PYGZus{}true is (num\PYGZus{}samples, 1), flatten to (num\PYGZus{}samples,)}
+    \PYG{k}{return} \PYG{n}{K}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{in\PYGZus{}top\PYGZus{}k}\PYG{p}{(}\PYG{n}{y\PYGZus{}pred}\PYG{p}{,} \PYG{n}{K}\PYG{o}{.}\PYG{n}{cast}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{flatten}\PYG{p}{(}\PYG{n}{y\PYGZus{}true}\PYG{p}{),} \PYG{l+s+s1}{\PYGZsq{}int32\PYGZsq{}}\PYG{p}{),} \PYG{n}{k}\PYG{p}{),}
+                  \PYG{n}{axis}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+\end{Verbatim}
