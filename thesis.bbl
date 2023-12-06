@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{mell2009nist}
 P.~Mell and T.~Grance.
@@ -38,6 +38,7 @@ TechTarget.
 
 \bibitem{MacPherson_2023}
 Jordan MacPherson.
+\newblock What is a hypervisor? - types, benefits and how does it work?
 \newblock
   \url{https://www.parkplacetechnologies.com/blog/what-is-hypervisor-types-benefits/},
   April 2023.
@@ -54,5 +55,22 @@ Amazon Web~Services Inc.
 Luca Abeni and Dario Faggioli.
 \newblock Using xen and kvm as real-time hypervisors.
 \newblock {\em Journal of Systems Architecture}, 106:101709, June 2020.
+
+\bibitem{Pradilla2016}
+J.V. Pradilla and C.E. Palau.
+\newblock {\em Micro Virtual Machines (MicroVMs) for Cloud-assisted
+  Cyber-Physical Systems (CPS)}, page 125–142.
+\newblock Elsevier, 2016.
+
+\bibitem{ibmWhatVirtualMachine}
+IBM.
+\newblock {W}hat are virtual machines? | {I}{B}{M} --- ibm.com.
+\newblock \url{https://www.ibm.com/topics/virtual-machines}.
+\newblock [Accessed 30-11-2023].
+
+\bibitem{libvirtLibvirtVirsh}
+libvirt: virsh --- libvirt.org.
+\newblock \url{https://libvirt.org/manpages/virsh.html}.
+\newblock [Accessed 06-12-2023].
 
 \end{thebibliography}

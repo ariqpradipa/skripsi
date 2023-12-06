@@ -80,15 +80,36 @@ Dalam pengaturan KVM, CPU virtual dari VM diimplementasikan sebagai thread (dise
 	\label{fig:xen-kvm}
 \end{figure}
 
-Pada Gambar \ref{fig:xen-kvm} adalah struktur daripada hypervisor KVM. KVM berjalan langsung pada kernel linux host dan membagikan resourcenya kepada guest \vm, sedangkan sistem operasi host berjalan langsung diatas kernel host. Sistem operasi host dapat melakukan konfigurasi kepada \vm\ yang menggunakan hypervisor miliknya. 
+Pada Gambar \ref{fig:xen-kvm} adalah struktur daripada hypervisor KVM. KVM berjalan langsung pada kernel linux host dan membagikan resourcenya kepada guest \vm, sedangkan sistem operasi host berjalan langsung diatas kernel host. Sistem operasi host dapat melakukan konfigurasi kepada \vm\ yang menggunakan hypervisor miliknya.
 
 %-----------------------------------------------------------------------------%
 \section{\f{Virtual Machine}}
 %-----------------------------------------------------------------------------%
 
+\hspace{0.5cm} Virtual Machine (VM) adalah sebuah lingkungan komputasi yang dibuat secara virtual di dalam sebuah komputer fisik (host)\cite{Pradilla2016}. VM ini berfungsi seperti sebuah komputer independen yang dapat menjalankan sistem operasi dan aplikasi seperti komputer fisik biasa, tetapi semuanya berjalan dalam lingkungan virtual yang terisolasi di dalam host fisik. Setiap \vm (VM) menjalankan sistem operasi secara independen dan beroperasi terpisah dari VM lainnya, bahkan ketika semuanya berjalan pada host yang sama. Perangkat lunak yang dikenal sebagai hypervisor atau \vmm (VMM) memungkinkan kita untuk menjalankan berbagai sistem operasi yang berbeda secara bersamaan pada \vm yang berbeda. VM memiliki beberapa keunggulan dibandingkan dengan mesin fisik, termasuk kemampuan untuk menjalankan beberapa lingkungan sistem operasi pada satu komputer fisik, mendukung aplikasi \f{legacy}, dan menyediakan opsi pemulihan dalam situasi bencana. VM digunakan untuk berbagai keperluan, seperti \cc, pengujian sistem operasi baru, dan menjalankan beberapa aplikasi pada satu mesin fisik\cite{ibmWhatVirtualMachine}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]
+	{assets/pics/vm-diagram.jpg}
+	\caption{Perbedaan Komputasi Tanpa Virtualisasi dengan Virtualisasi}
+	\label{fig:vm-diagram}
+\end{figure}
+
+Terdapat perbedaan dalam cara berjalan antara komputer tanpa virtualisasi (host) dan komputer yang divirtualisasi (guest) atau \vm. Pada Gambar 2.4, dapat diperlihatkan bahwa pada komputer tanpa virtualisasi, sistem operasinya berjalan langsung di atas perangkat keras, dengan driver yang berfungsi sebagai jembatan, sehingga aplikasi dapat berjalan langsung di atas sistem operasi tersebut. Di sisi lain, pada komputer yang divirtualisasi, sistem operasinya berjalan di atas VMM atau Virtual Machine Monitor, di mana satu VMM dapat menjalankan banyak sistem operasi guest.
+
 %-----------------------------------------------------------------------------%
-\section{HandBrake}
+\section{virsh}
 %-----------------------------------------------------------------------------%
+
+\hspace{0.5cm} virsh adalah \f{command line tool} yang merupakan bagian dari \f{library} libvirt dan secara utama digunakan untuk mengelola dan berinteraksi dengan teknologi virtualisasi pada sistem Linux, khususnya KVM (Kernel-based Virtual Machine) dan QEMU (Quick Emulator), dan mendukung hypervisor lainnya seperti Xen, LXC, OpenVZ, VirtualBox, dan VMware ESX\cite{libvirtLibvirtVirsh}.
+
+Secara sederhana penggunaan virsh adalah seperti ini
+\begin{center}
+	\begin{verbatim}
+		virsh [OPTION]... <command> <domain> [ARG]...
+	\end{verbatim}
+\end{center}
 
 %-----------------------------------------------------------------------------%
 \section{\latex~Secara Singkat}

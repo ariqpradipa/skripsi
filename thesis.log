@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.11.27)  30 NOV 2023 15:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.11.27)  6 DEC 2023 16:15
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1438,7 +1438,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 [5
 
 ]
-<assets/pics/apache_cloudstack_with_cloud_monkey.jpg, id=499, 1176.395pt x 342.
+<assets/pics/apache_cloudstack_with_cloud_monkey.jpg, id=502, 1176.395pt x 342.
 27875pt>
 File: assets/pics/apache_cloudstack_with_cloud_monkey.jpg Graphic file (type jp
 g)
@@ -1456,7 +1456,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [6 <./assets/pics/apache_cloudstack_with_cloud_monkey.jpg>]
-<assets/pics/type-1-hypervisor-vs-type-2.png, id=513, 1505.625pt x 734.745pt>
+<assets/pics/type-1-hypervisor-vs-type-2.png, id=516, 1505.625pt x 734.745pt>
 File: assets/pics/type-1-hypervisor-vs-type-2.png Graphic file (type png)
 <use assets/pics/type-1-hypervisor-vs-type-2.png>
 Package pdftex.def Info: assets/pics/type-1-hypervisor-vs-type-2.png  used on i
@@ -1472,7 +1472,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [7 <./assets/pics/type-1-hypervisor-vs-type-2.png>]
-<assets/pics/xen-kvm.png, id=527, 702.625pt x 394.47375pt>
+<assets/pics/xen-kvm.png, id=530, 702.625pt x 394.47375pt>
 File: assets/pics/xen-kvm.png Graphic file (type png)
 <use assets/pics/xen-kvm.png>
 Package pdftex.def Info: assets/pics/xen-kvm.png  used on input line 78.
@@ -1487,27 +1487,42 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [8]
+<assets/pics/vm-diagram.jpg, id=539, 708.6475pt x 523.9575pt>
+File: assets/pics/vm-diagram.jpg Graphic file (type jpg)
+<use assets/pics/vm-diagram.jpg>
+Package pdftex.def Info: assets/pics/vm-diagram.jpg  used on input line 94.
+(pdftex.def)             Requested size: 398.3386pt x 294.5255pt.
+
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
+
+[9 <./assets/pics/xen-kvm.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 94.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 115.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 94.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 115.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 94.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 115.
 
 
-Package natbib Warning: Citation `lankton2008introduction' on page 9 undefined 
-on input line 96.
+Package natbib Warning: Citation `lankton2008introduction' on page 10 undefined
+ on input line 117.
 
 
-Package natbib Warning: Citation `chin2000learning' on page 9 undefined on inpu
-t line 119.
+Package natbib Warning: Citation `chin2000learning' on page 10 undefined on inp
+ut line 140.
 
 
-Package natbib Warning: Citation `barto1995learning' on page 9 undefined on inp
-ut line 119.
+Package natbib Warning: Citation `barto1995learning' on page 10 undefined on in
+put line 140.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--120
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
 
  []
 
@@ -1519,16 +1534,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[9 <./assets/pics/xen-kvm.png>]
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
-
-[10]
+[10 <./assets/pics/vm-diagram.jpg>]
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1538,10 +1544,19 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [11]
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
+
+[12]
 File: assets/pics/creative_common.png Graphic file (type png)
 <use assets/pics/creative_common.png>
-Package pdftex.def Info: assets/pics/creative_common.png  used on input line 20
-7.
+Package pdftex.def Info: assets/pics/creative_common.png  used on input line 22
+8.
 (pdftex.def)             Requested size: 199.1693pt x 169.17186pt.
 
 
@@ -1552,7 +1567,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[12]) (./src/01-body/03-bab3.tex
+[13]) (./src/01-body/03-bab3.tex
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1561,7 +1576,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[13]
+[14]
 BAB 3.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1577,7 +1592,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-[14
+[15
 
 ]) (./src/01-body/04-bab4.tex
 
@@ -1588,7 +1603,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[15]
+[16]
 BAB 4.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1613,10 +1628,10 @@ asa In-done-sia.
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
 (Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 52.
 
-Package natbib Warning: Citation `lankton2008introduction' on page 16 undefined
+Package natbib Warning: Citation `lankton2008introduction' on page 17 undefined
  on input line 53.
 
-[16
+[17
 
 ]
 \openout4 = `thesis.pyg'.
@@ -1654,7 +1669,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[17]) (./src/01-body/05-bab5.tex
+[18]) (./src/01-body/05-bab5.tex
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1663,7 +1678,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[18]
+[19]
 BAB 5.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1684,10 +1699,10 @@ Overfull \hbox (27.94829pt too wide) in paragraph at lines 32--34
 [] 
  []
 
-[19
+[20
 
 ]
-<assets/pdfs/include.pdf, id=619, 597.51233pt x 845.0471pt>
+<assets/pdfs/include.pdf, id=633, 597.51233pt x 845.0471pt>
 File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf>
 Package pdftex.def Info: assets/pdfs/include.pdf  used on input line 55.
@@ -1696,7 +1711,7 @@ File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf>
 Package pdftex.def Info: assets/pdfs/include.pdf  used on input line 55.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
-<assets/pdfs/include.pdf, id=622, page=1, 597.51233pt x 845.0471pt>
+<assets/pdfs/include.pdf, id=636, page=1, 597.51233pt x 845.0471pt>
 File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf, page 1>
 Package pdftex.def Info: assets/pdfs/include.pdf , page1 used on input line 55.
@@ -1716,7 +1731,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[20]
+[21]
 File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf, page 1>
 Package pdftex.def Info: assets/pdfs/include.pdf , page1 used on input line 55.
@@ -1741,7 +1756,7 @@ File: assets/pdfs/include.pdf Graphic file (type pdf)
 Package pdftex.def Info: assets/pdfs/include.pdf , page1 used on input line 55.
 
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
-[21 <./assets/pdfs/include.pdf>]
+[22 <./assets/pdfs/include.pdf>]
 File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf>
 Package pdftex.def Info: assets/pdfs/include.pdf  used on input line 62.
@@ -1769,7 +1784,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[22]
+[23]
 File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf, page 1>
 Package pdftex.def Info: assets/pdfs/include.pdf , page1 used on input line 62.
@@ -1785,7 +1800,7 @@ File: assets/pdfs/include.pdf Graphic file (type pdf)
 Package pdftex.def Info: assets/pdfs/include.pdf , page1 used on input line 62.
 
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
- [23]) (./src/01-body/06-bab6.tex
+ [24]) (./src/01-body/06-bab6.tex
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1794,7 +1809,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[24]
+[25]
 BAB 6.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1810,7 +1825,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./src/01-body/99-kesimpulan.tex [25
+) (./src/01-body/99-kesimpulan.tex [26
 
 ]
 BAB 7.
@@ -1828,7 +1843,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--6
 
  []
 
-) (./thesis.bbl [26
+) (./thesis.bbl [27
 
 ]
 
@@ -1836,49 +1851,63 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
 
 
-Underfull \hbox (badness 3271) in paragraph at lines 33--38
+Underfull \hbox (badness 1917) in paragraph at lines 33--38
 []\OT1/ptm/m/n/12 TechTarget.  Cloud-stack.  []$https : / / www . techtarget . 
 com / whatis / de^^Lnition /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 40--45
-[]\OT1/ptm/m/n/12 Jordan MacPher-son.  []$https : / / www . parkplacetechnologi
+Underfull \hbox (badness 5622) in paragraph at lines 40--46
+[]\OT1/ptm/m/n/12 Jordan MacPher-son.  What is a hy-per-vi-sor? - types, ben-e-
+fits
+ []
+
+
+Underfull \hbox (badness 1270) in paragraph at lines 40--46
+\OT1/ptm/m/n/12 and how does it work?  []$https : / / www . parkplacetechnologi
 es . com / blog /
  []
 
 
-Underfull \hbox (badness 6575) in paragraph at lines 47--52
+Underfull \hbox (badness 5105) in paragraph at lines 48--53
 []\OT1/ptm/m/n/12 Amazon Web Ser-vices Inc.  What's the dif-fer-ence be-tween t
 ype
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--52
+Underfull \hbox (badness 10000) in paragraph at lines 48--53
 \OT1/ptm/m/n/12 1 and type 2 hy-per-vi-sors?  []$https : / / aws . amazon . com
  / compare /
  []
 
-)
+[28
+
+])
 
 Package natbib Warning: There were undefined citations.
 
-[27
 
-] (./thesis.aux)
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
+
+[29] (./thesis.aux)
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 99453A8C404A7CECA1AC1E2077B5E6F4;8436.
+(rerunfilecheck)             Checksum: 40B272B24D22D311FBDEF841EBB3A329;8416.
 runsystem(rm thesis.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 28709 strings out of 480247
- 543460 string characters out of 5896150
- 916726 words of memory out of 5000000
- 45767 multiletter control sequences out of 15000+600000
+ 28733 strings out of 480247
+ 544006 string characters out of 5896150
+ 916895 words of memory out of 5000000
+ 45784 multiletter control sequences out of 15000+600000
  543839 words of font info for 195 fonts, out of 8000000 for 9000
  83 hyphenation exceptions out of 8191
- 119i,17n,116p,1023b,1127s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 119i,17n,116p,1188b,1127s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-
@@ -1893,10 +1922,10 @@ xmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
 utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (42 pages, 405674 bytes).
+Output written on thesis.pdf (44 pages, 449616 bytes).
 PDF statistics:
- 773 PDF objects out of 1000 (max. 8388607)
- 676 compressed objects within 7 object streams
- 141 named destinations out of 1000 (max. 500000)
- 505 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 796 PDF objects out of 1000 (max. 8388607)
+ 696 compressed objects within 7 object streams
+ 147 named destinations out of 1000 (max. 500000)
+ 510 words of extra memory for PDF output out of 10000 (max. 10000000)
 
