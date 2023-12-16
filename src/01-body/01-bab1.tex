@@ -7,7 +7,7 @@
 %-----------------------------------------------------------------------------%
 \section{Latar Belakang}
 %-----------------------------------------------------------------------------%
-\hspace{0.5cm} \cc\ adalah sebuah model yang memungkinkan akses yang luas, nyaman, dan sesuai permintaan ke sumber daya komputasi bersama, seperti jaringan, server, dan penyimpanan. Model ini terdiri dari lima karakteristik utama, yakni layanan mandiri \f{on-demand}, akses jaringan yang luas, pengelolaan sumber daya \f{(resource pooling)}, elastisitas yang cepat, dan layanan yang terukur. \cc\ juga melibatkan tiga model layanan, seperti \f{Software as a Service} (SaaS), \f{Platform as a Service} (PaaS), dan Infrastructure as a Service (IaaS). Selain itu, terdapat empat model implementasi: \f{private cloud, community cloud, public cloud,} dan \f{hybrid cloud,} masing-masing sesuai dengan kebutuhan dan kegunaan dari organisasi yang berbeda\cite{mell2009nist}.
+\cc\ adalah sebuah model yang memungkinkan akses yang luas, nyaman, dan sesuai permintaan ke sumber daya komputasi bersama, seperti jaringan, server, dan penyimpanan. Model ini terdiri dari lima karakteristik utama, yakni layanan mandiri \f{on-demand}, akses jaringan yang luas, pengelolaan sumber daya \f{(resource pooling)}, elastisitas yang cepat, dan layanan yang terukur. \cc\ juga melibatkan tiga model layanan, seperti \f{Software as a Service} (SaaS), \f{Platform as a Service} (PaaS), dan Infrastructure as a Service (IaaS). Selain itu, terdapat empat model implementasi: \f{private cloud, community cloud, public cloud,} dan \f{hybrid cloud,} masing-masing sesuai dengan kebutuhan dan kegunaan dari organisasi yang berbeda\cite{mell2009nist}.
 
 Kita dapat membuat sistem \cc\ sendiri dengan menggunakan Apache CloudStack. Apache CloudStack adalah perangkat lunak \oss\ yang dirancang untuk implementasi dan administrasi jaringan \vm. CloudStack berfungsi sebagai platform \cc\ Infrastructure as a Service (IaaS) yang \f{reliable}, CloudStack juga dikenal karena \f{high availability} dan skalabilitasnya. Apache CloudStack digunakan oleh berbagai penyedia layanan untuk menyediakan layanan cloud publik, CloudStack juga digunakan oleh banyak perusahaan untuk membentuk solusi \f{private cloud} atau sebagai bagian dari konfigurasi \f{hybrid cloud}\cite{cloudstackabout}.
 
@@ -21,13 +21,13 @@ Penggunaan KVM sebagai hypervisor untuk menjalankan \vm\ pada Apache Cloudstack 
 %-----------------------------------------------------------------------------%
 \section{Permasalahan}
 %-----------------------------------------------------------------------------%
-\hspace{0.5cm} Pada bagian ini akan dijelaskan mengenai definisi permasalahan yang \saya~hadapi dan ingin diselesaikan serta asumsi dan batasan yang digunakan dalam menyelesaikannya.
+Pada bagian ini akan dijelaskan mengenai definisi permasalahan yang \saya~hadapi dan ingin diselesaikan serta asumsi dan batasan yang digunakan dalam menyelesaikannya.
 
 
 %-----------------------------------------------------------------------------%
 \subsection{Definisi Permasalahan}
 %-----------------------------------------------------------------------------%
-\hspace{0.5cm} Berdasarkan latar belakang yang telah dijelaskan pada bab 1.1 bahasan mengenai rumusah yang akan dibahas pada penelitian ini adalah sebagai berikut:
+Berdasarkan latar belakang yang telah dijelaskan pada bab 1.1 bahasan mengenai rumusah yang akan dibahas pada penelitian ini adalah sebagai berikut:
 \begin{enumerate}
   \item Apakah tuning hypervisor KVM pada Apache CloudStack memberikan efek yang signifikan terhadap performa sistem operasi \f{guest} yang menjalankan tugas kompresi video menggunakan Handbrake?
   \item Bagaimana konfigurasi hypervisor KVM dapat diatur secara optimal untuk meningkatkan efisiensi dalam menangani tugas kompresi video pada Apache CloudStack?
@@ -36,7 +36,7 @@ Penggunaan KVM sebagai hypervisor untuk menjalankan \vm\ pada Apache Cloudstack 
 %-----------------------------------------------------------------------------%
 \subsection{Batasan Permasalahan}
 %-----------------------------------------------------------------------------%
-\hspace{0.5cm} Karena berbagai kendala yang dihadapi pada skripsi ini dilakukan pembatasan masalah pada penelitian  sebagai berikut:
+Karena berbagai kendala yang dihadapi pada skripsi ini dilakukan pembatasan masalah pada penelitian  sebagai berikut:
 \begin{enumerate}
   \item Penelitian dilakukan menggunakan perangkat laptop dengan spesifikasi sebagai berikut:
   \begin{itemize}
@@ -53,7 +53,7 @@ Penggunaan KVM sebagai hypervisor untuk menjalankan \vm\ pada Apache Cloudstack 
 %-----------------------------------------------------------------------------%
 \section{Tujuan}
 %-----------------------------------------------------------------------------%
-\hspace{0.5cm} Penelitian ini bertujuan untuk mendalami analisis performa tuning hypervisor KVM, khususnya dalam konteks penggunaan Apache CloudStack, dengan fokus pada tugas kompresi video. Tujuan utama penelitian adalah untuk mengevaluasi apakah konfigurasi hypervisor KVM telah diatur secara optimal dan efisien, serta untuk memahami dampak tuning tersebut terhadap performa sistem operasi guest. Hasil dari penelitian ini diharapkan dapat memberikan wawasan praktis bagi pengelola sistem yang menggunakan Apache CloudStack dalam lingkungan produksi, serta memberikan panduan terkait optimalisasi hypervisor KVM dalam meningkatkan kinerja layanan Cloud Computing Infrastructure as a Service (IaaS).
+Penelitian ini bertujuan untuk mendalami analisis performa tuning hypervisor KVM, khususnya dalam konteks penggunaan Apache CloudStack, dengan fokus pada tugas kompresi video. Tujuan utama penelitian adalah untuk mengevaluasi apakah konfigurasi hypervisor KVM telah diatur secara optimal dan efisien, serta untuk memahami dampak tuning tersebut terhadap performa sistem operasi guest. Hasil dari penelitian ini diharapkan dapat memberikan wawasan praktis bagi pengelola sistem yang menggunakan Apache CloudStack dalam lingkungan produksi, serta memberikan panduan terkait optimalisasi hypervisor KVM dalam meningkatkan kinerja layanan Cloud Computing Infrastructure as a Service (IaaS).
 
 
 % %-----------------------------------------------------------------------------%
@@ -65,10 +65,10 @@ Penggunaan KVM sebagai hypervisor untuk menjalankan \vm\ pada Apache Cloudstack 
 % 	penelitian-penelitian sebelumnya}
 
 
-%-----------------------------------------------------------------------------%
+%----------------------------------------------------------------------\hspace{0.5cm} -------%
 \section{Metodologi Penelitian}
 %-----------------------------------------------------------------------------%
-\hspace{0.5cm} Beberapa metodologi yang dilakukan pada penelitian ini, antara lain:
+Beberapa metodologi yang dilakukan pada penelitian ini, antara lain:
 \begin{enumerate}
   \item Studi Literatur
   
@@ -87,7 +87,7 @@ Penggunaan KVM sebagai hypervisor untuk menjalankan \vm\ pada Apache Cloudstack 
 %-----------------------------------------------------------------------------%
 \section{Sistematika Penulisan}
 %-----------------------------------------------------------------------------%
-\hspace{0.5cm} Pada penulisan skripsi ini terdiri dari 3 bab dengan pokok bahasan yang berbeda-beda untuk setiap bab.
+Pada penulisan skripsi ini terdiri dari 3 bab dengan pokok bahasan yang berbeda-beda untuk setiap bab.
 \begin{itemize}
     \item BAB I PENDAHULUAN
 

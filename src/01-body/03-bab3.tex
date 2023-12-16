@@ -1,9 +1,66 @@
 %-----------------------------------------------------------------------------%
 \chapter{\babTiga}
 %-----------------------------------------------------------------------------%
-\todo{tambahkan kata-kata pengantar bab 1 disini}
+%\todo{tambahkan kata-kata pengantar bab 1 disini}
+Penelitian ini bertujuan untuk mengevaluasi konfigurasi Hypervisor KVM yang disediakan secara langsung dalam konteks penggunaan Virtual Machine pada Apache Cloudstack. Tujuan utama adalah untuk memastikan bahwa Virtual Machine dapat mencapai kinerja yang optimal sesuai dengan spesifikasi sistem yang digunakan. Untuk mencapai tujuan ini, \saya akan melakukan penyesuaian konfigurasi atau tuning pada Hypervisor KVM dan kemudian membandingkannya dengan kondisi awal yang tidak mengalami tuning. Hasil pengujian akan dianalisis untuk menentukan apakah ada perbedaan signifikan dalam kinerja antara Hypervisor KVM yang telah dituning dengan yang belum dituning.
 
+%-----------------------------------------------------------------------------%
+\section{Tahapan Penelitian}
+%-----------------------------------------------------------------------------%
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]
+	{assets/pics/tahapan-penelitian.png}
+	\caption{Tahapan Penelitian}
+	\label{fig:TahapanPenelitian}
+\end{figure}
 
+Penelitian ini akan dilakukan dalam beberapa tahap sesuai dengan diagram di gambar \ref{fig:TahapanPenelitian}. Tahap pertama melibatkan studi literatur untuk mengumpulkan semua informasi yang diperlukan untuk penelitian ini. Studi literatur ini penting karena memberikan dasar pengetahuan yang kuat tentang topik yang akan diteliti, memungkinkan \saya untuk memahami konteks dan kerangka kerja yang relevan.
+
+Selanjutnya, penelitian melibatkan tuning terhadap Hypervisor KVM dan pengujian dilakukan dengan mengkompresi video menggunakan aplikasi Handbrake. Pengujian dengan Handbrake bertujuan untuk mengukur efisiensi dan kinerja Hypervisor KVM setelah tuning. Hasil pengujian Handbrake ini akan digunakan untuk membandingkan waktu kompresi video antara Hypervisor KVM yang tidak dituning dengan yang sudah dituning. Hasil dari perbandingan ini akan memberikan gambaran mengenai konfigurasi yang paling optimal dan sesuai, serta membantu dalam pemahaman lebih lanjut tentang pengaruh tuning terhadap performa Hypervisor KVM dalam konteks kompresi video.
+
+%-----------------------------------------------------------------------------%
+\section{Tuning Hypervisor KVM}
+%-----------------------------------------------------------------------------%
+Konfigurasi tuning yang dilakukan adalah dengan menambahkan parameter 
+
+\begin{listing}[H]
+	\begin{minted}{xml}
+		<domain type='kvm'>
+			<name>i-2-4-VM</name>
+			<uuid>03704890-7c15-4f0a-bd11-4669a8424018</uuid>
+			<description>Ubuntu 22.04 LTS</description>
+			<memory unit='KiB'>1048576</memory>
+			<cputune>
+				<shares>1000</shares>
+			</cputune>
+			<os>
+				<type arch='x86_64' machine='pc-i440fx-6.2'>
+					hvm
+				</type>
+				<boot dev='cdrom'/>
+				<boot dev='hd'/>
+				<smbios mode='sysinfo'/>
+			</os>
+			<features>
+				<acpi/>
+				<apic/>
+				<pae/>
+			</features>
+			<cpu mode='custom' match='exact' check='full'>
+				<model fallback='forbid'>qemu64</model>
+				<feature policy='require' name='x2apic'/>
+				<feature policy='require' name='hypervisor'/>
+				<feature policy='require' name='lahf_lm'/>
+			</cpu>
+			<disk type='file' device='cdrom'>
+		</domain>
+	\end{minted}
+	\caption{Konfigurasi default dari KVM}
+	\label{code:default_kvm_xml}
+\end{listing}
+
+\iffalse
 %-----------------------------------------------------------------------------%
 \section{Satu Persamaan}
 %-----------------------------------------------------------------------------%
@@ -68,4 +125,4 @@ persamaannya masing-masing.
 		\text{jika pangkat $f(x)$ $<$ pangkat $g(x)$} \\\label{eq:gabungan3}
 	a^{m^{a \, ^{n}\log b }} = b^{\frac{m}{n}}
 \end{align}
-
+\fi
