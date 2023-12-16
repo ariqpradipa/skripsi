@@ -24,6 +24,30 @@ Selanjutnya, penelitian melibatkan tuning terhadap Hypervisor KVM dan pengujian 
 %-----------------------------------------------------------------------------%
 Konfigurasi tuning yang dilakukan adalah dengan menambahkan parameter 
 
+flag default host
+\begin{verbatim}
+	fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat 
+	pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb 
+	rdtscp lm constant_tsc rep_good acc_power nopl nonstop_tsc cpuid 
+	extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 
+	sse4_2 movbe popcnt aes xsave avx f16c lahf_lm cmp_legacy svm extapic 
+	cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt 
+	lwp fma4 tce nodeid_msr tbm topoext perfctr_core perfctr_nb bpext ptsc 
+	mwaitx cpb hw_pstate ssbd vmmcall fsgsbase bmi1 avx2 smep bmi2 xsaveopt 
+	arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid 
+	decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif 
+	overflow_recov
+\end{verbatim}
+
+
+flag default kvm
+\begin{verbatim}
+	fpu de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat 
+	pse36 clflush mmx fxsr sse sse2 syscall nx lm rep_good nopl 
+	cpuid extd_apicid tsc_known_freq pni cx16 x2apic hypervisor 
+	lahf_lm svm 3dnowprefetch vmmcall
+\end{verbatim}
+
 \begin{listing}[H]
 	\begin{minted}{xml}
 		<domain type='kvm'>

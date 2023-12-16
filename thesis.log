@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.11.27)  16 DEC 2023 15:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.11.27)  16 DEC 2023 19:00
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1525,7 +1525,7 @@ BAB 3.
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 2.
 
-<assets/pics/tahapan-penelitian.png, id=520, 573.14125pt x 181.67876pt>
+<assets/pics/tahapan-penelitian.png, id=526, 573.14125pt x 181.67876pt>
 File: assets/pics/tahapan-penelitian.png Graphic file (type png)
 <use assets/pics/tahapan-penelitian.png>
 Package pdftex.def Info: assets/pics/tahapan-penelitian.png  used on input line
@@ -1534,9 +1534,44 @@ Package pdftex.def Info: assets/pics/tahapan-penelitian.png  used on input line
 [12
 
  <./assets/pics/tahapan-penelitian.png>]
+Overfull \hbox (23.94002pt too wide) in paragraph at lines 40--40
+[]\OT1/pcr/m/n/12 pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt
+ pdpe1gb[] 
+ []
+
+
+Overfull \hbox (5.58008pt too wide) in paragraph at lines 40--40
+[]\OT1/pcr/m/n/12 extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 s
+se4_1[] 
+ []
+
+
+Overfull \hbox (23.94002pt too wide) in paragraph at lines 40--40
+[]\OT1/pcr/m/n/12 sse4_2 movbe popcnt aes xsave avx f16c lahf_lm cmp_legacy svm
+ extapic[] 
+ []
+
+
+Overfull \hbox (30.06pt too wide) in paragraph at lines 40--40
+[]\OT1/pcr/m/n/12 cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop s
+kinit wdt[] 
+ []
+
+
+Overfull \hbox (30.06pt too wide) in paragraph at lines 40--40
+[]\OT1/pcr/m/n/12 lwp fma4 tce nodeid_msr tbm topoext perfctr_core perfctr_nb b
+pext ptsc[] 
+ []
+
+
+Overfull \hbox (36.17998pt too wide) in paragraph at lines 40--40
+[]\OT1/pcr/m/n/12 mwaitx cpb hw_pstate ssbd vmmcall fsgsbase bmi1 avx2 smep bmi
+2 xsaveopt[] 
+ []
+
 \openout3 = `thesis.pyg'.
 
- (./_minted-thesis/pastie.pygstyle)
+(./_minted-thesis/pastie.pygstyle)
 (./_minted-thesis/F850766145F801746C94F1EB5B5E8ED85A6EC9A0A2AFCD7A2D0CFACDAA6B0
 A0E.pygtex
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
@@ -1551,11 +1586,10 @@ LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 2
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 ))
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 58.
+ mdframed uses option nobreak mdframed on input line 82.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 58.
-)
-(./src/01-body/04-bab4.tex
+ mdframed uses option nobreak mdframed on input line 82.
+
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1564,7 +1598,16 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[13]
+[13]) (./src/01-body/04-bab4.tex
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
+
+[14]
 BAB 4.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1589,10 +1632,10 @@ asa In-done-sia.
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
 (Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 52.
 
-Package natbib Warning: Citation `lankton2008introduction' on page 14 undefined
+Package natbib Warning: Citation `lankton2008introduction' on page 15 undefined
  on input line 53.
 
-[14
+[15
 
 ]
 \openout4 = `thesis.pyg'.
@@ -1621,7 +1664,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[15]) (./src/01-body/05-bab5.tex
+[16]) (./src/01-body/05-bab5.tex
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1630,7 +1673,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[16]
+[17]
 BAB 5.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1651,10 +1694,10 @@ Overfull \hbox (27.94829pt too wide) in paragraph at lines 32--34
 [] 
  []
 
-[17
+[18
 
 ]
-<assets/pdfs/include.pdf, id=561, 597.51233pt x 845.0471pt>
+<assets/pdfs/include.pdf, id=571, 597.51233pt x 845.0471pt>
 File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf>
 Package pdftex.def Info: assets/pdfs/include.pdf  used on input line 55.
@@ -1663,7 +1706,7 @@ File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf>
 Package pdftex.def Info: assets/pdfs/include.pdf  used on input line 55.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
-<assets/pdfs/include.pdf, id=564, page=1, 597.51233pt x 845.0471pt>
+<assets/pdfs/include.pdf, id=574, page=1, 597.51233pt x 845.0471pt>
 File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf, page 1>
 Package pdftex.def Info: assets/pdfs/include.pdf , page1 used on input line 55.
@@ -1683,7 +1726,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[18]
+[19]
 File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf, page 1>
 Package pdftex.def Info: assets/pdfs/include.pdf , page1 used on input line 55.
@@ -1708,7 +1751,7 @@ File: assets/pdfs/include.pdf Graphic file (type pdf)
 Package pdftex.def Info: assets/pdfs/include.pdf , page1 used on input line 55.
 
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
-[19 <./assets/pdfs/include.pdf>]
+[20 <./assets/pdfs/include.pdf>]
 File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf>
 Package pdftex.def Info: assets/pdfs/include.pdf  used on input line 62.
@@ -1736,7 +1779,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[20]
+[21]
 File: assets/pdfs/include.pdf Graphic file (type pdf)
 <use assets/pdfs/include.pdf, page 1>
 Package pdftex.def Info: assets/pdfs/include.pdf , page1 used on input line 62.
@@ -1752,7 +1795,7 @@ File: assets/pdfs/include.pdf Graphic file (type pdf)
 Package pdftex.def Info: assets/pdfs/include.pdf , page1 used on input line 62.
 
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
- [21]) (./src/01-body/06-bab6.tex
+ [22]) (./src/01-body/06-bab6.tex
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1761,7 +1804,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[22]
+[23]
 BAB 6.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1777,7 +1820,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./src/01-body/99-kesimpulan.tex [23
+) (./src/01-body/99-kesimpulan.tex [24
 
 ]
 BAB 7.
@@ -1795,7 +1838,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--6
 
  []
 
-) (./thesis.bbl [24
+) (./thesis.bbl [25
 
 ]
 
@@ -1832,7 +1875,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 48--53
  / compare /
  []
 
-[25
+[26
 
 ])
 
@@ -1846,20 +1889,26 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[26] (./thesis.aux)
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 129FFBD92F2EE4DB9709AB12F83179EE;7663.
+[27] (./thesis.aux)
+
+Package rerunfilecheck Warning: File `thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `thesis.out':
+(rerunfilecheck)             Before: 129FFBD92F2EE4DB9709AB12F83179EE;7663
+(rerunfilecheck)             After:  A0BC2590560794F3D5F3FABA46965789;7872.
 runsystem(rm thesis.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 28664 strings out of 480247
- 543812 string characters out of 5896150
+ 28671 strings out of 480247
+ 543865 string characters out of 5896150
  916478 words of memory out of 5000000
  45746 multiletter control sequences out of 15000+600000
  524020 words of font info for 148 fonts, out of 8000000 for 9000
  83 hyphenation exceptions out of 8191
- 119i,17n,116p,1173b,1129s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 119i,17n,116p,1173b,1127s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dis
@@ -1872,10 +1921,10 @@ xlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (41 pages, 438898 bytes).
+Output written on thesis.pdf (42 pages, 440986 bytes).
 PDF statistics:
- 711 PDF objects out of 1000 (max. 8388607)
- 616 compressed objects within 7 object streams
- 130 named destinations out of 1000 (max. 500000)
+ 722 PDF objects out of 1000 (max. 8388607)
+ 626 compressed objects within 7 object streams
+ 137 named destinations out of 1000 (max. 500000)
  475 words of extra memory for PDF output out of 10000 (max. 10000000)
 
