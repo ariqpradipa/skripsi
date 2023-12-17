@@ -73,4 +73,25 @@ libvirt: virsh --- libvirt.org.
 \newblock \url{https://libvirt.org/manpages/virsh.html}.
 \newblock [Accessed 06-12-2023].
 
+\bibitem{informitStreamingSIMD}
+{S}{S}{E} ({S}treaming {S}{I}{M}{D} {E}xtensions) | {M}icroprocessor {T}ypes
+  and {S}pecifications | {I}nform{I}{T} --- informit.com.
+\newblock
+  \url{https://www.informit.com/articles/article.aspx?p=130978&seqNum=8}.
+\newblock [Accessed 17-12-2023].
+
+\bibitem{SystemVAppBinaryInterfaceMichael}
+Andreas Jaeger Mark~Mithcell Michael~Matz, Jan~Hubicka.
+\newblock System v application binary interface amd64 architecture processor
+  supplement.
+\newblock \url{https://refspecs.linuxbase.org/elf/x86_64-abi-0.99.pdf}, 2010.
+\newblock [Accessed 17-12-2023].
+
+\bibitem{Tseng2009}
+Shu-Ming Tseng, Yu-Chin Kuo, Yen-Chih Ku, and Yueh-Teng Hsu.
+\newblock Software viterbi decoder with sse4 parallel processing instructions
+  for software dvb-t receiver.
+\newblock In {\em 2009 IEEE International Symposium on Parallel and Distributed
+  Processing with Applications}. IEEE, 2009.
+
 \end{thebibliography}
