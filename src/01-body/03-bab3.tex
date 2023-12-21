@@ -22,67 +22,89 @@ Selanjutnya, penelitian melibatkan tuning terhadap Hypervisor KVM dan pengujian 
 %-----------------------------------------------------------------------------%
 \section{Tuning Hypervisor KVM}
 %-----------------------------------------------------------------------------%
-Konfigurasi tuning yang dilakukan adalah dengan menambahkan parameter 
+Tuning Hypervisor KVM yang dilakukan adalah dengan menambahkan flag instruksi yang tidak terdapat pada konfigurasi KVM default, dimana flag default dari KVM yang mendukung kompresi video hanyalah sse, dan sse2.
 
-flag default host
-\begin{verbatim}
-	fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat 
-	pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb 
-	rdtscp lm constant_tsc rep_good acc_power nopl nonstop_tsc cpuid 
-	extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 
-	sse4_2 movbe popcnt aes xsave avx f16c lahf_lm cmp_legacy svm extapic 
-	cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt 
-	lwp fma4 tce nodeid_msr tbm topoext perfctr_core perfctr_nb bpext ptsc 
-	mwaitx cpb hw_pstate ssbd vmmcall fsgsbase bmi1 avx2 smep bmi2 xsaveopt 
-	arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid 
-	decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif 
-	overflow_recov
-\end{verbatim}
+\begin{figure}
+	\begin{alltt}
+		\textbf{fpu} vme \textbf{de pse tsc msr pae mce cx8 apic sep mtrr pge mca} 
+		\textbf{cmov pat pse36 clflush mmx fxsr sse sse2} ht \textbf{syscall nx} 
+		mmxext fxsr_opt pdpe1gb rdtscp \textbf{lm} constant_tsc \textbf{rep_good} acc_power
+		\textbf{nopl} nonstop_tsc \textbf{cpuid}  \textbf{extd_apicid} aperfmperf \textbf{pni} pclmulqdq 
+		monitor ssse3 fma \textbf{cx16} sse4_1  sse4_2 movbe popcnt aes xsave avx 
+		f16c \textbf{lahf_lm} cmp_legacy \textbf{svm} extapic cr8_legacy abm sse4a misalignsse
+		\textbf{3dnowprefetch} osvw ibs xop skinit wdt lwp fma4 tce nodeid_msr tbm
+		topoext perfctr_core perfctr_nb bpext ptsc mwaitx cpb hw_pstate ssbd 
+		\textbf{vmmcall} fsgsbase bmi1 avx2 smep bmi2 xsaveopt arat npt lbrv svm_lock
+		nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter 
+		pfthreshold avic v_vmsave_vmload vgif overflow_recov
+	\end{alltt}
+	\caption{Seluruh flag instruksi di Host}
+	\label{fig:flag_kvm_host}
+\end{figure}
 
+Terlihat pada gambar \ref{fig:flag_kvm_host} adalah keseluruhan flag instruksi dari sistem host, sedangkan text yang ditajamkan adalah flag instruksi bawaan default dari hypervisor KVM. Dari sini flag yang berguna untuk melakukan kompresi video dan ditajamkan hanyalah sse dan sse2, hal ini menandakan bahwa KVM tidak mengaktifkan keseluruhan flag instruksi meskipun pada sistem host sudah mendukung flag instruksinya. Beberapa flag yang berguna untuk melakukan kompresi video dan tidak dinyalakan oleh hypervisor KVM adalah SSE3, SSE4\_1, dan SSE4\_2. 
 
-flag default kvm
-\begin{verbatim}
-	fpu de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat 
-	pse36 clflush mmx fxsr sse sse2 syscall nx lm rep_good nopl 
-	cpuid extd_apicid tsc_known_freq pni cx16 x2apic hypervisor 
-	lahf_lm svm 3dnowprefetch vmmcall
-\end{verbatim}
+Kita dapat mengaktifkan flag tersebut untuk digunakan oleh \vmm kita yang menggunakan hypervisor KVM. Untuk melakukan tuning kita dapat menggunakan tools virsh untuk mengubah konfigurasi \vm dari CloudStack. Secara default konfigurasi dari \vm di CloudStack akan seperti ini:
+
 
 \begin{listing}[H]
 	\begin{minted}{xml}
 		<domain type='kvm'>
-			<name>i-2-4-VM</name>
-			<uuid>03704890-7c15-4f0a-bd11-4669a8424018</uuid>
-			<description>Ubuntu 22.04 LTS</description>
-			<memory unit='KiB'>1048576</memory>
-			<cputune>
-				<shares>1000</shares>
-			</cputune>
-			<os>
-				<type arch='x86_64' machine='pc-i440fx-6.2'>
-					hvm
-				</type>
-				<boot dev='cdrom'/>
-				<boot dev='hd'/>
-				<smbios mode='sysinfo'/>
-			</os>
-			<features>
-				<acpi/>
-				<apic/>
-				<pae/>
-			</features>
+		
+			...
+			
 			<cpu mode='custom' match='exact' check='full'>
 				<model fallback='forbid'>qemu64</model>
 				<feature policy='require' name='x2apic'/>
 				<feature policy='require' name='hypervisor'/>
 				<feature policy='require' name='lahf_lm'/>
 			</cpu>
-			<disk type='file' device='cdrom'>
+			
+			...
+			
 		</domain>
 	\end{minted}
 	\caption{Konfigurasi default dari KVM}
 	\label{code:default_kvm_xml}
 \end{listing}
+
+Terlihat dari kode \ref{code:default_kvm_xml} bahwa feature yang dinyalakan tidak memuat sse3, sse4\_1, dan sse4\_2. Untuk itu kita dapat menambahkan fitur tersebut sehingga \vm dapat menggunakan flag instruksi tersebut. Perubahahan yang akan kita lakukan akan seperti ini:
+
+\begin{listing}[H]
+	\begin{minted}{xml}
+		<domain type='kvm'>
+		
+			...
+			
+			<cpu mode='custom' match='exact' check='full'>
+				<model fallback='forbid'>qemu64</model>
+				<feature policy='require' name='x2apic'/>
+				<feature policy='require' name='hypervisor'/>
+				<feature policy='require' name='lahf_lm'/>
+				<feature policy='require' name='sse3'/>
+				<feature policy='require' name='sse4_1'/>
+				<feature policy='require' name='sse4_2'/>
+			</cpu>
+			
+			...
+			
+		</domain>
+	\end{minted}
+	\caption{Konfigurasi tuning KVM}
+	\label{code:tuned_kvm_xml}
+\end{listing}
+
+%-----------------------------------------------------------------------------%
+\section{Pengujian Handbrake}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\section{Pengumpulan Data}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\section{Analisis Pengujian}
+%-----------------------------------------------------------------------------%
 
 \iffalse
 %-----------------------------------------------------------------------------%
