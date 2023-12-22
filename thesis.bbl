@@ -94,4 +94,10 @@ Shu-Ming Tseng, Yu-Chin Kuo, Yen-Chih Ku, and Yueh-Teng Hsu.
 \newblock In {\em 2009 IEEE International Symposium on Parallel and Distributed
   Processing with Applications}. IEEE, 2009.
 
+\bibitem{Folgar2014-eg}
+Fernando~Gomez Folgar, Antonio~Garcia Loureiro, Tomas~Fernandez Pena, J~Isaac
+  Zablah, and Natalia Seoane.
+\newblock Implementation of the {KVM} hypervisor on several cloud platforms:
+  Tuning the apache {CloudStack} agent, August 2014.
+
 \end{thebibliography}

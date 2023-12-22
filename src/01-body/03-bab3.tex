@@ -95,9 +95,16 @@ Terlihat dari kode \ref{code:default_kvm_xml} bahwa feature yang dinyalakan tida
 \end{listing}
 
 %-----------------------------------------------------------------------------%
-\section{Pengujian Handbrake}
+\section{Pengujian Kompresi Video Dengan HandBrake}
 %-----------------------------------------------------------------------------%
+Untuk menguji dan membandingkan kinerja Hypervisor KVM sebelum dan sesudah tuning, \saya akan menggunakan software HandBrake, sebuah software kompresi video yang banyak digunakan. Proses ini melibatkan penggunaan HandBrake untuk kompresi video pada dua lingkungan virtual machine yang berbeda, yang mana satu menggunakan KVM yang belum di-tuning dan yang lainnya menggunakan KVM yang telah di-tuning. Tujuan dari pengujian ini adalah untuk mengevaluasi sejauh mana tuning Hypervisor KVM dapat mempengaruhi kecepatan kompresi video.
 
+HandBrake dipilih karena kemampuannya yang baik dalam mengkompresi video tanpa kehilangan kualitas yang signifikan. Dalam pengujian ini, video yang akan digunakan adalah "COSTA RICA IN 4K 60fps HDR (ULTRA HD)" yang diunduh dari YouTube. Video ini dipilih karena resolusi tingginya, yang memberikan tantangan yang baik untuk menguji efisiensi kompresi video pada kedua lingkungan virtual machine. Parameter penting yang akan diukur dalam pengujian ini adalah 'time elapsed' atau berapa lama waktu yang dibutuhkan oleh masing-masing virtual machine untuk menyelesaikan proses kompresi video. Data ini akan memberikan gambaran yang jelas mengenai perbedaan kinerja antara KVM yang telah di-tuning dengan yang belum.
+
+Hasil dari pengujian ini diharapkan dapat memberikan informasi berharga mengenai efektivitas tuning Hypervisor KVM dalam meningkatkan performa kompresi video, dan juga memberikan panduan bagi para profesional IT dalam mengoptimalkan lingkungan virtual mereka.
+
+
+pengecekan Structural Similarity Index Measure picture
 %-----------------------------------------------------------------------------%
 \section{Pengumpulan Data}
 %-----------------------------------------------------------------------------%

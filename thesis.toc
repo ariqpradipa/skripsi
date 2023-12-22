@@ -27,24 +27,27 @@
 \contentsline {chapter}{\numberline {3}\uppercase {Metode Pengujian Tuning Hypervisor KVM}}{13}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Tahapan Penelitian}{13}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Tuning Hypervisor KVM}{14}{section.3.2}%
-\contentsline {chapter}{\numberline {4}\uppercase {Struktur Berkas}}{16}{chapter.4}%
-\contentsline {section}{\numberline {4.1}thesis.tex}{16}{section.4.1}%
-\contentsline {section}{\numberline {4.2}laporan\_setting.tex}{16}{section.4.2}%
-\contentsline {section}{\numberline {4.3}istilah.tex}{16}{section.4.3}%
-\contentsline {section}{\numberline {4.4}hype.indonesia.tex}{16}{section.4.4}%
-\contentsline {section}{\numberline {4.5}pustaka.tex}{17}{section.4.5}%
-\contentsline {section}{\numberline {4.6}bab[1 - 6].tex}{17}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Penulisan \textit {code} atau \textit {pseudocode} program}{17}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}\textit {Inline}}{17}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}\textit {Multiline}}{17}{subsection.4.7.2}%
-\contentsline {chapter}{\numberline {5}\uppercase {Perintah dalam uithesis.sty}}{19}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Mengubah Tampilan Teks}{19}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Memberikan Catatan}{19}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Menambah Isi Daftar Isi}{20}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Memasukan PDF}{20}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Membuat Perintah Baru}{24}{section.5.5}%
-\contentsline {chapter}{\numberline {6}\uppercase {Bab Enam}}{25}{chapter.6}%
-\contentsline {chapter}{\numberline {7}\uppercase {Kesimpulan dan Saran}}{26}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Kesimpulan}{26}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Saran}{26}{section.7.2}%
-\contentsline {chapter}{\uppercase {Daftar Referensi}}{27}{section.7.2}%
+\contentsline {section}{\numberline {3.3}Pengujian Kompresi Video Dengan HandBrake}{16}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Pengumpulan Data}{16}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Analisis Pengujian}{16}{section.3.5}%
+\contentsline {chapter}{\numberline {4}\uppercase {Struktur Berkas}}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}thesis.tex}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}laporan\_setting.tex}{17}{section.4.2}%
+\contentsline {section}{\numberline {4.3}istilah.tex}{17}{section.4.3}%
+\contentsline {section}{\numberline {4.4}hype.indonesia.tex}{17}{section.4.4}%
+\contentsline {section}{\numberline {4.5}pustaka.tex}{18}{section.4.5}%
+\contentsline {section}{\numberline {4.6}bab[1 - 6].tex}{18}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Penulisan \textit {code} atau \textit {pseudocode} program}{18}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}\textit {Inline}}{18}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}\textit {Multiline}}{18}{subsection.4.7.2}%
+\contentsline {chapter}{\numberline {5}\uppercase {Perintah dalam uithesis.sty}}{20}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Mengubah Tampilan Teks}{20}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Memberikan Catatan}{20}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Menambah Isi Daftar Isi}{21}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Memasukan PDF}{21}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Membuat Perintah Baru}{25}{section.5.5}%
+\contentsline {chapter}{\numberline {6}\uppercase {Bab Enam}}{26}{chapter.6}%
+\contentsline {chapter}{\numberline {7}\uppercase {Kesimpulan dan Saran}}{27}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Kesimpulan}{27}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Saran}{27}{section.7.2}%
+\contentsline {chapter}{\uppercase {Daftar Referensi}}{28}{section.7.2}%
