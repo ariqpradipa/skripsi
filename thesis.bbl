@@ -68,6 +68,13 @@ IBM.
 \newblock \url{https://www.ibm.com/topics/virtual-machines}.
 \newblock [Accessed 30-11-2023].
 
+\bibitem{Wang2004}
+Z.~Wang, A.C. Bovik, H.R. Sheikh, and E.P. Simoncelli.
+\newblock Image quality assessment: From error visibility to structural
+  similarity.
+\newblock {\em IEEE Transactions on Image Processing}, 13(4):600–612, April
+  2004.
+
 \bibitem{libvirtLibvirtVirsh}
 libvirt: virsh --- libvirt.org.
 \newblock \url{https://libvirt.org/manpages/virsh.html}.
@@ -87,12 +94,16 @@ Andreas Jaeger Mark~Mithcell Michael~Matz, Jan~Hubicka.
 \newblock \url{https://refspecs.linuxbase.org/elf/x86_64-abi-0.99.pdf}, 2010.
 \newblock [Accessed 17-12-2023].
 
-\bibitem{Tseng2009}
-Shu-Ming Tseng, Yu-Chin Kuo, Yen-Chih Ku, and Yueh-Teng Hsu.
-\newblock Software viterbi decoder with sse4 parallel processing instructions
-  for software dvb-t receiver.
-\newblock In {\em 2009 IEEE International Symposium on Parallel and Distributed
-  Processing with Applications}. IEEE, 2009.
+\bibitem{Hassaballah2008}
+M.~Hassaballah, S.~Omran, and Y.~B. Mahdy.
+\newblock A review of simd multimedia extensions and their usage in scientific
+  and engineering applications.
+\newblock {\em The Computer Journal}, 51(6):630–649, January 2008.
+
+\bibitem{sse4reference}
+Intel.
+\newblock Sse4 programming reference, 2007.
+\newblock Intel 64 and IA-32 Architectures.
 
 \bibitem{Folgar2014-eg}
 Fernando~Gomez Folgar, Antonio~Garcia Loureiro, Tomas~Fernandez Pena, J~Isaac

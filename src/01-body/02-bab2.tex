@@ -99,6 +99,37 @@ Virtual Machine (VM) adalah sebuah lingkungan komputasi yang dibuat secara virtu
 Terdapat perbedaan dalam cara berjalan antara komputer tanpa virtualisasi (host) dan komputer yang divirtualisasi (guest) atau \vm. Pada Gambar 2.4, dapat diperlihatkan bahwa pada komputer tanpa virtualisasi, sistem operasinya berjalan langsung di atas perangkat keras, dengan driver yang berfungsi sebagai jembatan, sehingga aplikasi dapat berjalan langsung di atas sistem operasi tersebut. Di sisi lain, pada komputer yang divirtualisasi, sistem operasinya berjalan di atas VMM atau Virtual Machine Monitor, di mana satu VMM dapat menjalankan banyak sistem operasi guest.
 
 %-----------------------------------------------------------------------------%
+\section{\f{Structural Similarity Index Measure}}
+%-----------------------------------------------------------------------------%
+\f{Structural Similarity Index Measure} (SSIM) adalah metode yang dikembangkan untuk menilai kualitas gambar. SSIM merupakan pergeseran dari metode penilaian kualitas gambar tradisional, yang terutama berfokus pada kuantifikasi visibilitas kesalahan antara gambar yang terdistorsi dan gambar referensi\cite{Wang2004}. Aspek-aspek kunci dari SSIM, adalah sebagai berikut:
+
+\begin{enumerate}
+	\item Fokus pada Informasi Struktural
+	
+	SSIM didasarkan pada asumsi bahwa persepsi visual manusia sangat disesuaikan untuk mengekstrak informasi struktural dari sebuah adegan. Oleh karena itu, alih-alih hanya berfokus pada visibilitas kesalahan, SSIM menilai sejauh mana struktur gambar telah dipertahankan atau terdegradasi\cite{Wang2004}.
+	
+	\item Komponen SSIM
+	
+	Indeks SSIM menggabungkan pengukuran luminans, kontras, dan struktur. Komponen ini digunakan untuk membandingkan gambar yang terdistorsi dengan gambar referensi untuk menilai kualitas\cite{Wang2004}.
+	
+	\item Luminans dan Kontras Lokal
+	
+	SSIM menggunakan ukuran luminans dan kontras lokal, tetapi hal ini dapat bervariasi di berbagai bagian gambar\cite{Wang2004}.
+	
+	\item Kinerja
+	
+	Indeks SSIM dicatat berkinerja baik saat dibandingkan dengan metode penilaian kualitas gambar lainnya. Khususnya, metode ini efektif dalam mengevaluasi kualitas subjektif gambar yang dikompres dengan JPEG dan JPEG2000\cite{Wang2004}.
+	
+	\item Pelengkap Metode Tradisional
+	
+	Meskipun SSIM didasarkan pada prinsip yang berbeda dari metode \f{error-sensitivity} tradisional, SSIM dapat dilihat sebagai pelengkap dari pendekatan tersebut\cite{Wang2004}.
+\end{enumerate}
+
+Dengan demikian, SSIM mewakili pendekatan yang lebih holistik dan relevan secara perseptual untuk penilaian kualitas gambar, dengan fokus pada perubahan struktural dalam gambar daripada hanya kesalahan pada tingkat piksel.
+
+Dalam penelitian ini, SSIM akan diaplikasikan sebagai parameter analisis dengan membandingkan gambar sebelum dan sesudah kompresi. Analisis ini melibatkan perbandingan antara hasil kompresi video menggunakan Hypervisor KVM dalam kondisi default dengan hasil kompresi video menggunakan Hypervisor KVM yang telah mengalami penyetelan atau tuning. Tujuannya adalah untuk mengevaluasi efek tuning terhadap kualitas gambar setelah proses kompresi.
+
+%-----------------------------------------------------------------------------%
 \section{virsh}
 %-----------------------------------------------------------------------------%
 
@@ -123,32 +154,73 @@ Tidak seperti pendahulunya, MMX menggunakan unit floating-point standar yang sam
 Manfaat SSE yang utama terlihat dalam decoding MPEG2, format standar untuk video DVD, memungkinkan prosesor yang dilengkapi SSE untuk menangani decoding tersebut di perangkat lunak dengan kecepatan penuh tanpa perangkat keras tambahan. SSE juga meningkatkan penggunaan CPU dan kinerja perangkat lunak pengenalan suara, memberikan akurasi yang lebih tinggi dan waktu respons yang lebih cepat. Untuk sepenuhnya memanfaatkan kemampuan SSE, aplikasi harus diset secara khusus agar SSE-aware, sebuah fitur yang sekarang umum dalam banyak aplikasi grafis dan berhubungan dengan suara. SSE adalah perluasan dari MMX, yang berarti bahwa prosesor yang mendukung SSE juga kompatibel dengan instruksi MMX, hal ini memastikan \f{backward compatibility} dengan aplikasi yang mendukung MMX\cite{informitStreamingSIMD}.
 
 SSE telah berkembang seiring waktu dengan versi seperti SSE2, SSE3, dan SSE4, masing-masing membawa fitur baru dan meningkatkan kemampuan pemrosesan secara keseluruhan. Ekstensi ini telah banyak diadopsi dalam pengembangan perangkat lunak, terutama dalam bidang di mana pemrosesan paralel sangat penting.
+
+\subsection{SSE2}
+SSE2 adalah perluasan dari kemampuan SIMD (Single Instruction, Multiple Data) yang awalnya diperkenalkan dengan set instruksi SSE (Streaming SIMD Extensions). Pertama kali diperkenalkan oleh Intel dengan prosesor Pentium 4\cite{SystemVAppBinaryInterfaceMichael}. Perbedaan utama dan peningkatan dalam SSE2 dibandingkan dengan pendahulunya SSE meliputi:
+
 \begin{enumerate}
-	\item SSE
-	\item SSE2 
+	\item Rentang Jenis Data yang Lebih Luas 
 	
-	SSE2 adalah perluasan dari kemampuan SIMD (Single Instruction, Multiple Data) yang awalnya diperkenalkan dengan set instruksi SSE (Streaming SIMD Extensions). Pertama kali diperkenalkan oleh Intel dengan prosesor Pentium 4\cite{SystemVAppBinaryInterfaceMichael}. Perbedaan utama dan peningkatan dalam SSE2 dibandingkan dengan pendahulunya SSE meliputi:
+	SSE2 memperluas kemampuan SIMD untuk beroperasi pada data integer 64-bit dan data floating-point presisi ganda (SSE terutama berfokus pada operasi floating-point presisi tunggal).
 	
-	\begin{enumerate}
-		\item Rentang Jenis Data yang Lebih Luas 
-		
-		SSE2 memperluas kemampuan SIMD untuk beroperasi pada data integer 64-bit dan data floating-point presisi ganda (SSE terutama berfokus pada operasi floating-point presisi tunggal).
-		
-		\item Peningkatan Set Instruksi
-		
-		SSE2 menambahkan instruksi dan kemampuan baru, meningkatkan pengolahan dan manipulasi berbagai jenis data, termasuk integer terpak (packed integers) dan angka floating-point presisi ganda.
-		
-		\item Peningkatan Kinerja untuk Aplikasi Ilmiah dan Multimedia
-		
-		Dengan menyediakan operasi pada tipe data yang lebih besar dan set operasi yang lebih luas, SSE2 meningkatkan efisiensi dan kinerja aplikasi yang berhubungan dengan perhitungan matematika kompleks, grafik 3D, pengkodean video, dan tugas multimedia lainnya.
-	\end{enumerate}
+	\item Peningkatan Set Instruksi
 	
-	Penggabungan SSE2 dalam arsitektur AMD64 menyoroti pentingnya dalam komputasi modern, terutama untuk aplikasi yang memerlukan kinerja tinggi dalam pengolahan numerik dan multimedia. Dokumen ABI kemungkinan mengasumsikan keakraban dengan konsep-konsep ini, lebih berfokus pada detail implementasi dalam arsitektur AMD64 daripada menjelaskan perbedaan fundamental antara SSE dan SSE2\cite{SystemVAppBinaryInterfaceMichael}.
-	\item SSE3
-	\item SSSE3
-	\item SSE4
-	\cite{Tseng2009}
+	SSE2 menambahkan instruksi dan kemampuan baru, meningkatkan pengolahan dan manipulasi berbagai jenis data, termasuk integer terpak (packed integers) dan angka floating-point presisi ganda.
+	
+	\item Peningkatan Kinerja untuk Aplikasi Ilmiah dan Multimedia
+	
+	Dengan menyediakan operasi pada tipe data yang lebih besar dan set operasi yang lebih luas, SSE2 meningkatkan efisiensi dan kinerja aplikasi yang berhubungan dengan perhitungan matematika kompleks, grafik 3D, pengkodean video, dan tugas multimedia lainnya.
 \end{enumerate}
+
+Penggabungan SSE2 dalam arsitektur AMD64 menyoroti pentingnya dalam komputasi modern, terutama untuk aplikasi yang memerlukan kinerja tinggi dalam pengolahan numerik dan multimedia. Dokumen ABI kemungkinan mengasumsikan keakraban dengan konsep-konsep ini, lebih berfokus pada detail implementasi dalam arsitektur AMD64 daripada menjelaskan perbedaan fundamental antara SSE dan SSE2\cite{SystemVAppBinaryInterfaceMichael}.
+
+\subsection{SSE3}
+SSE3 (Streaming SIMD Extensions 3) merupakan ekstensi dari set instruksi SSE2, yang mana memperluas teknologi SSE (Streaming SIMD Extensions) asli. Perbedaan antara SSE3 dengan SSE2 antara lain:
+
+\begin{enumerate}
+	\item 13 Set Instruksi Baru
+	
+	SSE3 menambahkan tiga belas instruksi baru ke set instruksi SSE/SSE2 yang ada\cite{Hassaballah2008}.
+	
+	\item Dukungan untuk Model Eksekusi SIMD:
+	
+	Dari 13 instruksi ini, sepuluh dirancang untuk mendukung model eksekusi SIMD (Single Instruction, Multiple Data). Model ini merupakan aspek penting dari komputasi paralel, di mana beberapa titik data diproses secara bersamaan menggunakan satu instruksi. Ini sangat bermanfaat untuk tugas-tugas seperti pengolahan grafis, perhitungan ilmiah, dan aplikasi multimedia, di mana operasi pada set data besar adalah hal yang umum\cite{Hassaballah2008}.
+	 
+	\item Konversi Floating-Point ke Integer:
+	
+	Salah satu instruksi SSE3 secara spesifik mempercepat pemrograman \f{x87-style}. Instruksi ini berfokus pada peningkatan efisiensi dalam mengkonversi nilai floating-point menjadi integer. Hal ini bisa sangat berguna dalam skenario di mana perhitungan melibatkan tipe data floating-point dan integer\cite{Hassaballah2008}.
+	 
+	\item Akselerasi Sinkronisasi Thread:
+	 
+	Dua instruksi lain dalam set SSE3 ditujukan untuk meningkatkan sinkronisasi thread. Peningkatan ini sangat penting dalam aplikasi multi-thread, di mana pengelolaan eksekusi dan koordinasi beberapa thread adalah kunci untuk kinerja yang baik dan efisiensi\cite{Hassaballah2008}.
+\end{enumerate}
+
+Secara singkat, SSE3 memperluas kemampuan set instruksi SSE dan SSE2 dengan penekanan pada peningkatan eksekusi SIMD, konversi floating-point ke integer, serta sinkronisasi thread. Selain itu, SSE3 tetap mempertahankan kompatibilitas dengan jenis data dan lingkungan pemrograman yang sudah ada. Oleh karena itu, SSE3 menjadi alat yang sangat berguna bagi pengembang yang bekerja pada tugas komputasi berkinerja tinggi, terutama yang melibatkan pemrosesan paralel dan jenis data yang kompleks.
+
+\subsection{SSE4}
+SSE4, yang merupakan singkatan dari Streaming SIMD Extensions 4, adalah serangkaian instruksi yang diperkenalkan oleh Intel dalam prosesor 64-bitnya yang dibuat dengan teknologi proses 45 nm. SSE4 terdiri dari dua subset: SSE4.1 dan SSE4.2\cite{sse4reference}.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|p{3cm}|p{4.6cm}|p{4.6cm}|}
+		\hline
+		\textbf{Fitur} & \textbf{SSE4.1} & \textbf{SSE4.2} \\ \hline
+		Pengenalan & Bagian dari prosesor Intel 45 nm & Diperkenalkan dengan arsitektur mikro Nehalem \\ \hline
+		Instruksi & 47 set instruksi baru & 7 instruksi tambahan \\ \hline
+		Fokus & Peningkatan kinerja pada media, pengolahan citra, dan beban kerja 3D & Pengolahan string dan teks \\ \hline
+		Penyempurnaan Utama & Peningkatan vektorisasi kompiler, dukungan untuk perhitungan \f{packed dword} & Kemampuan integer SIMD yang ditingkatkan, fokus pada operasi string \\ \hline
+		Kompatibilitas & Sepenuhnya kompatibel dengan versi SSE sebelumnya & Juga kompatibel dengan versi SSE sebelumnya \\ \hline
+		Dukungan OS & Tidak memerlukan dukungan OS baru & Sama seperti SSE4.1 \\ \hline
+	\end{tabular}
+	\caption{Perbandingan SSE4.1 dan SSE4.2}
+	\label{table:perbandingan_sse4}
+\end{table}
+
+Berdasarkan informasi dalam tabel \ref{table:perbandingan_sse4}, SSE4.1 dirancang untuk meningkatkan performa dalam aplikasi media, pencitraan, dan 3D, serta menghadirkan 47 instruksi baru. Instruksi-instruksi ini berkontribusi pada peningkatan vektorisasi kompiler dan memberikan dukungan untuk perhitungan \f{packed dword}. Di sisi lain, SSE4.2, yang pertama kali diperkenalkan dalam prosesor dengan mikroarsitektur Nehalem, menambahkan tujuh instruksi tambahan. Fokus utama dari instruksi-instruksi tambahan ini adalah pada pemrosesan string dan teks, serta peningkatan dalam kemampuan integer SIMD\cite{sse4reference}.
+
+SSE4 tidak memperkenalkan tipe data baru tetapi mencakup berbagai tipe instruksi seperti perkalian dword, \f{floating-point dot-product}, \f{streaming load hint}, \f{packed blending}, dan instruksi MIN/MAX \f{packed integer}. Teknologi ini bertujuan untuk meningkatkan dukungan untuk perhitungan \f{packed dword} dan meningkatkan throughput memori untuk jenis memori tertentu. SSE4 sepenuhnya kompatibel dengan perangkat lunak dari generasi sebelumnya dari prosesor Intel dan tidak memerlukan dukungan OS baru di luar apa yang diperlukan untuk Streaming SIMD Extensions (SSE) sebelumnya\cite{sse4reference}.
+
+
 \iffalse
 %-----------------------------------------------------------------------------%
 \section{\latex~Secara Singkat}

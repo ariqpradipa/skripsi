@@ -3,11 +3,11 @@
 \contentsline {chapter}{LEMBAR PERNYATAAN ORISINALITAS}{iii}{section*.5}%
 \contentsline {chapter}{LEMBAR PENGESAHAN}{iv}{section*.6}%
 \contentsline {chapter}{\uppercase {Kata Pengantar}}{v}{section*.7}%
-\contentsline {chapter}{LEMBAR PERSETUJUAN PUBLIKASI ILMIAH}{vi}{section*.10}%
-\contentsline {chapter}{ABSTRAK}{viii}{section*.11}%
-\contentsline {chapter}{\uppercase {Daftar Isi}}{x}{section*.12}%
-\contentsline {chapter}{\uppercase {Daftar Gambar}}{xii}{section*.13}%
-\contentsline {chapter}{\uppercase {Daftar Tabel}}{xiii}{section*.14}%
+\contentsline {chapter}{LEMBAR PERSETUJUAN PUBLIKASI ILMIAH}{v}{section*.8}%
+\contentsline {chapter}{ABSTRAK}{vii}{section*.9}%
+\contentsline {chapter}{\uppercase {Daftar Isi}}{ix}{section*.10}%
+\contentsline {chapter}{\uppercase {Daftar Gambar}}{xi}{section*.11}%
+\contentsline {chapter}{\uppercase {Daftar Tabel}}{xii}{section*.12}%
 \contentsline {chapter}{\numberline {1}\uppercase {Pendahuluan}}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Latar Belakang}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Permasalahan}{2}{section.1.2}%
@@ -22,31 +22,15 @@
 \contentsline {section}{\numberline {2.3}Hypervisor}{7}{section.2.3}%
 \contentsline {section}{\numberline {2.4}KVM \textit {(Kernel-Based Virtual Machine)}}{8}{section.2.4}%
 \contentsline {section}{\numberline {2.5}\textit {Virtual Machine}}{9}{section.2.5}%
-\contentsline {section}{\numberline {2.6}virsh}{10}{section.2.6}%
-\contentsline {section}{\numberline {2.7}\textit {Streaming SIMD Extensions}}{11}{section.2.7}%
-\contentsline {chapter}{\numberline {3}\uppercase {Metode Pengujian Tuning Hypervisor KVM}}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Tahapan Penelitian}{13}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Tuning Hypervisor KVM}{14}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Pengujian Kompresi Video Dengan HandBrake}{16}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Analisis Pengujian}{16}{section.3.4}%
-\contentsline {chapter}{\numberline {4}\uppercase {Struktur Berkas}}{17}{chapter.4}%
-\contentsline {section}{\numberline {4.1}thesis.tex}{17}{section.4.1}%
-\contentsline {section}{\numberline {4.2}laporan\_setting.tex}{17}{section.4.2}%
-\contentsline {section}{\numberline {4.3}istilah.tex}{17}{section.4.3}%
-\contentsline {section}{\numberline {4.4}hype.indonesia.tex}{17}{section.4.4}%
-\contentsline {section}{\numberline {4.5}pustaka.tex}{18}{section.4.5}%
-\contentsline {section}{\numberline {4.6}bab[1 - 6].tex}{18}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Penulisan \textit {code} atau \textit {pseudocode} program}{18}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}\textit {Inline}}{18}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}\textit {Multiline}}{18}{subsection.4.7.2}%
-\contentsline {chapter}{\numberline {5}\uppercase {Perintah dalam uithesis.sty}}{20}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Mengubah Tampilan Teks}{20}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Memberikan Catatan}{20}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Menambah Isi Daftar Isi}{21}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Memasukan PDF}{21}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Membuat Perintah Baru}{25}{section.5.5}%
-\contentsline {chapter}{\numberline {6}\uppercase {Bab Enam}}{26}{chapter.6}%
-\contentsline {chapter}{\numberline {7}\uppercase {Kesimpulan dan Saran}}{27}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Kesimpulan}{27}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Saran}{27}{section.7.2}%
-\contentsline {chapter}{\uppercase {Daftar Referensi}}{28}{section.7.2}%
+\contentsline {section}{\numberline {2.6}\textit {Structural Similarity Index Measure}}{10}{section.2.6}%
+\contentsline {section}{\numberline {2.7}virsh}{11}{section.2.7}%
+\contentsline {section}{\numberline {2.8}\textit {Streaming SIMD Extensions}}{12}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}SSE2}{13}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}SSE3}{14}{subsection.2.8.2}%
+\contentsline {subsection}{\numberline {2.8.3}SSE4}{15}{subsection.2.8.3}%
+\contentsline {chapter}{\numberline {3}\uppercase {Metode Pengujian Tuning Hypervisor KVM}}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Tahapan Penelitian}{16}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Tuning Hypervisor KVM}{17}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Pengujian Kompresi Video Dengan HandBrake}{19}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Analisis Pengujian}{20}{section.3.4}%
+\contentsline {chapter}{\uppercase {Daftar Referensi}}{22}{section.3.4}%

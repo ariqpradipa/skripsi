@@ -44,8 +44,7 @@ Tuning Hypervisor KVM yang dilakukan adalah dengan menambahkan flag instruksi ya
 
 Terlihat pada gambar \ref{fig:flag_kvm_host} adalah keseluruhan flag instruksi dari sistem host, sedangkan text yang ditajamkan adalah flag instruksi bawaan default dari hypervisor KVM. Dari sini flag yang berguna untuk melakukan kompresi video dan ditajamkan hanyalah sse dan sse2, hal ini menandakan bahwa KVM tidak mengaktifkan keseluruhan flag instruksi meskipun pada sistem host sudah mendukung flag instruksinya. Beberapa flag yang berguna untuk melakukan kompresi video dan tidak dinyalakan oleh hypervisor KVM adalah SSE3, SSE4\_1, dan SSE4\_2. 
 
-Kita dapat mengaktifkan flag tersebut untuk digunakan oleh \vm\ kita yang menggunakan hypervisor KVM. Untuk melakukan tuning kita dapat menggunakan tools virsh untuk mengubah konfigurasi \vm dari CloudStack. Secara default konfigurasi dari \vm di CloudStack akan seperti ini:
-
+\saya\ dapat mengaktifkan flag tersebut untuk digunakan oleh \vm\ yang menggunakan hypervisor KVM. Untuk melakukan tuning \saya\ dapat menggunakan tools virsh untuk mengubah konfigurasi \vm dari CloudStack. Secara default konfigurasi dari \vm di CloudStack akan seperti ini:
 
 \begin{listing}[H]
 	\begin{minted}{xml}
@@ -68,7 +67,7 @@ Kita dapat mengaktifkan flag tersebut untuk digunakan oleh \vm\ kita yang menggu
 	\label{code:default_kvm_xml}
 \end{listing}
 
-Terlihat dari kode \ref{code:default_kvm_xml} bahwa feature yang dinyalakan tidak memuat sse3, sse4\_1, dan sse4\_2. Untuk itu kita dapat menambahkan fitur tersebut sehingga \vm dapat menggunakan flag instruksi tersebut. Perubahahan yang akan kita lakukan akan seperti ini:
+Terlihat dari kode \ref{code:default_kvm_xml} bahwa feature yang dinyalakan tidak memuat sse3, sse4\_1, dan sse4\_2. Untuk itu \saya\ dapat menambahkan fitur tersebut sehingga \vm dapat menggunakan flag instruksi tersebut. Perubahahan yang akan \saya lakukan akan seperti ini:
 
 \begin{listing}[H]
 	\begin{minted}{xml}
@@ -94,6 +93,8 @@ Terlihat dari kode \ref{code:default_kvm_xml} bahwa feature yang dinyalakan tida
 	\label{code:tuned_kvm_xml}
 \end{listing}
 
+Jika sudah dilakukan penambahan fitur seperti di kode \ref{code:tuned_kvm_xml} sekarang \vm yang menggunakan Hypervisor KVM sudah bisa mendukung set instruksi tersebut.
+
 %-----------------------------------------------------------------------------%
 \section{Pengujian Kompresi Video Dengan HandBrake}
 %-----------------------------------------------------------------------------%
@@ -118,14 +119,53 @@ Data ini yang akan memberikan gambaran yang jelas mengenai perbedaan kinerja ant
 
 Spesifikasi dari \vm\ yang akan digunakan dalam pengujian ini adalah sebagai berikut:
 \begin{itemize}
+	\item \textbf{Cloud Platform}: Apache CloudStack 4.18.1
 	\item \textbf{OS}: Ubuntu Server 22.04 LTS
 	\item \textbf{CPU}: 1 CPU x 1.00 Ghz
 	\item \textbf{Memory}: 1024 MB
 \end{itemize} 
 
+Perintah yang digunakan untuk melakukan kompresi video dengan handbrake adalah sebagai berikut:
+
+\begin{verbatim}
+	./HandBrakeCLI -i /path/to/input.mov -o /path/to/output.mp4
+	-e x264 -q 28 -r 15 -B 64 -X 1280 -O
+\end{verbatim}
+
+Dengan perintah ini \saya akan melakukan kompresi video dengan codec x264. Codec yang dikembangkan oleh VideoLAN yang sudah banyak digunakan dikarenakan mampu untuk melakukan kompresi video yang baik dan rendahnya tingkat penurunan kualitas gambar.
+
 %-----------------------------------------------------------------------------%
 \section{Analisis Pengujian}
 %-----------------------------------------------------------------------------%
+Dalam analisis ini, waktu kompresi untuk Hypervisor KVM yang belum di-tuning akan disebut sebagai $T_{\mathrm{default}}$, sementara waktu kompresi untuk Hypervisor KVM yang telah di-tuning akan disebut sebagai $T_{\mathrm{tuned}}$. Waktu kompresi ini akan diambil dari logs HandBrake yang telah melakukan kompresi video. Untuk mengetahui apakah terdapat perbedaan yang signifikan, \saya\ dapat menggunakan formula speedup. 
+
+\[ \mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}} \]
+
+Jika nilai speedup lebih dari 1, ini menandakan bahwa proses kompresi dengan Hypervisor KVM yang sudah di-tuning lebih cepat dibandingkan dengan yang belum di-tuning. 
+
+Pengujian akan dilakukan sebanyak kurang lebih sepuluh kali dan nantinya akan ditampilkan dalam bentuk grafik. Akan terdapat grafik \f{line chart} dengan dua garis dimana masing-merepresentasikan $T_{\mathrm{default}}$ dan $T_{\mathrm{tuned}}$.
+
+Selain menganalisis waktu kompresi video, \saya\ juga akan melakukan analisis untuk menilai kualitas video yang telah dikompresi. Analisis ini akan melibatkan perbandingan nilai dari \f{Structural Similarity Index Measure} (SSIM) antara video yang dikompres menggunakan Hypervisor KVM default dan Hypervisor KVM yang telah di-tuning. SSIM adalah metrik yang mengukur kesamaan visual antara dua video. Semakin tinggi nilai SSIM, semakin mirip video yang dikompres dengan versi aslinya. Oleh karena itu, nilai SSIM yang lebih tinggi menunjukkan kualitas kompresi yang lebih baik, dimana integritas visual dari video asli lebih terjaga.
+
+
+\iffalse
+Selanjutnya, \saya\ akan menghitung efisiensi dari tuning Hypervisor KVM ini. Untuk mengetahui efisiensi, \saya\ dapat menggunakan formula efisiensi.
+
+\[ \mathrm{Efficiency} = \frac{\mathrm{Speedup}}{\frac{R_{\mathrm{tuned}}}{R_{\mathrm{default}}}} \]
+
+
+Tujuan menghitung efisiensi ini adalah untuk mengetahui seberapa efektif tuning dilakukan dalam menggunakan sumber daya yang ada, seperti penggunaan CPU dan memori. Perhitungan ini penting untuk menilai kinerja tuning dalam konteks keseluruhan penggunaan sumber daya, tidak hanya kecepatan kompresi.
+\fi
+
+% Time Measurement
+%$T_{\mathrm{default}}$, $T_{\mathrm{tuned}}$
+%\[ T_{\mathrm{default}}, \quad T_{\mathrm{tuned}} \]
+
+% Speedup
+%$\mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}}$
+%\[ \mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}} \]
+
+
 
 \iffalse
 %-----------------------------------------------------------------------------%
@@ -144,8 +184,8 @@ Perintah ini juga dapat digunakan untuk menulis lebih dari satu persamaan.
 
 \noindent \begin{align}\label{eq:bola}
 	\underbrace{|\overline{ab}|}_{\text{pada bola $|\overline{ab}| = r$}} 
-		= \sqrt[2]{(x_{b} - x_{a})^{2} + (y_{b} - y_{a})^{2} + 
-				\vert\vert(z_{b} - z_{a})^{2}}
+	= \sqrt[2]{(x_{b} - x_{a})^{2} + (y_{b} - y_{a})^{2} + 
+		\vert\vert(z_{b} - z_{a})^{2}}
 \end{align}
 
 %-----------------------------------------------------------------------------%
@@ -154,29 +194,29 @@ Perintah ini juga dapat digunakan untuk menulis lebih dari satu persamaan.
 %-----------------------------------------------------------------------------%
 \noindent \begin{align}\label{eq:matriks}	
 	|\overline{a} * \overline{b}| &= |\overline{a}| |\overline{b}| \sin\theta 
-		\\[0.2cm]
+	\\[0.2cm]
 	\overline{a} * \overline{b} &=  
-		\begin{array}{| c c c |}
-			\hat{i} & x_{1} & x_{2} \\
-			\hat{j} & y_{1} & y_{2} \\
-			\hat{k} & z_{1} & z_{2} \\
-		\end{array} \nonumber \\[0.2cm]
+	\begin{array}{| c c c |}
+		\hat{i} & x_{1} & x_{2} \\
+		\hat{j} & y_{1} & y_{2} \\
+		\hat{k} & z_{1} & z_{2} \\
+	\end{array} \nonumber \\[0.2cm]
 	&= \hat{i} \,
-		\begin{array}{ | c c | }
-			y_{1} & y_{2} \\
-			z_{1} & z_{2} \\
-		\end{array} 
-	   + \hat{j} \,
-		\begin{array}{ | c c | }
-			z_{1} & z_{2} \\
-			x_{1} & x_{2} \\
-		\end{array} 
-	   + \hat{k} \,	
-		\begin{array}{ | c c | }
-			x_{1} & x_{2} \\
-			y_{1} & y_{2} \\
-		\end{array}
-		\nonumber
+	\begin{array}{ | c c | }
+		y_{1} & y_{2} \\
+		z_{1} & z_{2} \\
+	\end{array} 
+	+ \hat{j} \,
+	\begin{array}{ | c c | }
+		z_{1} & z_{2} \\
+		x_{1} & x_{2} \\
+	\end{array} 
+	+ \hat{k} \,	
+	\begin{array}{ | c c | }
+		x_{1} & x_{2} \\
+		y_{1} & y_{2} \\
+	\end{array}
+	\nonumber
 \end{align}
 
 Pada \equ~\ref{eq:matriks} dapat dilihat beberapa baris menjadi satu bagian 
@@ -187,9 +227,9 @@ persamaannya masing-masing.
 
 \noindent \begin{align}\label{eq:gabungan1}	
 	\int_{a}^{b} f(x)\, dx + \int_{b}^{c} f(x) \, dx = \int_{a}^{c} f(x) \, dx
-		\\\label{eq:gabungan2}
+	\\\label{eq:gabungan2}
 	\lim_{x \to \infty} \frac{f(x)}{g(x)} = 0 \hspace{1cm} 
-		\text{jika pangkat $f(x)$ $<$ pangkat $g(x)$} \\\label{eq:gabungan3}
+	\text{jika pangkat $f(x)$ $<$ pangkat $g(x)$} \\\label{eq:gabungan3}
 	a^{m^{a \, ^{n}\log b }} = b^{\frac{m}{n}}
 \end{align}
 \fi
