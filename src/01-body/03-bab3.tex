@@ -2,7 +2,7 @@
 \chapter{\babTiga}
 %-----------------------------------------------------------------------------%
 %\todo{tambahkan kata-kata pengantar bab 1 disini}
-Penelitian ini bertujuan untuk mengevaluasi konfigurasi Hypervisor KVM yang disediakan secara langsung dalam konteks penggunaan Virtual Machine pada Apache Cloudstack. Tujuan utama adalah untuk memastikan bahwa Virtual Machine dapat mencapai kinerja yang optimal sesuai dengan spesifikasi sistem yang digunakan. Untuk mencapai tujuan ini, \saya akan melakukan penyesuaian konfigurasi atau tuning pada Hypervisor KVM dan kemudian membandingkannya dengan kondisi awal yang tidak mengalami tuning. Hasil pengujian akan dianalisis untuk menentukan apakah ada perbedaan signifikan dalam kinerja antara Hypervisor KVM yang telah dituning dengan yang belum dituning.
+Penelitian ini bertujuan untuk mengevaluasi konfigurasi Hypervisor KVM yang disediakan secara langsung dalam konteks penggunaan \vm\ pada Apache Cloudstack. Tujuan utama adalah untuk memastikan bahwa \vm\ dapat mencapai kinerja yang optimal sesuai dengan spesifikasi sistem yang digunakan. Untuk mencapai tujuan ini, \saya akan melakukan penyesuaian konfigurasi atau tuning pada Hypervisor KVM dan kemudian membandingkannya dengan kondisi awal yang tidak mengalami tuning. Hasil pengujian akan dianalisis untuk menentukan apakah ada perbedaan signifikan dalam kinerja antara Hypervisor KVM yang telah dituning dengan yang belum dituning.
 
 %-----------------------------------------------------------------------------%
 \section{Tahapan Penelitian}
@@ -44,7 +44,7 @@ Tuning Hypervisor KVM yang dilakukan adalah dengan menambahkan flag instruksi ya
 
 Terlihat pada gambar \ref{fig:flag_kvm_host} adalah keseluruhan flag instruksi dari sistem host, sedangkan text yang ditajamkan adalah flag instruksi bawaan default dari hypervisor KVM. Dari sini flag yang berguna untuk melakukan kompresi video dan ditajamkan hanyalah sse dan sse2, hal ini menandakan bahwa KVM tidak mengaktifkan keseluruhan flag instruksi meskipun pada sistem host sudah mendukung flag instruksinya. Beberapa flag yang berguna untuk melakukan kompresi video dan tidak dinyalakan oleh hypervisor KVM adalah SSE3, SSE4\_1, dan SSE4\_2. 
 
-Kita dapat mengaktifkan flag tersebut untuk digunakan oleh \vmm kita yang menggunakan hypervisor KVM. Untuk melakukan tuning kita dapat menggunakan tools virsh untuk mengubah konfigurasi \vm dari CloudStack. Secara default konfigurasi dari \vm di CloudStack akan seperti ini:
+Kita dapat mengaktifkan flag tersebut untuk digunakan oleh \vm\ kita yang menggunakan hypervisor KVM. Untuk melakukan tuning kita dapat menggunakan tools virsh untuk mengubah konfigurasi \vm dari CloudStack. Secara default konfigurasi dari \vm di CloudStack akan seperti ini:
 
 
 \begin{listing}[H]
@@ -97,17 +97,31 @@ Terlihat dari kode \ref{code:default_kvm_xml} bahwa feature yang dinyalakan tida
 %-----------------------------------------------------------------------------%
 \section{Pengujian Kompresi Video Dengan HandBrake}
 %-----------------------------------------------------------------------------%
-Untuk menguji dan membandingkan kinerja Hypervisor KVM sebelum dan sesudah tuning, \saya akan menggunakan software HandBrake, sebuah software kompresi video yang banyak digunakan. Proses ini melibatkan penggunaan HandBrake untuk kompresi video pada dua lingkungan virtual machine yang berbeda, yang mana satu menggunakan KVM yang belum di-tuning dan yang lainnya menggunakan KVM yang telah di-tuning. Tujuan dari pengujian ini adalah untuk mengevaluasi sejauh mana tuning Hypervisor KVM dapat mempengaruhi kecepatan kompresi video.
+Untuk menguji dan membandingkan kinerja Hypervisor KVM sebelum dan sesudah tuning, {\saya} akan menggunakan software HandBrake, sebuah software kompresi video yang sudah banyak digunakan. Proses ini melibatkan penggunaan HandBrake untuk kompresi video pada dua lingkungan \vm\ yang berbeda, yang mana satu menggunakan KVM yang belum di-tuning dan yang lainnya menggunakan KVM yang telah di-tuning. Tujuan dari pengujian ini adalah untuk mengevaluasi sejauh mana tuning Hypervisor KVM dapat mempengaruhi kecepatan kompresi video.
 
-HandBrake dipilih karena kemampuannya yang baik dalam mengkompresi video tanpa kehilangan kualitas yang signifikan. Dalam pengujian ini, video yang akan digunakan adalah "COSTA RICA IN 4K 60fps HDR (ULTRA HD)" yang diunduh dari YouTube. Video ini dipilih karena resolusi tingginya, yang memberikan tantangan yang baik untuk menguji efisiensi kompresi video pada kedua lingkungan virtual machine. Parameter penting yang akan diukur dalam pengujian ini adalah 'time elapsed' atau berapa lama waktu yang dibutuhkan oleh masing-masing virtual machine untuk menyelesaikan proses kompresi video. Data ini akan memberikan gambaran yang jelas mengenai perbedaan kinerja antara KVM yang telah di-tuning dengan yang belum.
+HandBrake dipilih karena kemampuannya yang baik dalam mengkompresi video dan mudah untuk digunakan\cite{Folgar2014-eg}. Dalam pengujian ini, video yang akan digunakan adalah "COSTA RICA IN 4K 60fps HDR (ULTRA HD)" yang diunduh dari YouTube dengan resolusi video yang digunakan adalah 2K. Video ini dipilih karena resolusi tingginya, yang memberikan tantangan yang baik untuk menguji efisiensi kompresi video pada kedua lingkungan \vm. 
 
-Hasil dari pengujian ini diharapkan dapat memberikan informasi berharga mengenai efektivitas tuning Hypervisor KVM dalam meningkatkan performa kompresi video, dan juga memberikan panduan bagi para profesional IT dalam mengoptimalkan lingkungan virtual mereka.
+Parameter penting yang akan diukur dalam pengujian ini adalah: 
+
+\begin{enumerate}
+	\item \textbf{\f{Time Elapsed}}
+	
+	\f{Time Elapsed} atau berapa lama waktu yang dibutuhkan oleh masing-masing \vm\ untuk menyelesaikan proses kompresi video.
+		
+	\item \textbf{\f{Structural Similarity Index Measure Score}}
+	
+	Structural Similarity Index Measure adalah cara untuk menilai kesamaan dari 2 buah gambar, untuk melihat apakah terjadi penurunan kualitas atau perbedaan yang besar antara gambar yang belum di compress dengan gambar yang sudah di compress.
+\end{enumerate}
 
 
-pengecekan Structural Similarity Index Measure picture
-%-----------------------------------------------------------------------------%
-\section{Pengumpulan Data}
-%-----------------------------------------------------------------------------%
+Data ini yang akan memberikan gambaran yang jelas mengenai perbedaan kinerja antara KVM yang telah di-tuning dengan yang belum.
+
+Spesifikasi dari \vm\ yang akan digunakan dalam pengujian ini adalah sebagai berikut:
+\begin{itemize}
+	\item \textbf{OS}: Ubuntu Server 22.04 LTS
+	\item \textbf{CPU}: 1 CPU x 1.00 Ghz
+	\item \textbf{Memory}: 1024 MB
+\end{itemize} 
 
 %-----------------------------------------------------------------------------%
 \section{Analisis Pengujian}

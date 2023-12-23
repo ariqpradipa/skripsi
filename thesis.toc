@@ -28,8 +28,7 @@
 \contentsline {section}{\numberline {3.1}Tahapan Penelitian}{13}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Tuning Hypervisor KVM}{14}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Pengujian Kompresi Video Dengan HandBrake}{16}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Pengumpulan Data}{16}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Analisis Pengujian}{16}{section.3.5}%
+\contentsline {section}{\numberline {3.4}Analisis Pengujian}{16}{section.3.4}%
 \contentsline {chapter}{\numberline {4}\uppercase {Struktur Berkas}}{17}{chapter.4}%
 \contentsline {section}{\numberline {4.1}thesis.tex}{17}{section.4.1}%
 \contentsline {section}{\numberline {4.2}laporan\_setting.tex}{17}{section.4.2}%
