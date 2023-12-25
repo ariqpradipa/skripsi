@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.11.27)  24 DEC 2023 01:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.12.25)  25 DEC 2023 22:15
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1154,10 +1154,10 @@ Package newfloat Info: `float' package detected.
 
 (./_internals/sampul.tex
 Package epstopdf Info: Source file: <_internals/makara.eps>
-(epstopdf)                    date: 2023-11-26 16:42:00
+(epstopdf)                    date: 2023-12-25 21:29:09
 (epstopdf)                    size: 66662 bytes
 (epstopdf)             Output file: <_internals/makara-eps-converted-to.pdf>
-(epstopdf)                    date: 2023-11-27 22:18:59
+(epstopdf)                    date: 2023-12-25 21:29:09
 (epstopdf)                    size: 24220 bytes
 (epstopdf)             Command: <epstopdf --outfile=_internals/makara-eps-conve
 rted-to.pdf _internals/makara.eps>
@@ -1174,10 +1174,10 @@ line 14.
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./_internals/makara-eps-co
 nverted-to.pdf>]) (./_internals/judul_dalam.tex
 Package epstopdf Info: Source file: <_internals/makara.eps>
-(epstopdf)                    date: 2023-11-26 16:42:00
+(epstopdf)                    date: 2023-12-25 21:29:09
 (epstopdf)                    size: 66662 bytes
 (epstopdf)             Output file: <_internals/makara-eps-converted-to.pdf>
-(epstopdf)                    date: 2023-11-27 22:18:59
+(epstopdf)                    date: 2023-12-25 21:29:09
 (epstopdf)                    size: 24220 bytes
 (epstopdf)             Command: <epstopdf --outfile=_internals/makara-eps-conve
 rted-to.pdf _internals/makara.eps>
@@ -1275,12 +1275,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 66.
 
 (./src/00-front_matter/04-pengantar.tex)
-(./src/00-front_matter/05-persetujuan_publikasi.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--5
-[]
- []
-
-[5
+(./src/00-front_matter/05-persetujuan_publikasi.tex [5
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 30--36
@@ -1758,7 +1753,7 @@ runsystem(rm thesis.pyg)...executed.
 Here is how much of TeX's memory you used:
  28604 strings out of 480247
  542370 string characters out of 5896150
- 897791 words of memory out of 5000000
+ 897792 words of memory out of 5000000
  45713 multiletter control sequences out of 15000+600000
  514715 words of font info for 132 fonts, out of 8000000 for 9000
  83 hyphenation exceptions out of 8191
@@ -1772,7 +1767,7 @@ fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (37 pages, 371996 bytes).
+Output written on thesis.pdf (37 pages, 372528 bytes).
 PDF statistics:
  610 PDF objects out of 1000 (max. 8388607)
  538 compressed objects within 6 object streams
