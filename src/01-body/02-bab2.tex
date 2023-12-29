@@ -76,7 +76,7 @@ Dalam pengaturan KVM, CPU virtual dari VM diimplementasikan sebagai thread (dise
 	\centering
 	\includegraphics[width=1\textwidth]
 		{assets/pics/xen-kvm.png}
-	\caption{Hypervisor Type 1 vs Type 2}
+	\caption{Arsitektur Hypervisor KVM}
 	\label{fig:xen-kvm}
 \end{figure}
 
@@ -86,7 +86,7 @@ Pada Gambar \ref{fig:xen-kvm} adalah struktur daripada hypervisor KVM. KVM berja
 \section{\f{Virtual Machine}}
 %-----------------------------------------------------------------------------%
 
-Virtual Machine (VM) adalah sebuah lingkungan komputasi yang dibuat secara virtual di dalam sebuah komputer fisik (host)\cite{Pradilla2016}. VM ini berfungsi seperti sebuah komputer independen yang dapat menjalankan sistem operasi dan aplikasi seperti komputer fisik biasa, tetapi semuanya berjalan dalam lingkungan virtual yang terisolasi di dalam host fisik. Setiap \vm (VM) menjalankan sistem operasi secara independen dan beroperasi terpisah dari VM lainnya, bahkan ketika semuanya berjalan pada host yang sama. Perangkat lunak yang dikenal sebagai hypervisor atau \vmm (VMM) memungkinkan kita untuk menjalankan berbagai sistem operasi yang berbeda secara bersamaan pada \vm yang berbeda. VM memiliki beberapa keunggulan dibandingkan dengan mesin fisik, termasuk kemampuan untuk menjalankan beberapa lingkungan sistem operasi pada satu komputer fisik, mendukung aplikasi \f{legacy}, dan menyediakan opsi pemulihan dalam situasi bencana. VM digunakan untuk berbagai keperluan, seperti \cc, pengujian sistem operasi baru, dan menjalankan beberapa aplikasi pada satu mesin fisik\cite{ibmWhatVirtualMachine}.
+Virtual Machine (VM) adalah sebuah lingkungan komputasi yang dibuat secara virtual di dalam sebuah komputer fisik (host)\cite{Pradilla2016}. VM ini berfungsi seperti sebuah komputer independen yang dapat menjalankan sistem operasi dan aplikasi seperti komputer fisik biasa, tetapi semuanya berjalan dalam lingkungan virtual yang terisolasi di dalam host fisik. Setiap \vm\ (VM) menjalankan sistem operasi secara independen dan beroperasi terpisah dari VM lainnya, bahkan ketika semuanya berjalan pada host yang sama. Perangkat lunak yang dikenal sebagai hypervisor atau \vmm\ (VMM) memungkinkan kita untuk menjalankan berbagai sistem operasi yang berbeda secara bersamaan pada \vm\ yang berbeda. VM memiliki beberapa keunggulan dibandingkan dengan mesin fisik, termasuk kemampuan untuk menjalankan beberapa lingkungan sistem operasi pada satu komputer fisik, mendukung aplikasi \f{legacy}, dan menyediakan opsi pemulihan dalam situasi bencana. VM digunakan untuk berbagai keperluan, seperti \cc, pengujian sistem operasi baru, dan menjalankan beberapa aplikasi pada satu mesin fisik\cite{ibmWhatVirtualMachine}.
 
 \begin{figure}
 	\centering

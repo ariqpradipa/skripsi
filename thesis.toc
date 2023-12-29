@@ -30,7 +30,8 @@
 \contentsline {subsection}{\numberline {2.8.3}SSE4}{15}{subsection.2.8.3}%
 \contentsline {chapter}{\numberline {3}\uppercase {Metode Pengujian Tuning Hypervisor KVM}}{16}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Tahapan Penelitian}{16}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Tuning Hypervisor KVM}{17}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Pengujian Kompresi Video Dengan HandBrake}{19}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Analisis Pengujian}{20}{section.3.4}%
-\contentsline {chapter}{\uppercase {Daftar Referensi}}{22}{section.3.4}%
+\contentsline {section}{\numberline {3.2}Persiapan Lingkungan untuk Pengujian dan Analisis}{17}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Tuning Hypervisor KVM}{18}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Pengujian Kompresi Video Dengan HandBrake}{20}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Analisis Pengujian}{21}{section.3.5}%
+\contentsline {chapter}{\uppercase {Daftar Referensi}}{23}{section.3.5}%

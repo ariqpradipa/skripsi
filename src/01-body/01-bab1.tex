@@ -29,8 +29,10 @@ Pada bagian ini akan dijelaskan mengenai definisi permasalahan yang \saya~hadapi
 %-----------------------------------------------------------------------------%
 Berdasarkan latar belakang yang telah dijelaskan pada bab 1.1 bahasan mengenai rumusah yang akan dibahas pada penelitian ini adalah sebagai berikut:
 \begin{enumerate}
-  \item Apakah tuning hypervisor KVM pada Apache CloudStack memberikan efek yang signifikan terhadap performa sistem operasi \f{guest} yang menjalankan tugas kompresi video menggunakan Handbrake?
-  \item Bagaimana konfigurasi hypervisor KVM dapat diatur secara optimal untuk meningkatkan efisiensi dalam menangani tugas kompresi video pada Apache CloudStack?
+  \item Apakah konfigurasi default dari Hypervisor KVM sudah dibuat dengan optimal dan efisien?
+  \item Apakah tuning Hypervisor KVM untuk \vm\ di Apache Cloudstack memberikan efek yang signifikan terhadap performa tugas kompresi video dengan menggunakan HandBrake?
+  \item Bagaimana konfigurasi Hypervisor KVM dapat diatur secara optimal untuk meningkatkan efisiensi atau kecepatan dalam menangani tugas kompresi video pada Apache CloudStack?
+  
 \end{enumerate}
 
 %-----------------------------------------------------------------------------%
@@ -46,26 +48,33 @@ Karena berbagai kendala yang dihadapi pada skripsi ini dilakukan pembatasan masa
  \end{itemize}
   \item Sistem operasi yang digunakan adalah Ubuntu Server 22.04 LTS.
   \item Karena perangkat menggunakan CPU AMD, implementasi teknologi virtualisasi yang diadopsi adalah AMD-V.
-  \item Parameter yang menjadi fokus analisis dalam penelitian ini adalah rata-rata perbedaan waktu kompresi video antara hypervisor default dan hypervisor yang telah dituning.
+  \item Parameter yang menjadi fokus analisis dalam penelitian ini adalah rata-rata perbedaan waktu kompresi video antara hypervisor default dan hypervisor yang telah dituning dan juga nilai dari \ssim\ video dari hasil kompresi video yang dibandingkan dengan video asli.
 \end{enumerate}
 
 
 %-----------------------------------------------------------------------------%
 \section{Tujuan}
 %-----------------------------------------------------------------------------%
-Penelitian ini bertujuan untuk mendalami analisis performa tuning hypervisor KVM, khususnya dalam konteks penggunaan Apache CloudStack, dengan fokus pada tugas kompresi video. Tujuan utama penelitian adalah untuk mengevaluasi apakah konfigurasi hypervisor KVM telah diatur secara optimal dan efisien, serta untuk memahami dampak tuning tersebut terhadap performa sistem operasi guest. Hasil dari penelitian ini diharapkan dapat memberikan wawasan praktis bagi pengelola sistem yang menggunakan Apache CloudStack dalam lingkungan produksi, serta memberikan panduan terkait optimalisasi hypervisor KVM dalam meningkatkan kinerja layanan Cloud Computing Infrastructure as a Service (IaaS).
+%Penelitian ini bertujuan untuk menganalisis performa hypervisor KVM yang telah di-tuning, terutama dalam konteks penggunaan Apache CloudStack, dengan fokus pada tugas kompresi video menggunakan HandBrake. Tujuan utama adalah mengevaluasi apakah konfigurasi default hypervisor KVM sudah optimal dan efisien, serta memahami dampak tuning terhadap performa sistem operasi \f{guest}. Hasil penelitian ini diharapkan memberikan wawasan praktis bagi pengelola sistem yang menggunakan Apache CloudStack di lingkungan produksi, serta panduan untuk optimalisasi hypervisor KVM guna meningkatkan kinerja layanan \cc\ \f{Infrastructure as a Service} (IaaS).%
 
+Penelitian ini berfokus pada analisis performa hypervisor KVM setelah proses tuning, khususnya dalam penggunaan Apache CloudStack, dengan perhatian khusus pada kompresi video menggunakan HandBrake. Dengan tujuan sebagai berikut:
 
-% %-----------------------------------------------------------------------------%
-% \section{Posisi Penelitian}
-% %-----------------------------------------------------------------------------%
-% \todo{Posisi penelitian Anda jika dilihat secara bersamaan dengan 
-% 	peneliti-peneliti lainnya. Akan lebih baik lagi jika ikut menyertakan 
-% 	diagram yang menjelaskan hubungan dan keterkaitan antar 
-% 	penelitian-penelitian sebelumnya}
+\begin{itemize}
+	\item Evaluasi Konfigurasi Default Hypervisor KVM
+	
+	Menilai apakah konfigurasi default hypervisor KVM telah diatur secara optimal dan efisien.
+	
+	\item Pemahaman Dampak Tuning terhadap Performa Sistem Operasi \f{Guest}
+	
+	Memahami bagaimana tuning hypervisor KVM mempengaruhi performa sistem operasi \f{guest}.
+	
+	\item Panduan Optimalisasi Hypervisor KVM
+	
+	Menyusun rekomendasi untuk optimalisasi hypervisor KVM dalam rangka meningkatkan kinerja layanan Cloud Computing Infrastructure as a Service (IaaS).
+\end{itemize}
+Hasil penelitian ini diharapkan tidak hanya memberikan panduan praktis tetapi juga kontribusi akademis dalam bidang optimalisasi infrastruktur cloud.
 
-
-%----------------------------------------------------------------------\hspace{0.5cm} -------%
+%-----------------------------------------------------------------------------%
 \section{Metodologi Penelitian}
 %-----------------------------------------------------------------------------%
 Beberapa metodologi yang dilakukan pada penelitian ini, antara lain:
