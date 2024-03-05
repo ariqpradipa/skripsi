@@ -99,37 +99,6 @@ Virtual Machine (VM) adalah sebuah lingkungan komputasi yang dibuat secara virtu
 Terdapat perbedaan dalam cara berjalan antara komputer tanpa virtualisasi (host) dan komputer yang divirtualisasi (guest) atau \vm. Pada Gambar 2.4, dapat diperlihatkan bahwa pada komputer tanpa virtualisasi, sistem operasinya berjalan langsung di atas perangkat keras, dengan driver yang berfungsi sebagai jembatan, sehingga aplikasi dapat berjalan langsung di atas sistem operasi tersebut. Di sisi lain, pada komputer yang divirtualisasi, sistem operasinya berjalan di atas VMM atau Virtual Machine Monitor, di mana satu VMM dapat menjalankan banyak sistem operasi guest.
 
 %-----------------------------------------------------------------------------%
-\section{\f{Structural Similarity Index Measure}}
-%-----------------------------------------------------------------------------%
-\f{Structural Similarity Index Measure} (SSIM) adalah metode yang dikembangkan untuk menilai kualitas gambar. SSIM merupakan pergeseran dari metode penilaian kualitas gambar tradisional, yang terutama berfokus pada kuantifikasi visibilitas kesalahan antara gambar yang terdistorsi dan gambar referensi\cite{Wang2004}. Aspek-aspek kunci dari SSIM, adalah sebagai berikut:
-
-\begin{enumerate}
-	\item Fokus pada Informasi Struktural
-	
-	SSIM didasarkan pada asumsi bahwa persepsi visual manusia sangat disesuaikan untuk mengekstrak informasi struktural dari sebuah adegan. Oleh karena itu, alih-alih hanya berfokus pada visibilitas kesalahan, SSIM menilai sejauh mana struktur gambar telah dipertahankan atau terdegradasi\cite{Wang2004}.
-	
-	\item Komponen SSIM
-	
-	Indeks SSIM menggabungkan pengukuran luminans, kontras, dan struktur. Komponen ini digunakan untuk membandingkan gambar yang terdistorsi dengan gambar referensi untuk menilai kualitas\cite{Wang2004}.
-	
-	\item Luminans dan Kontras Lokal
-	
-	SSIM menggunakan ukuran luminans dan kontras lokal, tetapi hal ini dapat bervariasi di berbagai bagian gambar\cite{Wang2004}.
-	
-	\item Kinerja
-	
-	Indeks SSIM dicatat berkinerja baik saat dibandingkan dengan metode penilaian kualitas gambar lainnya. Khususnya, metode ini efektif dalam mengevaluasi kualitas subjektif gambar yang dikompres dengan JPEG dan JPEG2000\cite{Wang2004}.
-	
-	\item Pelengkap Metode Tradisional
-	
-	Meskipun SSIM didasarkan pada prinsip yang berbeda dari metode \f{error-sensitivity} tradisional, SSIM dapat dilihat sebagai pelengkap dari pendekatan tersebut\cite{Wang2004}.
-\end{enumerate}
-
-Dengan demikian, SSIM mewakili pendekatan yang lebih holistik dan relevan secara perseptual untuk penilaian kualitas gambar, dengan fokus pada perubahan struktural dalam gambar daripada hanya kesalahan pada tingkat piksel.
-
-Dalam penelitian ini, SSIM akan diaplikasikan sebagai parameter analisis dengan membandingkan gambar sebelum dan sesudah kompresi. Analisis ini melibatkan perbandingan antara hasil kompresi video menggunakan Hypervisor KVM dalam kondisi default dengan hasil kompresi video menggunakan Hypervisor KVM yang telah mengalami penyetelan atau tuning. Tujuannya adalah untuk mengevaluasi efek tuning terhadap kualitas gambar setelah proses kompresi.
-
-%-----------------------------------------------------------------------------%
 \section{virsh}
 %-----------------------------------------------------------------------------%
 
