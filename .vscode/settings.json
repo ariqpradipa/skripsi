@@ -1,0 +1,47 @@
+{
+    "latex-workshop.latex.tools": [
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "--shell-escape", // if you want to have the shell-escape flag
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+        },
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "pdflatex",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex",
+            ]
+        }
+    ],
+    "workbench.editorAssociations": {
+        "*.pdf": "latex-workshop-pdf-hook"
+    },
+    "latex-workshop.bibtex-fields.sort.enabled": true,
+    // Fix citation warnings in editor when using biber (wavy lines).
+    "latex-workshop.intellisense.citation.backend": "biblatex",
+    // Set bibliography indentation to four spaces (default: two).
+    "latex-workshop.bibtex-format.tab": "2 spaces",
+    // Avoid building PDF every time a file is modified or saved.
+    // "latex-workshop.latex.autoBuild.run": "never",
+    // Sync PDF with cursor position after compiling.
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    // Automatically choose last used recipe on next build.
+    "latex-workshop.latex.recipe.default": "lastUsed",
+}

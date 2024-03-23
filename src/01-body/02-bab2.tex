@@ -99,6 +99,18 @@ Virtual Machine (VM) adalah sebuah lingkungan komputasi yang dibuat secara virtu
 Terdapat perbedaan dalam cara berjalan antara komputer tanpa virtualisasi (host) dan komputer yang divirtualisasi (guest) atau \vm. Pada Gambar 2.4, dapat diperlihatkan bahwa pada komputer tanpa virtualisasi, sistem operasinya berjalan langsung di atas perangkat keras, dengan driver yang berfungsi sebagai jembatan, sehingga aplikasi dapat berjalan langsung di atas sistem operasi tersebut. Di sisi lain, pada komputer yang divirtualisasi, sistem operasinya berjalan di atas VMM atau Virtual Machine Monitor, di mana satu VMM dapat menjalankan banyak sistem operasi guest.
 
 %-----------------------------------------------------------------------------%
+\section{\f{Advanced Encryption Standard} (AES)}
+%-----------------------------------------------------------------------------%
+\f{Advanced Encryption Standard} atau disingkat AES pertama kali diumumkan oleh NIST \f{(National Institute Of Standards and Technology)} pada tahun 2001 sebagai pengganti algoritma DES yang semakin mudah diretas. AES merupakan hasil dari kompetisi yang diadakan oleh NIST pada tahun 1997 yang dimenangkan oleh tim dari belgium yang memiliki nama asli Rijndael. Rijndael dikembangkan oleh dua orang kriptografer dari belgium bernama Joan Daemen dan Vincent Rijmen. AES dipublikasikan oleh NIST pada tahun 2001 dan tersebar secara efektif pada bulan May 2002 setelah disetujui oleh Menteri Perdagan Amerika, Donald Evans\cite{Kaffahemailencryptaes}.
+
+
+
+%-----------------------------------------------------------------------------%
+\section{\f{Cyclic Redundancy Check} (CRC)}
+%-----------------------------------------------------------------------------%
+
+
+%-----------------------------------------------------------------------------%
 \section{virsh}
 %-----------------------------------------------------------------------------%
 
@@ -188,6 +200,7 @@ SSE4, yang merupakan singkatan dari Streaming SIMD Extensions 4, adalah serangka
 Berdasarkan informasi dalam tabel \ref{table:perbandingan_sse4}, SSE4.1 dirancang untuk meningkatkan performa dalam aplikasi media, pencitraan, dan 3D, serta menghadirkan 47 instruksi baru. Instruksi-instruksi ini berkontribusi pada peningkatan vektorisasi kompiler dan memberikan dukungan untuk perhitungan \f{packed dword}. Di sisi lain, SSE4.2, yang pertama kali diperkenalkan dalam prosesor dengan mikroarsitektur Nehalem, menambahkan tujuh instruksi tambahan. Fokus utama dari instruksi-instruksi tambahan ini adalah pada pemrosesan string dan teks, serta peningkatan dalam kemampuan integer SIMD\cite{sse4reference}.
 
 SSE4 tidak memperkenalkan tipe data baru tetapi mencakup berbagai tipe instruksi seperti perkalian dword, \f{floating-point dot-product}, \f{streaming load hint}, \f{packed blending}, dan instruksi MIN/MAX \f{packed integer}. Teknologi ini bertujuan untuk meningkatkan dukungan untuk perhitungan \f{packed dword} dan meningkatkan throughput memori untuk jenis memori tertentu. SSE4 sepenuhnya kompatibel dengan perangkat lunak dari generasi sebelumnya dari prosesor Intel dan tidak memerlukan dukungan OS baru di luar apa yang diperlukan untuk Streaming SIMD Extensions (SSE) sebelumnya\cite{sse4reference}.
+
 
 
 \iffalse
