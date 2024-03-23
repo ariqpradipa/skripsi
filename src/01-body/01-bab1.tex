@@ -15,13 +15,13 @@ Untuk menjalankan Apache Cloudstack diperlukan sebuah hypervisor. Hypervisor ada
 
 Pada penelitian ini \saya\ menggunakan sistem operasi Ubuntu yang berbasis Linux dan menggunakan KVM sebagai hypervisornya. Hypervisor KVM \f{(Kernel-based Virtual Machine)} adalah sebuah hypervisor berbasis kernel yang memungkinkan virtualisasi pada sistem operasi Linux\cite{whatiskvm}. KVM memanfaatkan modul kernel untuk menyediakan dukungan langsung untuk virtualisasi dengan menggunakan instruksi \f{hardware} yang mendukung teknologi virtualisasi, seperti Intel VT atau AMD-V.
 
-Penggunaan KVM sebagai hypervisor untuk menjalankan \vm\ pada Apache Cloudstack telah menjadi praktik umum. Namun, pertanyaan mendasar muncul: apakah hypervisor ini telah dikonfigurasi secara optimal untuk menjalankan tugas yang diberikan dengan efisien? Penelitian ini bertujuan untuk menganalisis apakah konfigurasi hypervisor KVM telah diatur dengan tepat dan efisien. Pada penelitian ini, penulis akan menguji performa hypervisor dengan melakukan tugas kompresi video menggunakan Handbrake. Selanjutnya, waktu yang diperlukan untuk menyelesaikan proses kompresi ini akan diukur dan dibandingkan dalam rangka evaluasi performa.
+Penggunaan KVM sebagai hypervisor untuk menjalankan \vm\ pada Apache Cloudstack telah menjadi praktik umum. Namun, pertanyaan mendasar muncul: apakah hypervisor ini telah dikonfigurasi secara optimal untuk menjalankan tugas yang diberikan dengan efisien? Penelitian ini bertujuan untuk menganalisis apakah konfigurasi hypervisor KVM telah diatur dengan tepat dan efisien. Pada penelitian ini, penulis akan menguji performa hypervisor dengan melakukan beberapa tugas komputasi, seperti kompresi video, enkripsi, dan juga validasi integritas data. Selanjutnya, waktu yang diperlukan untuk menyelesaikan proses komputasi ini akan diukur dan dibandingkan dalam rangka evaluasi performa.
 
 
 %-----------------------------------------------------------------------------%
 \section{Permasalahan}
 %-----------------------------------------------------------------------------%
-Pada bagian ini akan dijelaskan mengenai definisi permasalahan yang \saya~hadapi dan ingin diselesaikan serta asumsi dan batasan yang digunakan dalam menyelesaikannya.
+Pada bagian ini akan dijelaskan mengenai definisi permasalahan yang \saya\ hadapi dan ingin diselesaikan serta asumsi dan batasan yang digunakan dalam menyelesaikannya.
 
 
 %-----------------------------------------------------------------------------%
@@ -30,8 +30,8 @@ Pada bagian ini akan dijelaskan mengenai definisi permasalahan yang \saya~hadapi
 Berdasarkan latar belakang yang telah dijelaskan pada bab 1.1 bahasan mengenai rumusah yang akan dibahas pada penelitian ini adalah sebagai berikut:
 \begin{enumerate}
   \item Apakah konfigurasi default dari Hypervisor KVM sudah dibuat dengan optimal dan efisien?
-  \item Apakah tuning Hypervisor KVM untuk \vm\ di Apache Cloudstack memberikan efek yang signifikan terhadap performa tugas kompresi video dengan menggunakan HandBrake?
-  \item Bagaimana konfigurasi Hypervisor KVM dapat diatur secara optimal untuk meningkatkan efisiensi atau kecepatan dalam menangani tugas kompresi video pada Apache CloudStack?
+  \item Apakah tuning Hypervisor KVM untuk \vm\ di Apache Cloudstack memberikan efek yang signifikan terhadap performa tugas komputasi seperti kompresi video, enkripsi AES, dan validasi integritas data dengan CRC32?
+  \item Bagaimana konfigurasi Hypervisor KVM dapat diatur secara optimal untuk meningkatkan efisiensi atau kecepatan dalam menangani tugas komputasi tertentu pada Apache CloudStack?
   
 \end{enumerate}
 
@@ -42,13 +42,13 @@ Karena berbagai kendala yang dihadapi pada skripsi ini dilakukan pembatasan masa
 \begin{enumerate}
   \item Penelitian dilakukan menggunakan perangkat laptop dengan spesifikasi sebagai berikut:
   \begin{itemize}
-    \item CPU: AMD A10-9620P Radeon R5 10 Compute Cores 4C+6G x64.
-	\item RAM: 8 GB.
-	\item Penyimpanan: 100 GB pada harddisk.
+    \item CPU: AMD Ryzen 7 4800H x64.
+	\item RAM: 16 GB.
+	\item Penyimpanan: 1TB pada SSD.
  \end{itemize}
   \item Sistem operasi yang digunakan adalah Ubuntu Server 22.04 LTS.
   \item Karena perangkat menggunakan CPU AMD, implementasi teknologi virtualisasi yang diadopsi adalah AMD-V.
-  \item Parameter yang menjadi fokus analisis dalam penelitian ini adalah rata-rata perbedaan waktu kompresi video antara hypervisor default dan hypervisor yang telah dituning dan juga nilai dari \ssim\ video dari hasil kompresi video yang dibandingkan dengan video asli.
+  \item Parameter yang menjadi fokus analisis dalam penelitian ini adalah rata-rata perbedaan waktu kompresi video, waktu enkrispsi dengan AES, dan waktu validasi integritas data dengan CRC32 antara hypervisor default dan hypervisor yang telah dituning.
 \end{enumerate}
 
 
@@ -57,7 +57,7 @@ Karena berbagai kendala yang dihadapi pada skripsi ini dilakukan pembatasan masa
 %-----------------------------------------------------------------------------%
 %Penelitian ini bertujuan untuk menganalisis performa hypervisor KVM yang telah di-tuning, terutama dalam konteks penggunaan Apache CloudStack, dengan fokus pada tugas kompresi video menggunakan HandBrake. Tujuan utama adalah mengevaluasi apakah konfigurasi default hypervisor KVM sudah optimal dan efisien, serta memahami dampak tuning terhadap performa sistem operasi \f{guest}. Hasil penelitian ini diharapkan memberikan wawasan praktis bagi pengelola sistem yang menggunakan Apache CloudStack di lingkungan produksi, serta panduan untuk optimalisasi hypervisor KVM guna meningkatkan kinerja layanan \cc\ \f{Infrastructure as a Service} (IaaS).%
 
-Penelitian ini berfokus pada analisis performa hypervisor KVM setelah proses tuning, khususnya dalam penggunaan Apache CloudStack, dengan perhatian khusus pada kompresi video menggunakan HandBrake. Dengan tujuan sebagai berikut:
+Penelitian ini berfokus pada analisis performa hypervisor KVM setelah proses tuning, khususnya dalam penggunaan Apache CloudStack. Dengan tujuan sebagai berikut:
 
 \begin{itemize}
 	\item Evaluasi Konfigurasi Default Hypervisor KVM
@@ -81,11 +81,24 @@ Beberapa metodologi yang dilakukan pada penelitian ini, antara lain:
 \begin{enumerate}
   \item Studi Literatur
   
-  Studi literatur dalam penelitian ini dilakukan dengan melakukan pencarian, membaca, dan memahami jurnal serta sumber referensi yang terkait dengan \cc. Penelitian ini juga melibatkan eksplorasi literatur yang mendalam terkait dengan metode tuning hypervisor KVM, kondisi saat melakukan pemrosesan kompresi video, serta evaluasi keuntungan dan kerugian yang mungkin muncul akibat hasil tuning ini.
+  Studi literatur dalam penelitian ini dilakukan dengan melakukan pencarian, membaca, dan memahami jurnal serta sumber referensi yang terkait dengan \cc. Penelitian ini juga melibatkan eksplorasi literatur yang mendalam terkait dengan metode tuning hypervisor KVM, kondisi saat melakukan pemrosesan kompresi video, enkripsi AES, dan juga mengenai validasi integritas data dengan CRC32 serta evaluasi keuntungan dan kerugian yang mungkin muncul akibat hasil tuning ini.
   
   \item Pengumpulan Data
   
-  Pada penelitian ini, kompresi video akan dilakukan menggunakan Handbrake pada dua sistem, yaitu sistem yang menggunakan KVM default dan sistem yang menggunakan KVM yang sudah dituning. Pada masing-masing sistem, kompresi video akan dilakukan sebanyak 20 kali. Setelah itu, waktu rata-rata kompresi video pada kedua sistem akan dibandingkan dan dianalisis.
+  Pada penelitian ini, akan dilakukan tiga pengujian
+  \begin{enumerate}
+    \item Kompresi Video
+    
+    Kompresi video akan dilakukan menggunakan ffmpeg pada dua sistem, yaitu sistem yang menggunakan KVM default dan sistem yang menggunakan KVM yang sudah dituning. Pada masing-masing sistem, kompresi video akan dilakukan sebanyak 20 kali. Setelah itu, waktu rata-rata kompresi video pada kedua sistem akan dibandingkan dan dianalisis.
+
+    \item Enkripsi AES
+    
+    Enkripsi AES akan dilakukan dengan program benchmark yang dibuat \saya\ dengan python pada kedua sistem. Pada masing-masing sistem, enkripsi AES akan dilakukan sebanyak 10 kali. Setelah itu, waktu rata-rata enkripsi AES pada kedua sistem akan dibandingkan dan dianalisis.
+
+    \item Validasi CRC32
+    
+    Validasi CRC32 akan dilakukan dengan program benchmark yang dibuat \saya\ dengan python pada kedua sistem. Pada masing-masing sistem, validasi CRC32 akan dilakukan sebanyak 10 kali. Setelah itu, waktu rata-rata validasi CRC32 pada kedua sistem akan dibandingkan dan dianalisis.
+  \end{enumerate}
   
   \item Analisis
   
@@ -106,7 +119,15 @@ Pada penulisan skripsi ini terdiri dari 3 bab dengan pokok bahasan yang berbeda-
 
     Bab II membahas tentang landasan teori yang digunakan untuk memahami dan menganalisis hasil penelitian.
     
-    \item BAB III METODE PENGUJIAN TUNING HYPERVISOR KVM
+    \item BAB III METODE PENGUJIAN TUNING PARAMETER HYPERVISOR KVM DENGAN CLOUDSTACK AGENT
     
-    Bab III Membahas tentang tahapan dan bagaimana metode yang digunakan untuk melakukan tuning dan pengujian dari Hypervisor KVM, dan juga bagaimana analisis akan dilakukan
+    Bab III membahas tentang tahapan dan bagaimana metode yang digunakan untuk melakukan tuning dan pengujian dari tuning parameter Hypervisor KVM, dan juga bagaimana analisis akan dilakukan.
+
+    \item BAB IV PENGUJIAN TUNING PARAMETER HYPERVISOR KVM DENGAN CLOUDSTACK AGENT
+    
+    Bab IV menjelaskan hasil penelitian yang terdiri dari pengujian tuning parameter hypervisor KVM, dan dilakukan analisis performa hypervisor KVM setelah proses tuning.
+
+    \item BAB V PENUTUP
+    
+    Bab V menjelaskan kesimpulan dari penelitian dilakukan dan saran.
 \end{itemize}
