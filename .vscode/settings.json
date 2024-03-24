@@ -59,13 +59,13 @@
     // Fix citation warnings in editor when using biber (wavy lines).
     "latex-workshop.intellisense.citation.backend": "biblatex",
     // Set bibliography indentation to four spaces (default: two).
-    "latex-workshop.bibtex-format.tab": "2 spaces",
+    // "latex-workshop.bibtex-format.tab": "2 spaces",
     // Avoid building PDF every time a file is modified or saved.
     "latex-workshop.latex.autoBuild.run": "never",
     // Sync PDF with cursor position after compiling.
-    "latex-workshop.synctex.afterBuild.enabled": true,
+    // "latex-workshop.synctex.afterBuild.enabled": true,
     // Automatically choose last used recipe on next build.
     "latex-workshop.latex.recipe.default": "lastUsed",
-    "latex-workshop.synctex.synctexjs.enabled": true,
-    "latex-workshop.view.pdf.viewer": "tab",
+    // "latex-workshop.synctex.synctexjs.enabled": true,
+    // "latex-workshop.view.pdf.viewer": "tab",
 }
