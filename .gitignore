@@ -1,3 +1,6 @@
+.DS_Store
+**/.DS_Store
+
 _minted_*/
 ## Core latex/pdflatex auxiliary files:
 *.aux

@@ -314,67 +314,109 @@ Setelah server manajemen sudah UP, cloudstack dapat diakses di http://192.168.0.
 \begin{enumerate}
     \item Zone
     \begin{verbatim}
-    Name - nama bebas
-    Public DNS 1 - 8.8.8.8
-    Public DNS 2 - 1.1.1.1
-    Internal DNS1 - 192.168.0.1
-    Hypervisor - KVM
+Name - nama bebas
+Public DNS 1 - 8.8.8.8
+Public DNS 2 - 1.1.1.1
+Internal DNS1 - 192.168.0.1
+Hypervisor - KVM
     \end{verbatim}
 
     \item Network
     \begin{verbatim}
-    Gateway - 192.168.0.1
-    Netmask - 255.255.255.0
-    VLAN/VNI - (kosong untuk vlan://untagged, 
-                VXLAN untuk vxlan://untagged)
-    Start IP - 192.168.0.20
-    End IP - 192.168.0.50
+Gateway - 192.168.0.1
+Netmask - 255.255.255.0
+VLAN/VNI - (kosong untuk vlan://untagged, 
+            VXLAN untuk vxlan://untagged)
+Start IP - 192.168.0.20
+End IP - 192.168.0.50
     \end{verbatim}
 
     \item Pod
     \begin{verbatim}
-    Name - nama bebas
-    Gateway - 192.168.0.1
-    Start/end reserved system IPs - 192.168.0.51 - 192.168.0.80
+Name - nama bebas
+Gateway - 192.168.0.1
+Start/end reserved system IPs - 192.168.0.51 - 192.168.0.80
     \end{verbatim}
 
     \item Guest Traffic
     \begin{verbatim}
-    VLAN/VNI range: 700-900
+VLAN/VNI range: 700-900
     \end{verbatim}
 
     \item Cluster
     \begin{verbatim}
-    Name - nama bebas
-    Hypervisor - pilih KVM
+Name - nama bebas
+Hypervisor - pilih KVM
     \end{verbatim}
 
     \item Host
     \begin{verbatim}
-    Hostname - 192.168.0.10
-    Username - root
-    Password - password user root
+Hostname - 192.168.0.10
+Username - root
+Password - password user root
     \end{verbatim}
 
     \item Primary Storage
     \begin{verbatim}
-    Name - nama bebas
-    Scope - zone-wide
-    Protocol - NFS
-    Server - 192.168.0.10 [ubuntu server static IP]
-    Path - /export/primary
+Name - nama bebas
+Scope - zone-wide
+Protocol - NFS
+Server - 192.168.0.10 [ubuntu server static IP]
+Path - /export/primary
     \end{verbatim}
     
     \item Secondary Storage
     \begin{verbatim}
-    Provider - NFS
-    Name - nama bebas
-    Server - 192.168.100.10 [ubuntu server static ip]
-    Path - /export/secondary
+Provider - NFS
+Name - nama bebas
+Server - 192.168.100.10 [ubuntu server static ip]
+Path - /export/secondary
     \end{verbatim}
 \end{enumerate}
 
 Setelah konfigurasi selesai, pergi ke \texttt{Navigation>Infrasturcture>Summary} dan pastikan seluruh komponen sudah dinyalakan. Sekarang pengguna dapat menambahkan file iso yang diinginkan untuk membuat instance.
+
+%-----------------------------------------------------------------------------%
+\subsection{Persiapan Virtual Machine}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\subsubsection{Image Ubuntu Server 22.04 LTS}
+%-----------------------------------------------------------------------------%
+Langkah pertama yang harus dilakukan adalah mengunduh file image ISO Ubuntu Server 22.04 LTS dari situs resmi Ubuntu dan menyimpannya di sistem host. Untuk dapat digunakan oleh CloudStack, file ISO ini perlu di-host agar dapat diakses melalui alamat IP host. Hosting ini akan dilakukan menggunakan Apache2, sebuah aplikasi web server. Setelah konfigurasi Apache2 selesai dan file image ISO dapat diakses melalui alamat IP, langkah selanjutnya adalah membuka CloudStack dan menuju ke \texttt{Configuration>Global Settings>All Settings}. Di sini, isi konfigurasi \texttt{"Secstorage allow internal sites"} dengan nilai \texttt{192.168.0.0/24} (Home network) dan simpan pengaturan tersebut. Setelah itu, navigasikan ke \texttt{Images>ISOs} dan pilih opsi "register ISO". Tambahkan file ISO Ubuntu Server 22.04 LTS yang telah diunduh sebelumnya dengan memasukkan alamat URL image ISO dari sistem host. Tunggu hingga file image siap digunakan.
+
+%-----------------------------------------------------------------------------%
+\subsubsection{Membuat Image Template}
+%-----------------------------------------------------------------------------%
+Setelah ISO image sudah siap digunakan langkah selanjutnya adalah membuat image template. Pergi ke Compute>Instances dan pilih Add Instances. Konfigurasi Virtual Machine yang akan digunakan adalah seperti ini:
+
+\begin{enumerate}
+    \item Deployment Infrastructure
+    \begin{itemize}
+        \item Pod: Default
+        \item Cluster: Default
+        \item Host: Default
+    \end{itemize}
+
+    \item Template/ISO
+    
+    Klik tab ISOs dan pilih image Ubuntu Server 22.04 LTS yang telah ditambahkan sebelumnya.
+
+    \item Compute Offering
+    
+    Pilih High Instance dengan spesifikasi:
+    \begin{itemize}
+        \item CPU: 4 vCPU
+        \item Clock Speed: 2.0 GHz
+        \item Memory: 4096 MB
+    \end{itemize}
+
+    \item Data Disk
+    
+    Pada penelitian ini Virtual Machine akan diberikan data disk berukuran 20GB.
+
+    \item Networks
+\end{enumerate}
 
 %-----------------------------------------------------------------------------%
 \section{Tuning Hypervisor KVM}
