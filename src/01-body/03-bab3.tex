@@ -416,7 +416,13 @@ Setelah ISO image sudah siap digunakan langkah selanjutnya adalah membuat image 
     Pada penelitian ini Virtual Machine akan diberikan data disk berukuran 20GB.
 
     \item Networks
+    
+    Pada bagian network pilih \texttt{"Create New Network"} dan pilih tab Isolated. Berikan nama network, pilih zona, dan untuk bagian \texttt{Network Offering} pilih \texttt{"Network Offering used for CloudStack Kubernetes Service"}. Untuk Gateway isi dengan \texttt{192.168.0.1} (Gateway Home Network) dan untuk Netmask isi dengan \texttt{255.255.255.0}. Untuk DNS 1 isi dengan \texttt{1.1.1.1} (Cloudflare DNS), dan DNS 2 diisi dengan \texttt{8.8.8.8} (Google DNS). Setelah itu klik ok dan centang network yang baru dibuat.
 \end{enumerate}
+
+Setelah itu klik Launch Instance dan tunggu sampai instance siap digunakan. Jika instance sudah siap digunakan buka console dari instance dan lakukan instalasi standar Ubuntu Server 22.04 LTS. Jika Instalasi dari Ubuntu Server sudah selesai akan dilakukan instalasi program yang akan digunakan untuk melakukan penelitian. Program yang digunakan dalam penelitian ini adalah \texttt{ffmpeg} untuk melakukan kompresi video dan \texttt{python} untuk melakukan benchmark enkripsi dan validasi integritas file.
+
+Jika sudah selesai melakukan instalasi program yang diperlukan matikan virtual machine dan pergi ke Storage>Volumes dan klik titik tiga dari volume yang digunakan oleh Virtual Machine yang sudah dibuat tadi dan pilih \texttt{Create template from volume} kemudian tunggu sampai pembuatan template sudah selesai. Template ini akan digunakan untuk memudahkan membuat Virtual Machine baru dengan konfigurasi dan aplikasi yang sudah disiapkan apabila terjadi masalah dan diperlukan untuk membuat Virtual Machine baru.
 
 %-----------------------------------------------------------------------------%
 \section{Tuning Hypervisor KVM}
