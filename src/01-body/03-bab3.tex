@@ -35,7 +35,7 @@ Proses persiapan lingkungan untuk pengujian dan analisis yang tergambar dalam ga
 
 Setelah sistem operasi terinstal, dilakukan pembaruan dan peningkatan sistem operasi tersebut untuk memastikan semua komponen sistem berada pada versi terkini serta keamanan sistem terjaga. Langkah ini krusial untuk menutup potensi kerentanan yang mungkin ada pada sistem. Selanjutnya, Apache Cloudstack versi 4.18.1 diinstal dan dikonfigurasi. Apache Cloudstack berfungsi sebagai platform manajemen cloud yang memungkinkan pembuatan dan pengelolaan infrastruktur cloud yang kompleks, yang merupakan elemen kunci dalam penelitian ini.
 
-Dalam pembuatan lingkungan virtual, dibuat \vm yang menggunakan sistem operasi yang sama, yaitu Ubuntu Server 22.04 LTS. Pembuatan VM ini memungkinkan simulasi berbagai skenario penelitian dalam lingkungan yang terisolasi. Selanjutnya, untuk keperluan analisis dan pengujian, Handbrake diinstal, dan video yang akan digunakan pun disiapkan.
+Dalam pembuatan lingkungan virtual, dibuat \vm\ yang menggunakan sistem operasi yang sama, yaitu Ubuntu Server 22.04 LTS. Pembuatan VM ini memungkinkan simulasi berbagai skenario penelitian dalam lingkungan yang terisolasi. Selanjutnya, untuk keperluan analisis dan pengujian, Handbrake diinstal, dan video yang akan digunakan pun disiapkan.
 
 Tahapan selanjutnya merupakan pembuatan image template dari VM yang telah dikonfigurasi. Proses ini memungkinkan duplikasi VM dengan cepat dan efisien untuk pengujian berulang atau skenario analisis yang berbeda, menjamin konsistensi lingkungan penelitian. Image template ini kemudian digunakan sebagai standar untuk penelitian lebih lanjut, memastikan bahwa setiap VM yang dibuat untuk tujuan pengujian memiliki konfigurasi yang identik.
 
@@ -185,7 +185,7 @@ Pada tahap ini \saya\ akan melakukan konfigurasi untuk penyimpanan dari cloudsta
     \end{minted}
 \end{listing}
 
-Perintah \texttt{sudo apt-get install nfs-kernel-server quota} digunakan untuk menginstal perangkat lunak server NFS dan modul Quota pada sistem Linux. Selanjutnya, perintah \texttt{echo "/export *(rw,async,no\textunderscore root\textunderscore squash,no\textunderscore subtree\textunderscore check)" > /etc/exports} digunakan untuk menetapkan konfigurasi eksport NFS dengan opsi akses tertentu. Kemudian, perintah \texttt{sudo mkdir -p /export/primary /export/secondary} membuat direktori yang akan diakses oleh klien NFS. Terakhir, perintah \texttt{sudo exportfs -a} mengekspor semua direktori yang telah dikonfigurasi sebelumnya untuk diakses oleh klien NFS. Dengan demikian, rangkaian perintah ini mempersiapkan server NFS untuk berbagi data melalui jaringan. Setelah itu akan dilakukan konfigurasi NFS server dengan perintah:
+Perintah \texttt{sudo apt-get install nfs-kernel-server quota} digunakan untuk menginstal perangkat lunak server NFS dan modul Quota pada sistem Linux. Selanjutnya, perintah \texttt{echo "/export *(rw,async,no\_root\_squash,no\_subtree\_check)" > /etc/exports} digunakan untuk menetapkan konfigurasi eksport NFS dengan opsi akses tertentu. Kemudian, perintah \texttt{sudo mkdir -p /export/primary /export/secondary} membuat direktori yang akan diakses oleh klien NFS. Terakhir, perintah \texttt{sudo exportfs -a} mengekspor semua direktori yang telah dikonfigurasi sebelumnya untuk diakses oleh klien NFS. Dengan demikian, rangkaian perintah ini mempersiapkan server NFS untuk berbagi data melalui jaringan. Setelah itu akan dilakukan konfigurasi NFS server dengan perintah:
 
 \begin{listing}[H]
     \begin{minted}{bash}
@@ -377,18 +377,18 @@ Path - /export/secondary
 Setelah konfigurasi selesai, pergi ke \texttt{Navigation>Infrasturcture>Summary} dan pastikan seluruh komponen sudah dinyalakan. Sekarang pengguna dapat menambahkan file iso yang diinginkan untuk membuat instance.
 
 %-----------------------------------------------------------------------------%
-\subsection{Persiapan Virtual Machine}
+\subsection{Persiapan \vm}
 %-----------------------------------------------------------------------------%
 
 %-----------------------------------------------------------------------------%
 \subsubsection{Image Ubuntu Server 22.04 LTS}
 %-----------------------------------------------------------------------------%
-Langkah pertama yang harus dilakukan adalah mengunduh file image ISO Ubuntu Server 22.04 LTS dari situs resmi Ubuntu dan menyimpannya di sistem host. Untuk dapat digunakan oleh CloudStack, file ISO ini perlu di-host agar dapat diakses melalui alamat IP host. Hosting ini akan dilakukan menggunakan Apache2, sebuah aplikasi web server. Setelah konfigurasi Apache2 selesai dan file image ISO dapat diakses melalui alamat IP, langkah selanjutnya adalah membuka CloudStack dan menuju ke \texttt{Configuration>Global Settings>All Settings}. Di sini, isi konfigurasi \texttt{"Secstorage allow internal sites"} dengan nilai \texttt{192.168.0.0/24} (Home network) dan simpan pengaturan tersebut. Setelah itu, navigasikan ke \texttt{Images>ISOs} dan pilih opsi "register ISO". Tambahkan file ISO Ubuntu Server 22.04 LTS yang telah diunduh sebelumnya dengan memasukkan alamat URL image ISO dari sistem host. Tunggu hingga file image siap digunakan.
+Langkah pertama yang harus dilakukan adalah mengunduh file image ISO Ubuntu Server 22.04 LTS dari situs resmi Ubuntu dan menyimpannya di sistem host. Agar dapat digunakan oleh CloudStack, file ISO ini perlu di-host agar dapat diakses melalui alamat IP host. Hosting ini akan dilakukan menggunakan Apache2, sebuah aplikasi web server. Setelah konfigurasi Apache2 selesai dan file image ISO dapat diakses melalui alamat IP, langkah selanjutnya adalah membuka CloudStack dan menuju ke \texttt{Configuration>Global Settings>All Settings}. Di sini, isi konfigurasi \texttt{"Secstorage allow internal sites"} dengan nilai \texttt{192.168.0.0/24} (Home network) dan simpan pengaturan tersebut. Setelah itu, navigasikan ke \texttt{Images>ISOs} dan pilih opsi "register ISO". Tambahkan file ISO Ubuntu Server 22.04 LTS yang telah diunduh sebelumnya dengan memasukkan alamat URL image ISO dari sistem host. Tunggu hingga file image siap digunakan.
 
 %-----------------------------------------------------------------------------%
 \subsubsection{Membuat Image Template}
 %-----------------------------------------------------------------------------%
-Setelah ISO image sudah siap digunakan langkah selanjutnya adalah membuat image template. Pergi ke Compute>Instances dan pilih Add Instances. Konfigurasi Virtual Machine yang akan digunakan adalah seperti ini:
+Setelah ISO image sudah siap digunakan langkah selanjutnya adalah membuat image template. Pergi ke \texttt{Compute>Instances} dan pilih Add Instances. Konfigurasi \vm\ yang akan digunakan adalah seperti ini:
 
 \begin{enumerate}
     \item Deployment Infrastructure
@@ -413,16 +413,16 @@ Setelah ISO image sudah siap digunakan langkah selanjutnya adalah membuat image 
 
     \item Data Disk
     
-    Pada penelitian ini Virtual Machine akan diberikan data disk berukuran 20GB.
+    Pada penelitian ini \vm\ akan diberikan data disk berukuran 20GB.
 
     \item Networks
     
-    Pada bagian network pilih \texttt{"Create New Network"} dan pilih tab Isolated. Berikan nama network, pilih zona, dan untuk bagian \texttt{Network Offering} pilih \texttt{"Network Offering used for CloudStack Kubernetes Service"}. Untuk Gateway isi dengan \texttt{192.168.0.1} (Gateway Home Network) dan untuk Netmask isi dengan \texttt{255.255.255.0}. Untuk DNS 1 isi dengan \texttt{1.1.1.1} (Cloudflare DNS), dan DNS 2 diisi dengan \texttt{8.8.8.8} (Google DNS). Setelah itu klik ok dan centang network yang baru dibuat.
+    Di bagian network, pilih \texttt{"Create New Network"} dan pilih tab Isolated. Beri nama untuk jaringan tersebut, pilih zona yang sesuai, dan untuk bagian \texttt{Network Offering} pilih \texttt{"Network Offering used for CloudStack Kubernetes Service"}. Isi bagian Gateway dengan \texttt{192.168.0.1} (Gateway Home Network) dan Netmask dengan \texttt{255.255.255.0}. Untuk DNS 1, gunakan \texttt{1.1.1.1} (Cloudflare DNS), dan untuk DNS 2, gunakan \texttt{8.8.8.8} (Google DNS). Setelah itu, klik OK dan centang jaringan yang baru saja dibuat.
 \end{enumerate}
 
-Setelah itu klik Launch Instance dan tunggu sampai instance siap digunakan. Jika instance sudah siap digunakan buka console dari instance dan lakukan instalasi standar Ubuntu Server 22.04 LTS. Jika Instalasi dari Ubuntu Server sudah selesai akan dilakukan instalasi program yang akan digunakan untuk melakukan penelitian. Program yang digunakan dalam penelitian ini adalah \texttt{ffmpeg} untuk melakukan kompresi video dan \texttt{python} untuk melakukan benchmark enkripsi dan validasi integritas file.
+Setelah itu, klik "Launch Instance" dan tunggu sampai instance siap digunakan. Jika instance sudah siap digunakan, buka konsol dari instance dan lakukan instalasi standar Ubuntu Server 22.04 LTS. Setelah instalasi Ubuntu Server selesai, lanjutkan dengan instalasi program-program yang akan digunakan untuk penelitian. Program-program yang digunakan termasuk \texttt{ffmpeg} untuk melakukan kompresi video, \texttt{python} untuk melakukan benchmark enkripsi, dan validasi integritas file.
 
-Jika sudah selesai melakukan instalasi program yang diperlukan matikan virtual machine dan pergi ke Storage>Volumes dan klik titik tiga dari volume yang digunakan oleh Virtual Machine yang sudah dibuat tadi dan pilih \texttt{Create template from volume} kemudian tunggu sampai pembuatan template sudah selesai. Template ini akan digunakan untuk memudahkan membuat Virtual Machine baru dengan konfigurasi dan aplikasi yang sudah disiapkan apabila terjadi masalah dan diperlukan untuk membuat Virtual Machine baru.
+Setelah selesai menginstal semua program yang diperlukan, matikan \vm\ dan pergi ke \texttt{Storage>Volumes}. Klik pada titik tiga dari volume yang digunakan oleh \vm\ yang telah dibuat sebelumnya, lalu pilih opsi \texttt{Create template from volume}. Tunggu hingga proses pembuatan template selesai. Template ini akan sangat berguna untuk memudahkan pembuatan \vm\ baru dengan konfigurasi dan aplikasi yang sudah disiapkan jika terjadi masalah atau jika dibutuhkan pembuatan \vm\ baru.
 
 %-----------------------------------------------------------------------------%
 \section{Tuning Hypervisor KVM}
@@ -430,14 +430,14 @@ Jika sudah selesai melakukan instalasi program yang diperlukan matikan virtual m
 Tuning Hypervisor KVM yang dilakukan adalah dengan menambahkan flag instruksi yang tidak terdapat pada konfigurasi KVM default, dimana flag default dari KVM yang mendukung kompresi video hanyalah sse, dan sse2.
 
 \begin{figure}
-    \texttt{\textbf{fpu} vme \textbf{de pse tsc msr pae mce cx8 apic sep mtrr pge mca} \textbf{cmov pat pse36 clflush mmx fxsr sse sse2} ht \textbf{syscall nx} mmxext fxsr\textunderscore opt pdpe1gb rdtscp \textbf{lm} constant\textunderscore tsc \textbf{rep\textunderscore good} acc\textunderscore power\textbf{nopl} nonstop\textunderscore tsc \textbf{cpuid}  \textbf{extd\textunderscore apicid} aperfmperf \textbf{pni} pclmulqdq monitor ssse3 fma \textbf{cx16} sse4\textunderscore 1 sse4\textunderscore 2 movbe popcnt aes xsave avx f16c \textbf{lahf\textunderscore lm} cmp\textunderscore legacy \textbf{svm} extapic cr8\textunderscore legacy abm sse4a misalignsse\textbf{3dnowprefetch} osvw ibs xop skinit wdt lwp fma4 tce nodeid\textunderscore msr tbmtopoext perfctr\textunderscore core perfctr\textunderscore nb bpext ptsc mwaitx cpb hw\textunderscore pstate ssbd \textbf{vmmcall} fsgsbase bmi1 avx2 smep bmi2 xsaveopt arat npt lbrv svm\textunderscore locknrip\textunderscore save tsc\textunderscore scale vmcb\textunderscore clean flushbyasid decodeassists pausefilter pfthreshold avic v\textunderscore vmsave\textunderscore vmload vgif overflow\textunderscore recov}
+    \texttt{\textbf{fpu} vme \textbf{de pse tsc msr pae mce cx8 apic sep mtrr pge mca} \textbf{cmov pat pse36 clflush mmx fxsr sse sse2} ht \textbf{syscall nx} mmxext fxsr\_opt pdpe1gb rdtscp \textbf{lm} constant\_tsc \textbf{rep\_good} acc\_power \textbf{nopl} nonstop\_tsc \textbf{cpuid}  \textbf{extd\_apicid} aperfmperf \textbf{pni} pclmulqdq monitor ssse3 fma \textbf{cx16} sse4\_1 sse4\_2 movbe popcnt aes xsave avx f16c \textbf{lahf\_lm} cmp\_legacy \textbf{svm} extapic cr8\_legacy abm sse4a misalignsse\textbf{3dnowprefetch} osvw ibs xop skinit wdt lwp fma4 tce nodeid\_msr tbmtopoext perfctr\_core perfctr\_nb bpext ptsc mwaitx cpb hw\_pstate ssbd \textbf{vmmcall} fsgsbase bmi1 avx2 smep bmi2 xsaveopt arat npt lbrv svm\_locknrip\_save tsc\_scale vmcb\_clean flushbyasid decodeassists pausefilter pfthreshold avic v\_vmsave\_vmload vgif overflow\_recov}
     \caption{Seluruh flag instruksi di Host}
     \label{fig:flag_kvm_host}
 \end{figure}
 
 Terlihat pada gambar \ref{fig:flag_kvm_host} adalah keseluruhan flag instruksi dari sistem host, sedangkan text yang ditajamkan adalah flag instruksi bawaan default dari hypervisor KVM. Dari sini flag yang berguna untuk melakukan kompresi video dan ditajamkan hanyalah sse dan sse2, hal ini menandakan bahwa KVM tidak mengaktifkan keseluruhan flag instruksi meskipun pada sistem host sudah mendukung flag instruksinya. Beberapa flag yang berguna untuk melakukan kompresi video dan tidak dinyalakan oleh hypervisor KVM adalah SSE3, SSE4\_1, dan SSE4\_2. 
 
-\saya\ dapat mengaktifkan flag tersebut untuk digunakan oleh \vm\ yang menggunakan hypervisor KVM. Untuk melakukan tuning \saya\ dapat menggunakan tools virsh untuk mengubah konfigurasi \vm dari CloudStack. Secara default konfigurasi dari \vm di CloudStack akan seperti ini:
+\saya\ dapat mengaktifkan flag tersebut untuk digunakan oleh \vm\ yang menggunakan hypervisor KVM. Untuk melakukan tuning \saya\ dapat menggunakan tools virsh untuk mengubah konfigurasi \vm\ dari CloudStack. Secara default konfigurasi dari \vm\ di CloudStack akan seperti ini:
 
 \begin{listing}[H]
     \begin{minted}{xml}
@@ -460,7 +460,7 @@ Terlihat pada gambar \ref{fig:flag_kvm_host} adalah keseluruhan flag instruksi d
     \label{code:default_kvm_xml}
 \end{listing}
 
-Terlihat dari kode \ref{code:default_kvm_xml} bahwa feature yang dinyalakan tidak memuat sse3, sse4\_1, dan sse4\_2. Untuk itu \saya\ dapat menambahkan fitur tersebut sehingga \vm dapat menggunakan flag instruksi tersebut. Perubahahan yang akan \saya lakukan akan seperti ini:
+Terlihat dari kode \ref{code:default_kvm_xml} bahwa feature yang dinyalakan tidak memuat sse3, sse4\_1, dan sse4\_2. Untuk itu \saya\ dapat menambahkan fitur tersebut sehingga \vm\ dapat menggunakan flag instruksi tersebut. Perubahahan yang akan \saya lakukan akan seperti ini:
 
 \begin{listing}[H]
     \begin{minted}{xml}
