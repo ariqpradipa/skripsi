@@ -427,38 +427,68 @@ Setelah selesai menginstal semua program yang diperlukan, matikan \vm\ dan pergi
 %-----------------------------------------------------------------------------%
 \section{Tuning Hypervisor KVM}
 %-----------------------------------------------------------------------------%
-Tuning Hypervisor KVM yang dilakukan adalah dengan menambahkan flag instruksi yang tidak terdapat pada konfigurasi KVM default, dimana flag default dari KVM yang mendukung kompresi video hanyalah sse, dan sse2.
+Untuk melakukan tuning pada Hypervisor KVM, digunakan tools virsh, sebuah command line tool yang disediakan oleh virtualization API libvirt untuk mengelola hypervisor seperti KVM, Xen, VMware ESXi, dan lain-lain. Tuning Hypervisor KVM dilakukan dengan menambahkan flag atau instruksi yang tidak terdapat pada konfigurasi KVM default.
 
 \begin{figure}
-    \texttt{\textbf{fpu} vme \textbf{de pse tsc msr pae mce cx8 apic sep mtrr pge mca} \textbf{cmov pat pse36 clflush mmx fxsr sse sse2} ht \textbf{syscall nx} mmxext fxsr\_opt pdpe1gb rdtscp \textbf{lm} constant\_tsc \textbf{rep\_good} acc\_power \textbf{nopl} nonstop\_tsc \textbf{cpuid}  \textbf{extd\_apicid} aperfmperf \textbf{pni} pclmulqdq monitor ssse3 fma \textbf{cx16} sse4\_1 sse4\_2 movbe popcnt aes xsave avx f16c \textbf{lahf\_lm} cmp\_legacy \textbf{svm} extapic cr8\_legacy abm sse4a misalignsse\textbf{3dnowprefetch} osvw ibs xop skinit wdt lwp fma4 tce nodeid\_msr tbmtopoext perfctr\_core perfctr\_nb bpext ptsc mwaitx cpb hw\_pstate ssbd \textbf{vmmcall} fsgsbase bmi1 avx2 smep bmi2 xsaveopt arat npt lbrv svm\_locknrip\_save tsc\_scale vmcb\_clean flushbyasid decodeassists pausefilter pfthreshold avic v\_vmsave\_vmload vgif overflow\_recov}
+    \texttt{\textbf{fpu} vme \textbf{de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2} ht \textbf{syscall nx} mmxext fxsr\_opt pdpe1gb rdtscp \textbf{lm} constant\_tsc \textbf{rep\_good} \textbf{nopl} nonstop\_tsc \textbf{cpuid extd\_apicid} aperfmperf rapl \textbf{pni} pclmulqdq monitor ssse3 fma \textbf{cx16} sse4\_1 sse4\_2 movbe popcnt aes xsave avx f16c rdrand \textbf{lahf\_lm} cmp\_legacy \textbf{svm} extapic cr8\_legacy abm sse4a misalignsse \textbf{3dnowprefetch} osvw ibs skinit wdt tce topoext perfctr\_core perfctr\_nb bpext perfctr\_llc mwaitx cpb cat\_l3 cdp\_l3 hw\_pstate ssbd mba ibrs ibpb stibp \textbf{vmmcall} fsgsbase bmi1 avx2 smep bmi2 cqm rdt\_a rdseed adx smap clflushopt clwb sha\_ni xsaveopt xsavec xgetbv1 cqm\_llc cqm\_occup\_llc cqm\_mbm\_total cqm\_mbm\_local clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm\_lock nrip\_save tsc\_scale vmcb\_clean flushbyasid decodeassists pausefilter pfthreshold avic v\_vmsave\_vmload vgif v\_spec\_ctrl umip rdpid overflow\_recov succor smca}
     \caption{Seluruh flag instruksi di Host}
     \label{fig:flag_kvm_host}
 \end{figure}
 
 Terlihat pada gambar \ref{fig:flag_kvm_host} adalah keseluruhan flag instruksi dari sistem host, sedangkan text yang ditajamkan adalah flag instruksi bawaan default dari hypervisor KVM. Dari sini flag yang berguna untuk melakukan kompresi video dan ditajamkan hanyalah sse dan sse2, hal ini menandakan bahwa KVM tidak mengaktifkan keseluruhan flag instruksi meskipun pada sistem host sudah mendukung flag instruksinya. Beberapa flag yang berguna untuk melakukan kompresi video dan tidak dinyalakan oleh hypervisor KVM adalah SSE3, SSE4\_1, dan SSE4\_2. 
 
-\saya\ dapat mengaktifkan flag tersebut untuk digunakan oleh \vm\ yang menggunakan hypervisor KVM. Untuk melakukan tuning \saya\ dapat menggunakan tools virsh untuk mengubah konfigurasi \vm\ dari CloudStack. Secara default konfigurasi dari \vm\ di CloudStack akan seperti ini:
+
+Pertama, langkah yang dilakukan adalah melakukan list dari virtual machine yang sedang berjalan di sistem dengan perintah:
+
+\texttt{virsh list}
+
+Keluaran dari perintah ini adalah:
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]
+    {assets/pics/virsh_list.png}
+    \caption{Keluaran perintah \texttt{virsh list}}
+    \label{fig:virsh_list}
+\end{figure}
+
+Pada Gambar \ref{fig:virsh_list} terlihat daftar virtual machine yang sedang berjalan di sistem. Dari daftar ini, virtual machine yang akan di-tuning adalah \texttt{i-2-16-VM}. Setelah mendapatkan nama virtual machine yang akan di-tuning (\texttt{i-2-16-VM}), gunakan perintah \texttt{virsh edit i-2-16-VM} untuk melihat konfigurasi virtual machine tersebut.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]
+    {assets/pics/virsh_edit1.png}
+    \caption{Perintah \texttt{virsh edit i-2-16-VM} untuk melihat konfigurasi virtual machine \texttt{i-2-16-VM}}
+    \label{fig:virsh_edit1}
+\end{figure}
+
+Pada gambar \ref{fig:virsh_edit1} terlihat konfigurasi virtual machine \texttt{i-2-16-VM}. Dari konfigurasi ini kita akan fokus pada bagian:
 
 \begin{listing}[H]
     \begin{minted}{xml}
-        <domain type='kvm'>
+        ...
+
+        <cpu mode='custom' match='exact' check='full'>
+            <model fallback='forbid'>qemu64</model>
+            <topology sockets='1' dies='1' cores='4' threads='1'/>
+            <feature policy='require' name='x2apic'/>
+            <feature policy='require' name='hypervisor'/> 
+            <feature policy='require' name='lahf_1m'/>
+        </cpu>
         
-            ...
-            
-            <cpu mode='custom' match='exact' check='full'>
-                <model fallback='forbid'>qemu64</model>
-                <feature policy='require' name='x2apic'/>
-                <feature policy='require' name='hypervisor'/>
-                <feature policy='require' name='lahf_lm'/>
-            </cpu>
-            
-            ...
-            
-        </domain>
+        ...
     \end{minted}
-    \caption{Konfigurasi default dari KVM}
+    \caption{Konfigurasi flag default}
     \label{code:default_kvm_xml}
 \end{listing}
+
+Kode \ref{code:default_kvm_xml} menunjukkan konfigurasi flag default dari hypervisor KVM. Hal yang akan dilakukan adalah menambahkan flag sebagai salah satu feature. Dalam penelitian ini flag yang akan dicoba untuk digunakan adalah \texttt{ssse3, sse4.1, sse4.2, sse4a, dan aes}
+
+
+
+
+\saya\ dapat mengaktifkan flag tersebut untuk digunakan oleh \vm\ yang menggunakan hypervisor KVM. Untuk melakukan tuning \saya\ dapat menggunakan tools virsh untuk mengubah konfigurasi \vm\ dari CloudStack. Secara default konfigurasi dari \vm\ di CloudStack akan seperti ini:
+
+
 
 Terlihat dari kode \ref{code:default_kvm_xml} bahwa feature yang dinyalakan tidak memuat sse3, sse4\_1, dan sse4\_2. Untuk itu \saya\ dapat menambahkan fitur tersebut sehingga \vm\ dapat menggunakan flag instruksi tersebut. Perubahahan yang akan \saya lakukan akan seperti ini:
 
