@@ -435,17 +435,28 @@ Untuk melakukan tuning pada Hypervisor KVM, digunakan tools virsh, sebuah comman
     \label{fig:flag_kvm_host}
 \end{figure}
 
-Terlihat pada gambar \ref{fig:flag_kvm_host} adalah keseluruhan flag instruksi dari sistem host, sedangkan text yang ditajamkan adalah flag instruksi bawaan default dari hypervisor KVM. Dari sini flag yang berguna untuk melakukan kompresi video dan ditajamkan hanyalah sse dan sse2, hal ini menandakan bahwa KVM tidak mengaktifkan keseluruhan flag instruksi meskipun pada sistem host sudah mendukung flag instruksinya. Beberapa flag yang berguna untuk melakukan kompresi video dan tidak dinyalakan oleh hypervisor KVM adalah SSE3, SSE4\_1, dan SSE4\_2. 
+Terlihat pada Gambar \ref{fig:flag_kvm_host} adalah daftar lengkap flag instruksi yang tersedia di sistem host, dengan teks yang ditebalkan menunjukkan flag instruksi yang sudah diaktifkan secara default oleh hypervisor KVM. Namun, tampak bahwa KVM tidak mengaktifkan semua flag instruksi meskipun sistem host mendukung flag-flag tersebut. Untuk melihat flag yang sudah diaktifkan pada virtual machine dapat dilakukan dengan menggunakan perintah \texttt{lscpu}.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
+    {assets/pics/lscpu_original.jpeg}
+    \caption{Flag default KVM}
+    \label{fig:lscpu_original}
+\end{figure}
 
-Pertama, langkah yang dilakukan adalah melakukan list dari virtual machine yang sedang berjalan di sistem dengan perintah:
+Terlihat pada gambar \ref{fig:lscpu_original} sama dengan Gambar \ref{fig:flag_kvm_host} di text yang ditebalkan. Dalam penelitian ini, flag yang akan diuji adalah \texttt{ssse3, sse4.1, sse4.2, sse4a, dan aes}. Semua flag SSE akan digunakan untuk percobaan kompresi video, sementara sse4.2 akan digunakan untuk validasi integritas file dengan CRC32, dan flag AES akan digunakan untuk enkripsi menggunakan AES. Harapannya, tuning ini akan memberikan peningkatan kinerja yang signifikan dibandingkan dengan konfigurasi default dari KVM.
 
-\texttt{virsh list}
+Untuk melakukan tuning flag pada Hypervisor KVM, langkah pertama yang harus dilakukan adalah melihat daftar lengkap virtual machine yang sedang berjalan di sistem. Hal ini dapat dilakukan dengan menggunakan perintah:
+
+\begin{verbatim}
+    virsh list
+\end{verbatim}
 
 Keluaran dari perintah ini adalah:
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]
+    \includegraphics[width=0.6\textwidth]
     {assets/pics/virsh_list.png}
     \caption{Keluaran perintah \texttt{virsh list}}
     \label{fig:virsh_list}
@@ -481,43 +492,99 @@ Pada gambar \ref{fig:virsh_edit1} terlihat konfigurasi virtual machine \texttt{i
     \label{code:default_kvm_xml}
 \end{listing}
 
-Kode \ref{code:default_kvm_xml} menunjukkan konfigurasi flag default dari hypervisor KVM. Hal yang akan dilakukan adalah menambahkan flag sebagai salah satu feature. Dalam penelitian ini flag yang akan dicoba untuk digunakan adalah \texttt{ssse3, sse4.1, sse4.2, sse4a, dan aes}
-
-
-
-
-\saya\ dapat mengaktifkan flag tersebut untuk digunakan oleh \vm\ yang menggunakan hypervisor KVM. Untuk melakukan tuning \saya\ dapat menggunakan tools virsh untuk mengubah konfigurasi \vm\ dari CloudStack. Secara default konfigurasi dari \vm\ di CloudStack akan seperti ini:
-
-
-
-Terlihat dari kode \ref{code:default_kvm_xml} bahwa feature yang dinyalakan tidak memuat sse3, sse4\_1, dan sse4\_2. Untuk itu \saya\ dapat menambahkan fitur tersebut sehingga \vm\ dapat menggunakan flag instruksi tersebut. Perubahahan yang akan \saya lakukan akan seperti ini:
+Kode \ref{code:default_kvm_xml} menampilkan konfigurasi flag default dari hypervisor KVM. Langkah berikutnya adalah menambahkan flag instruksi yang tidak termasuk dalam konfigurasi KVM default. Untuk melakukan ini, dilakukan duplikasi konfigurasi tersebut ke dalam sebuah file baru, seperti dalam penelitian ini yang akan disimpan di file \texttt{tuned\_kvm.xml}. Setelah disimpan di file \texttt{tuned\_kvm.xml}, selanjutnya dilakukan penambahan fitur yang diinginkan.
 
 \begin{listing}[H]
     \begin{minted}{xml}
-        <domain type='kvm'>
+        ...
+
+        <cpu mode='custom' match='exact' check='full'>
+            <model fallback='forbid'>qemu64</model>
+            <topology sockets='1' dies='1' cores='4' threads='1'/>
+            <feature policy='require' name='x2apic'/>
+            <feature policy='require' name='hypervisor'/> 
+            <feature policy='require' name='lahf_1m'/>
+            <feature policy='require' name='ssse3'/>
+        </cpu>
         
-            ...
-            
-            <cpu mode='custom' match='exact' check='full'>
-                <model fallback='forbid'>qemu64</model>
-                <feature policy='require' name='x2apic'/>
-                <feature policy='require' name='hypervisor'/>
-                <feature policy='require' name='lahf_lm'/>
-                <feature policy='require' name='sse3'/>
-                <feature policy='require' name='sse4_1'/>
-                <feature policy='require' name='sse4_2'/>
-            </cpu>
-            
-            ...
-            
-        </domain>
+        ...
     \end{minted}
-    \caption{Konfigurasi tuning KVM}
-    \label{code:tuned_kvm_xml}
+    \caption{Konfigurasi flag ssse3}
+    \label{code:ssse3_kvm_xml}
 \end{listing}
 
-Jika sudah dilakukan penambahan fitur seperti di kode \ref{code:tuned_kvm_xml} sekarang \vm yang menggunakan Hypervisor KVM sudah bisa mendukung set instruksi tersebut.
+Pada kode \ref{code:ssse3_kvm_xml}, fitur \texttt{ssse3} ditambahkan dengan menambahkan baris \texttt{<feature policy='require' name='ssse3'/>} pada kode tersebut. Setelah mengubah file \texttt{tuned\_kvm.xml}, simpan perubahan pada file tersebut. Selanjutnya, matikan mesin virtual dengan menggunakan perintah \texttt{destroy}:
 
+\begin{verbatim}
+    virsh destroy i-2-16-VM
+\end{verbatim}
+
+Setelah virtual machine dimatikan, langkah selanjutnya adalah membuat virtual machine baru berdasarkan konfigurasi yang telah diubah sebelumnya. Hal ini dapat dilakukan dengan menggunakan perintah:
+
+\begin{verbatim}
+    virsh create tuned_kvm.xml
+\end{verbatim}
+
+Dengan perintah ini maka \vm\ \texttt{i-2-16-VM} akan dibuat menggunakan konfigurasi \texttt{tuned\_kvm.xml}. Kita dapat melihat perubahan pada \vm\ \texttt{i-2-16-VM} dengan menggunakan perintah \texttt{lscpu} pada console virtual machine.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
+    {assets/pics/lscpu_ssse3.jpeg}
+    \caption{Flag tuned dengan ssse3}
+    \label{fig:lscpu_ssse3}
+\end{figure}
+
+Dengan ini menandakan bahwa flag \texttt{ssse3} pada \vm\ \texttt{i-2-16-VM} sudah diaktifkan dan Hypervisor KVM sudah berhasil dituning.
+
+%-----------------------------------------------------------------------------%
+\subsection{Konfigurasi Hypervisor KVM untuk Kompresi Video}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\subsection{Konfigurasi Hypervisor KVM untuk Validasi Integritas File}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\subsection{Konfigurasi Hypervisor KVM untuk Enkripsi AES}
+%-----------------------------------------------------------------------------%
+
+
+%-----------------------------------------------------------------------------%
+\section{Pengujian Hasil Tuning}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\subsection{Pengujian Kompresi Video}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\subsection{Pengujian Validasi Integritas File}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\subsection{Pengujian Enkripsi AES}
+%-----------------------------------------------------------------------------%
+
+
+%-----------------------------------------------------------------------------%
+\section{Analisis}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\subsection{Analisis Pengujian Kompresi Video}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\subsection{Analisis Pengujian Validasi Integritas File}
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+\subsection{Analisis Pengujian Enkripsi AES}
+%-----------------------------------------------------------------------------%
+
+
+\iffalse
 %-----------------------------------------------------------------------------%
 \section{Pengujian Kompresi Video Dengan HandBrake}
 %-----------------------------------------------------------------------------%
@@ -590,7 +657,6 @@ Tujuan menghitung efisiensi ini adalah untuk mengetahui seberapa efektif tuning 
 
 
 
-\iffalse
 %-----------------------------------------------------------------------------%
 \section{Satu Persamaan}
 %-----------------------------------------------------------------------------%
