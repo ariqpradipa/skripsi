@@ -13,14 +13,67 @@ PersiapanLingkunganPenelitian
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_original.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi Default}
+    \label{fig:lscpu_video_compression_test_original}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
     {assets/pics/video-compression-test/original.jpeg}
     \caption{Test Kompresi Video dengan Konfigurasi Default}
     \label{fig:video_compression_test_original}
 \end{figure}
 
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xbar,
+            bar width=12pt,
+            xlabel={Detik},
+            ytick=data,
+            nodes near coords,
+            nodes near coords align={horizontal},
+            symbolic y coords={run 1,run 2,run 3,run 4,run 5,run 6,run 7,run 8,run 9,run 10},
+            enlarge y limits=0.2,
+            enlarge x limits=0.05,
+            width=\textwidth,
+            height=0.4\textheight,
+            xmin=0,
+            xmax=160
+        ]
+        \addplot [fill=black] coordinates {
+            (142.257,run 1) 
+            (142.116,run 2) 
+            (142.983,run 3) 
+            (143.54,run 4) 
+            (141.966,run 5)
+            (138.732,run 6) 
+            (138.355,run 7)
+            (139.209,run 8) 
+            (141.622,run 9) 
+            (144.236,run 10)
+        };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Grafik Tes Kompresi Video dengan Konfigurasi Default}
+    \label{fig:video_compression_test_original_graph}
+\end{figure}
+
+
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi dengan SSSE3}
 %-----------------------------------------------------------------------------%
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_ssse3.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSSE3}
+    \label{fig:lscpu_video_compression_test_ssse3}
+\end{figure}
+
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
@@ -35,6 +88,14 @@ PersiapanLingkunganPenelitian
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_sse4.1.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSE4.1}
+    \label{fig:lscpu_video_compression_test_sse4.1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
     {assets/pics/video-compression-test/sse4.1.jpeg}
     \caption{Test Kompresi Video dengan Konfigurasi SSE4.1}
     \label{fig:video_compression_test_sse4.1}
@@ -43,6 +104,14 @@ PersiapanLingkunganPenelitian
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi dengan SSE4.2}
 %-----------------------------------------------------------------------------%
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_sse4.2.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSE4.2}
+    \label{fig:lscpu_video_compression_test_sse4.2}
+\end{figure}
+
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
@@ -57,6 +126,14 @@ PersiapanLingkunganPenelitian
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_sse4a.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSE4a}
+    \label{fig:lscpu_video_compression_test_sse4a}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
     {assets/pics/video-compression-test/sse4a.jpeg}
     \caption{Test Kompresi Video dengan Konfigurasi SSE4a}
     \label{fig:video_compression_test_sse4a}
@@ -65,6 +142,14 @@ PersiapanLingkunganPenelitian
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi dengan SSSE3 + SSE4.1}
 %-----------------------------------------------------------------------------%
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1\textwidth]
+%     {assets/pics/video-compression-test/lscpu_ssse3,sse4.1.jpeg}
+%     \caption{\texttt{lscpu} Konfigurasi SSSE3 + SSE4.1}
+%     \label{fig:lscpu_video_compression_test_ssse3,sse4.1}
+% \end{figure}
+
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
@@ -79,6 +164,14 @@ PersiapanLingkunganPenelitian
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_ssse3,sse4.2.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSSE3 + SSE4.2}
+    \label{fig:lscpu_video_compression_test_ssse3,sse4.2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
     {assets/pics/video-compression-test/ssse3,sse4.2.jpeg}
     \caption{Test Kompresi Video dengan Konfigurasi SSSE3 + SSE4.2}
     \label{fig:video_compression_test_ssse3,sse4.2}
@@ -87,6 +180,14 @@ PersiapanLingkunganPenelitian
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi dengan SSSE3 + SSE4a}
 %-----------------------------------------------------------------------------%
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_ssse3,sse4a.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSSE3 + SSE4a}
+    \label{fig:lscpu_video_compression_test_ssse3,sse4a}
+\end{figure}
+
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
@@ -101,6 +202,14 @@ PersiapanLingkunganPenelitian
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_sse4.1,sse4.2.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSE4.1 + SSE4.2}
+    \label{fig:lscpu_video_compression_test_sse4.1,sse4.2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
     {assets/pics/video-compression-test/sse4.1,sse4.2.jpeg}
     \caption{Test Kompresi Video dengan Konfigurasi SSE4.1 + SSE4.2}
     \label{fig:video_compression_test_sse4.1,sse4.2}
@@ -109,6 +218,14 @@ PersiapanLingkunganPenelitian
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi dengan SSE4.1 + SSE4a}
 %-----------------------------------------------------------------------------%
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_sse4.1,sse4a.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSE4.1 + SSE4a}
+    \label{fig:lscpu_video_compression_test_sse4.1,sse4a}
+\end{figure}
+
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
@@ -123,6 +240,14 @@ PersiapanLingkunganPenelitian
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_sse4.2,sse4a.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSE4.2 + SSE4a}
+    \label{fig:lscpu_video_compression_test_sse4.2,sse4a}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
     {assets/pics/video-compression-test/sse4.2,sse4a.jpeg}
     \caption{Test Kompresi Video dengan Konfigurasi SSE4.2 + SSE4a}
     \label{fig:video_compression_test_sse4.2,sse4a}
@@ -131,6 +256,14 @@ PersiapanLingkunganPenelitian
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi dengan SSSE3 + SSE4.1 + SSE4.2}
 %-----------------------------------------------------------------------------%
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1\textwidth]
+%     {assets/pics/video-compression-test/lscpu_ssse3,sse4.1,sse4.2.jpeg}
+%     \caption{\texttt{lscpu} Konfigurasi SSSE3 + SSE4.1 + SSE4.2}
+%     \label{fig:lscpu_video_compression_test_ssse3,sse4.1,sse4.2}
+% \end{figure}
+
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
@@ -145,6 +278,14 @@ PersiapanLingkunganPenelitian
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_ssse3,sse4.1,sse4a.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSSE3 + SSE4.1 + SSE4a}
+    \label{fig:lscpu_video_compression_test_ssse3,sse4.1,sse4a}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
     {assets/pics/video-compression-test/ssse3,sse4.1,sse4a.jpeg}
     \caption{Test Kompresi Video dengan Konfigurasi SSSE3 + SSE4.1 + SSE4a}
     \label{fig:video_compression_test_ssse3,sse4.1,sse4a}
@@ -153,6 +294,14 @@ PersiapanLingkunganPenelitian
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi dengan SSSE3 + SSE4.2 + SSE4a}
 %-----------------------------------------------------------------------------%
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_ssse3,sse4.2,sse4a.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSSE3 + SSE4.2 + SSE4a}
+    \label{fig:lscpu_video_compression_test_ssse3,sse4.2,sse4a.jpeg}
+\end{figure}
+
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
@@ -167,6 +316,14 @@ PersiapanLingkunganPenelitian
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
+    {assets/pics/video-compression-test/lscpu_sse4.1,sse4.2,sse4a.jpeg}
+    \caption{\texttt{lscpu} Konfigurasi SSE4.1 + SSE4.2 + SSE4a}
+    \label{fig:lscpu_video_compression_test_sse4.1,sse4.2,sse4a.jpeg}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
     {assets/pics/video-compression-test/sse4.1,sse4.2,sse4a.jpeg}
     \caption{Test Kompresi Video dengan Konfigurasi SSE4.1 + SSE4.2 + SSE4a}
     \label{fig:video_compression_test_sse4.1,sse4.2,sse4a.jpeg}
@@ -175,6 +332,14 @@ PersiapanLingkunganPenelitian
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi dengan SSSE3 + SSE4.1 + SSE4.2 + SSE4a}
 %-----------------------------------------------------------------------------%
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1\textwidth]
+%     {assets/pics/video-compression-test/lscpu_ssse3,sse4.1,sse4.2,sse4a.jpeg}
+%     \caption{\texttt{lscpu} Konfigurasi SSSE3 + SSE4.1 + SSE4.2 + SSE4a}
+%     \label{fig:lscpu_video_compression_test_ssse3,sse4.1,sse4.2,sse4a.jpeg}
+% \end{figure}
+
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
