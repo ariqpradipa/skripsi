@@ -313,7 +313,7 @@ Setelah server manajemen sudah UP, cloudstack dapat diakses di http://192.168.0.
 
 \begin{enumerate}
     \item Zone
-    \begin{verbatim}
+          \begin{verbatim}
 Name - nama bebas
 Public DNS 1 - 8.8.8.8
 Public DNS 2 - 1.1.1.1
@@ -322,7 +322,7 @@ Hypervisor - KVM
     \end{verbatim}
 
     \item Network
-    \begin{verbatim}
+          \begin{verbatim}
 Gateway - 192.168.0.1
 Netmask - 255.255.255.0
 VLAN/VNI - (kosong untuk vlan://untagged, 
@@ -332,41 +332,41 @@ End IP - 192.168.0.50
     \end{verbatim}
 
     \item Pod
-    \begin{verbatim}
+          \begin{verbatim}
 Name - nama bebas
 Gateway - 192.168.0.1
 Start/end reserved system IPs - 192.168.0.51 - 192.168.0.80
     \end{verbatim}
 
     \item Guest Traffic
-    \begin{verbatim}
+          \begin{verbatim}
 VLAN/VNI range: 700-900
     \end{verbatim}
 
     \item Cluster
-    \begin{verbatim}
+          \begin{verbatim}
 Name - nama bebas
 Hypervisor - pilih KVM
     \end{verbatim}
 
     \item Host
-    \begin{verbatim}
+          \begin{verbatim}
 Hostname - 192.168.0.10
 Username - root
 Password - password user root
     \end{verbatim}
 
     \item Primary Storage
-    \begin{verbatim}
+          \begin{verbatim}
 Name - nama bebas
 Scope - zone-wide
 Protocol - NFS
 Server - 192.168.0.10 [ubuntu server static IP]
 Path - /export/primary
     \end{verbatim}
-    
+
     \item Secondary Storage
-    \begin{verbatim}
+          \begin{verbatim}
 Provider - NFS
 Name - nama bebas
 Server - 192.168.100.10 [ubuntu server static ip]
@@ -392,32 +392,32 @@ Setelah ISO image sudah siap digunakan langkah selanjutnya adalah membuat image 
 
 \begin{enumerate}
     \item Deployment Infrastructure
-    \begin{itemize}
-        \item Pod: Default
-        \item Cluster: Default
-        \item Host: Default
-    \end{itemize}
+          \begin{itemize}
+              \item Pod: Default
+              \item Cluster: Default
+              \item Host: Default
+          \end{itemize}
 
     \item Template/ISO
-    
-    Klik tab ISOs dan pilih image Ubuntu Server 22.04 LTS yang telah ditambahkan sebelumnya.
+
+          Klik tab ISOs dan pilih image Ubuntu Server 22.04 LTS yang telah ditambahkan sebelumnya.
 
     \item Compute Offering
-    
-    Pilih High Instance dengan spesifikasi:
-    \begin{itemize}
-        \item CPU: 4 vCPU
-        \item Clock Speed: 2.0 GHz
-        \item Memory: 4096 MB
-    \end{itemize}
+
+          Pilih High Instance dengan spesifikasi:
+          \begin{itemize}
+              \item CPU: 4 vCPU
+              \item Clock Speed: 2.0 GHz
+              \item Memory: 4096 MB
+          \end{itemize}
 
     \item Data Disk
-    
-    Pada penelitian ini \vm\ akan diberikan data disk berukuran 20GB.
+
+          Pada penelitian ini \vm\ akan diberikan data disk berukuran 20GB.
 
     \item Networks
-    
-    Di bagian network, pilih \texttt{"Create New Network"} dan pilih tab Isolated. Beri nama untuk jaringan tersebut, pilih zona yang sesuai, dan untuk bagian \texttt{Network Offering} pilih \texttt{"Network Offering used for CloudStack Kubernetes Service"}. Isi bagian Gateway dengan \texttt{192.168.0.1} (Gateway Home Network) dan Netmask dengan \texttt{255.255.255.0}. Untuk DNS 1, gunakan \texttt{1.1.1.1} (Cloudflare DNS), dan untuk DNS 2, gunakan \texttt{8.8.8.8} (Google DNS). Setelah itu, klik OK dan centang jaringan yang baru saja dibuat.
+
+          Di bagian network, pilih \texttt{"Create New Network"} dan pilih tab Isolated. Beri nama untuk jaringan tersebut, pilih zona yang sesuai, dan untuk bagian \texttt{Network Offering} pilih \texttt{"Network Offering used for CloudStack Kubernetes Service"}. Isi bagian Gateway dengan \texttt{192.168.0.1} (Gateway Home Network) dan Netmask dengan \texttt{255.255.255.0}. Untuk DNS 1, gunakan \texttt{1.1.1.1} (Cloudflare DNS), dan untuk DNS 2, gunakan \texttt{8.8.8.8} (Google DNS). Setelah itu, klik OK dan centang jaringan yang baru saja dibuat.
 \end{enumerate}
 
 Setelah itu, klik "Launch Instance" dan tunggu sampai instance siap digunakan. Jika instance sudah siap digunakan, buka konsol dari instance dan lakukan instalasi standar Ubuntu Server 22.04 LTS. Setelah instalasi Ubuntu Server selesai, lanjutkan dengan instalasi program-program yang akan digunakan untuk penelitian. Program-program yang digunakan termasuk \texttt{ffmpeg} untuk melakukan kompresi video, \texttt{python} untuk melakukan benchmark enkripsi, dan validasi integritas file.
@@ -540,15 +540,71 @@ Dengan ini menandakan bahwa flag \texttt{ssse3} pada \vm\ \texttt{i-2-16-VM} sud
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi Hypervisor KVM untuk Kompresi Video}
 %-----------------------------------------------------------------------------%
+\begin{listing}[H]
+    \begin{minted}{xml}
+        ...
+
+        <cpu mode='custom' match='exact' check='full'>
+            <model fallback='forbid'>qemu64</model>
+            <topology sockets='1' dies='1' cores='4' threads='1'/>
+            <feature policy='require' name='x2apic'/>
+            <feature policy='require' name='hypervisor'/> 
+            <feature policy='require' name='lahf_1m'/>
+            <feature policy='require' name='ssse3'/>
+            <feature policy='require' name='sse4.1'/>
+            <feature policy='require' name='sse4.2'/>
+            <feature policy='require' name='sse4a'/>
+        </cpu>
+        
+        ...
+    \end{minted}
+    \caption{Konfigurasi Hypervisor KVM untuk Kompresi Video}
+    \label{code:tuned_kompresi_video}
+\end{listing}
 
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi Hypervisor KVM untuk Validasi Integritas File}
 %-----------------------------------------------------------------------------%
+\begin{listing}[H]
+    \begin{minted}{xml}
+        ...
+
+        <cpu mode='custom' match='exact' check='full'>
+            <model fallback='forbid'>qemu64</model>
+            <topology sockets='1' dies='1' cores='4' threads='1'/>
+            <feature policy='require' name='x2apic'/>
+            <feature policy='require' name='hypervisor'/> 
+            <feature policy='require' name='lahf_1m'/>
+            <feature policy='require' name='sse4.2'/>
+        </cpu>
+        
+        ...
+    \end{minted}
+    \caption{Konfigurasi Hypervisor KVM untuk Validasi Integritas File}
+    \label{code:tuned_validasi_integritas_file}
+\end{listing}
 
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi Hypervisor KVM untuk Enkripsi AES}
 %-----------------------------------------------------------------------------%
+\begin{listing}[H]
+    \begin{minted}{xml}
+        ...
 
+        <cpu mode='custom' match='exact' check='full'>
+            <model fallback='forbid'>qemu64</model>
+            <topology sockets='1' dies='1' cores='4' threads='1'/>
+            <feature policy='require' name='x2apic'/>
+            <feature policy='require' name='hypervisor'/> 
+            <feature policy='require' name='lahf_1m'/>
+            <feature policy='require' name='aes'/>
+        </cpu>
+        
+        ...
+    \end{minted}
+    \caption{Konfigurasi Hypervisor KVM untuk Enkripsi AES}
+    \label{code:tuned_enkripsi_aes}
+\end{listing}
 
 %-----------------------------------------------------------------------------%
 \section{Pengujian Hasil Tuning}
@@ -557,19 +613,190 @@ Dengan ini menandakan bahwa flag \texttt{ssse3} pada \vm\ \texttt{i-2-16-VM} sud
 %-----------------------------------------------------------------------------%
 \subsection{Pengujian Kompresi Video}
 %-----------------------------------------------------------------------------%
+\begin{listing}[H]
+    \begin{minted}{bash}
+    #!/bin/bash
+    
+    # Specify the path to your input video file
+    input_file="timessquaredaywide.mp4"
+
+    # Specify the output directory
+    output_directory="output"
+
+    # Specify the number of times to run the benchmark
+    num_runs=10
+
+    # Loop to run the benchmark command multiple times
+    for i in $(seq 1 $num_runs)
+    do
+        start_time=$(date +%s.%N)
+        log_file="$output_directory/log_$i.txt"
+        
+        echo "Running benchmark $i..."
+        
+        # Add your ffmpeg compression command here
+        ffmpeg -i "$input_file" -c:v libx265 -preset medium -crf 32 -c:a aac -strict -2 "$output_directory/output_$i.mp4" > "$log_file" 2>&1
+        
+        end_time=$(date +%s.%N)
+        elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+        
+        echo "Benchmark $i completed in $elapsed_time seconds. Log saved to $log_file."
+    done
+    \end{minted}
+    \caption{Kode Pengujian Kompresi Video}
+    \label{code:kode_pengujian_kompresi_video}
+\end{listing}
 
 %-----------------------------------------------------------------------------%
 \subsection{Pengujian Validasi Integritas File}
 %-----------------------------------------------------------------------------%
+\begin{listing}[H]
+    \begin{minted}{python}
+    import os
+    import time
+    import crc32c
+
+    def benchmark_crc32c(data, iterations):
+        # Perform CRC32 calculation
+        start_time = time.time()
+        for _ in range(iterations):
+            crc32c.crc32c(data)
+        end_time = time.time()
+
+        # Calculate average time per iteration
+        avg_time = (end_time - start_time) / iterations
+        return avg_time
+
+    def main(i):
+        # Define parameters
+        data_size = 10 * 1024 * 1024  # Size of the data (10 MB)
+        num_iterations = 1000  # Number of iterations to average the time
+
+        # Generate random data
+        data = bytearray(os.urandom(data_size))
+
+        # Run the benchmark
+        avg_time_crc32c = benchmark_crc32c(data, num_iterations)
+        print(
+            f"Run {i + 1} Average time for CRC32 calculation: {avg_time_crc32c * 1000} ms"
+        )
+
+    for i in range(10):
+        main(i)
+
+    \end{minted}
+    \caption{Kode Pengujian Validasi Integritas File}
+    \label{code:kode_pengujian_validasi_integritas_file}
+\end{listing}
 
 %-----------------------------------------------------------------------------%
 \subsection{Pengujian Enkripsi AES}
 %-----------------------------------------------------------------------------%
 
+variable \textbf{plainTextData} yang digunakan adalah:
 
+\texttt{The Advanced Encryption Standard (AES) is a symmetric-key encryption algorithm that has become the de facto standard for securing sensitive data worldwide. Developed by Belgian cryptographers Joan Daemen and Vincent Rijmen, AES was adopted by the U.S. National Institute of Standards and Technology (NIST) in 2001 after a rigorous evaluation process involving numerous submissions from around the globe. AES replaced the aging Data Encryption Standard (DES) and its variants, which were becoming increasingly vulnerable to brute-force attacks due to advances in computing power. AES operates on fixed block sizes of 128 bits and supports key lengths of 128, 192, or 256 bits, with the latter providing the highest level of security. Its sophisticated mathematical structure, based on substitution-permutation networks, makes it highly resistant to various cryptanalytic attacks, including differential and linear cryptanalysis. AES employs multiple rounds of substitution, permutation, and key mixing operations to scramble the plaintext data, making it virtually impossible to decrypt without the correct key. One of the key strengths of AES is its versatility and flexibility. It can be implemented in hardware or software, making it suitable for a wide range of applications, from securing communication channels to protecting data at rest. AES has been extensively studied and scrutinized by cryptographers worldwide, and its strength lies in its ability to withstand known attacks while maintaining high performance. Consequently, AES has been widely adopted in various industries, including government, finance, healthcare, and telecommunications, as well as in protocols and standards such as TLS/SSL, IPsec, and wireless encryption standards like WPA2.}
+
+\begin{listing}[H]
+    \begin{minted}{python}
+    from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+    from cryptography.hazmat.primitives import padding
+    from cryptography.hazmat.backends import default_backend
+    import time
+
+    # Generate a random AES key and plaintext
+    key = b"sixteenbytekey12"
+    plaintext = plainTextData
+
+    # Function to perform AES encryption benchmark
+    def aes_encrypt_benchmark(key, plaintext):
+        backend = default_backend()
+        cipher = Cipher(algorithms.AES(key), modes.ECB(), backend=backend)
+        encryptor = cipher.encryptor()
+
+        padder = padding.PKCS7(algorithms.AES.block_size).padder()
+        padded_plaintext = padder.update(plaintext) + padder.finalize()
+
+        start_time = time.time()
+        ciphertext = encryptor.update(padded_plaintext) + encryptor.finalize()
+        end_time = time.time()
+
+        return ciphertext, end_time - start_time
+
+    # Function to perform AES decryption benchmark
+    def aes_decrypt_benchmark(key, ciphertext):
+        backend = default_backend()
+        cipher = Cipher(algorithms.AES(key), modes.ECB(), backend=backend)
+        decryptor = cipher.decryptor()
+
+        start_time = time.time()
+        padded_plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+        end_time = time.time()
+
+        unpadder = padding.PKCS7(algorithms.AES.block_size).unpadder()
+        plaintext = unpadder.update(padded_plaintext) + unpadder.finalize()
+
+        return end_time - start_time
+    \end{minted}
+    \caption{Kode Pengujian Enkripsi AES (1)}
+    \label{code:pengujian_enkripsi_aes_1}
+\end{listing}
+
+\begin{listing}[H]
+    \begin{minted}{python}
+    def run_benchmark():
+        # Benchmark AES encryption
+        ciphertext, aes_time_encrypt = aes_encrypt_benchmark(key, plaintext)
+        # print(f"AES Encryption Time: {(aes_time_encrypt * 1000):.5f} ms")
+
+        # Benchmark AES decryption
+        aes_time_decrypt = aes_decrypt_benchmark(key, ciphertext)
+        # print(f"AES Decryption Time: {(aes_time_decrypt * 1000):.5f} ms")
+        return aes_time_encrypt, aes_time_decrypt
+
+    def main(i):
+        iterations = 1000
+
+        encrypt_time = 0
+        decrypt_time = 0
+        for _ in range(iterations):
+            encrypt_time_iter, decrypt_time_iter = run_benchmark()
+            encrypt_time += encrypt_time_iter
+            decrypt_time += decrypt_time_iter
+
+        avg_encrypt_time = encrypt_time / iterations
+        avg_decrypt_time = decrypt_time / iterations
+
+        print(f"Run {i+1} Average AES Encryption Time: {(avg_encrypt_time * 1000):.5f} ms")
+        print(
+            f"Run {i+1} Average AES Decryption Time: {(avg_decrypt_time * 1000):.5f} ms\n"
+        )
+
+    for i in range(10):
+        main(i)
+
+    \end{minted}
+    \caption{Kode Pengujian Enkripsi AES (2)}
+    \label{code:pengujian_enkripsi_aes_2}
+\end{listing}
 %-----------------------------------------------------------------------------%
 \section{Analisis}
 %-----------------------------------------------------------------------------%
+Analisis akan dilakukan dengan perhitungan menggunakan formula \texttt{speedup}, diasumsikan bahwa T(1) adalah waktu eksekusi Test 1 dan T(p) adalah waktu eksekusi Test 2\cite{beuwolfCetin}.
+\[
+    S(p) := \frac{T(1)}{T(p)}
+\]
+
+% \[
+% \text{Speedup} = \frac{1}{(1 - P) + \frac{P}{S}}
+% \]
+
+% Dimana:
+% \begin{itemize}
+%     \item $\text{Speedup}$ adalah percepatan teoretis dari sistem setelah perubahan.
+%     \item $P$ adalah proporsi dari sistem yang mendapatkan manfaat dari perubahan (dinyatakan sebagai pecahan antara 0 dan 1).
+%     \item $S$ adalah percepatan dari bagian yang mendapatkan manfaat dari perubahan.
+% \end{itemize}
 
 %-----------------------------------------------------------------------------%
 \subsection{Analisis Pengujian Kompresi Video}
@@ -585,140 +812,140 @@ Dengan ini menandakan bahwa flag \texttt{ssse3} pada \vm\ \texttt{i-2-16-VM} sud
 
 
 \iffalse
-%-----------------------------------------------------------------------------%
-\section{Pengujian Kompresi Video Dengan HandBrake}
-%-----------------------------------------------------------------------------%
-Untuk menguji dan membandingkan kinerja Hypervisor KVM sebelum dan sesudah tuning, {\saya} akan menggunakan software HandBrake, sebuah software kompresi video yang sudah banyak digunakan. Proses ini melibatkan penggunaan HandBrake untuk kompresi video pada dua lingkungan \vm\ yang berbeda, yang mana satu menggunakan KVM yang belum di-tuning dan yang lainnya menggunakan KVM yang telah di-tuning. Tujuan dari pengujian ini adalah untuk mengevaluasi sejauh mana tuning Hypervisor KVM dapat mempengaruhi kecepatan kompresi video.
+    %-----------------------------------------------------------------------------%
+    \section{Pengujian Kompresi Video Dengan HandBrake}
+    %-----------------------------------------------------------------------------%
+    Untuk menguji dan membandingkan kinerja Hypervisor KVM sebelum dan sesudah tuning, {\saya} akan menggunakan software HandBrake, sebuah software kompresi video yang sudah banyak digunakan. Proses ini melibatkan penggunaan HandBrake untuk kompresi video pada dua lingkungan \vm\ yang berbeda, yang mana satu menggunakan KVM yang belum di-tuning dan yang lainnya menggunakan KVM yang telah di-tuning. Tujuan dari pengujian ini adalah untuk mengevaluasi sejauh mana tuning Hypervisor KVM dapat mempengaruhi kecepatan kompresi video.
 
-HandBrake dipilih karena kemampuannya yang baik dalam mengkompresi video dan mudah untuk digunakan\cite{Folgar2014eg}. Dalam pengujian ini, video yang akan digunakan adalah "COSTA RICA IN 4K 60fps HDR (ULTRA HD)" yang diunduh dari YouTube dengan resolusi video yang digunakan adalah 2K. Video ini dipilih karena resolusi tingginya, yang memberikan tantangan yang baik untuk menguji efisiensi kompresi video pada kedua lingkungan \vm. 
+    HandBrake dipilih karena kemampuannya yang baik dalam mengkompresi video dan mudah untuk digunakan\cite{Folgar2014eg}. Dalam pengujian ini, video yang akan digunakan adalah "COSTA RICA IN 4K 60fps HDR (ULTRA HD)" yang diunduh dari YouTube dengan resolusi video yang digunakan adalah 2K. Video ini dipilih karena resolusi tingginya, yang memberikan tantangan yang baik untuk menguji efisiensi kompresi video pada kedua lingkungan \vm.
 
-Parameter penting yang akan diukur dalam pengujian ini adalah: 
+    Parameter penting yang akan diukur dalam pengujian ini adalah:
 
-\begin{enumerate}
-    \item \textbf{\f{Time Elapsed}}
-    
-    \f{Time Elapsed} atau berapa lama waktu yang dibutuhkan oleh masing-masing \vm\ untuk menyelesaikan proses kompresi video.
-        
-    \item \textbf{\f{Structural Similarity Index Measure Score}}
-    
-    Structural Similarity Index Measure adalah cara untuk menilai kesamaan dari 2 buah gambar, untuk melihat apakah terjadi penurunan kualitas atau perbedaan yang besar antara gambar yang belum di compress dengan gambar yang sudah di compress.
-\end{enumerate}
+    \begin{enumerate}
+        \item \textbf{\f{Time Elapsed}}
+
+              \f{Time Elapsed} atau berapa lama waktu yang dibutuhkan oleh masing-masing \vm\ untuk menyelesaikan proses kompresi video.
+
+        \item \textbf{\f{Structural Similarity Index Measure Score}}
+
+              Structural Similarity Index Measure adalah cara untuk menilai kesamaan dari 2 buah gambar, untuk melihat apakah terjadi penurunan kualitas atau perbedaan yang besar antara gambar yang belum di compress dengan gambar yang sudah di compress.
+    \end{enumerate}
 
 
-Data ini yang akan memberikan gambaran yang jelas mengenai perbedaan kinerja antara KVM yang telah di-tuning dengan yang belum.
+    Data ini yang akan memberikan gambaran yang jelas mengenai perbedaan kinerja antara KVM yang telah di-tuning dengan yang belum.
 
-Spesifikasi dari \vm\ yang akan digunakan dalam pengujian ini adalah sebagai berikut:
-\begin{itemize}
-    \item \textbf{Cloud Platform}: Apache CloudStack 4.18.1
-    \item \textbf{OS}: Ubuntu Server 22.04 LTS
-    \item \textbf{CPU}: 1 CPU x 1.00 Ghz
-    \item \textbf{Memory}: 1024 MB
-\end{itemize} 
+    Spesifikasi dari \vm\ yang akan digunakan dalam pengujian ini adalah sebagai berikut:
+    \begin{itemize}
+        \item \textbf{Cloud Platform}: Apache CloudStack 4.18.1
+        \item \textbf{OS}: Ubuntu Server 22.04 LTS
+        \item \textbf{CPU}: 1 CPU x 1.00 Ghz
+        \item \textbf{Memory}: 1024 MB
+    \end{itemize}
 
-Perintah yang digunakan untuk melakukan kompresi video dengan handbrake adalah sebagai berikut:
+    Perintah yang digunakan untuk melakukan kompresi video dengan handbrake adalah sebagai berikut:
 
-\begin{verbatim}
+    \begin{verbatim}
     ./HandBrakeCLI -i /path/to/input.mov -o /path/to/output.mp4
     -e x264 -q 28 -r 15 -B 64 -X 1280 -O
 \end{verbatim}
 
-Dengan perintah ini \saya akan melakukan kompresi video dengan codec x264. Codec yang dikembangkan oleh VideoLAN yang sudah banyak digunakan dikarenakan mampu untuk melakukan kompresi video yang baik dan rendahnya tingkat penurunan kualitas gambar.
+    Dengan perintah ini \saya akan melakukan kompresi video dengan codec x264. Codec yang dikembangkan oleh VideoLAN yang sudah banyak digunakan dikarenakan mampu untuk melakukan kompresi video yang baik dan rendahnya tingkat penurunan kualitas gambar.
 
-%-----------------------------------------------------------------------------%
-\section{Analisis Pengujian}
-%-----------------------------------------------------------------------------%
-Dalam analisis ini, waktu kompresi untuk Hypervisor KVM yang belum di-tuning akan disebut sebagai $T_{\mathrm{default}}$, sementara waktu kompresi untuk Hypervisor KVM yang telah di-tuning akan disebut sebagai $T_{\mathrm{tuned}}$. Waktu kompresi ini akan diambil dari logs HandBrake yang telah melakukan kompresi video. Untuk mengetahui apakah terdapat perbedaan yang signifikan, \saya\ dapat menggunakan formula speedup. 
+    %-----------------------------------------------------------------------------%
+    \section{Analisis Pengujian}
+    %-----------------------------------------------------------------------------%
+    Dalam analisis ini, waktu kompresi untuk Hypervisor KVM yang belum di-tuning akan disebut sebagai $T_{\mathrm{default}}$, sementara waktu kompresi untuk Hypervisor KVM yang telah di-tuning akan disebut sebagai $T_{\mathrm{tuned}}$. Waktu kompresi ini akan diambil dari logs HandBrake yang telah melakukan kompresi video. Untuk mengetahui apakah terdapat perbedaan yang signifikan, \saya\ dapat menggunakan formula speedup.
 
-\[ \mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}} \]
+    \[ \mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}} \]
 
-Jika nilai speedup lebih dari 1, ini menandakan bahwa proses kompresi dengan Hypervisor KVM yang sudah di-tuning lebih cepat dibandingkan dengan yang belum di-tuning. 
+    Jika nilai speedup lebih dari 1, ini menandakan bahwa proses kompresi dengan Hypervisor KVM yang sudah di-tuning lebih cepat dibandingkan dengan yang belum di-tuning.
 
-Pengujian akan dilakukan sebanyak kurang lebih sepuluh kali dan nantinya akan ditampilkan dalam bentuk grafik. Akan terdapat grafik \f{line chart} dengan dua garis dimana masing-merepresentasikan $T_{\mathrm{default}}$ dan $T_{\mathrm{tuned}}$.
+    Pengujian akan dilakukan sebanyak kurang lebih sepuluh kali dan nantinya akan ditampilkan dalam bentuk grafik. Akan terdapat grafik \f{line chart} dengan dua garis dimana masing-merepresentasikan $T_{\mathrm{default}}$ dan $T_{\mathrm{tuned}}$.
 
-Selain menganalisis waktu kompresi video, \saya\ juga akan melakukan analisis untuk menilai kualitas video yang telah dikompresi. Analisis ini akan melibatkan perbandingan nilai dari \f{Structural Similarity Index Measure} (SSIM) antara video yang dikompres menggunakan Hypervisor KVM default dan Hypervisor KVM yang telah di-tuning. SSIM adalah metrik yang mengukur kesamaan visual antara dua video. Semakin tinggi nilai SSIM, semakin mirip video yang dikompres dengan versi aslinya. Oleh karena itu, nilai SSIM yang lebih tinggi menunjukkan kualitas kompresi yang lebih baik, dimana integritas visual dari video asli lebih terjaga.
-
-
-\iffalse
-Selanjutnya, \saya\ akan menghitung efisiensi dari tuning Hypervisor KVM ini. Untuk mengetahui efisiensi, \saya\ dapat menggunakan formula efisiensi.
-
-\[ \mathrm{Efficiency} = \frac{\mathrm{Speedup}}{\frac{R_{\mathrm{tuned}}}{R_{\mathrm{default}}}} \]
+    Selain menganalisis waktu kompresi video, \saya\ juga akan melakukan analisis untuk menilai kualitas video yang telah dikompresi. Analisis ini akan melibatkan perbandingan nilai dari \f{Structural Similarity Index Measure} (SSIM) antara video yang dikompres menggunakan Hypervisor KVM default dan Hypervisor KVM yang telah di-tuning. SSIM adalah metrik yang mengukur kesamaan visual antara dua video. Semakin tinggi nilai SSIM, semakin mirip video yang dikompres dengan versi aslinya. Oleh karena itu, nilai SSIM yang lebih tinggi menunjukkan kualitas kompresi yang lebih baik, dimana integritas visual dari video asli lebih terjaga.
 
 
-Tujuan menghitung efisiensi ini adalah untuk mengetahui seberapa efektif tuning dilakukan dalam menggunakan sumber daya yang ada, seperti penggunaan CPU dan memori. Perhitungan ini penting untuk menilai kinerja tuning dalam konteks keseluruhan penggunaan sumber daya, tidak hanya kecepatan kompresi.
-\fi
+    \iffalse
+        Selanjutnya, \saya\ akan menghitung efisiensi dari tuning Hypervisor KVM ini. Untuk mengetahui efisiensi, \saya\ dapat menggunakan formula efisiensi.
 
-% Time Measurement
-%$T_{\mathrm{default}}$, $T_{\mathrm{tuned}}$
-%\[ T_{\mathrm{default}}, \quad T_{\mathrm{tuned}} \]
-
-% Speedup
-%$\mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}}$
-%\[ \mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}} \]
+        \[ \mathrm{Efficiency} = \frac{\mathrm{Speedup}}{\frac{R_{\mathrm{tuned}}}{R_{\mathrm{default}}}} \]
 
 
+        Tujuan menghitung efisiensi ini adalah untuk mengetahui seberapa efektif tuning dilakukan dalam menggunakan sumber daya yang ada, seperti penggunaan CPU dan memori. Perhitungan ini penting untuk menilai kinerja tuning dalam konteks keseluruhan penggunaan sumber daya, tidak hanya kecepatan kompresi.
+    \fi
 
-%-----------------------------------------------------------------------------%
-\section{Satu Persamaan}
-%-----------------------------------------------------------------------------%
+    % Time Measurement
+    %$T_{\mathrm{default}}$, $T_{\mathrm{tuned}}$
+    %\[ T_{\mathrm{default}}, \quad T_{\mathrm{tuned}} \]
 
-\noindent \begin{align}\label{eq:garis}
-    \cfrac{y - y_{1}}{y_{2} - y_{1}} = 
-    \cfrac{x - x_{1}}{x_{2} - x_{1}}
-\end{align}
+    % Speedup
+    %$\mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}}$
+    %\[ \mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}} \]
 
-\equ~\ref{eq:garis} diatas adalah persamaan garis. 
-\equ~\ref{eq:garis} dan \ref{eq:bola} sama-sama dibuat dengan perintah \bslash
-align. 
-Perintah ini juga dapat digunakan untuk menulis lebih dari satu persamaan. 
 
-\noindent \begin{align}\label{eq:bola}
-    \underbrace{|\overline{ab}|}_{\text{pada bola $|\overline{ab}| = r$}} 
-    = \sqrt[2]{(x_{b} - x_{a})^{2} + (y_{b} - y_{a})^{2} + 
-        \vert\vert(z_{b} - z_{a})^{2}}
-\end{align}
 
-%-----------------------------------------------------------------------------%
-\section{Lebih dari Satu Persamaan}
-\label{sec:multiEqu}
-%-----------------------------------------------------------------------------%
-\noindent \begin{align}\label{eq:matriks}	
-    |\overline{a} * \overline{b}| &= |\overline{a}| |\overline{b}| \sin\theta 
-    \\[0.2cm]
-    \overline{a} * \overline{b} &=  
-    \begin{array}{| c c c |}
-        \hat{i} & x_{1} & x_{2} \\
-        \hat{j} & y_{1} & y_{2} \\
-        \hat{k} & z_{1} & z_{2} \\
-    \end{array} \nonumber \\[0.2cm]
-    &= \hat{i} \,
-    \begin{array}{ | c c | }
-        y_{1} & y_{2} \\
-        z_{1} & z_{2} \\
-    \end{array} 
-    + \hat{j} \,
-    \begin{array}{ | c c | }
-        z_{1} & z_{2} \\
-        x_{1} & x_{2} \\
-    \end{array} 
-    + \hat{k} \,	
-    \begin{array}{ | c c | }
-        x_{1} & x_{2} \\
-        y_{1} & y_{2} \\
-    \end{array}
-    \nonumber
-\end{align}
+    %-----------------------------------------------------------------------------%
+    \section{Satu Persamaan}
+    %-----------------------------------------------------------------------------%
 
-Pada \equ~\ref{eq:matriks} dapat dilihat beberapa baris menjadi satu bagian 
-dari \equ~\ref{eq:matriks}. 
-Sedangkan dibawah ini dapat dilihat bahwa dengan cara yang sama, \equ~
-\ref{eq:gabungan1}, \ref{eq:gabungan2}, dan \ref{eq:gabungan3} memiliki nomor 
-persamaannya masing-masing. 
+    \noindent \begin{align}\label{eq:garis}
+        \cfrac{y - y_{1}}{y_{2} - y_{1}} =
+        \cfrac{x - x_{1}}{x_{2} - x_{1}}
+    \end{align}
 
-\noindent \begin{align}\label{eq:gabungan1}	
-    \int_{a}^{b} f(x)\, dx + \int_{b}^{c} f(x) \, dx = \int_{a}^{c} f(x) \, dx
-    \\\label{eq:gabungan2}
-    \lim_{x \to \infty} \frac{f(x)}{g(x)} = 0 \hspace{1cm} 
-    \text{jika pangkat $f(x)$ $<$ pangkat $g(x)$} \\\label{eq:gabungan3}
-    a^{m^{a \, ^{n}\log b }} = b^{\frac{m}{n}}
-\end{align}
+    \equ~\ref{eq:garis} diatas adalah persamaan garis.
+    \equ~\ref{eq:garis} dan \ref{eq:bola} sama-sama dibuat dengan perintah \bslash
+    align.
+    Perintah ini juga dapat digunakan untuk menulis lebih dari satu persamaan.
+
+    \noindent \begin{align}\label{eq:bola}
+        \underbrace{|\overline{ab}|}_{\text{pada bola $|\overline{ab}| = r$}}
+        = \sqrt[2]{(x_{b} - x_{a})^{2} + (y_{b} - y_{a})^{2} +
+            \vert\vert(z_{b} - z_{a})^{2}}
+    \end{align}
+
+    %-----------------------------------------------------------------------------%
+    \section{Lebih dari Satu Persamaan}
+    \label{sec:multiEqu}
+    %-----------------------------------------------------------------------------%
+    \noindent \begin{align}\label{eq:matriks}
+        |\overline{a} * \overline{b}| & = |\overline{a}| |\overline{b}| \sin\theta
+        \\[0.2cm]
+        \overline{a} * \overline{b}   & =
+        \begin{array}{| c c c |}
+            \hat{i} & x_{1} & x_{2} \\
+            \hat{j} & y_{1} & y_{2} \\
+            \hat{k} & z_{1} & z_{2} \\
+        \end{array} \nonumber                                                    \\[0.2cm]
+                                      & = \hat{i} \,
+        \begin{array}{ | c c | }
+            y_{1} & y_{2} \\
+            z_{1} & z_{2} \\
+        \end{array}
+        + \hat{j} \,
+        \begin{array}{ | c c | }
+            z_{1} & z_{2} \\
+            x_{1} & x_{2} \\
+        \end{array}
+        + \hat{k} \,
+        \begin{array}{ | c c | }
+            x_{1} & x_{2} \\
+            y_{1} & y_{2} \\
+        \end{array}
+        \nonumber
+    \end{align}
+
+    Pada \equ~\ref{eq:matriks} dapat dilihat beberapa baris menjadi satu bagian
+    dari \equ~\ref{eq:matriks}.
+    Sedangkan dibawah ini dapat dilihat bahwa dengan cara yang sama, \equ~
+    \ref{eq:gabungan1}, \ref{eq:gabungan2}, dan \ref{eq:gabungan3} memiliki nomor
+    persamaannya masing-masing.
+
+    \noindent \begin{align}\label{eq:gabungan1}
+        \int_{a}^{b} f(x)\, dx + \int_{b}^{c} f(x) \, dx = \int_{a}^{c} f(x) \, dx
+        \\\label{eq:gabungan2}
+        \lim_{x \to \infty} \frac{f(x)}{g(x)} = 0 \hspace{1cm}
+        \text{jika pangkat $f(x)$ $<$ pangkat $g(x)$} \\\label{eq:gabungan3}
+        a^{m^{a \, ^{n}\log b }} = b^{\frac{m}{n}}
+    \end{align}
 \fi

@@ -68,4 +68,7 @@
     "latex-workshop.latex.recipe.default": "lastUsed",
     // "latex-workshop.synctex.synctexjs.enabled": true,
     // "latex-workshop.view.pdf.viewer": "tab",
+    "[latex]": {
+        "editor.formatOnSave": false,
+    }
 }
