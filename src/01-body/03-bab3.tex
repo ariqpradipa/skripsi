@@ -1,8 +1,7 @@
 %-----------------------------------------------------------------------------%
 \chapter{\babTiga}
 %-----------------------------------------------------------------------------%
-%\todo{tambahkan kata-kata pengantar bab 1 disini}
-Penelitian ini bertujuan untuk mengevaluasi konfigurasi Hypervisor KVM yang disediakan secara langsung dalam konteks penggunaan \vm\ pada Apache Cloudstack. Tujuan utama adalah untuk memastikan bahwa \vm\ dapat mencapai kinerja yang optimal sesuai dengan spesifikasi sistem yang digunakan. Untuk mencapai tujuan ini, \saya akan melakukan penyesuaian konfigurasi atau tuning pada Hypervisor KVM dan kemudian membandingkannya dengan kondisi awal yang tidak mengalami tuning. Hasil pengujian akan dianalisis untuk menentukan apakah ada perbedaan signifikan dalam kinerja antara Hypervisor KVM yang telah dituning dengan yang belum dituning.
+Penelitian ini bertujuan untuk mengevaluasi konfigurasi Hypervisor KVM yang disediakan secara langsung dalam konteks penggunaan \vm\ pada Apache Cloudstack. Tujuan utama adalah untuk memastikan bahwa \vm\ dapat mencapai kinerja yang optimal sesuai dengan spesifikasi sistem yang digunakan. Untuk mencapai tujuan ini, \saya\ akan melakukan penyesuaian konfigurasi atau tuning pada Hypervisor KVM dan kemudian membandingkannya dengan kondisi awal yang tidak mengalami tuning. Hasil pengujian akan dianalisis untuk menentukan apakah ada perbedaan signifikan dalam kinerja antara Hypervisor KVM yang telah dituning dengan yang belum dituning.
 
 %-----------------------------------------------------------------------------%
 \section{Tahapan Penelitian}
@@ -15,9 +14,9 @@ Penelitian ini bertujuan untuk mengevaluasi konfigurasi Hypervisor KVM yang dise
     \label{fig:TahapanPenelitian}
 \end{figure}
 
-Penelitian ini akan dilakukan dalam beberapa tahap sesuai dengan diagram di gambar \ref{fig:TahapanPenelitian}. Tahap pertama melibatkan studi literatur untuk mengumpulkan semua informasi yang diperlukan untuk penelitian ini. Studi literatur ini penting karena memberikan dasar pengetahuan yang kuat tentang topik yang akan diteliti, memungkinkan \saya untuk memahami konteks dan kerangka kerja yang relevan.
+Penelitian ini akan dilakukan dalam beberapa tahap sesuai dengan diagram di gambar \ref{fig:TahapanPenelitian}. Tahap pertama melibatkan studi literatur untuk mengumpulkan semua informasi yang diperlukan. Studi literatur ini penting karena memberikan dasar pengetahuan yang kuat tentang topik yang akan diteliti, memungkinkan peneliti untuk memahami konteks dan kerangka kerja yang relevan. 
 
-Selanjutnya, penelitian melibatkan tuning terhadap Hypervisor KVM dan pengujian dilakukan dengan mengkompresi video menggunakan aplikasi Handbrake. Pengujian dengan Handbrake bertujuan untuk mengukur efisiensi dan kinerja Hypervisor KVM setelah tuning. Hasil pengujian Handbrake ini akan digunakan untuk membandingkan waktu kompresi video antara Hypervisor KVM yang tidak dituning dengan yang sudah dituning. Hasil dari perbandingan ini akan memberikan gambaran mengenai konfigurasi yang paling optimal dan sesuai, serta membantu dalam pemahaman lebih lanjut tentang pengaruh tuning terhadap performa Hypervisor KVM dalam konteks kompresi video.
+Selanjutnya, penelitian melibatkan tuning terhadap Hypervisor KVM, dan pengujian dilakukan dengan tiga skenario, yaitu kompresi video, enkripsi data dengan AES, dan validasi integritas data menggunakan CRC32. Hasil dari pengujian ini akan memberikan gambaran mengenai konfigurasi yang paling optimal dan sesuai, serta membantu dalam pemahaman lebih lanjut tentang pengaruh tuning terhadap performa Hypervisor KVM.
 
 %-----------------------------------------------------------------------------%
 \section{Persiapan Lingkungan untuk Pengujian dan Analisis}
@@ -33,13 +32,13 @@ Selanjutnya, penelitian melibatkan tuning terhadap Hypervisor KVM dan pengujian 
 
 Proses persiapan lingkungan untuk pengujian dan analisis yang tergambar dalam gambar \ref{fig:PersiapanLingkunganPenelitian} menggambarkan serangkaian langkah sistematis yang penting untuk memastikan integritas hasil penelitian. Proses ini dimulai dengan tahap inisiasi yang meliputi instalasi Ubuntu Server 22.04 LTS, sebuah sistem operasi yang stabil dan sering digunakan untuk keperluan server. Instalasi ini menjadi landasan dasar bagi infrastruktur yang akan dikembangkan.
 
-Setelah sistem operasi terinstal, dilakukan pembaruan dan peningkatan sistem operasi tersebut untuk memastikan semua komponen sistem berada pada versi terkini serta keamanan sistem terjaga. Langkah ini krusial untuk menutup potensi kerentanan yang mungkin ada pada sistem. Selanjutnya, Apache Cloudstack versi 4.18.1 diinstal dan dikonfigurasi. Apache Cloudstack berfungsi sebagai platform manajemen cloud yang memungkinkan pembuatan dan pengelolaan infrastruktur cloud yang kompleks, yang merupakan elemen kunci dalam penelitian ini.
+Setelah sistem operasi terinstal, dilakukan pembaruan dan peningkatan sistem operasi tersebut untuk memastikan semua komponen sistem berada pada versi terkini serta keamanan sistem terjaga. Langkah ini krusial untuk menutup potensi kerentanan yang mungkin ada pada sistem. Selanjutnya, Apache Cloudstack versi 4.18.1 diinstal dan dikonfigurasikan. Apache Cloudstack berfungsi sebagai platform manajemen cloud yang memungkinkan pembuatan dan pengelolaan infrastruktur cloud yang kompleks, yang merupakan elemen kunci dalam penelitian ini.
 
-Dalam pembuatan lingkungan virtual, dibuat \vm\ yang menggunakan sistem operasi yang sama, yaitu Ubuntu Server 22.04 LTS. Pembuatan VM ini memungkinkan simulasi berbagai skenario penelitian dalam lingkungan yang terisolasi. Selanjutnya, untuk keperluan analisis dan pengujian, Handbrake diinstal, dan video yang akan digunakan pun disiapkan.
+Dalam pembuatan lingkungan virtual, dibuat \vm\ yang menggunakan sistem operasi yang sama, yaitu Ubuntu Server 22.04 LTS. Pembuatan VM ini memungkinkan simulasi berbagai skenario penelitian dalam lingkungan yang terisolasi. Selanjutnya, untuk keperluan analisis dan pengujian, berbagai perangkat lunak yang akan digunakan untuk melakukan pengujian akan di install.
 
-Tahapan selanjutnya merupakan pembuatan image template dari VM yang telah dikonfigurasi. Proses ini memungkinkan duplikasi VM dengan cepat dan efisien untuk pengujian berulang atau skenario analisis yang berbeda, menjamin konsistensi lingkungan penelitian. Image template ini kemudian digunakan sebagai standar untuk penelitian lebih lanjut, memastikan bahwa setiap VM yang dibuat untuk tujuan pengujian memiliki konfigurasi yang identik.
+Tahapan selanjutnya merupakan pembuatan image template dari VM yang telah dikonfigurasikan. Proses ini memungkinkan duplikasi VM dengan cepat dan efisien untuk pengujian berulang atau skenario analisis yang berbeda, menjamin konsistensi lingkungan penelitian. Image template ini kemudian digunakan sebagai standar untuk penelitian lebih lanjut, memastikan bahwa setiap VM yang dibuat untuk tujuan pengujian memiliki konfigurasi yang identik.
 
-Setelah semua dilakukan hal ini menandakan bahwa lingkungan penelitian telah siap untuk diuji dan dianalisis. Kesiapan lingkungan ini esensial untuk memastikan bahwa pengujian yang dilakukan dapat diulang dan hasilnya valid.
+Setelah semua dilakukan hal ini menandakan bahwa lingkungan penelitian telah siap untuk diuji dan dianalisis. Kesiapan lingkungan ini esensial untuk memastikan bahwa pengujian yang dilakukan dapat diulang dengan cepat dan efisien.
 
 %-----------------------------------------------------------------------------%
 \subsection{Instalasi dan Konfigurasi Apache Cloudstack}
@@ -562,6 +561,8 @@ Dengan ini menandakan bahwa flag \texttt{ssse3} pada \vm\ \texttt{i-2-16-VM} sud
     \label{code:tuned_kompresi_video}
 \end{listing}
 
+Untuk melakukan pengujian dengan kompresi video akan digunakan konfigurasi seperti pada kode \ref{code:tuned_kompresi_video}. Flag yang akan digunakan adalah ssse3, sse4.1, sse4.2, dan sse4a. Flag-flag ini dipilih dikarenakan 
+
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi Hypervisor KVM untuk Validasi Integritas File}
 %-----------------------------------------------------------------------------%
@@ -782,34 +783,32 @@ variable \textbf{plainTextData} yang digunakan adalah:
 %-----------------------------------------------------------------------------%
 \section{Analisis}
 %-----------------------------------------------------------------------------%
-Analisis akan dilakukan dengan perhitungan menggunakan formula \texttt{speedup}, diasumsikan bahwa T(1) adalah waktu eksekusi Test 1 dan T(p) adalah waktu eksekusi Test 2\cite{beuwolfCetin}.
-\[
-    S(p) := \frac{T(1)}{T(p)}
-\]
+Analisis akan dilakukan dengan melakukan perhitungan menggunakan formula \texttt{speedup}. Diasumsikan bahwa T(1) adalah waktu eksekusi Test dengan konfigurasi default, dan T(p) adalah waktu eksekusi Test dengan konfigurasi yang telah dituning\cite{beuwolfCetin}. 
 
-% \[
-% \text{Speedup} = \frac{1}{(1 - P) + \frac{P}{S}}
-% \]
+Formula \texttt{speedup} dinyatakan sebagai berikut:
 
-% Dimana:
-% \begin{itemize}
-%     \item $\text{Speedup}$ adalah percepatan teoretis dari sistem setelah perubahan.
-%     \item $P$ adalah proporsi dari sistem yang mendapatkan manfaat dari perubahan (dinyatakan sebagai pecahan antara 0 dan 1).
-%     \item $S$ adalah percepatan dari bagian yang mendapatkan manfaat dari perubahan.
-% \end{itemize}
+\[S(p) = \frac{T(1)}{T(p)}\]
+
+Berdasarkan rumus ini, jika nilai S(p) semakin besar, maka konfigurasi yang dituning semakin bagus. Hal ini menandakan bahwa tuning Hypervisor dapat mempercepat proses yang dilakukan. Sebaliknya, jika S(p) semakin kecil, maka konfigurasi yang dituning semakin lambat. Jika nilai S(p) sama, maka efek dari konfigurasi yang dituning sama dengan konfigurasi default.
 
 %-----------------------------------------------------------------------------%
 \subsection{Analisis Pengujian Kompresi Video}
 %-----------------------------------------------------------------------------%
+Dalam analisis pengujian dengan kompresi video, akan dibandingkan waktu eksekusi antara konfigurasi Hypervisor yang tidak dituning (default) dan konfigurasi yang telah dituning. Perbandingan ini dilakukan dengan menggunakan formula \texttt{speedup}. Konfigurasi yang optimal adalah konfigurasi yang memiliki nilai \texttt{speedup} tertinggi, yang menunjukkan peningkatan kinerja yang signifikan dalam proses kompresi video.
 
 %-----------------------------------------------------------------------------%
 \subsection{Analisis Pengujian Validasi Integritas File}
 %-----------------------------------------------------------------------------%
+Untuk analisis pengujian validasi integritas file, akan digunakan pendekatan yang serupa dengan analisis kompresi video. Akan dibandingkan waktu eksekusi antara konfigurasi Hypervisor yang tidak dituning (default) dan konfigurasi yang telah dituning menggunakan formula \texttt{speedup}. Nilai S(p) yang lebih besar menunjukkan bahwa konfigurasi yang dituning lebih efisien dalam memverifikasi integritas file dibandingkan dengan konfigurasi default. Konfigurasi yang optimal adalah konfigurasi yang memiliki nilai \texttt{speedup} tertinggi, yang mengindikasikan peningkatan kinerja yang signifikan dalam proses validasi integritas file.
 
 %-----------------------------------------------------------------------------%
 \subsection{Analisis Pengujian Enkripsi AES}
 %-----------------------------------------------------------------------------%
+Dalam analisis pengujian enkripsi AES, kami akan menggunakan metode yang sama seperti analisis sebelumnya, yaitu dengan membandingkan waktu eksekusi antara konfigurasi Hypervisor yang tidak dituning (default) dan konfigurasi yang telah dituning menggunakan formula \texttt{speedup}. Nilai S(p) yang lebih besar menunjukkan bahwa konfigurasi yang dituning lebih efisien dalam melakukan enkripsi AES dibandingkan dengan konfigurasi default. Konfigurasi yang optimal adalah konfigurasi yang memiliki nilai \texttt{speedup} tertinggi, yang mengindikasikan peningkatan kinerja yang signifikan dalam proses enkripsi AES.
 
+\hfill
+
+Dengan menganalisis nilai \texttt{speedup}, kami dapat mengevaluasi dan membandingkan kinerja berbagai konfigurasi Hypervisor dalam melakukan tugas-tugas seperti kompresi video, validasi integritas file, dan enkripsi AES. Konfigurasi dengan nilai \texttt{speedup} tertinggi akan menjadi pilihan yang optimal untuk meningkatkan kinerja dan efisiensi dalam setiap tugas yang diuji.
 
 \iffalse
     %-----------------------------------------------------------------------------%
