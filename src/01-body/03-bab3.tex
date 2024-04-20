@@ -14,7 +14,7 @@ Penelitian ini bertujuan untuk mengevaluasi konfigurasi Hypervisor KVM yang dise
     \label{fig:TahapanPenelitian}
 \end{figure}
 
-Penelitian ini akan dilakukan dalam beberapa tahap sesuai dengan diagram di gambar \ref{fig:TahapanPenelitian}. Tahap pertama melibatkan studi literatur untuk mengumpulkan semua informasi yang diperlukan. Studi literatur ini penting karena memberikan dasar pengetahuan yang kuat tentang topik yang akan diteliti, memungkinkan peneliti untuk memahami konteks dan kerangka kerja yang relevan. 
+Penelitian ini akan dilakukan dalam beberapa tahap sesuai dengan diagram di gambar \ref{fig:TahapanPenelitian}. Tahap pertama melibatkan studi literatur untuk mengumpulkan semua informasi yang diperlukan. Studi literatur ini penting karena memberikan dasar pengetahuan yang kuat tentang topik yang akan diteliti, memungkinkan peneliti untuk memahami konteks dan kerangka kerja yang relevan.
 
 Selanjutnya, penelitian melibatkan tuning terhadap Hypervisor KVM, dan pengujian dilakukan dengan tiga skenario, yaitu kompresi video, enkripsi data dengan AES, dan validasi integritas data menggunakan CRC32. Hasil dari pengujian ini akan memberikan gambaran mengenai konfigurasi yang paling optimal dan sesuai, serta membantu dalam pemahaman lebih lanjut tentang pengaruh tuning terhadap performa Hypervisor KVM.
 
@@ -45,31 +45,31 @@ Setelah semua dilakukan hal ini menandakan bahwa lingkungan penelitian telah sia
 %-----------------------------------------------------------------------------%
 Dalam instalasi ini akan digunakan \f{Home Network} di IP 192.168.0.0/24. Pertama pastikan bahwa \f{tools} yang dibutuhkan sudah terinstall dengan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     sudo apt-get install -y openntpd openssh-server vim htop tar
     sudo apt-get install -y intel-microcode
-\end{verbatim}
+\end{lstlisting}
 
-Perinyah ini akan menginstall \f{tools} openntpd, openssh-server, vim, htop, tar, dan intel-microcode. Setelah melakukan instalasi \f{tools} ini kemudian \saya\ akan mengganti password dari user root dengan perintah:
+Perintah ini akan menginstall \f{tools} openntpd, openssh-server, vim, htop, tar, dan intel-microcode. Setelah melakukan instalasi \f{tools} ini kemudian \saya\ akan mengganti password dari user root dengan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     sudo passwd root
-\end{verbatim}
+\end{lstlisting}
 
 %-----------------------------------------------------------------------------%
 \subsubsection{Pengaturan Jaringan}
 %-----------------------------------------------------------------------------%
 Melakukan pengaturan \f{Linux Bridge} yang akan menghandle jaringan CloudStack \f{public, guest, management} dan \f{storage}. Untuk penyederhanaan \saya\ akan menggunakan satu \f{bridge} yang bernama \textbf{cloudbr0} yang akan digunakan untuk semua jaringan ini. Untuk menginstall \f{tools} untuk melakukan \f{bridge} digunakan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     sudo apt-get install bridge-utils
-\end{verbatim}
+\end{lstlisting}
 
 Setelah menginstall \f{tools} ini, \saya\ akan mengkonfigurasi \f{bridge} cloudbr0 dengan menggunakan netplan. Pertama pastikan bahwa seleuruh konfigurasi netplan sekarang di rename dengan menambahkan extensi .bak sebagai backup. Setelah itu buat file konfigruasi netplan dengan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     sudo nano /etc/netplan/01-netcfg.yaml
-\end{verbatim}
+\end{lstlisting}
 
 Dengan perintah ini akan membuka text editor nano dengan file 01-netcfg.yaml. Isi file konfigurasi tersebut dengan:
 
@@ -104,40 +104,38 @@ Dengan perintah ini akan membuka text editor nano dengan file 01-netcfg.yaml. Is
 
 Dalam konfigurasi ini IP dari \f{bridge} cloudbr0 adalah 192.168.0.10/24 dan akan menggunakan DNS 1.1.1.1 dan 8.8.8.8. Setelah melakukan konfigurasi ini \saya\ akan mengaktifkan \f{bridge} cloudbr0 dengan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     sudo netplan generate
     sudo netplan apply
     sudo reboot
-\end{verbatim}
+\end{lstlisting}
 
 Dengan perintah ini akan dilakukan netplan generate dan apply, setelah itu sistem melakukan reboot. Sampai sini pembuatan \f{bridge} cloudbr0 sudah selesai.
 
 \subsubsection{Instalasi Cloudstack}
 Pertama kita akan melakukan instalasi cloudstack-management dan juga mysql-server. Database yang akan digunakan adalah MySQL. Kita akan menggunakan perintah:
 
-\begin{listing}[H]
-    \begin{minted}{bash}
+\begin{lstlisting}
     sudo mkdir -p /etc/apt/keyrings
     wget -O- http://packages.shapeblue.com/release.asc | gpg --dearmor | sudo tee /etc/apt/keyrings/cloudstack.gpg > /dev/null
-
-    echo deb [signed-by=/etc/apt/keyrings/cloudstack.gpg] http://packages.shapeblue.com/cloudstack/upstream/debian/4.18 / > /etc/apt/sources.list.d/cloudstack.list
+    
+    echo deb [signed-by=/etc/apt/keyrings/cloudstack.gpg] http://packages.shapeblue.com/cloudstack/upstream/debian/4.18 / > /etc/apt/sources.list.d/cloudstack.list \\
     sudo apt-get update -y
     sudo apt-get install cloudstack-management mysql-server
-    \end{minted}
-\end{listing}
+\end{lstlisting}
 
 Perintah tersebut digunakan untuk menginstal CloudStack Management Server versi 4.18 dan MySQL Server dari repositori tertentu. Pertama, perintah membuat direktori untuk menyimpan kunci GPG yang digunakan untuk mengotentikasi paket dari repositori CloudStack. Kemudian, kunci GPG tersebut diunduh, didekompresi, dan disimpan dalam direktori yang telah dibuat. Selanjutnya, konfigurasi ditambahkan ke file sources.list.d untuk menandatangani paket-paket dari repositori CloudStack. Setelah itu, daftar paket diperbarui dan CloudStack Management Server serta MySQL Server diinstal menggunakan perintah apt-get. Selain ini juga akan dilakukan instalasi \f{tools} cloudstack usage dan billing yang bersifat opsional, dengan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     sudo apt-get install cloudstack-usage
-\end{verbatim}
+\end{lstlisting}
 
 \subsubsection{Konfigurasi Database}
 Setelah mysql server selesai di install akan dilakukan konfigurasi setting InnoDB di mysql server dengan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
-\end{verbatim}
+\end{lstlisting}
 
 Hapus semua isi file tersebut dan isi dengan:
 
@@ -160,128 +158,114 @@ Hapus semua isi file tersebut dan isi dengan:
 
 Simpan konfigurasi dan setelah itu restart mysql server. Hal ini dilakukan agar mysql menggunakan setting yang terbaru. Untuk melakukan restart mysql server dapat dilakukan dengan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     systemctl restart mysql
-\end{verbatim}
+\end{lstlisting}
 
 Setelah mysql server selesai di restart langkah selanjunya adalah deploy database untuk cloudstack. Deploy server ini harus dilakukan sebagai user root. Deploy dilakukan dengan perintah:
 
-\begin{figure}
-    \texttt{cloudstack-setup-databases cloud:cloud@localhost --deploy-as=root:password -i 192.168.0.10}
-\end{figure}
+\begin{lstlisting}
+    cloudstack-setup-databases cloud:cloud@localhost --deploy-as=root:password -i 192.168.0.10
+\end{lstlisting}
 
 IP yang digunakan adalah IP dari sistem host. Tunggu sampai deployment selesai, langkah ini akan selesai dalam beberapa menit.
 
 \subsubsection{Konfigurasi Storage}
 Pada tahap ini \saya\ akan melakukan konfigurasi untuk penyimpanan dari cloudstack. Pertama kita akan melakukan instalasi storage driver yang akan digunakan dengan perintah:
 
-\begin{listing}[H]
-    \begin{minted}{bash}
+\begin{lstlisting}
     sudo apt-get install nfs-kernel-server quota
     echo "/export  *(rw,async,no_root_squash,no_subtree_check)" > /etc/exports
     sudo mkdir -p /export/primary /export/secondary
     sudo exportfs -a
-    \end{minted}
-\end{listing}
+\end{lstlisting}
 
 Perintah \texttt{sudo apt-get install nfs-kernel-server quota} digunakan untuk menginstal perangkat lunak server NFS dan modul Quota pada sistem Linux. Selanjutnya, perintah \texttt{echo "/export *(rw,async,no\_root\_squash,no\_subtree\_check)" > /etc/exports} digunakan untuk menetapkan konfigurasi eksport NFS dengan opsi akses tertentu. Kemudian, perintah \texttt{sudo mkdir -p /export/primary /export/secondary} membuat direktori yang akan diakses oleh klien NFS. Terakhir, perintah \texttt{sudo exportfs -a} mengekspor semua direktori yang telah dikonfigurasi sebelumnya untuk diakses oleh klien NFS. Dengan demikian, rangkaian perintah ini mempersiapkan server NFS untuk berbagi data melalui jaringan. Setelah itu akan dilakukan konfigurasi NFS server dengan perintah:
 
-\begin{listing}[H]
-    \begin{minted}{bash}
+\begin{lstlisting}
     sed -i -e 's/^RPCMOUNTDOPTS="--manage-gids"$/RPCMOUNTDOPTS="-p 892 --manage-gids"/g' /etc/default/nfs-kernel-server
     sed -i -e 's/^STATDOPTS=$/STATDOPTS="--port 662 --outgoing-port 2020"/g' /etc/default/nfs-common
     echo "NEED_STATD=yes" >> /etc/default/nfs-common
     sed -i -e 's/^RPCRQUOTADOPTS=$/RPCRQUOTADOPTS="-p 875"/g' /etc/default/quota
     service nfs-kernel-server restart
-    \end{minted}
-\end{listing}
+\end{lstlisting}
 
 Perintah-perintah tersebut digunakan untuk mengubah konfigurasi pada server NFS dan Quota pada sistem Linux. Pertama, menggunakan \texttt{sed}, konfigurasi NFS Mount Daemon dan NFS Stat Daemon diubah untuk menggunakan port yang ditentukan dan mengaktifkan manajemen GID. Selanjutnya, layanan Stat Daemon diaktifkan dengan menambahkan opsi yang sesuai ke file konfigurasi NFS Common. Kemudian, konfigurasi RPC Quota Daemon diubah untuk menggunakan port yang ditentukan. Terakhir, layanan NFS Kernel Server di-restart untuk menerapkan perubahan konfigurasi yang telah dilakukan.
 
 \subsubsection{Konfigurasi KVM}
 Tahap selanjutnya adalah konfigurasi KVM dan cloudstack agent. Pertama install kvm dan cloudstack agent dengan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     sudo apt-get install qemu-kvm cloudstack-agent
-\end{verbatim}
+\end{lstlisting}
 
 Setelah KVM dan cloudstack agent terinstall langkah selanjutnya adalah menjalankan perintah ini:
 
-\begin{listing}[H]
-    \begin{minted}{bash}
+\begin{lstlisting}
     sudo sed -i -e 's/\#vnc_listen.*$/vnc_listen = "0.0.0.0"/g' /etc/libvirt/qemu.conf
     sudo echo LIBVIRTD_ARGS=\"--listen\" >> /etc/default/libvirtd
     sudo systemctl mask libvirtd.socket libvirtd-ro.socket libvirtd-admin.socket libvirtd-tls.socket libvirtd-tcp.socket
     sudo systemctl restart libvirtd
-    \end{minted}
-\end{listing}
+\end{lstlisting}
 
 Perintah tersebut digunakan untuk mengkonfigurasi libvirt, sebuah toolkit untuk mengelola virtualisasi di Linux. Pertama, perintah \texttt{sed} digunakan untuk mengubah pengaturan dalam file konfigurasi \texttt{qemu.conf} agar libvirt dapat menerima koneksi VNC dari semua interface jaringan. Kemudian, argumen \texttt{--listen} ditambahkan ke konfigurasi libvirtd melalui file \texttt{/etc/default/libvirtd}, yang membuat libvirt mendengarkan koneksi dari interface jaringan. Selanjutnya, perintah \texttt{systemctl mask} digunakan untuk menonaktifkan unit-unit systemd yang terkait dengan libvirtd, seperti socket-soket yang tidak diperlukan, untuk menghindari aktivasi yang tidak diinginkan. Terakhir, layanan libvirtd di-restart agar perubahan konfigurasi dapat diterapkan.
 
 Selanjutnya akan dilakukan konfigurasi default untuk libvirtd dengan perintah:
 
-\begin{listing}[H]
-    \begin{minted}{bash}
+\begin{lstlisting}
     echo 'listen_tls=0' >> /etc/libvirt/libvirtd.conf
     echo 'listen_tcp=1' >> /etc/libvirt/libvirtd.conf
     echo 'tcp_port = "16509"' >> /etc/libvirt/libvirtd.conf
     echo 'mdns_adv = 0' >> /etc/libvirt/libvirtd.conf
     echo 'auth_tcp = "none"' >> /etc/libvirt/libvirtd.conf
     systemctl restart libvirtd
-    \end{minted}
-\end{listing}
+\end{lstlisting}
 
 Perintah-perintah tersebut digunakan untuk mengkonfigurasi default pada file konfigurasi libvirt (libvirtd.conf). Pertama, dengan menambahkan \texttt{listen\_tls=0}, libvirt diminta untuk tidak mendengarkan koneksi TLS, sehingga mematikan mode tersebut. Kemudian, \texttt{listen\_tcp=1} mengaktifkan libvirt untuk mendengarkan koneksi TCP/IP. Penambahan \texttt{tcp\_port = "16509"} menetapkan port TCP yang akan digunakan oleh libvirt. Selanjutnya, dengan \texttt{mdns\_adv = 0}, mDNS advertise untuk penemuan otomatis layanan libvirt dimatikan. Terakhir, \texttt{auth\_tcp = "none"} mengatur libvirt untuk menerima koneksi TCP/IP tanpa melakukan otentikasi. Setelah perubahan-perubahan ini diterapkan, layanan libvirt di-restart agar konfigurasi baru dapat mulai berlaku. Penting untuk dicatat bahwa konfigurasi default ini hanya diperlukan saat setup awal, karena saat menambahkan host KVM dalam CloudStack, konfigurasi yang lebih aman menggunakan TLS akan diterapkan secara otomatis.
 
 Pada host tertentu ditempat menjalankan docker dan service lainnya, dimungkinkan perlu untuk menambahkan konfigrasi berikut ini di \texttt{/etc/sysctl.conf} lalu jalankan \texttt{sysctl -p}
 
-\begin{listing}[H]
-    \begin{minted}{bash}
+\begin{lstlisting}
     nano /etc/sysctl.conf
     echo 'net.bridge.bridge-nf-call-arptables = 0' >> /etc/sysctl.conf
     echo 'net.bridge.bridge-nf-call-iptables = 0' >> /etc/sysctl.conf
     sysctl -p
-    \end{minted}
-\end{listing}
+\end{lstlisting}
 
 Pad perintah ini pertama, akan dibuka file \texttt{/etc/sysctl.conf} menggunakan editor teks nano. Kemudian, dengan menambahkan baris \texttt{net.bridge.bridge-nf-call-arptables = 0} dan \texttt{net.bridge.bridge-nf-call-iptables = 0} ke dalam file tersebut, Ini akan mematikan fungsi kernel yang biasanya dipanggil saat menggunakan Docker dan jembatan jaringan (bridge). Ini penting karena beberapa layanan, seperti Docker, kadang memerlukan konfigurasi khusus agar berjalan dengan lancar di lingkungan host yang kompleks. Terakhir, dengan menjalankan perintah \texttt{sysctl -p}, perubahan konfigurasi yang telah dibuat akan diterapkan tanpa harus me-reboot sistem, sehingga memungkinkan kernel untuk memuat ulang konfigurasi yang baru diterapkan.
 
 Setelah itu kita akan mengenerate host id dengan uuid, hal ini dapat dilakukan dengan perintah:
 
-\begin{listing}[H]
-    \begin{minted}{bash}
+\begin{lstlisting}
     sudo apt-get install uuid
     UUID=$(uuid)
     echo host_uuid = \"$UUID\" >> /etc/libvirt/libvirtd.conf
     systemctl restart libvirtd
-    \end{minted}
-\end{listing}
+\end{lstlisting}
 
 Perintah ini digunakan untuk meng-generate UUID (Universally Unique Identifier) untuk host dan mengintegrasikannya ke dalam konfigurasi libvirtd. Perintah \texttt{UUID=\$(uuid)} digunakan untuk meng-generate UUID secara acak dan menyimpannya dalam variabel \texttt{UUID}. UUID adalah string panjang yang unik secara global dan digunakan untuk mengidentifikasi entitas secara unik di sistem. Kemudian, perintah \texttt{echo host\_uuid = \" \$UUID \"  >> /etc/libvirt/libvirtd.conf} menambahkan baris \texttt{host\_uuid = "<nilai UUID>"} ke dalam file konfigurasi \texttt{libvirtd.conf}. Fungsi baris ini adalah untuk menyimpan UUID host di konfigurasi libvirtd, yang akan digunakan oleh libvirt untuk mengidentifikasi host secara unik dalam lingkungan virtualisasi. Terakhir, perintah systemctl restart libvirtd digunakan untuk merestart layanan libvirtd agar perubahan konfigurasi yang telah dilakukan dapat diterapkan.
 
 \subsubsection{Konfigurasi Firewall}
 Untuk melakukan konfigruasi firewall kita dapat menggunakan perintah:
 
-\begin{listing}[H]
-    \begin{minted}{bash}
-        # configure firewall rules to allow useful ports
-        NETWORK=192.168.0.0/24
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p udp --dport 111 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 111 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 2049 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 32803 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p udp --dport 32769 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 892 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 875 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 662 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 8250 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 8080 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 9090 -j ACCEPT
-        iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 16514 -j ACCEPT
-        
-        apt-get install iptables-persistent
-    \end{minted}
-\end{listing}
+\begin{lstlisting}
+    # configure firewall rules to allow useful ports
+    NETWORK=192.168.0.0/24
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p udp --dport 111 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 111 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 2049 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 32803 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p udp --dport 32769 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 892 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 875 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 662 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 8250 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 8080 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 9090 -j ACCEPT
+    iptables -A INPUT -s $NETWORK -m state --state NEW -p tcp --dport 16514 -j ACCEPT
+    
+    apt-get install iptables-persistent
+\end{lstlisting}
 
 Perintah tersebut bertujuan untuk mengonfigurasi aturan firewall pada sistem menggunakan iptables, dengan fokus pada pembukaan port-port yang umum digunakan untuk layanan-layanan tertentu. Pertama, baris \texttt{NETWORK=192.168.0.0/24} mendefinisikan jaringan yang diizinkan melalui aturan firewall. Selanjutnya, setiap perintah \texttt{iptables -A INPUT ... -j ACCEPT} menambahkan aturan iptables untuk mengizinkan koneksi baru pada port tertentu dari jaringan yang telah ditentukan sebelumnya. Misalnya, perintah \texttt{iptables -A INPUT -s \$NETWORK -m state --state NEW -p udp --dport 111 -j ACCEPT} mengizinkan koneksi UDP baru pada port 111 dari jaringan yang telah ditentukan.
 
@@ -289,14 +273,12 @@ Aturan-aturan tersebut dirancang untuk membuka akses ke port-port yang umum digu
 
 Setelah itu kita harus menonaktifkan apparmor pada libvirtd, dikarenakan cloudstack melakukan berbagai macam hal yang mana bisa terblokir oleh mekanisme pertahanan seperti apparmor\cite{apacheHostInstallation}. Untuk mematikan apparmor dapat dilakukan dengan perintah:
 
-\begin{listing}[H]
-    \begin{minted}{bash}
+\begin{lstlisting}
     ln -s /etc/apparmor.d/usr.sbin.libvirtd /etc/apparmor.d/disable/
     ln -s /etc/apparmor.d/usr.lib.libvirt.virt-aa-helper /etc/apparmor.d/disable/
     apparmor_parser -R /etc/apparmor.d/usr.sbin.libvirtd
     apparmor_parser -R /etc/apparmor.d/usr.lib.libvirt.virt-aa-helper
-    \end{minted}
-\end{listing}
+\end{lstlisting}
 
 Perintah-perintah tersebut bertujuan untuk menonaktifkan AppArmor pada layanan libvirtd (Libvirt daemon). Langkah pertama adalah membuat symlink (tautan simbolis) dari file konfigurasi AppArmor yang berkaitan dengan libvirtd dan helpernya ke dalam direktori \texttt{/etc/apparmor.d/disable/}. Dengan melakukan ini, AppArmor diarahkan untuk mengabaikan atau menonaktifkan aturan-aturan yang telah didefinisikan untuk libvirtd. Selanjutnya, perintah \texttt{apparmor\_parser -R} digunakan untuk me-refresh aturan-aturan AppArmor yang terkait dengan libvirtd dan helpernya, sehingga aturan-aturan yang telah dinonaktifkan dengan symlink dapat diaplikasikan secara efektif.
 
@@ -312,65 +294,85 @@ Setelah server manajemen sudah UP, cloudstack dapat diakses di http://192.168.0.
 
 \begin{enumerate}
     \item Zone
-          \begin{verbatim}
-Name - nama bebas
-Public DNS 1 - 8.8.8.8
-Public DNS 2 - 1.1.1.1
-Internal DNS1 - 192.168.0.1
-Hypervisor - KVM
-    \end{verbatim}
+
+          \begin{tabular}{|l|l|}
+              \hline
+              Name           & nama bebas  \\ \hline
+              Public DNS 1   & 8.8.8.8     \\ \hline
+              Public DNS 2   & 1.1.1.1     \\ \hline
+              Internal DNS 1 & 192.168.0.1 \\ \hline
+          \end{tabular}
+          \label{tab:config-zone-table}
 
     \item Network
-          \begin{verbatim}
-Gateway - 192.168.0.1
-Netmask - 255.255.255.0
-VLAN/VNI - (kosong untuk vlan://untagged, 
-            VXLAN untuk vxlan://untagged)
-Start IP - 192.168.0.20
-End IP - 192.168.0.50
-    \end{verbatim}
+
+          \begin{tabular}{|l|l|}
+              \hline
+              Gateway  & 192.168.0.1                                                                                    \\ \hline
+              Netmask  & 255.255.255.0                                                                                  \\ \hline
+              VLAN/VNI & \vtop{\hbox{\strut (kosong untuk vlan://untagged,}\hbox{\strut VXLAN untuk vxlan://untagged)}} \\ \hline
+              Start IP & 192.168.0.20                                                                                   \\ \hline
+              End IP   & 192.168.0.50                                                                                   \\ \hline
+          \end{tabular}
+          \label{tab:config-network-table}
 
     \item Pod
-          \begin{verbatim}
-Name - nama bebas
-Gateway - 192.168.0.1
-Start/end reserved system IPs - 192.168.0.51 - 192.168.0.80
-    \end{verbatim}
+
+          \begin{tabular}{|l|l|}
+              \hline
+              Name                          & nama bebas                  \\ \hline
+              Gateway                       & 192.168.0.1                 \\ \hline
+              Start/end reserved system IPs & 192.168.0.51 - 192.168.0.80 \\ \hline
+          \end{tabular}
+          \label{tab:config-pod-table}
+
 
     \item Guest Traffic
-          \begin{verbatim}
-VLAN/VNI range: 700-900
-    \end{verbatim}
+
+          \begin{tabular}{|l|l|}
+              \hline
+              VLAN/VNI range & 700-900 \\ \hline
+          \end{tabular}
+          \label{tab:config-guest-traffic-table}
 
     \item Cluster
-          \begin{verbatim}
-Name - nama bebas
-Hypervisor - pilih KVM
-    \end{verbatim}
+
+          \begin{tabular}{|l|l|}
+              \hline
+              Name       & nama bebas \\ \hline
+              Hypervisor & KVM        \\ \hline
+          \end{tabular}
+
 
     \item Host
-          \begin{verbatim}
-Hostname - 192.168.0.10
-Username - root
-Password - password user root
-    \end{verbatim}
+
+          \begin{tabular}{|l|l|}
+              \hline
+              Hostname & 192.168.0.10       \\ \hline
+              Username & root               \\ \hline
+              Password & password user root \\ \hline
+          \end{tabular}
 
     \item Primary Storage
-          \begin{verbatim}
-Name - nama bebas
-Scope - zone-wide
-Protocol - NFS
-Server - 192.168.0.10 [ubuntu server static IP]
-Path - /export/primary
-    \end{verbatim}
+
+          \begin{tabular}{|l|l|}
+              \hline
+              Name     & nama bebas                             \\ \hline
+              Scope    & zone-wide                              \\ \hline
+              Protocol & NFS                                    \\ \hline
+              Server   & 192.168.0.10 [ubuntu server static IP] \\ \hline
+              Path     & /export/primary                        \\ \hline
+          \end{tabular}
 
     \item Secondary Storage
-          \begin{verbatim}
-Provider - NFS
-Name - nama bebas
-Server - 192.168.100.10 [ubuntu server static ip]
-Path - /export/secondary
-    \end{verbatim}
+
+          \begin{tabular}{|l|l|}
+              \hline
+              Provider & NFS                                      \\ \hline
+              Name     & nama bebas                               \\ \hline
+              Server   & 192.168.100.10 [ubuntu server static ip] \\ \hline
+              Path     & /export/secondary                        \\ \hline
+          \end{tabular}
 \end{enumerate}
 
 Setelah konfigurasi selesai, pergi ke \texttt{Navigation>Infrasturcture>Summary} dan pastikan seluruh komponen sudah dinyalakan. Sekarang pengguna dapat menambahkan file iso yang diinginkan untuk membuat instance.
@@ -378,6 +380,7 @@ Setelah konfigurasi selesai, pergi ke \texttt{Navigation>Infrasturcture>Summary}
 %-----------------------------------------------------------------------------%
 \subsection{Persiapan \vm}
 %-----------------------------------------------------------------------------%
+Pada tahap ini akan dijelaskan bagaimana cara membuat \vm\ yang akan digunakan untuk melakukan pengujian. \vm\ yang akan dibuat menggunakan image Ubuntu Server 22.04 LTS yang telah diinstal sebelumnya.
 
 %-----------------------------------------------------------------------------%
 \subsubsection{Image Ubuntu Server 22.04 LTS}
@@ -436,6 +439,7 @@ Untuk melakukan tuning pada Hypervisor KVM, digunakan tools virsh, sebuah comman
 
 Terlihat pada Gambar \ref{fig:flag_kvm_host} adalah daftar lengkap flag instruksi yang tersedia di sistem host, dengan teks yang ditebalkan menunjukkan flag instruksi yang sudah diaktifkan secara default oleh hypervisor KVM. Namun, tampak bahwa KVM tidak mengaktifkan semua flag instruksi meskipun sistem host mendukung flag-flag tersebut. Untuk melihat flag yang sudah diaktifkan pada virtual machine dapat dilakukan dengan menggunakan perintah \texttt{lscpu}.
 
+
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]
@@ -448,14 +452,14 @@ Terlihat pada gambar \ref{fig:lscpu_original} sama dengan Gambar \ref{fig:flag_k
 
 Untuk melakukan tuning flag pada Hypervisor KVM, langkah pertama yang harus dilakukan adalah melihat daftar lengkap virtual machine yang sedang berjalan di sistem. Hal ini dapat dilakukan dengan menggunakan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     virsh list
-\end{verbatim}
+\end{lstlisting}
 
 Keluaran dari perintah ini adalah:
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]
+    \includegraphics[width=0.5\textwidth]
     {assets/pics/virsh_list.png}
     \caption{Keluaran perintah \texttt{virsh list}}
     \label{fig:virsh_list}
@@ -514,15 +518,15 @@ Kode \ref{code:default_kvm_xml} menampilkan konfigurasi flag default dari hyperv
 
 Pada kode \ref{code:ssse3_kvm_xml}, fitur \texttt{ssse3} ditambahkan dengan menambahkan baris \texttt{<feature policy='require' name='ssse3'/>} pada kode tersebut. Setelah mengubah file \texttt{tuned\_kvm.xml}, simpan perubahan pada file tersebut. Selanjutnya, matikan mesin virtual dengan menggunakan perintah \texttt{destroy}:
 
-\begin{verbatim}
+\begin{lstlisting}
     virsh destroy i-2-16-VM
-\end{verbatim}
+\end{lstlisting}
 
 Setelah virtual machine dimatikan, langkah selanjutnya adalah membuat virtual machine baru berdasarkan konfigurasi yang telah diubah sebelumnya. Hal ini dapat dilakukan dengan menggunakan perintah:
 
-\begin{verbatim}
+\begin{lstlisting}
     virsh create tuned_kvm.xml
-\end{verbatim}
+\end{lstlisting}
 
 Dengan perintah ini maka \vm\ \texttt{i-2-16-VM} akan dibuat menggunakan konfigurasi \texttt{tuned\_kvm.xml}. Kita dapat melihat perubahan pada \vm\ \texttt{i-2-16-VM} dengan menggunakan perintah \texttt{lscpu} pada console virtual machine.
 
@@ -539,6 +543,8 @@ Dengan ini menandakan bahwa flag \texttt{ssse3} pada \vm\ \texttt{i-2-16-VM} sud
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi Hypervisor KVM untuk Kompresi Video}
 %-----------------------------------------------------------------------------%
+Pengujian kompresi video akan menggunakan konfigurasi seperti terlihat pada kode \ref{code:tuned_kompresi_video} yaitu dengan menggunakan flag ssse3, sse4.1, sse4.2, dan sse4a. Pemilihan flag-flag ini didasarkan pada instruksi SIMD (Single Instruction, Multiple Data) yang digunakan untuk operasi vektor pada data. Instruksi SIMD memungkinkan prosesor melakukan operasi secara bersamaan pada beberapa elemen data, sehingga mempercepat proses kompresi video dengan memanfaatkan kemampuan tersebut.
+
 \begin{listing}[H]
     \begin{minted}{xml}
         ...
@@ -561,11 +567,11 @@ Dengan ini menandakan bahwa flag \texttt{ssse3} pada \vm\ \texttt{i-2-16-VM} sud
     \label{code:tuned_kompresi_video}
 \end{listing}
 
-Untuk melakukan pengujian dengan kompresi video akan digunakan konfigurasi seperti pada kode \ref{code:tuned_kompresi_video}. Flag yang akan digunakan adalah ssse3, sse4.1, sse4.2, dan sse4a. Flag-flag ini dipilih dikarenakan 
-
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi Hypervisor KVM untuk Validasi Integritas File}
 %-----------------------------------------------------------------------------%
+Untuk melakukan pengujian dengan validasi integritas file akan digunakan konfigurasi seperti pada kode \ref{code:tuned_validasi_integritas_file}. Flag yang akan digunakan adalah sse4.2. Flag ini dipilih dikarenakan salah satu kemampuan yang dimiliki oleh flag ini adalah mendukung instruksi CRC32 yang akan digunakan untuk validasi integritas file.
+
 \begin{listing}[H]
     \begin{minted}{xml}
         ...
@@ -588,6 +594,8 @@ Untuk melakukan pengujian dengan kompresi video akan digunakan konfigurasi seper
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi Hypervisor KVM untuk Enkripsi AES}
 %-----------------------------------------------------------------------------%
+Untuk melakukan pengujian dengan enkripsi AES akan digunakan konfigurasi seperti pada kode \ref{code:tuned_enkripsi_aes}. Flag yang akan digunakan adalah aes. Flag ini dipilih dikarenakan salah satu kemampuan yang dimiliki oleh flag ini adalah mendukung instruksi AES yang akan digunakan untuk enkripsi AES.
+
 \begin{listing}[H]
     \begin{minted}{xml}
         ...
@@ -608,12 +616,15 @@ Untuk melakukan pengujian dengan kompresi video akan digunakan konfigurasi seper
 \end{listing}
 
 %-----------------------------------------------------------------------------%
-\section{Pengujian Hasil Tuning}
+\section{Skenario Pengujian Tuning}
 %-----------------------------------------------------------------------------%
+Pada bagian ini akan dijelaskan skenario pengujian yang akan dilakukan untuk mengukur dampak tuning yang dilakukan pada Hypervisor KVM terhadap kinerja virtual machine. Pengujian akan dilakukan dengan menggunakan tiga skenario yang berbeda, yaitu kompresi video, validasi integritas file, dan enkripsi AES. Setiap skenario akan dijalankan pada virtual machine yang telah dituning dengan konfigurasi yang sesuai.
 
 %-----------------------------------------------------------------------------%
-\subsection{Pengujian Kompresi Video}
+\subsection{Skenario Pengujian Kompresi Video}
 %-----------------------------------------------------------------------------%
+Pada pengujian kompresi video akan dilakukan dengan menggunakan perangkat lunak ffmpeg untuk melakukan kompresi video. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan kompresi video dengan menggunakan konfigurasi tuning yang telah dilakukan pada Hypervisor KVM. Pengujian ini akan dilakukan dengan menggunakan video yang berjudul \texttt{Times Square Day Wide} yang memiliki durasi 10 detik dan resolusi 4k. Video ini akan dikompresi menggunakan codec h265 dengan preset medium. Pengujian akan dijalankan sebanyak 10 kali dan diukur waktu yang diperlukan untuk menyelesaikan proses kompresi video. Skrip bash yang digunakan untuk melakukan pengujian kompresi video dapat dilihat pada kode \ref{code:kode_pengujian_kompresi_video}.
+
 \begin{listing}[H]
     \begin{minted}{bash}
     #!/bin/bash
@@ -649,8 +660,10 @@ Untuk melakukan pengujian dengan kompresi video akan digunakan konfigurasi seper
 \end{listing}
 
 %-----------------------------------------------------------------------------%
-\subsection{Pengujian Validasi Integritas File}
+\subsection{Skenario Pengujian Validasi Integritas File}
 %-----------------------------------------------------------------------------%
+Pada pengujian validasi integritas file akan dilakukan dengan menggunakan library crc32c dari python untuk melakukan perhitungan CRC32 pada file. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan perhitungan CRC32 pada file dengan ukuran 10 MB. Pengujian ini akan dijalankan sebanyak 10 kali dan diukur waktu yang diperlukan untuk menyelesaikan proses perhitungan CRC32. Skrip python yang digunakan untuk melakukan pengujian validasi integritas file dapat dilihat pada kode \ref{code:kode_pengujian_validasi_integritas_file}.
+
 \begin{listing}[H]
     \begin{minted}{python}
     import os
@@ -691,12 +704,21 @@ Untuk melakukan pengujian dengan kompresi video akan digunakan konfigurasi seper
 \end{listing}
 
 %-----------------------------------------------------------------------------%
-\subsection{Pengujian Enkripsi AES}
+\subsection{Skenario Pengujian Enkripsi AES}
 %-----------------------------------------------------------------------------%
+Pada pengujian enkripsi AES akan dilakukan dengan menggunakan library cryptography dari python untuk melakukan enkripsi AES. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan enkripsi AES pada data teks Gambar \ref{fig:aesPlaintextData}. Pengujian ini akan dijalankan sebanyak 10 kali dan diukur waktu yang diperlukan untuk menyelesaikan proses enkripsi AES. Skrip python yang digunakan untuk melakukan pengujian enkripsi AES dapat dilihat pada kode \ref{code:pengujian_enkripsi_aes_1} dan \ref{code:pengujian_enkripsi_aes_2}.
 
-variable \textbf{plainTextData} yang digunakan adalah:
+\begin{figure}
+    \begin{lstlisting}
+The Advanced Encryption Standard (AES) is a symmetric-key encryption algorithm that has become the de facto standard for securing sensitive data worldwide. Developed by Belgian cryptographers Joan Daemen and Vincent Rijmen, AES was adopted by the U.S. National Institute of Standards and Technology (NIST) in 2001 after a rigorous evaluation process involving numerous submissions from around the globe. AES replaced the aging Data Encryption Standard (DES) and its variants, which were becoming increasingly vulnerable to brute-force attacks due to advances in computing power.
+...
+AES has been extensively studied and scrutinized by cryptographers worldwide, and its strength lies in its ability to withstand known attacks while maintaining high performance. Consequently, AES has been widely adopted in various industries, including government, finance, healthcare, and telecommunications, as well as in protocols and standards such as TLS/SSL, IPsec, and wireless encryption standards like WPA2.
+    \end{lstlisting}
+    \caption{Potongan Plaintext Data untuk AES Encryption Benchmark}
+    \label{fig:aesPlaintextData}
+\end{figure}
 
-\texttt{The Advanced Encryption Standard (AES) is a symmetric-key encryption algorithm that has become the de facto standard for securing sensitive data worldwide. Developed by Belgian cryptographers Joan Daemen and Vincent Rijmen, AES was adopted by the U.S. National Institute of Standards and Technology (NIST) in 2001 after a rigorous evaluation process involving numerous submissions from around the globe. AES replaced the aging Data Encryption Standard (DES) and its variants, which were becoming increasingly vulnerable to brute-force attacks due to advances in computing power. AES operates on fixed block sizes of 128 bits and supports key lengths of 128, 192, or 256 bits, with the latter providing the highest level of security. Its sophisticated mathematical structure, based on substitution-permutation networks, makes it highly resistant to various cryptanalytic attacks, including differential and linear cryptanalysis. AES employs multiple rounds of substitution, permutation, and key mixing operations to scramble the plaintext data, making it virtually impossible to decrypt without the correct key. One of the key strengths of AES is its versatility and flexibility. It can be implemented in hardware or software, making it suitable for a wide range of applications, from securing communication channels to protecting data at rest. AES has been extensively studied and scrutinized by cryptographers worldwide, and its strength lies in its ability to withstand known attacks while maintaining high performance. Consequently, AES has been widely adopted in various industries, including government, finance, healthcare, and telecommunications, as well as in protocols and standards such as TLS/SSL, IPsec, and wireless encryption standards like WPA2.}
+%  AES operates on fixed block sizes of 128 bits and supports key lengths of 128, 192, or 256 bits, with the latter providing the highest level of security. Its sophisticated mathematical structure, based on substitution-permutation networks, makes it highly resistant to various cryptanalytic attacks, including differential and linear cryptanalysis. AES employs multiple rounds of substitution, permutation, and key mixing operations to scramble the plaintext data, making it virtually impossible to decrypt without the correct key. One of the key strengths of AES is its versatility and flexibility. It can be implemented in hardware or software, making it suitable for a wide range of applications, from securing communication channels to protecting data at rest.
 
 \begin{listing}[H]
     \begin{minted}{python}
@@ -707,7 +729,7 @@ variable \textbf{plainTextData} yang digunakan adalah:
 
     # Generate a random AES key and plaintext
     key = b"sixteenbytekey12"
-    plaintext = plainTextData
+    plaintext = # Gambar Potongan Plaintext Data untuk AES Encryption Benchmark
 
     # Function to perform AES encryption benchmark
     def aes_encrypt_benchmark(key, plaintext):
@@ -783,13 +805,16 @@ variable \textbf{plainTextData} yang digunakan adalah:
 %-----------------------------------------------------------------------------%
 \section{Analisis}
 %-----------------------------------------------------------------------------%
-Analisis akan dilakukan dengan melakukan perhitungan menggunakan formula \texttt{speedup}. Diasumsikan bahwa T(1) adalah waktu eksekusi Test dengan konfigurasi default, dan T(p) adalah waktu eksekusi Test dengan konfigurasi yang telah dituning\cite{beuwolfCetin}. 
+Analisis akan dilakukan dengan melakukan perhitungan menggunakan formula \texttt{speedup}. Diasumsikan bahwa T(1) adalah waktu eksekusi Test dengan konfigurasi default, dan T(p) adalah waktu eksekusi Test dengan konfigurasi yang telah dituning\cite{beuwolfCetin}.
 
 Formula \texttt{speedup} dinyatakan sebagai berikut:
 
-\[S(p) = \frac{T(1)}{T(p)}\]
+\begin{equation}
+    S(p) = \frac{T(1)}{T(p)} 
+    \label{eq:formula}
+\end{equation}
 
-Berdasarkan rumus ini, jika nilai S(p) semakin besar, maka konfigurasi yang dituning semakin bagus. Hal ini menandakan bahwa tuning Hypervisor dapat mempercepat proses yang dilakukan. Sebaliknya, jika S(p) semakin kecil, maka konfigurasi yang dituning semakin lambat. Jika nilai S(p) sama, maka efek dari konfigurasi yang dituning sama dengan konfigurasi default.
+Berdasarkan rumus \ref{eq:formula}, jika nilai S(p) semakin besar, maka konfigurasi yang dituning semakin bagus. Hal ini menandakan bahwa tuning Hypervisor dapat mempercepat proses yang dilakukan. Sebaliknya, jika S(p) semakin kecil, maka konfigurasi yang dituning semakin lambat. Jika nilai S(p) sama, maka efek dari konfigurasi yang dituning sama dengan konfigurasi default.
 
 %-----------------------------------------------------------------------------%
 \subsection{Analisis Pengujian Kompresi Video}
