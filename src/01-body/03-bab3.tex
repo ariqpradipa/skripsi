@@ -706,7 +706,7 @@ Pada pengujian validasi integritas file akan dilakukan dengan menggunakan librar
 %-----------------------------------------------------------------------------%
 \subsection{Skenario Pengujian Enkripsi AES}
 %-----------------------------------------------------------------------------%
-Pada pengujian enkripsi AES akan dilakukan dengan menggunakan library cryptography dari python untuk melakukan enkripsi AES. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan enkripsi AES pada data teks Gambar \ref{fig:aesPlaintextData}. Pengujian ini akan dijalankan sebanyak 10 kali dan diukur waktu yang diperlukan untuk menyelesaikan proses enkripsi AES. Skrip python yang digunakan untuk melakukan pengujian enkripsi AES dapat dilihat pada kode \ref{code:pengujian_enkripsi_aes_1} dan \ref{code:pengujian_enkripsi_aes_2}.
+Pada pengujian enkripsi AES akan dilakukan dengan menggunakan library cryptography dari python untuk melakukan enkripsi AES. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan enkripsi AES pada data teks Gambar \ref{fig:aesPlaintextData}. Pengujian ini akan dijalankan sebanyak 10 kali dan diukur waktu yang diperlukan untuk menyelesaikan proses enkripsi AES. Skrip python yang digunakan untuk melakukan pengujian enkripsi AES dapat dilihat pada kode \ref{code:pengujian_enkripsi_aes}.
 
 \begin{figure}
     \begin{lstlisting}
@@ -720,8 +720,7 @@ AES has been extensively studied and scrutinized by cryptographers worldwide, an
 
 %  AES operates on fixed block sizes of 128 bits and supports key lengths of 128, 192, or 256 bits, with the latter providing the highest level of security. Its sophisticated mathematical structure, based on substitution-permutation networks, makes it highly resistant to various cryptanalytic attacks, including differential and linear cryptanalysis. AES employs multiple rounds of substitution, permutation, and key mixing operations to scramble the plaintext data, making it virtually impossible to decrypt without the correct key. One of the key strengths of AES is its versatility and flexibility. It can be implemented in hardware or software, making it suitable for a wide range of applications, from securing communication channels to protecting data at rest.
 
-\begin{listing}[H]
-    \begin{minted}{python}
+\begin{minted}{python}
     from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
     from cryptography.hazmat.primitives import padding
     from cryptography.hazmat.backends import default_backend
@@ -760,14 +759,8 @@ AES has been extensively studied and scrutinized by cryptographers worldwide, an
         plaintext = unpadder.update(padded_plaintext) + unpadder.finalize()
 
         return end_time - start_time
-    \end{minted}
-    \caption{Kode Pengujian Enkripsi AES (1)}
-    \label{code:pengujian_enkripsi_aes_1}
-\end{listing}
-
-\begin{listing}[H]
-    \begin{minted}{python}
-    def run_benchmark():
+    
+        def run_benchmark():
         # Benchmark AES encryption
         ciphertext, aes_time_encrypt = aes_encrypt_benchmark(key, plaintext)
         # print(f"AES Encryption Time: {(aes_time_encrypt * 1000):.5f} ms")
@@ -797,11 +790,12 @@ AES has been extensively studied and scrutinized by cryptographers worldwide, an
 
     for i in range(10):
         main(i)
+\end{minted}
+\begin{figure}
+    \caption{Kode Pengujian Enkripsi AES}
+    \label{code:pengujian_enkripsi_aes}
+\end{figure}
 
-    \end{minted}
-    \caption{Kode Pengujian Enkripsi AES (2)}
-    \label{code:pengujian_enkripsi_aes_2}
-\end{listing}
 %-----------------------------------------------------------------------------%
 \section{Analisis}
 %-----------------------------------------------------------------------------%
@@ -810,7 +804,7 @@ Analisis akan dilakukan dengan melakukan perhitungan menggunakan formula \texttt
 Formula \texttt{speedup} dinyatakan sebagai berikut:
 
 \begin{equation}
-    S(p) = \frac{T(1)}{T(p)} 
+    S(p) = \frac{T(1)}{T(p)}
     \label{eq:formula}
 \end{equation}
 
