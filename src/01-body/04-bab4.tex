@@ -965,13 +965,57 @@ Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalanka
 %-----------------------------------------------------------------------------%
 \subsection{Analisis Pengujian Tuning Hypervisor KVM dengan Kompresi Video}
 %-----------------------------------------------------------------------------%
+% \begin{figure}
+%     \centering
+%     \begin{tikzpicture}
+%         \begin{axis}[
+%                 xbar,
+%                 bar width=12pt,
+%                 xlabel={Detik},
+%                 ytick=data,
+%                 nodes near coords,
+%                 nodes near coords align={horizontal},
+%                 symbolic y coords={4.1.1,4.1.2,4.1.3,4.1.4,4.1.5,4.1.6,4.1.7,4.1.8,4.1.9,4.1.10,4.1.11,4.1.12,4.1.13,4.1.14,4.1.15,4.1.16},
+%                 enlarge y limits=0.1,
+%                 enlarge x limits=0.05,
+%                 width=\textwidth,
+%                 height=0.5\textheight,
+%                 xmin=0,
+%                 xmax=160
+%             ]
+%             \addplot [fill=black] coordinates {
+%                     (141.5,4.1.1)
+%                     (126.5,4.1.2)
+%                     (73.2,4.1.3)
+%                     (142.7,4.1.4)
+%                     (140.8,4.1.5)
+%                     (58.2,4.1.6)
+%                     (123.5,4.1.7)
+%                     (124.4,4.1.8)
+%                     (70.34,4.1.9)
+%                     (69.9,4.1.10)
+%                     (139.1,4.1.11)
+%                     (59.1,4.1.12)
+%                     (58.9,4.1.13)
+%                     (124.9,4.1.14)
+%                     (71.6,4.1.15)
+%                     (60.1,4.1.16)
+%                 };
+%         \end{axis}
+%     \end{tikzpicture}
+%     \caption{Grafik Rata-Rata Waktu Tes Kompresi Video}
+%     \label{fig:video_compression_test_graph}
+% \end{figure}
+
+% Grafik \ref{fig:video_compression_test_graph} menunjukkan rata-rata waktu yang diperlukan untuk melakukan benchmark pada setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki waktu tercepat adalah konfigurasi SSSE3 + SSE4.1 dengan rata-rata waktu 58.2 detik.
+
 \begin{figure}
     \centering
     \begin{tikzpicture}
         \begin{axis}[
                 xbar,
                 bar width=12pt,
-                xlabel={Detik},
+                xlabel={\f{Speedup}},
                 ytick=data,
                 nodes near coords,
                 nodes near coords align={horizontal},
@@ -981,37 +1025,38 @@ Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalanka
                 width=\textwidth,
                 height=0.5\textheight,
                 xmin=0,
-                xmax=160
+                xmax=2.6
             ]
             \addplot [fill=black] coordinates {
-                    (141.5,4.1.1)
-                    (126.5,4.1.2)
-                    (73.2,4.1.3)
-                    (142.7,4.1.4)
-                    (140.8,4.1.5)
-                    (58.2,4.1.6)
-                    (123.5,4.1.7)
-                    (124.4,4.1.8)
-                    (70.34,4.1.9)
-                    (69.9,4.1.10)
-                    (139.1,4.1.11)
-                    (59.1,4.1.12)
-                    (58.9,4.1.13)
-                    (124.9,4.1.14)
-                    (71.6,4.1.15)
-                    (60.1,4.1.16)
+                    (1.0000,4.1.1)
+                    (1.1180,4.1.2)
+                    (1.9330,4.1.3)
+                    (0.9910,4.1.4)
+                    (1.0049,4.1.5)
+                    (2.4310,4.1.6)
+                    (1.1450,4.1.7)
+                    (1.1370,4.1.8)
+                    (2.0110,4.1.9)
+                    (2.0240,4.1.10)
+                    (1.0170,4.1.11)
+                    (2.3940,4.1.12)
+                    (2.4020,4.1.13)
+                    (1.1329,4.1.14)
+                    (1.9760,4.1.15)
+                    (2.3540,4.1.16)
                 };
         \end{axis}
     \end{tikzpicture}
-    \caption{Grafik Rata-Rata Waktu Tes Kompresi Video}
+    \caption{Grafik \f{speedup} Tes Kompresi Video}
     \label{fig:video_compression_test_graph}
 \end{figure}
 
-Grafik \ref{fig:video_compression_test_graph} menunjukkan rata-rata waktu yang diperlukan untuk melakukan benchmark pada setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki waktu tercepat adalah konfigurasi SSSE3 + SSE4.1 dengan rata-rata waktu 58.2 detik.
+Grafik \ref{fig:video_compression_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi SSSE3 + SSE4.1 denga nilai \f{speedup} 2.431, dengan rata-rata waktu untuk melakukan kompresi selama 58.2 detik.
 
 %-----------------------------------------------------------------------------%
 \section{Hasil Pengujian Tuning Hypervisor KVM dengan Validasi Integraitas File}
 %-----------------------------------------------------------------------------%
+Pada bagian ini akan dijelaskan hasil pengujian tuning hypervisor KVM dengan validasi integritas file dengan menggunakan program benchmark kode \ref{code:kode_pengujian_validasi_integritas_file}.
 
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi Default}
@@ -1137,13 +1182,43 @@ Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_file}
 \subsection{Analisis Pengujian Tuning Hypervisor KVM dengan Validasi Integraitas File}
 %-----------------------------------------------------------------------------%
 
+% \begin{figure}
+%     \centering
+%     \begin{tikzpicture}
+%         \begin{axis}[
+%                 xbar,
+%                 bar width=12pt,
+%                 xlabel={Milisecond},
+%                 ytick=data,
+%                 nodes near coords,
+%                 nodes near coords align={horizontal},
+%                 symbolic y coords={4.2.1,4.2.2},
+%                 enlarge y limits=0.2,
+%                 enlarge x limits=0.05,
+%                 width=\textwidth,
+%                 height=0.2\textheight,
+%                 xmin=0,
+%                 xmax=5.5
+%             ]
+%             \addplot [fill=black] coordinates {
+%                     (4.3,4.2.1)
+%                     (0.56,4.2.2)
+%                 };
+%         \end{axis}
+%     \end{tikzpicture}
+%     \caption{Grafik Rata-Rata Waktu Tes Validasi Integritas File}
+%     \label{fig:file_integrity_test_graph}
+% \end{figure}
+
+% Grafik \ref{fig:file_integrity_test_graph} menunjukkan rata-rata waktu yang diperlukan untuk melakukan benchmark pada setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki waktu tercepat adalah konfigurasi SSE4.2 dengan rata-rata waktu 0.56 ms.
+
 \begin{figure}
     \centering
     \begin{tikzpicture}
         \begin{axis}[
                 xbar,
                 bar width=12pt,
-                xlabel={Milisecond},
+                xlabel={\f{Speedup}},
                 ytick=data,
                 nodes near coords,
                 nodes near coords align={horizontal},
@@ -1153,23 +1228,24 @@ Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_file}
                 width=\textwidth,
                 height=0.2\textheight,
                 xmin=0,
-                xmax=5.5
+                xmax=8
             ]
             \addplot [fill=black] coordinates {
-                    (4.3,4.2.1)
-                    (0.56,4.2.2)
+                    (1.000,4.2.1)
+                    (7.678,4.2.2)
                 };
         \end{axis}
     \end{tikzpicture}
-    \caption{Grafik Rata-Rata Waktu Tes Validasi Integritas File}
+    \caption{Grafik \f{speedup} Tes Validasi Integritas File}
     \label{fig:file_integrity_test_graph}
 \end{figure}
 
-Grafik \ref{fig:file_integrity_test_graph} menunjukkan rata-rata waktu yang diperlukan untuk melakukan benchmark pada setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki waktu tercepat adalah konfigurasi SSE4.2 dengan rata-rata waktu 0.56 ms.
+Grafik \ref{fig:file_integrity_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi SSE4.2 dengan nilai \f{speedup} 7.678, dengan rata-rata waktu untuk melakukan validasi integritas file selama 0.56 ms.
 
 %-----------------------------------------------------------------------------%
 \section{Hasil Pengujian Tuning Hypervisor KVM dengan Enkripsi AES}
 %-----------------------------------------------------------------------------%
+Pada bagian ini akan dijelaskan hasil pengujian tuning hypervisor KVM dengan enkripsi AES dengan menggunakan program benchmark kode \ref{code:pengujian_enkripsi_aes}.
 
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi Default}
@@ -1367,6 +1443,64 @@ Program benchmark dengan kode \ref{code:pengujian_enkripsi_aes} dijalankan pada 
 \subsection{Analisis Pengujian Tuning Hypervisor KVM dengan Enkripsi AES}
 %-----------------------------------------------------------------------------%
 
+% \begin{figure}
+%     \centering
+%     \begin{tikzpicture}
+%         \begin{axis}[
+%                 xbar,
+%                 bar width=12pt,
+%                 xlabel={Microsecond},
+%                 ytick=data,
+%                 nodes near coords,
+%                 nodes near coords align={horizontal},
+%                 symbolic y coords={4.3.1,4.3.2},
+%                 enlarge y limits=0.2,
+%                 enlarge x limits=0.05,
+%                 width=\textwidth,
+%                 height=0.2\textheight,
+%                 xmin=0,
+%                 xmax=23
+%             ]
+%             \addplot [fill=black] coordinates {
+%                     (17.2,4.3.1)
+%                     (7.9,4.3.2)
+%                 };
+%         \end{axis}
+%     \end{tikzpicture}
+%     \caption{Grafik Rata-Rata Waktu Tes Enkripsi AES}
+%     \label{fig:aes_encrypt_test_graph}
+% \end{figure}
+
+% \begin{figure}
+%     \centering
+%     \begin{tikzpicture}
+%         \begin{axis}[
+%                 xbar,
+%                 bar width=12pt,
+%                 xlabel={Microsecond},
+%                 ytick=data,
+%                 nodes near coords,
+%                 nodes near coords align={horizontal},
+%                 symbolic y coords={4.3.1,4.3.2},
+%                 enlarge y limits=0.2,
+%                 enlarge x limits=0.05,
+%                 width=\textwidth,
+%                 height=0.2\textheight,
+%                 xmin=0,
+%                 xmax=23
+%             ]
+%             \addplot [fill=black] coordinates {
+%                     (20.9,4.3.1)
+%                     (7.8,4.3.2)
+%                 };
+%         \end{axis}
+%     \end{tikzpicture}
+%     \caption{Grafik Rata-Rata Waktu Tes Dekripsi AES}
+%     \label{fig:aes_decrypt_test_graph}
+% \end{figure}
+
+% Grafik \ref{fig:aes_encrypt_test_graph} dan \ref{fig:aes_decrypt_test_graph} menunjukkan rata-rata waktu yang diperlukan untuk melakukan benchmark pada setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki waktu tercepat adalah konfigurasi AES dengan rata-rata waktu 7.9 $\mu$s untuk enkripsi dan 7.8 $\mu$s untuk dekripsi.
+
 \begin{figure}
     \centering
     \begin{tikzpicture}
@@ -1383,11 +1517,11 @@ Program benchmark dengan kode \ref{code:pengujian_enkripsi_aes} dijalankan pada 
                 width=\textwidth,
                 height=0.2\textheight,
                 xmin=0,
-                xmax=23
+                xmax=3
             ]
             \addplot [fill=black] coordinates {
-                    (17.2,4.3.1)
-                    (7.9,4.3.2)
+                    (1.00,4.3.1)
+                    (2.17,4.3.2)
                 };
         \end{axis}
     \end{tikzpicture}
@@ -1411,11 +1545,11 @@ Program benchmark dengan kode \ref{code:pengujian_enkripsi_aes} dijalankan pada 
                 width=\textwidth,
                 height=0.2\textheight,
                 xmin=0,
-                xmax=23
+                xmax=3
             ]
             \addplot [fill=black] coordinates {
-                    (20.9,4.3.1)
-                    (7.8,4.3.2)
+                    (1.000,4.3.1)
+                    (2.679,4.3.2)
                 };
         \end{axis}
     \end{tikzpicture}
@@ -1423,7 +1557,8 @@ Program benchmark dengan kode \ref{code:pengujian_enkripsi_aes} dijalankan pada 
     \label{fig:aes_decrypt_test_graph}
 \end{figure}
 
-Grafik \ref{fig:aes_encrypt_test_graph} dan \ref{fig:aes_decrypt_test_graph} menunjukkan rata-rata waktu yang diperlukan untuk melakukan benchmark pada setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki waktu tercepat adalah konfigurasi AES dengan rata-rata waktu 7.9 $\mu$s untuk enkripsi dan 7.8 $\mu$s untuk dekripsi.
+Grafik \ref{fig:aes_encrypt_test_graph} dan \ref{fig:aes_decrypt_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi AES dengan nilai \f{speedup} 2.17 untuk enkripsi dan 2.679 untuk dekripsi. Dengan masing masing rata-rata waktu untuk melakukan enkripsi dan dekripsi adalah 7.9 $\mu$s dan 7.8 $\mu$s.
+
 
 \iffalse
     %-----------------------------------------------------------------------------%
