@@ -199,6 +199,19 @@ SSE3 (Streaming SIMD Extensions 3) merupakan ekstensi dari set instruksi SSE2, y
 
 Secara singkat, SSE3 memperluas kemampuan set instruksi SSE dan SSE2 dengan penekanan pada peningkatan eksekusi SIMD, konversi floating-point ke integer, serta sinkronisasi thread. Selain itu, SSE3 tetap mempertahankan kompatibilitas dengan jenis data dan lingkungan pemrograman yang sudah ada. Oleh karena itu, SSE3 menjadi alat yang sangat berguna bagi pengembang yang bekerja pada tugas komputasi berkinerja tinggi, terutama yang melibatkan pemrosesan paralel dan jenis data yang kompleks.
 
+\subsection{SSSE3}
+SSSE3 (Supplemental Streaming SIMD Extensions 3) adalah ekstensi dari set instruksi SSE3 yang diperkenalkan oleh Intel pada tahun 2006. SSSE3 menambahkan 32 instruksi baru ke set instruksi SSE3 yang ada, yang dirancang untuk meningkatkan kinerja pemrosesan SIMD (Single Instruction, Multiple Data) pada aplikasi yang memerlukan operasi vektorisasi dan paralel. Pembaruan dari SSSE3 antara lain:
+
+\begin{enumerate}
+	\item Dua belas instruksi yang melakukan operasi penambahan atau pengurangan horizontal.
+	\item Enam instruksi yang mengevaluasi nilai absolut.
+	\item Dua instruksi yang melakukan operasi perkalian-dan-penambahan dan mempercepat evaluasi \f{dot product}.
+	\item Dua instruksi yang mempercepat operasi perkalian bilangan bulat dan menghasilkan nilai bilangan bulat dengan penskalaan.
+	\item Dua instruksi yang melakukan \f{in-place shuffle} pada tingkat byte sesuai dengan operand kontrol pengacakan kedua.
+	\item Enam instruksi yang mengubah bilangan bulat menjadi negatif dalam operand tujuan jika elemen yang sesuai dalam operand sumber adalah negatif.
+	\item Dua instruksi yang menyelaraskan data dari gabungan dua operand.
+\end{enumerate}
+
 \subsection{SSE4}
 SSE4, yang merupakan singkatan dari Streaming SIMD Extensions 4, adalah serangkaian instruksi yang diperkenalkan oleh Intel dalam prosesor 64-bitnya yang dibuat dengan teknologi proses 45 nm. SSE4 terdiri dari dua subset: SSE4.1 dan SSE4.2\cite{sse4reference}.
 

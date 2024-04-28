@@ -422,7 +422,7 @@ Setelah ISO image sudah siap digunakan langkah selanjutnya adalah membuat image 
           Di bagian network, pilih \texttt{"Create New Network"} dan pilih tab Isolated. Beri nama untuk jaringan tersebut, pilih zona yang sesuai, dan untuk bagian \texttt{Network Offering} pilih \texttt{"Network Offering used for CloudStack Kubernetes Service"}. Isi bagian Gateway dengan \texttt{192.168.0.1} (Gateway Home Network) dan Netmask dengan \texttt{255.255.255.0}. Untuk DNS 1, gunakan \texttt{1.1.1.1} (Cloudflare DNS), dan untuk DNS 2, gunakan \texttt{8.8.8.8} (Google DNS). Setelah itu, klik OK dan centang jaringan yang baru saja dibuat.
 \end{enumerate}
 
-Setelah itu, klik "Launch Instance" dan tunggu sampai instance siap digunakan. Jika instance sudah siap digunakan, buka konsol dari instance dan lakukan instalasi standar Ubuntu Server 22.04 LTS. Setelah instalasi Ubuntu Server selesai, lanjutkan dengan instalasi program-program yang akan digunakan untuk penelitian. Program-program yang digunakan termasuk \texttt{ffmpeg} untuk melakukan kompresi video, \texttt{python} untuk melakukan benchmark enkripsi, dan validasi integritas file.
+Setelah itu, klik "Launch Instance" dan tunggu sampai instance siap digunakan. Jika instance sudah siap digunakan, buka konsol dari instance dan lakukan instalasi standar Ubuntu Server 22.04 LTS. Setelah instalasi Ubuntu Server selesai, lanjutkan dengan instalasi program-program yang akan digunakan untuk penelitian. Program-program yang digunakan termasuk \texttt{ffmpeg} untuk melakukan kompresi video, \texttt{python} untuk melakukan benchmark enkripsi, dan validasi integritas data.
 
 Setelah selesai menginstal semua program yang diperlukan, matikan \vm\ dan pergi ke \texttt{Storage>Volumes}. Klik pada titik tiga dari volume yang digunakan oleh \vm\ yang telah dibuat sebelumnya, lalu pilih opsi \texttt{Create template from volume}. Tunggu hingga proses pembuatan template selesai. Template ini akan sangat berguna untuk memudahkan pembuatan \vm\ baru dengan konfigurasi dan aplikasi yang sudah disiapkan jika terjadi masalah atau jika dibutuhkan pembuatan \vm\ baru.
 
@@ -448,7 +448,7 @@ Terlihat pada Gambar \ref{fig:flag_kvm_host} adalah daftar lengkap flag instruks
     \label{fig:lscpu_original}
 \end{figure}
 
-Terlihat pada gambar \ref{fig:lscpu_original} sama dengan Gambar \ref{fig:flag_kvm_host} di text yang ditebalkan. Dalam penelitian ini, flag yang akan diuji adalah \texttt{ssse3, sse4.1, sse4.2, sse4a, dan aes}. Semua flag SSE akan digunakan untuk percobaan kompresi video, sementara sse4.2 akan digunakan untuk validasi integritas file dengan CRC32, dan flag AES akan digunakan untuk enkripsi menggunakan AES. Harapannya, tuning ini akan memberikan peningkatan kinerja yang signifikan dibandingkan dengan konfigurasi default dari KVM.
+Terlihat pada gambar \ref{fig:lscpu_original} sama dengan Gambar \ref{fig:flag_kvm_host} di text yang ditebalkan. Dalam penelitian ini, flag yang akan diuji adalah \texttt{ssse3, sse4.1, sse4.2, sse4a, dan aes}. Semua flag SSE akan digunakan untuk percobaan kompresi video, sementara sse4.2 akan digunakan untuk validasi integritas data dengan CRC32, dan flag AES akan digunakan untuk enkripsi menggunakan AES. Harapannya, tuning ini akan memberikan peningkatan kinerja yang signifikan dibandingkan dengan konfigurasi default dari KVM.
 
 Untuk melakukan tuning flag pada Hypervisor KVM, langkah pertama yang harus dilakukan adalah melihat daftar lengkap virtual machine yang sedang berjalan di sistem. Hal ini dapat dilakukan dengan menggunakan perintah:
 
@@ -568,9 +568,9 @@ Pengujian kompresi video akan menggunakan konfigurasi seperti terlihat pada kode
 \end{listing}
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi Hypervisor KVM untuk Validasi Integritas File}
+\subsection{Konfigurasi Hypervisor KVM untuk Validasi Integritas Data}
 %-----------------------------------------------------------------------------%
-Untuk melakukan pengujian dengan validasi integritas file akan digunakan konfigurasi seperti pada kode \ref{code:tuned_validasi_integritas_file}. Flag yang akan digunakan adalah sse4.2. Flag ini dipilih dikarenakan salah satu kemampuan yang dimiliki oleh flag ini adalah mendukung instruksi CRC32 yang akan digunakan untuk validasi integritas file.
+Untuk melakukan pengujian dengan validasi integritas data akan digunakan konfigurasi seperti pada kode \ref{code:tuned_validasi_integritas_file}. Flag yang akan digunakan adalah sse4.2. Flag ini dipilih dikarenakan salah satu kemampuan yang dimiliki oleh flag ini adalah mendukung instruksi CRC32 yang akan digunakan untuk validasi integritas data.
 
 \begin{listing}[H]
     \begin{minted}{xml}
@@ -587,7 +587,7 @@ Untuk melakukan pengujian dengan validasi integritas file akan digunakan konfigu
         
         ...
     \end{minted}
-    \caption{Konfigurasi Hypervisor KVM untuk Validasi Integritas File}
+    \caption{Konfigurasi Hypervisor KVM untuk Validasi Integritas Data}
     \label{code:tuned_validasi_integritas_file}
 \end{listing}
 
@@ -618,7 +618,7 @@ Untuk melakukan pengujian dengan enkripsi AES akan digunakan konfigurasi seperti
 %-----------------------------------------------------------------------------%
 \section{Skenario Pengujian Tuning}
 %-----------------------------------------------------------------------------%
-Pada bagian ini akan dijelaskan skenario pengujian yang akan dilakukan untuk mengukur dampak tuning yang dilakukan pada Hypervisor KVM terhadap kinerja virtual machine. Pengujian akan dilakukan dengan menggunakan tiga skenario yang berbeda, yaitu kompresi video, validasi integritas file, dan enkripsi AES. Setiap skenario akan dijalankan pada virtual machine yang telah dituning dengan konfigurasi yang sesuai.
+Pada bagian ini akan dijelaskan skenario pengujian yang akan dilakukan untuk mengukur dampak tuning yang dilakukan pada Hypervisor KVM terhadap kinerja virtual machine. Pengujian akan dilakukan dengan menggunakan tiga skenario yang berbeda, yaitu kompresi video, validasi integritas data, dan enkripsi AES. Setiap skenario akan dijalankan pada virtual machine yang telah dituning dengan konfigurasi yang sesuai.
 
 %-----------------------------------------------------------------------------%
 \subsection{Skenario Pengujian Kompresi Video}
@@ -660,9 +660,9 @@ Pada pengujian kompresi video akan dilakukan dengan menggunakan perangkat lunak 
 \end{listing}
 
 %-----------------------------------------------------------------------------%
-\subsection{Skenario Pengujian Validasi Integritas File}
+\subsection{Skenario Pengujian Validasi Integritas Data}
 %-----------------------------------------------------------------------------%
-Pada pengujian validasi integritas file akan dilakukan dengan menggunakan library crc32c dari python untuk melakukan perhitungan CRC32 pada file. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan perhitungan CRC32 pada file dengan ukuran 10 MB. Pengujian ini akan dijalankan sebanyak 10 kali dan diukur waktu yang diperlukan untuk menyelesaikan proses perhitungan CRC32. Skrip python yang digunakan untuk melakukan pengujian validasi integritas file dapat dilihat pada kode \ref{code:kode_pengujian_validasi_integritas_file}.
+Pada pengujian validasi integritas data akan dilakukan dengan menggunakan library crc32c dari python untuk melakukan perhitungan CRC32 pada file. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan perhitungan CRC32 pada file dengan ukuran 10 MB. Pengujian ini akan dijalankan sebanyak 10 kali dan diukur waktu yang diperlukan untuk menyelesaikan proses perhitungan CRC32. Skrip python yang digunakan untuk melakukan pengujian validasi integritas data dapat dilihat pada kode \ref{code:kode_pengujian_validasi_integritas_data}.
 
 \begin{listing}[H]
     \begin{minted}{python}
@@ -699,8 +699,8 @@ Pada pengujian validasi integritas file akan dilakukan dengan menggunakan librar
         main(i)
 
     \end{minted}
-    \caption{Kode Pengujian Validasi Integritas File}
-    \label{code:kode_pengujian_validasi_integritas_file}
+    \caption{Kode Pengujian Validasi Integritas Data}
+    \label{code:kode_pengujian_validasi_integritas_data}
 \end{listing}
 
 %-----------------------------------------------------------------------------%
@@ -816,9 +816,9 @@ Berdasarkan rumus \ref{eq:formula}, jika nilai S(p) semakin besar, maka konfigur
 Dalam analisis pengujian dengan kompresi video, akan dibandingkan waktu eksekusi antara konfigurasi Hypervisor yang tidak dituning (default) dan konfigurasi yang telah dituning. Perbandingan ini dilakukan dengan menggunakan formula \texttt{speedup}. Konfigurasi yang optimal adalah konfigurasi yang memiliki nilai \texttt{speedup} tertinggi, yang menunjukkan peningkatan kinerja yang signifikan dalam proses kompresi video.
 
 %-----------------------------------------------------------------------------%
-\subsection{Analisis Pengujian Validasi Integritas File}
+\subsection{Analisis Pengujian Validasi Integritas Data}
 %-----------------------------------------------------------------------------%
-Untuk analisis pengujian validasi integritas file, akan digunakan pendekatan yang serupa dengan analisis kompresi video. Akan dibandingkan waktu eksekusi antara konfigurasi Hypervisor yang tidak dituning (default) dan konfigurasi yang telah dituning menggunakan formula \texttt{speedup}. Nilai S(p) yang lebih besar menunjukkan bahwa konfigurasi yang dituning lebih efisien dalam memverifikasi integritas file dibandingkan dengan konfigurasi default. Konfigurasi yang optimal adalah konfigurasi yang memiliki nilai \texttt{speedup} tertinggi, yang mengindikasikan peningkatan kinerja yang signifikan dalam proses validasi integritas file.
+Untuk analisis pengujian validasi integritas data, akan digunakan pendekatan yang serupa dengan analisis kompresi video. Akan dibandingkan waktu eksekusi antara konfigurasi Hypervisor yang tidak dituning (default) dan konfigurasi yang telah dituning menggunakan formula \texttt{speedup}. Nilai S(p) yang lebih besar menunjukkan bahwa konfigurasi yang dituning lebih efisien dalam memverifikasi integritas data dibandingkan dengan konfigurasi default. Konfigurasi yang optimal adalah konfigurasi yang memiliki nilai \texttt{speedup} tertinggi, yang mengindikasikan peningkatan kinerja yang signifikan dalam proses validasi integritas data.
 
 %-----------------------------------------------------------------------------%
 \subsection{Analisis Pengujian Enkripsi AES}
@@ -827,7 +827,7 @@ Dalam analisis pengujian enkripsi AES, kami akan menggunakan metode yang sama se
 
 \hfill
 
-Dengan menganalisis nilai \texttt{speedup}, kami dapat mengevaluasi dan membandingkan kinerja berbagai konfigurasi Hypervisor dalam melakukan tugas-tugas seperti kompresi video, validasi integritas file, dan enkripsi AES. Konfigurasi dengan nilai \texttt{speedup} tertinggi akan menjadi pilihan yang optimal untuk meningkatkan kinerja dan efisiensi dalam setiap tugas yang diuji.
+Dengan menganalisis nilai \texttt{speedup}, kami dapat mengevaluasi dan membandingkan kinerja berbagai konfigurasi Hypervisor dalam melakukan tugas-tugas seperti kompresi video, validasi integritas data, dan enkripsi AES. Konfigurasi dengan nilai \texttt{speedup} tertinggi akan menjadi pilihan yang optimal untuk meningkatkan kinerja dan efisiensi dalam setiap tugas yang diuji.
 
 \iffalse
     %-----------------------------------------------------------------------------%

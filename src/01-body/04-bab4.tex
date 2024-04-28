@@ -1054,9 +1054,9 @@ Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalanka
 Grafik \ref{fig:video_compression_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi SSSE3 + SSE4.1 denga nilai \f{speedup} 2.431, dengan rata-rata waktu untuk melakukan kompresi selama 58.2 detik.
 
 %-----------------------------------------------------------------------------%
-\section{Hasil Pengujian Tuning Hypervisor KVM dengan Validasi Integraitas File}
+\section{Hasil Pengujian Tuning Hypervisor KVM dengan Validasi Integritas Data}
 %-----------------------------------------------------------------------------%
-Pada bagian ini akan dijelaskan hasil pengujian tuning hypervisor KVM dengan validasi integritas file dengan menggunakan program benchmark kode \ref{code:kode_pengujian_validasi_integritas_file}.
+Pada bagian ini akan dijelaskan hasil pengujian tuning hypervisor KVM dengan validasi integritas data dengan menggunakan program benchmark kode \ref{code:kode_pengujian_validasi_integritas_data}.
 
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi Default}
@@ -1076,7 +1076,7 @@ Gambar \ref{fig:lscpu_file_integrity_test_default} menunjukkan hasil dari perint
     \centering
     \includegraphics[width=1\textwidth]
     {assets/pics/crc-test/original.jpeg}
-    \caption{Test Validasi Integritas File Dengan Konfigurasi Default}
+    \caption{Test Validasi Integritas Data Dengan Konfigurasi Default}
     \label{fig:file_integrity_test_default}
 \end{figure}
 
@@ -1112,11 +1112,11 @@ Gambar \ref{fig:lscpu_file_integrity_test_default} menunjukkan hasil dari perint
                 };
         \end{axis}
     \end{tikzpicture}
-    \caption{Grafik Tes Validasi Integritas File Dengan Konfigurasi Default}
+    \caption{Grafik Tes Validasi Integritas Data Dengan Konfigurasi Default}
     \label{fig:file_integrity_test_default_graph}
 \end{figure}
 
-Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_file} dijalankan pada konfigurasi default. Hasil pengujian dapat dilihat pada gambar \ref{fig:file_integrity_test_default}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:file_integrity_test_default_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi default berkisar antara 3.6 ms hingga 5.1 ms. Rata-rata dari 10 run yang dilakukan adalah 4.3 ms.
+Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_data} dijalankan pada konfigurasi default. Hasil pengujian dapat dilihat pada gambar \ref{fig:file_integrity_test_default}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:file_integrity_test_default_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi default berkisar antara 3.6 ms hingga 5.1 ms. Rata-rata dari 10 run yang dilakukan adalah 4.3 ms.
 
 %-----------------------------------------------------------------------------%
 \subsection{Konfigurasi dengan SSE4.2}
@@ -1136,7 +1136,7 @@ Gambar \ref{fig:lscpu_file_integrity_test_sse4.2} menunjukkan hasil dari perinta
     \centering
     \includegraphics[width=1\textwidth]
     {assets/pics/crc-test/sse4.2.jpeg}
-    \caption{Test Validasi Integritas File Dengan Konfigurasi SSE4.2}
+    \caption{Test Validasi Integritas Data Dengan Konfigurasi SSE4.2}
     \label{fig:file_integrity_test_sse4.2}
 \end{figure}
 
@@ -1172,14 +1172,14 @@ Gambar \ref{fig:lscpu_file_integrity_test_sse4.2} menunjukkan hasil dari perinta
                 };
         \end{axis}
     \end{tikzpicture}
-    \caption{Grafik Tes Validasi Integritas File Dengan Konfigurasi SSE4.2}
+    \caption{Grafik Tes Validasi Integritas Data Dengan Konfigurasi SSE4.2}
     \label{fig:file_integrity_test_sse4.2_graph}
 \end{figure}
 
-Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_file} dijalankan pada konfigurasi SSE4.2. Hasil pengujian dapat dilihat pada gambar \ref{fig:file_integrity_test_sse4.2}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:file_integrity_test_sse4.2_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSE4.2 berkisar antara 0.55 ms hingga 0.59 ms. Rata-rata dari 10 run yang dilakukan adalah 0.56 ms.
+Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_data} dijalankan pada konfigurasi SSE4.2. Hasil pengujian dapat dilihat pada gambar \ref{fig:file_integrity_test_sse4.2}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:file_integrity_test_sse4.2_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSE4.2 berkisar antara 0.55 ms hingga 0.59 ms. Rata-rata dari 10 run yang dilakukan adalah 0.56 ms.
 
 %-----------------------------------------------------------------------------%
-\subsection{Analisis Pengujian Tuning Hypervisor KVM dengan Validasi Integraitas File}
+\subsection{Analisis Pengujian Tuning Hypervisor KVM dengan Validasi Integritas Data}
 %-----------------------------------------------------------------------------%
 
 % \begin{figure}
@@ -1206,7 +1206,7 @@ Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_file}
 %                 };
 %         \end{axis}
 %     \end{tikzpicture}
-%     \caption{Grafik Rata-Rata Waktu Tes Validasi Integritas File}
+%     \caption{Grafik Rata-Rata Waktu Tes Validasi Integritas Data}
 %     \label{fig:file_integrity_test_graph}
 % \end{figure}
 
@@ -1236,11 +1236,11 @@ Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_file}
                 };
         \end{axis}
     \end{tikzpicture}
-    \caption{Grafik \f{speedup} Tes Validasi Integritas File}
+    \caption{Grafik \f{speedup} Tes Validasi Integritas Data}
     \label{fig:file_integrity_test_graph}
 \end{figure}
 
-Grafik \ref{fig:file_integrity_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi SSE4.2 dengan nilai \f{speedup} 7.678, dengan rata-rata waktu untuk melakukan validasi integritas file selama 0.56 ms.
+Grafik \ref{fig:file_integrity_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi SSE4.2 dengan nilai \f{speedup} 7.678, dengan rata-rata waktu untuk melakukan validasi integritas data selama 0.56 ms.
 
 %-----------------------------------------------------------------------------%
 \section{Hasil Pengujian Tuning Hypervisor KVM dengan Enkripsi AES}
