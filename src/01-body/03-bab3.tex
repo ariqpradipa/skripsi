@@ -659,6 +659,14 @@ Pada pengujian kompresi video akan dilakukan dengan menggunakan perangkat lunak 
     \label{code:kode_pengujian_kompresi_video}
 \end{listing}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
+    {assets/pics/code-flowchart/flowchart_kompresi_video.png}
+    \caption{Flowchat Kode Pengujian Kompresi Video}
+    \label{fig:flowchart_kompresi_video}
+\end{figure}
+
 %-----------------------------------------------------------------------------%
 \subsection{Skenario Pengujian Validasi Integritas Data}
 %-----------------------------------------------------------------------------%
@@ -681,27 +689,34 @@ Pada pengujian validasi integritas data akan dilakukan dengan menggunakan librar
         avg_time = (end_time - start_time) / iterations
         return avg_time
 
-    def main(i):
+    def main():
         # Define parameters
         data_size = 10 * 1024 * 1024  # Size of the data (10 MB)
         num_iterations = 1000  # Number of iterations to average the time
 
-        # Generate random data
-        data = bytearray(os.urandom(data_size))
+        for i in range(10):
+            # Generate random data
+            data = bytearray(os.urandom(data_size))
 
-        # Run the benchmark
-        avg_time_crc32c = benchmark_crc32c(data, num_iterations)
-        print(
-            f"Run {i + 1} Average time for CRC32 calculation: {avg_time_crc32c * 1000} ms"
-        )
+            # Run the benchmark
+            avg_time_crc32c = benchmark_crc32c(data, num_iterations)
+            print(
+                f"Run {i + 1} Average time for CRC32 calculation: {avg_time_crc32c * 1000} ms"
+            )
 
-    for i in range(10):
-        main(i)
-
+    main()
     \end{minted}
     \caption{Kode Pengujian Validasi Integritas Data}
     \label{code:kode_pengujian_validasi_integritas_data}
 \end{listing}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
+    {assets/pics/code-flowchart/flowchart_crc32.png}
+    \caption{Flowchat Kode Pengujian Validasi Integritas Data}
+    \label{fig:flowchart_crc32}
+\end{figure}
 
 %-----------------------------------------------------------------------------%
 \subsection{Skenario Pengujian Enkripsi AES}
@@ -709,16 +724,10 @@ Pada pengujian validasi integritas data akan dilakukan dengan menggunakan librar
 Pada pengujian enkripsi AES akan dilakukan dengan menggunakan library cryptography dari python untuk melakukan enkripsi AES. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan enkripsi AES pada data teks Gambar \ref{fig:aesPlaintextData}. Pengujian ini akan dijalankan sebanyak 10 kali dan diukur waktu yang diperlukan untuk menyelesaikan proses enkripsi AES. Skrip python yang digunakan untuk melakukan pengujian enkripsi AES dapat dilihat pada kode \ref{code:pengujian_enkripsi_aes}.
 
 \begin{figure}
-    \begin{lstlisting}
-The Advanced Encryption Standard (AES) is a symmetric-key encryption algorithm that has become the de facto standard for securing sensitive data worldwide. Developed by Belgian cryptographers Joan Daemen and Vincent Rijmen, AES was adopted by the U.S. National Institute of Standards and Technology (NIST) in 2001 after a rigorous evaluation process involving numerous submissions from around the globe. AES replaced the aging Data Encryption Standard (DES) and its variants, which were becoming increasingly vulnerable to brute-force attacks due to advances in computing power.
-...
-AES has been extensively studied and scrutinized by cryptographers worldwide, and its strength lies in its ability to withstand known attacks while maintaining high performance. Consequently, AES has been widely adopted in various industries, including government, finance, healthcare, and telecommunications, as well as in protocols and standards such as TLS/SSL, IPsec, and wireless encryption standards like WPA2.
-    \end{lstlisting}
+
     \caption{Potongan Plaintext Data untuk AES Encryption Benchmark}
     \label{fig:aesPlaintextData}
 \end{figure}
-
-%  AES operates on fixed block sizes of 128 bits and supports key lengths of 128, 192, or 256 bits, with the latter providing the highest level of security. Its sophisticated mathematical structure, based on substitution-permutation networks, makes it highly resistant to various cryptanalytic attacks, including differential and linear cryptanalysis. AES employs multiple rounds of substitution, permutation, and key mixing operations to scramble the plaintext data, making it virtually impossible to decrypt without the correct key. One of the key strengths of AES is its versatility and flexibility. It can be implemented in hardware or software, making it suitable for a wide range of applications, from securing communication channels to protecting data at rest.
 
 \begin{minted}{python}
     from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -770,30 +779,38 @@ AES has been extensively studied and scrutinized by cryptographers worldwide, an
         # print(f"AES Decryption Time: {(aes_time_decrypt * 1000):.5f} ms")
         return aes_time_encrypt, aes_time_decrypt
 
-    def main(i):
+    def main():
         iterations = 1000
 
-        encrypt_time = 0
-        decrypt_time = 0
-        for _ in range(iterations):
-            encrypt_time_iter, decrypt_time_iter = run_benchmark()
-            encrypt_time += encrypt_time_iter
-            decrypt_time += decrypt_time_iter
+        for i in range(10):
+            encrypt_time = 0
+            decrypt_time = 0
+            for _ in range(iterations):
+                encrypt_time_iter, decrypt_time_iter = run_benchmark()
+                encrypt_time += encrypt_time_iter
+                decrypt_time += decrypt_time_iter
 
-        avg_encrypt_time = encrypt_time / iterations
-        avg_decrypt_time = decrypt_time / iterations
+            avg_encrypt_time = encrypt_time / iterations
+            avg_decrypt_time = decrypt_time / iterations
 
-        print(f"Run {i+1} Average AES Encryption Time: {(avg_encrypt_time * 1000):.5f} ms")
-        print(
-            f"Run {i+1} Average AES Decryption Time: {(avg_decrypt_time * 1000):.5f} ms\n"
-        )
+            print(f"Run {i+1} Average AES Encryption Time: {(avg_encrypt_time * 1000):.5f} ms")
+            print(
+                f"Run {i+1} Average AES Decryption Time: {(avg_decrypt_time * 1000):.5f} ms\n"
+            )
 
-    for i in range(10):
-        main(i)
+    main()
 \end{minted}
 \begin{figure}
     \caption{Kode Pengujian Enkripsi AES}
     \label{code:pengujian_enkripsi_aes}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]
+    {assets/pics/code-flowchart/flowchart_aes.png}
+    \caption{Flowchat Kode Pengujian Enkripsi dan Dekripsi AES}
+    \label{fig:flowchart_aes}
 \end{figure}
 
 %-----------------------------------------------------------------------------%
