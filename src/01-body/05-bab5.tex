@@ -5,11 +5,12 @@
 Berdasarkan hasil pengujian hasil tuning hypervisor dari tiga skenario berbeda yang telah dilakukan, dapat disimpulkan berbagai hal:
 
 \begin{enumerate}
-	\item Flag default yang disediakan oleh hypervisor bersifat minimal, sehingga dapat dilakukan tuning untuk menambahkan fitur-fitur yang lebih spesifik sesuai dengan kebutuhan pengguna.
+	\item Flag default yang disediakan oleh hypervisor bersifat minimal, sehingga perlu dilakukan tuning untuk meningkatkan performa sesuai dengan kebutuhan dari pengguna.
 	\item Dari hasil pengujian tuning hypervisor dengan kompresi video dengan menggunakan tools ffmpeg, kombinasi feature flag yang paling baik untuk digunakan adalah SSSE3 dan SSE4.1 dengan kecepatan kompresi video sebesar 2.43 kali lebih cepat dibandingkan dengan flag default.
 	\item Dari hasil pengujian tuning hypervisor dengan validasi integritas data menggunakan fungsu CRC32, penambahan feature flag sse4.2 dapat mempercepat proses validasi integritas file sebesar 7.68 kali lebih cepat dibandingkan dengan flag default.
 	\item Dari hasil pengujian tuning hypervisor dengan enkrispi AES, penambahan feature flag aes dapat mempercepat proses enkripsi AES sebesar 2.17 kali lebih cepat dibandingkan dengan flag default.
 	\item Dari hasil pengujian tuning hypervisor dengan dekripsi AES, penambahan feature flag aes dapat mempercepat proses dekripsi AES sebesar 2.68 kali lebih cepat dibandingkan dengan flag default.
+	\item Dengan melakukan tuning hypervisor yang tepat, performa dalam menjalankan aplikasi dapat ditingkatkan sesuai dengan kebutuhan pengguna.
 \end{enumerate}
 
 %-----------------------------------------------------------------------------%
@@ -23,6 +24,7 @@ Setelah dilakukan penelitian dan pengujian terhadap tuning hypervisor untuk \vm\
 	\item Memberikan contoh kasus penggunaan yang lebih kompleks, seperti penggunaan hypervisor untuk kebutuhan \textit{machine learning} atau \textit{big data} dan menganalisis efek dari tuning hypervisor pada kasus tersebut.
 	\item Untuk konteks penelitian tuning hypervisor, dapat digunakan jenis Cloud Management Platform (CMP) yang berbeda, seperti OpenStack, ManageIQ, atau Cloudify.
 	\item Membandingkan efektivitas tuning hypervisor pada lingkungan virtualisasi yang berbeda, seperti (\textit{full virtualization}), paravirtualisasi, atau kontainerisasi.
+	\item Menggunakan flag AVX/AVX2 untuk melakukan pengujian tuning dengan kompresi video. Dikarenakan AVX merupakan flag pembaruan dari SSE.
 \end{itemize}
 
 \iffalse

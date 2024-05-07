@@ -1,7 +1,7 @@
 %-----------------------------------------------------------------------------%
 \chapter{\babEmpat}
 %-----------------------------------------------------------------------------%
-Pada bab ini kan dijelaskan hasil dari pengujian tuning Hypervisor KVM. Pengujian dilakukan dengan menggunakan program benchmark yang telah dijelaskan pada bab 3.
+Pada bab ini, hasil dari pengujian tuning Hypervisor KVM akan dijelaskan. Proses pengujian tersebut melibatkan penggunaan program benchmark yang telah dijelaskan secara rinci pada bab 3. Dalam pengujian ini, \saya\ mengeksplorasi berbagai parameter dan konfigurasi yang dapat diterapkan pada Hypervisor KVM untuk meningkatkan kinerja dan efisiensi sistem secara keseluruhan. Selain itu, \saya\ juga melakukan analisis terhadap data pengujian.
 
 %-----------------------------------------------------------------------------%
 \section{Hasil Pengujian Tuning Hypervisor KVM dengan Kompresi Video}
@@ -9,7 +9,7 @@ Pada bab ini kan dijelaskan hasil dari pengujian tuning Hypervisor KVM. Pengujia
 Pada bagian ini akan dijelaskan hasil pengujian tuning Hypervisor KVM dengan menggunakan program benchmark yang telah dibuat sebelumnya dengan melakukan kompresi video.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi Default}
+\subsection{Hasil Pengujian dengan Konfigurasi Default}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -69,7 +69,7 @@ Gambar \ref{fig:lscpu_video_compression_test_original} menunjukkan hasil dari pe
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi default Hypervisor KVM. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_original}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_original_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi default berkisar antara 138 detik hingga 144 detik. Rata-rata dari 10 run yang dilakukan adalah 141.5 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSSE3}
+\subsection{Hasil Pengujian dengan Konfigurasi SSSE3}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -129,7 +129,7 @@ Gambar \ref{fig:lscpu_video_compression_test_ssse3} menunjukkan hasil dari perin
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSSE3. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_ssse3}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_ssse3_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSSE3 berkisar antara 123 detik hingga 128 detik. Rata-rata dari 10 run yang dilakukan adalah 126.5 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSE4.1}
+\subsection{Hasil Pengujian dengan Konfigurasi SSE4.1}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -189,7 +189,7 @@ Gambar \ref{fig:lscpu_video_compression_test_sse4.1} menunjukkan hasil dari peri
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSE4.1. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_sse4.1}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_sse4.1_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSE4.1 berkisar antara 72 detik hingga 74 detik. Rata-rata dari 10 run yang dilakukan adalah 73.2 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSE4.2}
+\subsection{Hasil Pengujian dengan Konfigurasi SSE4.2}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -246,10 +246,10 @@ Gambar \ref{fig:lscpu_video_compression_test_sse4.2} menunjukkan hasil dari peri
     \label{fig:video_compression_test_sse4.2_graph}
 \end{figure}
 
-Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSE4.2. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_sse4.2}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_sse4.2_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSE4.2 berkisar antara 140 detik hingga 143 detik. Rata-rata dari 10 run yang dilakukan adalah 142.7 detik.
+Program benchmark yang menggunakan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSE4.2. Hasil dari pengujian tersebut dapat ditemukan dalam gambar \ref{fig:video_compression_test_sse4.2}. Dari log yang dihasilkan selama eksekusi program benchmark, waktu yang diperlukan untuk setiap run benchmark dicatat dan kemudian digunakan untuk menghasilkan grafik, seperti yang terlihat pada gambar \ref{fig:video_compression_test_sse4.2_graph}. Grafik tersebut menampilkan rentang waktu yang dibutuhkan untuk menjalankan benchmark pada konfigurasi SSE4.2, yang berkisar antara 140 detik hingga 143 detik. Rata-rata dari 10 run yang dilakukan adalah 142.7 detik. Flag SSE4.2 terbukti meningkatkan performa khususnya dalam perhitungan CRC32 karena SSE4.2 memiliki fungsi yang dibuat secara khusus untuk melakukan perhitungan CRC32.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSE4a}
+\subsection{Hasil Pengujian dengan Konfigurasi SSE4a}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -308,7 +308,7 @@ Gambar \ref{fig:lscpu_video_compression_test_sse4a} menunjukkan hasil dari perin
 
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSE4a. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_sse4a}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_sse4a_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSE4a berkisar antara 138 detik hingga 143 detik. Rata-rata dari 10 run yang dilakukan adalah 140.8 detik.
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSSE3 + SSE4.1}
+\subsection{Hasil Pengujian dengan Konfigurasi SSSE3 + SSE4.1}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -368,7 +368,7 @@ Gambar \ref{fig:lscpu_video_compression_test_ssse3,sse4.1} menunjukkan hasil dar
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSSE3 + SSE4.1. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.1}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.1_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSSE3 + SSE4.1 berkisar antara 57 detik hingga 59 detik. Rata-rata dari 10 run yang dilakukan adalah 58.2 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSSE3 + SSE4.2}
+\subsection{Hasil Pengujian dengan Konfigurasi SSSE3 + SSE4.2}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -428,7 +428,7 @@ Gambar \ref{fig:lscpu_video_compression_test_ssse3,sse4.2} menunjukkan hasil dar
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSSE3 + SSE4.2. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.2}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.2_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSSE3 + SSE4.2 berkisar antara 122 detik hingga 124 detik. Rata-rata dari 10 run yang dilakukan adalah 123.5 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSSE3 + SSE4a}
+\subsection{Hasil Pengujian dengan Konfigurasi SSSE3 + SSE4a}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -488,7 +488,7 @@ Gambar \ref{fig:lscpu_video_compression_test_ssse3,sse4a} menunjukkan hasil dari
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSSE3 + SSE4a. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_ssse3,sse4a}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_ssse3,sse4a_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSSE3 + SSE4a berkisar antara 123 detik hingga 125 detik. Rata-rata dari 10 run yang dilakukan adalah 124.4 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSE4.1 + SSE4.2}
+\subsection{Hasil Pengujian dengan Konfigurasi SSE4.1 + SSE4.2}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -548,7 +548,7 @@ Gambar \ref{fig:lscpu_video_compression_test_sse4.1,sse4.2} menunjukkan hasil da
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSE4.1 + SSE4.2. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_sse4.1,sse4.2}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_sse4.1,sse4.2_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSE4.1 + SSE4.2 berkisar antara 69 detik hingga 71 detik. Rata-rata dari 10 run yang dilakukan adalah 70.34 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSE4.1 + SSE4a}
+\subsection{Hasil Pengujian dengan Konfigurasi SSE4.1 + SSE4a}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -608,7 +608,7 @@ Gambar \ref{fig:lscpu_video_compression_test_sse4.1,sse4a} menunjukkan hasil dar
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSE4.1 + SSE4a. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_sse4.1,sse4a}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_sse4.1,sse4a_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSE4.1 + SSE4a berkisar antara 69 detik hingga 70 detik. Rata-rata dari 10 run yang dilakukan adalah 69.9 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSE4.2 + SSE4a}
+\subsection{Hasil Pengujian dengan Konfigurasi SSE4.2 + SSE4a}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -668,7 +668,7 @@ Gambar \ref{fig:lscpu_video_compression_test_sse4.2,sse4a} menunjukkan hasil dar
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSE4.2 + SSE4a. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_sse4.2,sse4a}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_sse4.2,sse4a_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSE4.2 + SSE4a berkisar antara 138 detik hingga 139 detik. Rata-rata dari 10 run yang dilakukan adalah 139.1 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSSE3 + SSE4.1 + SSE4.2}
+\subsection{Hasil Pengujian dengan Konfigurasi SSSE3 + SSE4.1 + SSE4.2}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -728,7 +728,7 @@ Gambar \ref{fig:lscpu_video_compression_test_ssse3,sse4.1,sse4.2} menunjukkan ha
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSSE3 + SSE4.1 + SSE4.2. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.1,sse4.2}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.1,sse4.2_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSSE3 + SSE4.1 + SSE4.2 berkisar antara 57 detik hingga 60 detik. Rata-rata dari 10 run yang dilakukan adalah 59.1 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSSE3 + SSE4.1 + SSE4a}
+\subsection{Hasil Pengujian dengan Konfigurasi SSSE3 + SSE4.1 + SSE4a}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -788,7 +788,7 @@ Gambar \ref{fig:lscpu_video_compression_test_ssse3,sse4.1,sse4a} menunjukkan has
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSSE3 + SSE4.1 + SSE4a. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.1,sse4a}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.1,sse4a_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSSE3 + SSE4.1 + SSE4a berkisar antara 58 detik hingga 59 detik. Rata-rata dari 10 run yang dilakukan adalah 58.9 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSSE3 + SSE4.2 + SSE4a}
+\subsection{Hasil Pengujian dengan Konfigurasi SSSE3 + SSE4.2 + SSE4a}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -847,7 +847,7 @@ Gambar \ref{fig:lscpu_video_compression_test_ssse3,sse4.2,sse4a.jpeg} menunjukka
 
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSSE3 + SSE4.2 + SSE4a. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.2,sse4a.jpeg}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.2,sse4a_graph} Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSSE3 + SSE4.2 + SSE4a berkisar antara 124 detik hingga 125 detik. Rata-rata dari 10 run yang dilakukan adalah 124.9 detik.
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSE4.1 + SSE4.2 + SSE4a}
+\subsection{Hasil Pengujian dengan Konfigurasi SSE4.1 + SSE4.2 + SSE4a}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -907,7 +907,7 @@ Gambar \ref{fig:lscpu_video_compression_test_sse4.1,sse4.2,sse4a.jpeg} menunjukk
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSE4.1 + SSE4.2 + SSE4a. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_sse4.1,sse4.2,sse4a.jpeg}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_sse4.1,sse4.2,sse4a_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSE4.1 + SSE4.2 + SSE4a berkisar antara 71 detik hingga 72 detik. Rata-rata dari 10 run yang dilakukan adalah 71.6 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSSE3 + SSE4.1 + SSE4.2 + SSE4a}
+\subsection{Hasil Pengujian dengan Konfigurasi SSSE3 + SSE4.1 + SSE4.2 + SSE4a}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     \texttt{fpu de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm rep\_good nopl cpuid extd\_apicid tsc\_known\_freq pni \textbf{ssse3} cx16 \textbf{sse4\_1} \textbf{sse4\_2} x2apic hypervisor lahf\_lm cmp\_legacy svm \textbf{sse4a} 3dnowprefetch vmmcall}
@@ -964,7 +964,7 @@ Gambar \ref{fig:lscpu_video_compression_test_ssse3,sse4.1,sse4a} menunjukkan has
 Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalankan pada konfigurasi SSSE3 + SSE4.1 + SSE4.2 + SSE4a. Hasil pengujian dapat dilihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.1,sse4.2,sse4a.jpeg}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:video_compression_test_ssse3,sse4.1,sse4.2,sse4a_graph} Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSSE3 + SSE4.1 + SSE4.2 + SSE4a berkisar antara 59 detik hingga 61 detik. Rata-rata dari 10 run yang dilakukan adalah 60.1 detik.
 
 %-----------------------------------------------------------------------------%
-\subsection{Analisis Pengujian Tuning Hypervisor KVM dengan Kompresi Video}
+\subsection{Analisis Hasil Pengujian Tuning Hypervisor KVM dengan Kompresi Video}
 %-----------------------------------------------------------------------------%
 % \begin{figure}
 %     \centering
@@ -1052,7 +1052,7 @@ Program benchmark dengan kode \ref{code:kode_pengujian_kompresi_video} dijalanka
     \label{fig:video_compression_test_graph}
 \end{figure}
 
-Grafik \ref{fig:video_compression_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi SSSE3 + SSE4.1 denga nilai \f{speedup} 2.431, dengan rata-rata waktu untuk melakukan kompresi selama 58.2 detik.
+Grafik \ref{fig:video_compression_test_graph} menampilkan \f{speedup} dari berbagai konfigurasi yang diuji. Dari grafik tersebut, terlihat bahwa konfigurasi dengan \f{speedup} tertinggi adalah SSSE3 + SSE4.1 dengan nilai \f{speedup} 2.431, disertai dengan rata-rata waktu kompresi selama 58.2 detik. Kedua flag ini memberikan peningkatan performa yang signifikan. SSSE3 memberikan peningkatan performa karena fiturnya yang dirancang khusus untuk HD audio/video decoding/encoding, sementara SSE4.1 menambahkan instruksi baru seperti \texttt{MPSADBW}, penting untuk beberapa codec \f{High Definition}, dan memungkinkan perhitungan perbedaan blok 8×8 dalam waktu kurang dari tujuh siklus.
 
 %-----------------------------------------------------------------------------%
 \section{Hasil Pengujian Tuning Hypervisor KVM dengan Validasi Integritas Data}
@@ -1060,7 +1060,7 @@ Grafik \ref{fig:video_compression_test_graph} menunjukkan \f{speedup} dari setia
 Pada bagian ini akan dijelaskan hasil pengujian tuning hypervisor KVM dengan validasi integritas data dengan menggunakan program benchmark kode \ref{code:kode_pengujian_validasi_integritas_data}.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi Default}
+\subsection{Hasil Pengujian dengan Konfigurasi Default}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -1120,7 +1120,7 @@ Gambar \ref{fig:lscpu_file_integrity_test_default} menunjukkan hasil dari perint
 Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_data} dijalankan pada konfigurasi default. Hasil pengujian dapat dilihat pada gambar \ref{fig:file_integrity_test_default}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:file_integrity_test_default_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi default berkisar antara 3.6 ms hingga 5.1 ms. Rata-rata dari 10 run yang dilakukan adalah 4.3 ms.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan SSE4.2}
+\subsection{Hasil Pengujian dengan Konfigurasi SSE4.2}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -1180,7 +1180,7 @@ Gambar \ref{fig:lscpu_file_integrity_test_sse4.2} menunjukkan hasil dari perinta
 Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_data} dijalankan pada konfigurasi SSE4.2. Hasil pengujian dapat dilihat pada gambar \ref{fig:file_integrity_test_sse4.2}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:file_integrity_test_sse4.2_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi SSE4.2 berkisar antara 0.55 ms hingga 0.59 ms. Rata-rata dari 10 run yang dilakukan adalah 0.56 ms.
 
 %-----------------------------------------------------------------------------%
-\subsection{Analisis Pengujian Tuning Hypervisor KVM dengan Validasi Integritas Data}
+\subsection{Analisis Hasil Pengujian Tuning Hypervisor KVM dengan Validasi Integritas Data}
 %-----------------------------------------------------------------------------%
 
 % \begin{figure}
@@ -1241,7 +1241,7 @@ Program benchmark dengan kode \ref{code:kode_pengujian_validasi_integritas_data}
     \label{fig:file_integrity_test_graph}
 \end{figure}
 
-Grafik \ref{fig:file_integrity_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi SSE4.2 dengan nilai \f{speedup} 7.678, dengan rata-rata waktu untuk melakukan validasi integritas data selama 0.56 ms.
+Grafik \ref{fig:file_integrity_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi SSE4.2 dengan nilai \f{speedup} 7.678, dengan rata-rata waktu untuk melakukan validasi integritas data selama 0.56 ms. Flag SSE4.2 terbukti meningkatkan performa dalam perhitungan CRC32 karena SSE4.2 memiliki fungsi yang dibuat secara khusus untuk melakukan perhitungan CRC32.
 
 %-----------------------------------------------------------------------------%
 \section{Hasil Pengujian Tuning Hypervisor KVM dengan Enkripsi AES}
@@ -1249,7 +1249,7 @@ Grafik \ref{fig:file_integrity_test_graph} menunjukkan \f{speedup} dari setiap k
 Pada bagian ini akan dijelaskan hasil pengujian tuning hypervisor KVM dengan enkripsi AES dengan menggunakan program benchmark kode \ref{code:pengujian_enkripsi_aes}.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi Default}
+\subsection{Hasil Pengujian dengan Konfigurasi Default}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -1345,7 +1345,7 @@ Gambar \ref{fig:lscpu_aes_test_default} menunjukkan hasil dari perintah \texttt{
 Program benchmark dengan kode \ref{code:pengujian_enkripsi_aes} dijalankan pada konfigurasi default. Hasil pengujian dapat dilihat pada gambar \ref{fig:aes_test_default}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:aes_encryption_test_default_graph} dan \ref{fig:aes_decryption_test_default_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi default berkisar untuk melakukan enkripsi berkisar antara 17 $\mu$s hingga 17.3 $\mu$s dan untuk melakukan dekripsi berkisar antara 20.7 $\mu$s hingga 21 $\mu$s. Rata-rata dari 10 run yang dilakukan adalah 17.2 $\mu$sms untuk enkripsi dan 20.9 $\mu$s untuk dekripsi.
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi dengan AES}
+\subsection{Hasil Pengujian dengan Konfigurasi AES}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     % \centering
@@ -1441,7 +1441,7 @@ Gambar \ref{fig:lscpu_aes_test_aes} menunjukkan hasil dari perintah \texttt{lscp
 Program benchmark dengan kode \ref{code:pengujian_enkripsi_aes} dijalankan pada konfigurasi AES. Hasil pengujian dapat dilihat pada gambar \ref{fig:aes_test_aes}. Dari log yang dihasilkan saat menjalankan program benchmark, waktu yang diperlukan untuk melakukan setiap run benchmark diambil dan digunakan untuk membuat grafik seperti yang terlihat pada gambar \ref{fig:aes_encryption_test_aes_graph} dan \ref{fig:aes_decryption_test_aes_graph}. Grafik tersebut menunjukkan bahwa waktu yang diperlukan untuk melakukan benchmark pada konfigurasi AES berkisar untuk melakukan enkripsi berkisar antara 7.8 $\mu$s hingga 8.15 $\mu$s dan untuk melakukan dekripsi berkisar antara 7.76 $\mu$s hingga 8.05 $\mu$s. Rata-rata dari 10 run yang dilakukan adalah 7.9 $\mu$s untuk enkripsi dan 7.8 $\mu$s untuk dekripsi.
 
 %-----------------------------------------------------------------------------%
-\subsection{Analisis Pengujian Tuning Hypervisor KVM dengan Enkripsi AES}
+\subsection{Analisis Hasil Pengujian Tuning Hypervisor KVM dengan Enkripsi AES}
 %-----------------------------------------------------------------------------%
 
 % \begin{figure}
@@ -1558,8 +1558,7 @@ Program benchmark dengan kode \ref{code:pengujian_enkripsi_aes} dijalankan pada 
     \label{fig:aes_decrypt_test_graph}
 \end{figure}
 
-Grafik \ref{fig:aes_encrypt_test_graph} dan \ref{fig:aes_decrypt_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi AES dengan nilai \f{speedup} 2.17 untuk enkripsi dan 2.679 untuk dekripsi. Dengan masing masing rata-rata waktu untuk melakukan enkripsi dan dekripsi adalah 7.9 $\mu$s dan 7.8 $\mu$s.
-
+Grafik \ref{fig:aes_encrypt_test_graph} dan \ref{fig:aes_decrypt_test_graph} memperlihatkan \textit{speedup} dari berbagai konfigurasi yang diuji. Dari grafik tersebut, dapat disimpulkan bahwa konfigurasi dengan \textit{speedup} tertinggi adalah dengan konfigurasi penambahan flag AES yang mencapai \textit{speedup} 2.17 untuk proses enkripsi dan 2.679 untuk proses dekripsi, dengan rata-rata waktu masing-masing 7.9 $\mu$s untuk enkripsi dan 7.8 $\mu$s untuk dekripsi. Penggunaan flag AES terbukti efektif dalam meningkatkan kinerja pada proses enkripsi dan dekripsi karena AES menyediakan fungsi-fungsi seperti \textit{AESENC} dan \textit{AESENCLAST} yang mendukung proses enkripsi, serta fungsi \textit{AESDEC} dan \textit{AESDECLAST} yang mendukung proses dekripsi. Selain itu, terdapat juga fungsi \textit{AESKEYGENASSIST} yang membantu dalam pembuatan kunci, semuanya dirancang secara khusus untuk mendukung proses enkripsi dan dekripsi menggunakan algoritma AES.
 
 \iffalse
     %-----------------------------------------------------------------------------%

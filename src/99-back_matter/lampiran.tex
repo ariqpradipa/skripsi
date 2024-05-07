@@ -1,8 +1,164 @@
 %-----------------------------------------------------------------------------%
-% \addChapter{Lampiran 1}
+\addChapter{Lampiran 1}
 \chapter*{Lampiran 1}
 %-----------------------------------------------------------------------------%
 
+\begin{listing}[H]
+    \begin{minted}{bash}
+    #!/bin/bash
+    
+    # Specify the path to your input video file
+    input_file="timessquaredaywide.mp4"
+
+    # Specify the output directory
+    output_directory="output"
+
+    # Specify the number of times to run the benchmark
+    num_runs=10
+
+    # Loop to run the benchmark command multiple times
+    for i in $(seq 1 $num_runs)
+    do
+        start_time=$(date +%s.%N)
+        log_file="$output_directory/log_$i.txt"
+        
+        echo "Running benchmark $i..."
+        
+        # Add your ffmpeg compression command here
+        ffmpeg -i "$input_file" -c:v libx265 -preset medium -crf 32 -c:a aac -strict -2 "$output_directory/output_$i.mp4" > "$log_file" 2>&1
+        
+        end_time=$(date +%s.%N)
+        elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+        
+        echo "Benchmark $i completed in $elapsed_time seconds. Log saved to $log_file."
+    done
+    \end{minted}
+    \caption{Kode Pengujian Kompresi Video}
+    \label{code:kode_pengujian_kompresi_video}
+\end{listing}
+
+\begin{listing}[H]
+    \begin{minted}{python}
+    import os
+    import time
+    import crc32c
+
+    def benchmark_crc32c(data, iterations):
+        # Perform CRC32 calculation
+        start_time = time.time()
+        for _ in range(iterations):
+            crc32c.crc32c(data)
+        end_time = time.time()
+
+        # Calculate average time per iteration
+        avg_time = (end_time - start_time) / iterations
+        return avg_time
+
+    def main():
+        # Define parameters
+        data_size = 10 * 1024 * 1024  # Size of the data (10 MB)
+        num_iterations = 1000  # Number of iterations to average the time
+
+        for i in range(10):
+            # Generate random data
+            data = bytearray(os.urandom(data_size))
+
+            # Run the benchmark
+            avg_time_crc32c = benchmark_crc32c(data, num_iterations)
+            print(
+                f"Run {i + 1} Average time for CRC32 calculation: {avg_time_crc32c * 1000} ms"
+            )
+            
+    main()
+    \end{minted}
+    \caption{Kode Pengujian Validasi Integritas Data}
+    \label{code:kode_pengujian_validasi_integritas_data}
+\end{listing}
+
+\begin{listing}
+    \begin{minted}{python}
+    from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+    from cryptography.hazmat.primitives import padding
+    from cryptography.hazmat.backends import default_backend
+    import time
+
+    # Generate a random AES key and plaintext
+    key = b"sixteenbytekey12"
+    plaintext = # Gambar Potongan Plaintext Data untuk AES Encryption Benchmark
+
+    # Function to perform AES encryption benchmark
+    def aes_encrypt_benchmark(key, plaintext):
+        backend = default_backend()
+        cipher = Cipher(algorithms.AES(key), modes.ECB(), backend=backend)
+        encryptor = cipher.encryptor()
+
+        padder = padding.PKCS7(algorithms.AES.block_size).padder()
+        padded_plaintext = padder.update(plaintext) + padder.finalize()
+
+        start_time = time.time()
+        ciphertext = encryptor.update(padded_plaintext) + encryptor.finalize()
+        end_time = time.time()
+
+        return ciphertext, end_time - start_time
+
+    # Function to perform AES decryption benchmark
+    def aes_decrypt_benchmark(key, ciphertext):
+        backend = default_backend()
+        cipher = Cipher(algorithms.AES(key), modes.ECB(), backend=backend)
+        decryptor = cipher.decryptor()
+
+        start_time = time.time()
+        padded_plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+        end_time = time.time()
+
+        unpadder = padding.PKCS7(algorithms.AES.block_size).unpadder()
+        plaintext = unpadder.update(padded_plaintext) + unpadder.finalize()
+
+        return end_time - start_time
+    \end{minted}
+\end{listing}
+\begin{listing}
+    \begin{minted}{python}
+    def run_benchmark():
+        # Benchmark AES encryption
+        ciphertext, aes_time_encrypt = aes_encrypt_benchmark(key, plaintext)
+        # print(f"AES Encryption Time: {(aes_time_encrypt * 1000):.5f} ms")
+
+        # Benchmark AES decryption
+        aes_time_decrypt = aes_decrypt_benchmark(key, ciphertext)
+        # print(f"AES Decryption Time: {(aes_time_decrypt * 1000):.5f} ms")
+        return aes_time_encrypt, aes_time_decrypt
+
+    def main():
+        iterations = 1000
+
+        for i in range(10):
+            encrypt_time = 0
+            decrypt_time = 0
+            for _ in range(iterations):
+                encrypt_time_iter, decrypt_time_iter = run_benchmark()
+                encrypt_time += encrypt_time_iter
+                decrypt_time += decrypt_time_iter
+
+            avg_encrypt_time = encrypt_time / iterations
+            avg_decrypt_time = decrypt_time / iterations
+
+            print(f"Run {i+1} Average AES Encryption Time: {(avg_encrypt_time * 1000):.5f} ms")
+            print(
+                f"Run {i+1} Average AES Decryption Time: {(avg_decrypt_time * 1000):.5f} ms\n"
+            )
+
+    main()
+    \end{minted}
+    \caption{Kode Pengujian Enkripsi AES}
+    \label{code:pengujian_enkripsi_aes}
+\end{listing}
 
 
-The Advanced Encryption Standard (AES) is a symmetric-key encryption algorithm that has become the de facto standard for securing sensitive data worldwide. Developed by Belgian cryptographers Joan Daemen and Vincent Rijmen, AES was adopted by the U.S. National Institute of Standards and Technology (NIST) in 2001 after a rigorous evaluation process involving numerous submissions from around the globe. AES replaced the aging Data Encryption Standard (DES) and its variants, which were becoming increasingly vulnerable to brute-force attacks due to advances in computing power. AES operates on fixed block sizes of 128 bits and supports key lengths of 128, 192, or 256 bits, with the latter providing the highest level of security. Its sophisticated mathematical structure, based on substitution-permutation networks, makes it highly resistant to various cryptanalytic attacks, including differential and linear cryptanalysis. AES employs multiple rounds of substitution, permutation, and key mixing operations to scramble the plaintext data, making it virtually impossible to decrypt without the correct key. One of the key strengths of AES is its versatility and flexibility. It can be implemented in hardware or software, making it suitable for a wide range of applications, from securing communication channels to protecting data at rest. AES has been extensively studied and scrutinized by cryptographers worldwide, and its strength lies in its ability to withstand known attacks while maintaining high performance. Consequently, AES has been widely adopted in various industries, including government, finance, healthcare, and telecommunications, as well as in protocols and standards such as TLS/SSL, IPsec, and wireless encryption standards like WPA2.
+\begin{figure}
+    \begin{quote}
+        The Advanced Encryption Standard (AES) is a symmetric-key encryption algorithm that has become the de facto standard for securing sensitive data worldwide. Developed by Belgian cryptographers Joan Daemen and Vincent Rijmen, AES was adopted by the U.S. National Institute of Standards and Technology (NIST) in 2001 after a rigorous evaluation process involving numerous submissions from around the globe. AES replaced the aging Data Encryption Standard (DES) and its variants, which were becoming increasingly vulnerable to brute-force attacks due to advances in computing power. AES operates on fixed block sizes of 128 bits and supports key lengths of 128, 192, or 256 bits, with the latter providing the highest level of security. Its sophisticated mathematical structure, based on substitution-permutation networks, makes it highly resistant to various cryptanalytic attacks, including differential and linear cryptanalysis. AES employs multiple rounds of substitution, permutation, and key mixing operations to scramble the plaintext data, making it virtually impossible to decrypt without the correct key. One of the key strengths of AES is its versatility and flexibility. It can be implemented in hardware or software, making it suitable for a wide range of applications, from securing communication channels to protecting data at rest. AES has been extensively studied and scrutinized by cryptographers worldwide, and its strength lies in its ability to withstand known attacks while maintaining high performance. Consequently, AES has been widely adopted in various industries, including government, finance, healthcare, and telecommunications, as well as in protocols and standards such as TLS/SSL, IPsec, and wireless encryption standards like WPA2.
+    \end{quote}
+    \caption{Plaintext Data untuk AES Encryption Benchmark}
+    \label{fig:aesPlaintextData}
+\end{figure}
