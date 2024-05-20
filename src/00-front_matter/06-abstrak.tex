@@ -10,29 +10,27 @@
 \vspace*{0.2cm}
 {
 	\setlength{\parindent}{0pt}
-	
+
 	\begin{tabular}{@{}l l p{10cm}}
-		Nama&: & \penulis \\
-		Program Studi&: & \program \\
-		Judul&: & \judul \\
-		Pembimbing&: & \pembimbing \\
+		Nama          & : & \penulis    \\
+		Program Studi & : & \program    \\
+		Judul         & : & \judul      \\
+		Pembimbing    & : & \pembimbing \\
 	\end{tabular}
 
 	\bigskip
 	\bigskip
-	
-	Penelitian ini bertujuan untuk menganalisis performa dari tuning Hypervisor Kernel-based Virtual Machine (KVM) dengan fokus pada Streaming SIMD Extensions (SSE) dalam konteks kompresi video pada Virtual Machines (VMs) yang berjalan di Apache CloudStack. Kajian ini secara khusus meneliti pengaruh penambahan flag SSE3, SSE4.1, dan SSE4.2 terhadap performa kompresi video. Dua aspek utama yang menjadi fokus adalah kecepatan kompresi dan kualitas video yang dihasilkan.
-	
-	Untuk menilai kecepatan kompresi, penelitian ini membandingkan waktu kompresi antara Hypervisor KVM yang telah di-tuning dengan flag SSE tambahan dan Hypervisor KVM default. Metode yang digunakan untuk mengukur kecepatan ini adalah dengan menghitung waktu yang diperlukan untuk kompresi video pada kedua konfigurasi hypervisor tersebut.
-	
-	Di sisi lain, kualitas video yang dikompresi dievaluasi menggunakan metrik Structural Similarity Index Measure (SSIM). SSIM digunakan untuk mengukur kesamaan visual antara video asli dan video hasil kompresi, memberikan gambaran tentang seberapa baik video dikompresi tanpa kehilangan kualitas visual.
-	
-	Penelitian ini menghasilkan temuan penting mengenai efektivitas tuning SSE pada Hypervisor KVM dalam konteks Apache CloudStack, memberikan wawasan baru tentang optimisasi performa untuk kompresi video di lingkungan cloud. Hasil ini diharapkan dapat membantu dalam pengembangan praktik terbaik untuk konfigurasi Hypervisor KVM dalam meningkatkan efisiensi dan efektivitas kompresi video pada VM.
+
+	\cc\ menyediakan akses mudah ke berbagai sumber daya melalui jaringan internet, dengan jangkauan jaringan yang luas, kemampuan elastisitas yang cepat, dan layanan yang dapat diukur. Dalam penelitian ini, digunakan \f{Cloud Management Platform} Apache CloudStack untuk membangun sistem Cloud sendiri. Sistem ini menggunakan sistem operasi Ubuntu dan hypervisor KVM (Kernel-based Virtual Machine) untuk menguji performa dan optimalisasi konfigurasi hypervisor dalam menjalankan tugas-tugas komputasi tertentu.
+
+	Penelitian ini bertujuan untuk menganalisis apakah konfigurasi default dari hypervisor KVM sudah optimal dan bagaimana tuning hypervisor KVM dapat meningkatkan performa dalam menjalankan tugas komputasi seperti kompresi video, enkripsi, dekripsi, dan validasi integritas data. Metode yang digunakan melibatkan pengujian performa hypervisor KVM dengan melakukan berbagai tugas komputasi dan mengukur waktu yang diperlukan untuk menyelesaikan tugas-tugas tersebut. Hasil pengujian menunjukkan bahwa tuning hypervisor dengan menambahkan flag tertentu seperti SSSE3, SSE4.1, SSE4.2, SSE4a, dan AES dapat meningkatkan performa komputasi secara signifikan.
+
+	Kesimpulan dari penelitian ini adalah bahwa konfigurasi default hypervisor KVM bersifat minimal dan perlu dilakukan tuning untuk mencapai performa optimal. Tuning hypervisor yang tepat dapat mempercepat kompresi video hingga 2.4 kali, validasi integritas data hingga 7.56 kali, enkripsi AES hingga 2.1 kali, dan dekripsi AES hingga 2.68 kali dibandingkan dengan konfigurasi default. Penelitian ini diharapkan memberikan kontribusi akademis dalam bidang optimalisasi infrastruktur cloud.
 
 	\bigskip
 
 	Kata kunci:\\
-	Tuning Hypervisor KVM, Kompresi Video, Cloud Computing, Apache CloudStack
+	Cloud Computing, KVM Hypervisor, Optimisasi Performa, Apache CloudStack
 }
 
 \newpage

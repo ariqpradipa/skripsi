@@ -21,18 +21,16 @@
 	\bigskip
 	\bigskip
 
-	This study aims to analyze the performance of tuning the Kernel-based Virtual Machine (KVM) Hypervisor, focusing on Streaming SIMD Extensions (SSE) in the context of video compression on Virtual Machines (VMs) running in Apache CloudStack. Specifically, this research examines the impact of adding SSE3, SSE4.1, and SSE4.2 flags on video compression performance. The main focuses are the speed of compression and the quality of the resulting video.
+	Cloud Computing provides easy access to various resources over the internet, with a wide network reach, fast elasticity capabilities, and measurable services. In this research, the Apache CloudStack Cloud Management Platform is utilized to build a Cloud system. This system uses the Ubuntu operating system and KVM (Kernel-based Virtual Machine) hypervisor to test performance and optimize the hypervisor configuration for specific computing tasks.
 	
-	To assess compression speed, this study compares the compression time between the KVM Hypervisor tuned with additional SSE flags and the default KVM Hypervisor. The method used to measure this speed involves calculating the time required for video compression on both hypervisor configurations.
+	The aim of this research is to analyze whether the default configuration of the KVM hypervisor is optimal and how tuning the KVM hypervisor can enhance performance in executing computing tasks such as video compression, encryption, decryption, and data integrity validation. The methodology involves performance testing of the KVM hypervisor by executing various computing tasks and measuring the time taken to complete these tasks. The test results indicate that tuning the hypervisor by adding specific flags such as SSSE3, SSE4.1, SSE4.2, SSE4a, and AES can significantly improve computational performance.
 	
-	On the other hand, the quality of the compressed video is evaluated using the Structural Similarity Index Measure (SSIM) metric. SSIM is used to measure the visual similarity between the original video and the compressed video, providing an insight into how well the video is compressed without losing visual quality.
-	
-	This research yields significant findings regarding the effectiveness of SSE tuning on the KVM Hypervisor in the context of Apache CloudStack, offering new insights into performance optimization for video compression in cloud environments. These results are expected to assist in developing best practices for configuring the KVM Hypervisor to enhance efficiency and effectiveness in video compression on VMs.
+	The conclusion drawn from this research is that the default configuration of the KVM hypervisor is minimal and requires tuning to achieve optimal performance. Proper hypervisor tuning can accelerate video compression by up to 2.4 times, data integrity validation by up to 7.56 times, AES encryption by up to 2.1 times, and AES decryption by up to 2.68 times compared to the default configuration. This research is expected to make an academic contribution in the field of cloud infrastructure optimization.
 
 	\bigskip
 
 	Key words:\\
-	KVM Hypervisor Tuning, Video Compression, Cloud Computing, Apache CloudStack
+	Cloud Computing, KVM Hypervisor, Performance Optimization, Apache CloudStack
 }
 
 \newpage
