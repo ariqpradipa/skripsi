@@ -32,23 +32,38 @@ Dibawah ini merupakan daftar konfigurasi yang digunakan dalam pengujian tuning H
 \end{multicols}
 \begin{figure}
     \centering
+    \caption{Konfigurasi yang digunakan dalam pengujian tuning Hypervisor KVM dengan kompresi video}
+    \label{fig:video_compression_test_configuration}
+\end{figure}
+
+\begin{figure}
+    \centering
     \begin{tikzpicture}
         \begin{axis}[
                 xbar,
-                bar width=12pt,
+                bar width=2ex,
                 xlabel={Detik},
                 ytick=data,
+                y=3ex,
                 nodes near coords,
                 nodes near coords align={horizontal},
                 symbolic y coords={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                enlarge y limits=0.2,
-                enlarge x limits=0.05,
+                enlarge y limits=0.1,
+                enlarge x limits=0.1,
                 width=\textwidth,
                 height=0.6\textheight,
                 xmin=0,
-                xmax=160
+                xmax=160,
+                grid=major,
+                grid style={dashed, black!30},
+                axis background/.style={fill=gray!10},
+                y axis line style={opacity=0},
+                tick,
+                yticklabel style={font=\footnotesize},
+                xticklabel style={font=\footnotesize},
+                xlabel style={font=\normalsize, color=black, font=\bfseries},
             ]
-            \addplot [fill=black] coordinates {
+            \addplot[red!20!black,fill=blue!60!white] coordinates {
                     (138.236,1)
                     (123.965,2)
                     (70.7347,3)
@@ -72,27 +87,36 @@ Dibawah ini merupakan daftar konfigurasi yang digunakan dalam pengujian tuning H
     \label{fig:video_compression_test_average_graph}
 \end{figure}
 
-Grafik \ref{fig:video_compression_test_average_graph} menampilkan rata-rata waktu yang dibutuhkan untuk melakukan kompresi video pada berbagai konfigurasi yang diuji. Dari grafik tersebut, terlihat bahwa konfigurasi dengan waktu rata-rata terlama adalah konfigurasi Default dengan waktu rata-rata 138.24 detik, sedangkan konfigurasi dengan waktu rata-rata tercepat adalah konfigurasi SSSE3 + SSE4.1 + SSE4.2 + SSE4a dengan waktu rata-rata 57.7 detik.
+Grafik \ref{fig:video_compression_test_average_graph} menampilkan rata-rata waktu yang dibutuhkan untuk melakukan kompresi video pada berbagai konfigurasi berdasarkan gambar \ref{fig:video_compression_test_configuration}. Dari grafik tersebut, terlihat bahwa konfigurasi dengan waktu rata-rata terlama adalah konfigurasi Default dengan waktu rata-rata 138.24 detik, sedangkan konfigurasi dengan waktu rata-rata tercepat adalah konfigurasi SSSE3 + SSE4.1 + SSE4.2 + SSE4a dengan waktu rata-rata 57.7 detik.
 
 \begin{figure}
     \centering
     \begin{tikzpicture}
         \begin{axis}[
                 xbar,
-                bar width=12pt,
+                bar width=2ex,
                 xlabel={\f{Speedup}},
                 ytick=data,
+                y=3ex,
                 nodes near coords,
                 nodes near coords align={horizontal},
                 symbolic y coords={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
                 enlarge y limits=0.1,
-                enlarge x limits=0.05,
+                enlarge x limits=0.1,
                 width=\textwidth,
-                height=0.5\textheight,
+                height=0.6\textheight,
                 xmin=0,
-                xmax=2.6
+                xmax=2.5,
+                grid=major,
+                grid style={dashed, black!30},
+                axis background/.style={fill=gray!10},
+                y axis line style={opacity=0},
+                tick,
+                yticklabel style={font=\footnotesize},
+                xticklabel style={font=\footnotesize},
+                xlabel style={font=\normalsize, color=black, font=\bfseries},
             ]
-            \addplot [fill=black] coordinates {
+            \addplot[red!20!black,fill=blue!60!white] coordinates {
                     (1.0000,1)
                     (1.115,2)
                     (1.954,3)
@@ -116,41 +140,45 @@ Grafik \ref{fig:video_compression_test_average_graph} menampilkan rata-rata wakt
     \label{fig:video_compression_test_graph}
 \end{figure}
 
-Grafik \ref{fig:video_compression_test_graph} menampilkan \f{speedup} dari berbagai konfigurasi yang diuji. Dari grafik tersebut, terlihat bahwa konfigurasi dengan \f{speedup} tertinggi adalah SSSE3 + SSE4.1 + SSE4.2 + SSE4a dengan nilai \f{speedup} 2.4, disertai dengan rata-rata waktu kompresi selama 57.7 detik. Keempat flag ini memberikan peningkatan performa yang signifikan untuk melakukan kompresi video. Namun jika dilihat dari hasil lainnya, flag yang sangat berpengaruh adalah SSSE3 dan SSE4.1, dimana untuk SSSE3 saja memiliki nilai \f{speedup} sebesar 1.12, dan untuk SSE4.1 saja memiliki nilai \f{speedup} paling besar yaitu di 1.95. SSSE3 memberikan peningkatan performa karena fiturnya yang dirancang khusus untuk HD audio/video decoding/encoding, sementara SSE4.1 menambahkan instruksi baru seperti \texttt{MPSADBW}, penting untuk beberapa codec \f{High Definition}, dan memungkinkan perhitungan perbedaan blok 8×8 dalam waktu kurang dari tujuh siklus.
+Grafik \ref{fig:video_compression_test_graph} menampilkan \f{speedup} dari berbagai konfigurasi berdasarkan gambar gambar \ref{fig:video_compression_test_configuration}. Dari grafik tersebut, terlihat bahwa konfigurasi dengan \f{speedup} tertinggi adalah SSSE3 + SSE4.1 + SSE4.2 + SSE4a dengan nilai \f{speedup} 2.4, disertai dengan rata-rata waktu kompresi selama 57.7 detik. Keempat flag ini memberikan peningkatan performa yang signifikan untuk melakukan kompresi video. Namun jika dilihat dari hasil lainnya, flag yang sangat berpengaruh adalah SSSE3 dan SSE4.1, dimana untuk SSSE3 saja memiliki nilai \f{speedup} sebesar 1.12, dan untuk SSE4.1 saja memiliki nilai \f{speedup} paling besar yaitu di 1.95. SSSE3 memberikan peningkatan performa karena fiturnya yang dirancang khusus untuk HD audio/video decoding/encoding, sementara SSE4.1 menambahkan instruksi baru seperti \texttt{MPSADBW}, penting untuk beberapa codec \f{High Definition}, dan memungkinkan perhitungan perbedaan blok 8×8 dalam waktu kurang dari tujuh siklus.
 
 %-----------------------------------------------------------------------------%
 \section{Hasil Tuning Hypervisor KVM dengan Validasi Integritas Data}
 %-----------------------------------------------------------------------------%
 Pada bagian ini akan dijelaskan hasil pengujian tuning hypervisor KVM dengan validasi integritas data dengan menggunakan program benchmark kode \ref{code:kode_pengujian_validasi_integritas_data}.
 
-Dibawah ini merupakan daftar konfigurasi yang digunakan dalam pengujian tuning Hypervisor KVM dengan kompresi video:
-
-\begin{enumerate}
-    \item Default
-    \item SSE4.2
-\end{enumerate}
+Flag yang digunakan untuk konfigurasi dalam pengujian tuning Hypervisor KVM dengan validasi integritas data adalah SSE4.2.
 
 \begin{figure}
     \centering
     \begin{tikzpicture}
         \begin{axis}[
                 xbar,
-                bar width=12pt,
+                bar width=2ex,
                 xlabel={Milisecond},
                 ytick=data,
+                y=3ex,
                 nodes near coords,
                 nodes near coords align={horizontal},
-                symbolic y coords={1,2},
-                enlarge y limits=0.2,
-                enlarge x limits=0.05,
+                symbolic y coords={Default,SSE4.2},
+                enlarge y limits=1,
+                enlarge x limits=0.1,
                 width=\textwidth,
-                height=0.2\textheight,
+                height=0.6\textheight,
                 xmin=0,
-                xmax=5
+                xmax=4.5,
+                grid=major,
+                grid style={dashed, black!30},
+                axis background/.style={fill=gray!10},
+                y axis line style={opacity=0},
+                tick,
+                yticklabel style={font=\footnotesize},
+                xticklabel style={font=\footnotesize},
+                xlabel style={font=\normalsize, color=black, font=\bfseries},
             ]
-            \addplot [fill=black] coordinates {
-                    (4.1642,1)
-                    (0.5451,2)
+            \addplot[red!20!black,fill=blue!60!white] coordinates {
+                    (4.1642,Default)
+                    (0.5451,SSE4.2)
                 };
         \end{axis}
     \end{tikzpicture}
@@ -165,22 +193,31 @@ Grafik \ref{fig:file_integrity_test_average_graph} menunjukkan rata-rata waktu y
     \begin{tikzpicture}
         \begin{axis}[
                 xbar,
-                bar width=12pt,
+                bar width=2ex,
                 xlabel={\f{Speedup}},
                 ytick=data,
+                y=3ex,
                 nodes near coords,
                 nodes near coords align={horizontal},
-                symbolic y coords={1,2},
-                enlarge y limits=0.2,
-                enlarge x limits=0.05,
+                symbolic y coords={Default,SSE4.2},
+                enlarge y limits=1,
+                enlarge x limits=0.1,
                 width=\textwidth,
-                height=0.2\textheight,
+                height=0.6\textheight,
                 xmin=0,
-                xmax=8
+                xmax=8,
+                grid=major,
+                grid style={dashed, black!30},
+                axis background/.style={fill=gray!10},
+                y axis line style={opacity=0},
+                tick,
+                yticklabel style={font=\footnotesize},
+                xticklabel style={font=\footnotesize},
+                xlabel style={font=\normalsize, color=black, font=\bfseries},
             ]
-            \addplot [fill=black] coordinates {
-                    (1.000,1)
-                    (7.563,2)
+            \addplot[red!20!black,fill=blue!60!white] coordinates {
+                    (1.000,Default)
+                    (7.563,SSE4.2)
                 };
         \end{axis}
     \end{tikzpicture}
@@ -195,34 +232,38 @@ Grafik \ref{fig:file_integrity_test_graph} menunjukkan \f{speedup} dari setiap k
 %-----------------------------------------------------------------------------%
 Pada bagian ini akan dijelaskan hasil pengujian tuning hypervisor KVM dengan enkripsi AES dengan menggunakan program benchmark kode \ref{code:pengujian_enkripsi_aes}.
 
-Dibawah ini merupakan daftar konfigurasi yang digunakan dalam pengujian tuning Hypervisor KVM dengan kompresi video:
-
-\begin{enumerate}
-    \item Default
-    \item AES
-\end{enumerate}
+Flag yang digunakan untuk konfigurasi dalam pengujian tuning Hypervisor KVM dengan enkripsi dan dekripsi AES adalah AES.
 
 \begin{figure}
     \centering
     \begin{tikzpicture}
         \begin{axis}[
                 xbar,
-                bar width=12pt,
+                bar width=2ex,
                 xlabel={Microsecond},
                 ytick=data,
+                y=3ex,
                 nodes near coords,
                 nodes near coords align={horizontal},
-                symbolic y coords={1,2},
-                enlarge y limits=0.2,
-                enlarge x limits=0.05,
+                symbolic y coords={Default,AES},
+                enlarge y limits=1,
+                enlarge x limits=0.1,
                 width=\textwidth,
-                height=0.2\textheight,
+                height=0.6\textheight,
                 xmin=0,
-                xmax=23
+                xmax=22,
+                grid=major,
+                grid style={dashed, black!30},
+                axis background/.style={fill=gray!10},
+                y axis line style={opacity=0},
+                tick,
+                yticklabel style={font=\footnotesize},
+                xticklabel style={font=\footnotesize},
+                xlabel style={font=\normalsize, color=black, font=\bfseries},
             ]
-            \addplot [fill=black] coordinates {
-                    (17.15,1)
-                    (8.18,2)
+            \addplot[red!20!black,fill=blue!60!white] coordinates {
+                    (17.15,Default)
+                    (8.18,AES)
                 };
         \end{axis}
     \end{tikzpicture}
@@ -235,22 +276,31 @@ Dibawah ini merupakan daftar konfigurasi yang digunakan dalam pengujian tuning H
     \begin{tikzpicture}
         \begin{axis}[
                 xbar,
-                bar width=12pt,
+                bar width=2ex,
                 xlabel={Microsecond},
                 ytick=data,
+                y=3ex,
                 nodes near coords,
                 nodes near coords align={horizontal},
-                symbolic y coords={1,2},
-                enlarge y limits=0.2,
-                enlarge x limits=0.05,
+                symbolic y coords={Default,AES},
+                enlarge y limits=1,
+                enlarge x limits=0.1,
                 width=\textwidth,
-                height=0.2\textheight,
+                height=0.6\textheight,
                 xmin=0,
-                xmax=23
+                xmax=22,
+                grid=major,
+                grid style={dashed, black!30},
+                axis background/.style={fill=gray!10},
+                y axis line style={opacity=0},
+                tick,
+                yticklabel style={font=\footnotesize},
+                xticklabel style={font=\footnotesize},
+                xlabel style={font=\normalsize, color=black, font=\bfseries},
             ]
-            \addplot [fill=black] coordinates {
-                    (21.4,1)
-                    (8,2)
+            \addplot[red!20!black,fill=blue!60!white] coordinates {
+                    (21.4,Default)
+                    (8,AES)
                 };
         \end{axis}
     \end{tikzpicture}
@@ -265,22 +315,31 @@ Grafik \ref{fig:aes_encrypt_test_average_graph} dan \ref{fig:aes_decrypt_test_av
     \begin{tikzpicture}
         \begin{axis}[
                 xbar,
-                bar width=12pt,
-                xlabel={Microsecond},
+                bar width=2ex,
+                xlabel={\f{Speedup}},
                 ytick=data,
+                y=3ex,
                 nodes near coords,
                 nodes near coords align={horizontal},
-                symbolic y coords={1,2},
-                enlarge y limits=0.2,
-                enlarge x limits=0.05,
+                symbolic y coords={Default,AES},
+                enlarge y limits=1,
+                enlarge x limits=0.1,
                 width=\textwidth,
-                height=0.2\textheight,
+                height=0.6\textheight,
                 xmin=0,
-                xmax=3
+                xmax=3,
+                grid=major,
+                grid style={dashed, black!30},
+                axis background/.style={fill=gray!10},
+                y axis line style={opacity=0},
+                tick,
+                yticklabel style={font=\footnotesize},
+                xticklabel style={font=\footnotesize},
+                xlabel style={font=\normalsize, color=black, font=\bfseries},
             ]
-            \addplot [fill=black] coordinates {
-                    (1.000,1)
-                    (2.096,2)
+            \addplot[red!20!black,fill=blue!60!white] coordinates {
+                    (1.000,Default)
+                    (2.096,AES)
                 };
         \end{axis}
     \end{tikzpicture}
@@ -293,22 +352,31 @@ Grafik \ref{fig:aes_encrypt_test_average_graph} dan \ref{fig:aes_decrypt_test_av
     \begin{tikzpicture}
         \begin{axis}[
                 xbar,
-                bar width=12pt,
-                xlabel={Microsecond},
+                bar width=2ex,
+                xlabel={\f{Speedup}},
                 ytick=data,
+                y=3ex,
                 nodes near coords,
                 nodes near coords align={horizontal},
-                symbolic y coords={1,2},
-                enlarge y limits=0.2,
-                enlarge x limits=0.05,
+                symbolic y coords={Default,AES},
+                enlarge y limits=1,
+                enlarge x limits=0.1,
                 width=\textwidth,
-                height=0.2\textheight,
+                height=0.6\textheight,
                 xmin=0,
-                xmax=3
+                xmax=3,
+                grid=major,
+                grid style={dashed, black!30},
+                axis background/.style={fill=gray!10},
+                y axis line style={opacity=0},
+                tick,
+                yticklabel style={font=\footnotesize},
+                xticklabel style={font=\footnotesize},
+                xlabel style={font=\normalsize, color=black, font=\bfseries},
             ]
-            \addplot [fill=black] coordinates {
-                    (1.000,1)
-                    (2.675,2)
+            \addplot[red!20!black,fill=blue!60!white] coordinates {
+                    (1.000,Default)
+                    (2.675,AES)
                 };
         \end{axis}
     \end{tikzpicture}
