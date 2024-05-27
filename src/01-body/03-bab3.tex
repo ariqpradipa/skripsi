@@ -598,7 +598,7 @@ Pada bagian ini akan dijelaskan skenario pengujian yang akan dilakukan untuk men
 %-----------------------------------------------------------------------------%
 \subsection{Skenario Pengujian Kompresi Video}
 %-----------------------------------------------------------------------------%
-Pada pengujian kompresi video akan dilakukan dengan menggunakan perangkat lunak ffmpeg untuk melakukan kompresi video. Flow untuk melakukan pengujian dengan kompresi video dapat terlihat di gambar \ref{fig:flowchart_kompresi_video}. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan kompresi video dengan menggunakan konfigurasi tuning yang telah dilakukan pada Hypervisor KVM. Pengujian ini akan dilakukan dengan menggunakan video yang berjudul \texttt{Times Square Day Wide} yang memiliki durasi 10 detik dan resolusi 4k. Video ini akan dikompresi menggunakan codec h265 dengan preset medium. Pengujian akan dijalankan sebanyak 10 kali dan diukur waktu yang diperlukan untuk menyelesaikan proses kompresi video. Script bash lengkap yang digunakan untuk melakukan pengujian kompresi video dapat dilihat di \textbf{kode \ref{code:kode_pengujian_kompresi_video}} pada lampiran.
+Pada pengujian kompresi video akan dilakukan dengan menggunakan perangkat lunak ffmpeg untuk melakukan kompresi video. Flow untuk melakukan pengujian dengan kompresi video dapat terlihat di gambar \ref{fig:flowchart_kompresi_video}. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan kompresi video dengan menggunakan konfigurasi tuning yang telah dilakukan pada Hypervisor KVM. Pengujian ini akan dilakukan dengan menggunakan video yang berjudul \texttt{Times Square Day Wide} yang memiliki durasi 10 detik dan resolusi 4k. Video ini akan dikompresi menggunakan codec h265 dengan preset medium. Pengujian akan dijalankan sebanyak 100 kali per tuning dan diukur waktu yang diperlukan untuk menyelesaikan proses kompresi video. Script bash lengkap yang digunakan untuk melakukan pengujian kompresi video dapat dilihat di \textbf{kode \ref{code:kode_pengujian_kompresi_video}} pada lampiran.
 
 \begin{figure}
     \centering
@@ -611,7 +611,7 @@ Pada pengujian kompresi video akan dilakukan dengan menggunakan perangkat lunak 
 %-----------------------------------------------------------------------------%
 \subsection{Skenario Pengujian Validasi Integritas Data}
 %-----------------------------------------------------------------------------%
-Pada pengujian validasi integritas data akan dilakukan dengan menggunakan library crc32c dari python untuk melakukan perhitungan CRC32 pada file. Flow untuk melakukan pengujian validasi integritas data dapat dilihat pada gambar \ref{fig:flowchart_crc32}. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan perhitungan CRC32 pada file dengan ukuran 10 MB. Pengujian ini akan dijalankan sebanyak 10 kali dan setiap pengujian akan dilakukan iterasi sebanyak 1000 kali kemudian diukur waktu yang diperlukan untuk menyelesaikan proses perhitungan CRC32. Kode python lengkap yang digunakan untuk melakukan pengujian validasi integritas data dapat dilihat di \textbf{kode \ref{code:kode_pengujian_validasi_integritas_data}} pada lampirn.
+Pada pengujian validasi integritas data akan dilakukan dengan menggunakan library crc32c dari python untuk melakukan validasi pada sebuah data. Flow untuk melakukan pengujian validasi integritas data dapat dilihat pada gambar \ref{fig:flowchart_crc32}. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan perhitungan CRC32 pada data bytearray yang berukuran 10 MB. Pengujian ini akan dijalankan sebanyak 100 kali per tuning kemudian diukur waktu yang diperlukan untuk menyelesaikan proses perhitungan CRC32. Kode python lengkap yang digunakan untuk melakukan pengujian validasi integritas data dapat dilihat di \textbf{kode \ref{code:kode_pengujian_validasi_integritas_data}} pada lampirn.
 
 \begin{figure}
     \centering
@@ -624,7 +624,7 @@ Pada pengujian validasi integritas data akan dilakukan dengan menggunakan librar
 %-----------------------------------------------------------------------------%
 \subsection{Skenario Pengujian Enkripsi AES}
 %-----------------------------------------------------------------------------%
-Pada pengujian enkripsi AES akan dilakukan dengan menggunakan library cryptography dari python untuk melakukan enkripsi AES. Flow untuk melakukan pengujian dengan enkripsi dan dekripsi AES dapat dilihat pada gambar \ref{fig:flowchart_aes} Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan enkripsi AES pada data teks Gambar \ref{fig:aesPlaintextData}. Pengujian ini akan dijalankan sebanyak 10 kali dan diukur waktu yang diperlukan untuk menyelesaikan proses enkripsi AES. Skrip python yang digunakan untuk melakukan pengujian enkripsi AES dapat dilihat di \textbf{kode \ref{code:pengujian_enkripsi_aes}} pada lampiran.
+Pada pengujian enkripsi AES akan dilakukan dengan menggunakan library cryptography dari python untuk melakukan enkripsi AES. Flow untuk melakukan pengujian dengan enkripsi dan dekripsi AES dapat dilihat pada gambar \ref{fig:flowchart_aes} Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan enkripsi AES pada data teks yang dapat dilihat pada Gambar \ref{fig:aesPlaintextData}. Pengujian ini akan dijalankan sebanyak 100 kali per tuning dan diukur waktu yang diperlukan untuk menyelesaikan proses enkripsi dan dekripsi AES. Kode python yang digunakan untuk melakukan pengujian enkripsi AES dapat dilihat di \textbf{kode \ref{code:pengujian_enkripsi_aes}} pada lampiran.
 
 \begin{figure}
     \centering
@@ -655,142 +655,3 @@ Untuk analisis pengujian validasi integritas data, \saya\ akan menggunakan pende
 Dalam analisis pengujian enkripsi AES, \saya\ akan menggunakan metode yang sama seperti analisis sebelumnya, yaitu dengan membandingkan waktu eksekusi antara konfigurasi Hypervisor yang tidak dituning (default) dan konfigurasi yang telah dituning menggunakan formula \texttt{speedup}. Nilai S(p) yang lebih besar menunjukkan bahwa konfigurasi yang dituning lebih efisien dalam melakukan enkripsi AES dibandingkan dengan konfigurasi default.
 
 Dengan menganalisis nilai \texttt{speedup}, penulis dapat mengevaluasi dan membandingkan kinerja berbagai konfigurasi Hypervisor dalam melakukan tugas-tugas seperti kompresi video, validasi integritas data, dan enkripsi AES. Konfigurasi dengan nilai \texttt{speedup} tertinggi akan menjadi pilihan yang optimal untuk meningkatkan kinerja dan efisiensi dalam setiap tugas yang diuji.
-
-\iffalse
-    %-----------------------------------------------------------------------------%
-    \section{Pengujian Kompresi Video Dengan HandBrake}
-    %-----------------------------------------------------------------------------%
-    Untuk menguji dan membandingkan kinerja Hypervisor KVM sebelum dan sesudah tuning, {\saya} akan menggunakan software HandBrake, sebuah software kompresi video yang sudah banyak digunakan. Proses ini melibatkan penggunaan HandBrake untuk kompresi video pada dua lingkungan \vm\ yang berbeda, yang mana satu menggunakan KVM yang belum di-tuning dan yang lainnya menggunakan KVM yang telah di-tuning. Tujuan dari pengujian ini adalah untuk mengevaluasi sejauh mana tuning Hypervisor KVM dapat mempengaruhi kecepatan kompresi video.
-
-    HandBrake dipilih karena kemampuannya yang baik dalam mengkompresi video dan mudah untuk digunakan\cite{Folgar2014eg}. Dalam pengujian ini, video yang akan digunakan adalah "COSTA RICA IN 4K 60fps HDR (ULTRA HD)" yang diunduh dari YouTube dengan resolusi video yang digunakan adalah 2K. Video ini dipilih karena resolusi tingginya, yang memberikan tantangan yang baik untuk menguji efisiensi kompresi video pada kedua lingkungan \vm.
-
-    Parameter penting yang akan diukur dalam pengujian ini adalah:
-
-    \begin{enumerate}
-        \item \textbf{\f{Time Elapsed}}
-
-              \f{Time Elapsed} atau berapa lama waktu yang dibutuhkan oleh masing-masing \vm\ untuk menyelesaikan proses kompresi video.
-
-        \item \textbf{\f{Structural Similarity Index Measure Score}}
-
-              Structural Similarity Index Measure adalah cara untuk menilai kesamaan dari 2 buah gambar, untuk melihat apakah terjadi penurunan kualitas atau perbedaan yang besar antara gambar yang belum di compress dengan gambar yang sudah di compress.
-    \end{enumerate}
-
-
-    Data ini yang akan memberikan gambaran yang jelas mengenai perbedaan kinerja antara KVM yang telah di-tuning dengan yang belum.
-
-    Spesifikasi dari \vm\ yang akan digunakan dalam pengujian ini adalah sebagai berikut:
-    \begin{itemize}
-        \item \textbf{Cloud Platform}: Apache CloudStack 4.18.1
-        \item \textbf{OS}: Ubuntu Server 22.04 LTS
-        \item \textbf{CPU}: 1 CPU x 1.00 Ghz
-        \item \textbf{Memory}: 1024 MB
-    \end{itemize}
-
-    Perintah yang digunakan untuk melakukan kompresi video dengan handbrake adalah sebagai berikut:
-
-    \begin{verbatim}
-    ./HandBrakeCLI -i /path/to/input.mov -o /path/to/output.mp4
-    -e x264 -q 28 -r 15 -B 64 -X 1280 -O
-\end{verbatim}
-
-    Dengan perintah ini \saya akan melakukan kompresi video dengan codec x264. Codec yang dikembangkan oleh VideoLAN yang sudah banyak digunakan dikarenakan mampu untuk melakukan kompresi video yang baik dan rendahnya tingkat penurunan kualitas gambar.
-
-    %-----------------------------------------------------------------------------%
-    \section{Analisis Pengujian}
-    %-----------------------------------------------------------------------------%
-    Dalam analisis ini, waktu kompresi untuk Hypervisor KVM yang belum di-tuning akan disebut sebagai $T_{\mathrm{default}}$, sementara waktu kompresi untuk Hypervisor KVM yang telah di-tuning akan disebut sebagai $T_{\mathrm{tuned}}$. Waktu kompresi ini akan diambil dari logs HandBrake yang telah melakukan kompresi video. Untuk mengetahui apakah terdapat perbedaan yang signifikan, \saya\ dapat menggunakan formula speedup.
-
-    \[ \mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}} \]
-
-    Jika nilai speedup lebih dari 1, ini menandakan bahwa proses kompresi dengan Hypervisor KVM yang sudah di-tuning lebih cepat dibandingkan dengan yang belum di-tuning.
-
-    Pengujian akan dilakukan sebanyak kurang lebih sepuluh kali dan nantinya akan ditampilkan dalam bentuk grafik. Akan terdapat grafik \f{line chart} dengan dua garis dimana masing-merepresentasikan $T_{\mathrm{default}}$ dan $T_{\mathrm{tuned}}$.
-
-    Selain menganalisis waktu kompresi video, \saya\ juga akan melakukan analisis untuk menilai kualitas video yang telah dikompresi. Analisis ini akan melibatkan perbandingan nilai dari \f{Structural Similarity Index Measure} (SSIM) antara video yang dikompres menggunakan Hypervisor KVM default dan Hypervisor KVM yang telah di-tuning. SSIM adalah metrik yang mengukur kesamaan visual antara dua video. Semakin tinggi nilai SSIM, semakin mirip video yang dikompres dengan versi aslinya. Oleh karena itu, nilai SSIM yang lebih tinggi menunjukkan kualitas kompresi yang lebih baik, dimana integritas visual dari video asli lebih terjaga.
-
-
-    \iffalse
-        Selanjutnya, \saya\ akan menghitung efisiensi dari tuning Hypervisor KVM ini. Untuk mengetahui efisiensi, \saya\ dapat menggunakan formula efisiensi.
-
-        \[ \mathrm{Efficiency} = \frac{\mathrm{Speedup}}{\frac{R_{\mathrm{tuned}}}{R_{\mathrm{default}}}} \]
-
-
-        Tujuan menghitung efisiensi ini adalah untuk mengetahui seberapa efektif tuning dilakukan dalam menggunakan sumber daya yang ada, seperti penggunaan CPU dan memori. Perhitungan ini penting untuk menilai kinerja tuning dalam konteks keseluruhan penggunaan sumber daya, tidak hanya kecepatan kompresi.
-    \fi
-
-    % Time Measurement
-    %$T_{\mathrm{default}}$, $T_{\mathrm{tuned}}$
-    %\[ T_{\mathrm{default}}, \quad T_{\mathrm{tuned}} \]
-
-    % Speedup
-    %$\mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}}$
-    %\[ \mathrm{Speedup} = \frac{T_{\mathrm{default}}}{T_{\mathrm{tuned}}} \]
-
-
-
-    %-----------------------------------------------------------------------------%
-    \section{Satu Persamaan}
-    %-----------------------------------------------------------------------------%
-
-    \noindent \begin{align}\label{eq:garis}
-        \cfrac{y - y_{1}}{y_{2} - y_{1}} =
-        \cfrac{x - x_{1}}{x_{2} - x_{1}}
-    \end{align}
-
-    \equ~\ref{eq:garis} diatas adalah persamaan garis.
-    \equ~\ref{eq:garis} dan \ref{eq:bola} sama-sama dibuat dengan perintah \bslash
-    align.
-    Perintah ini juga dapat digunakan untuk menulis lebih dari satu persamaan.
-
-    \noindent \begin{align}\label{eq:bola}
-        \underbrace{|\overline{ab}|}_{\text{pada bola $|\overline{ab}| = r$}}
-        = \sqrt[2]{(x_{b} - x_{a})^{2} + (y_{b} - y_{a})^{2} +
-            \vert\vert(z_{b} - z_{a})^{2}}
-    \end{align}
-
-    %-----------------------------------------------------------------------------%
-    \section{Lebih dari Satu Persamaan}
-    \label{sec:multiEqu}
-    %-----------------------------------------------------------------------------%
-    \noindent \begin{align}\label{eq:matriks}
-        |\overline{a} * \overline{b}| & = |\overline{a}| |\overline{b}| \sin\theta
-        \\[0.2cm]
-        \overline{a} * \overline{b}   & =
-        \begin{array}{| c c c |}
-            \hat{i} & x_{1} & x_{2} \\
-            \hat{j} & y_{1} & y_{2} \\
-            \hat{k} & z_{1} & z_{2} \\
-        \end{array} \nonumber                                                    \\[0.2cm]
-                                      & = \hat{i} \,
-        \begin{array}{ | c c | }
-            y_{1} & y_{2} \\
-            z_{1} & z_{2} \\
-        \end{array}
-        + \hat{j} \,
-        \begin{array}{ | c c | }
-            z_{1} & z_{2} \\
-            x_{1} & x_{2} \\
-        \end{array}
-        + \hat{k} \,
-        \begin{array}{ | c c | }
-            x_{1} & x_{2} \\
-            y_{1} & y_{2} \\
-        \end{array}
-        \nonumber
-    \end{align}
-
-    Pada \equ~\ref{eq:matriks} dapat dilihat beberapa baris menjadi satu bagian
-    dari \equ~\ref{eq:matriks}.
-    Sedangkan dibawah ini dapat dilihat bahwa dengan cara yang sama, \equ~
-    \ref{eq:gabungan1}, \ref{eq:gabungan2}, dan \ref{eq:gabungan3} memiliki nomor
-    persamaannya masing-masing.
-
-    \noindent \begin{align}\label{eq:gabungan1}
-        \int_{a}^{b} f(x)\, dx + \int_{b}^{c} f(x) \, dx = \int_{a}^{c} f(x) \, dx
-        \\\label{eq:gabungan2}
-        \lim_{x \to \infty} \frac{f(x)}{g(x)} = 0 \hspace{1cm}
-        \text{jika pangkat $f(x)$ $<$ pangkat $g(x)$} \\\label{eq:gabungan3}
-        a^{m^{a \, ^{n}\log b }} = b^{\frac{m}{n}}
-    \end{align}
-\fi
