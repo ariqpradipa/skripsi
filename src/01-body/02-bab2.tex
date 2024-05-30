@@ -7,7 +7,7 @@ Pada bab ini, akan dijelaskan mengenai landasan teori yang menjadi dasar untuk m
 %-----------------------------------------------------------------------------%
 \section{\cc}
 %-----------------------------------------------------------------------------%
-\cc, menurut definisi National Institute of Standards and Technology (NIST), merupakan suatu model komputasi yang menyediakan akses dan konfigurasi sumber daya komputasi seperti jaringan, server, penyimpanan, aplikasi, dan layanan secara on-demand, memungkinkan pelepasan yang cepat tanpa interaksi yang kompleks dengan penyedia layanan\cite{mell2009nist}. \cc\ bukanlah suatu teknologi spesifik, melainkan sebuah model yang menggambarkan operasional dan ekonomi untuk penyediaan serta penggunaan infrastruktur IT dan layanan terkait. Beberapa definisi cloud memiliki karakteristik umum yang sama, seperti \f{pay-per-use} (pembayaran sesuai dengan penggunaan), kapasitas yang elastis, layanan mandiri, dan abstraksi atau virtualisasi sumber daya\cite{Buyya_Broberg_Goscinski_2011}. NIST membagi model layanan cloud menjadi\cite{mell2009nist}:
+\cc, menurut definisi National Institute of Standards and Technology (NIST), merupakan suatu model komputasi yang menyediakan akses dan konfigurasi sumber daya komputasi seperti jaringan, server, penyimpanan, aplikasi, dan layanan secara on-demand, memungkinkan pelepasan yang cepat tanpa interaksi yang kompleks dengan penyedia layanan \cite{mell2009nist}. \cc\ bukanlah suatu teknologi spesifik, melainkan sebuah model yang menggambarkan operasional dan ekonomi untuk penyediaan serta penggunaan infrastruktur IT dan layanan terkait. Beberapa definisi cloud memiliki karakteristik umum yang sama, seperti \f{pay-per-use} (pembayaran sesuai dengan penggunaan), kapasitas yang elastis, layanan mandiri, dan abstraksi atau virtualisasi sumber daya \cite{Buyya_Broberg_Goscinski_2011}. NIST membagi model layanan cloud menjadi \cite{mell2009nist}:
 \begin{enumerate}
 	\item Software As A Service (SaaS)
 
@@ -35,21 +35,21 @@ Pada bab ini, akan dijelaskan mengenai landasan teori yang menjadi dasar untuk m
 	\caption{Logo Apache CloudStack}
 	\label{fig:LogoApacheCloudStack}
 \end{figure}
-Apache CloudStack adalah perangkat lunak \oss\ yang dirancang untuk mendeploy dan mengelola jaringan besar mesin virtual, sebagai platform komputasi awan berbasis Infrastructure as a Service (IaaS) yang sangat tersedia dan dapat \f{scaleable}\cite{cloudstackabout}. Pada Gambar \ref{fig:LogoApacheCloudStack} adalah logo dari Apache Cloudstack. CloudStack digunakan oleh sejumlah penyedia layanan untuk menawarkan layanan cloud publik, dan oleh banyak perusahaan untuk menyediakan penawaran cloud \f{on-premise} (pribadi), atau sebagai bagian dari solusi cloud hybrid\cite{cloudstackabout}.
+Apache CloudStack adalah perangkat lunak \oss\ yang dirancang untuk mendeploy dan mengelola jaringan besar mesin virtual, sebagai platform komputasi awan berbasis Infrastructure as a Service (IaaS) yang sangat tersedia dan dapat \f{scaleable} \cite{cloudstackabout}. Pada Gambar \ref{fig:LogoApacheCloudStack} adalah logo dari Apache Cloudstack. CloudStack digunakan oleh sejumlah penyedia layanan untuk menawarkan layanan cloud publik, dan oleh banyak perusahaan untuk menyediakan penawaran cloud \f{on-premise} (pribadi), atau sebagai bagian dari solusi cloud hybrid \cite{cloudstackabout}.
 
-CloudStack adalah solusi siap pakai yang mencakup seluruh "stack" fitur yang paling diinginkan oleh organisasi dengan IaaS cloud: orkestrasi komputasi, Jaringan sebagai Layanan, manajemen pengguna dan akun, dan antarmuka Pengguna (UI) yang baik\cite{cloudstackabout}.
+CloudStack adalah solusi siap pakai yang mencakup seluruh "stack" fitur yang paling diinginkan oleh organisasi dengan IaaS cloud: orkestrasi komputasi, Jaringan sebagai Layanan, manajemen pengguna dan akun, dan antarmuka Pengguna (UI) yang baik \cite{cloudstackabout}.
 
-CloudStack saat ini mendukung hypervisor paling populer: VMware, KVM, Citrix XenServer, Xen Cloud Platform (XCP), Oracle VM server, dan Microsoft Hyper-V\cite{cloudstackabout}.
+CloudStack saat ini mendukung hypervisor paling populer: VMware, KVM, Citrix XenServer, Xen Cloud Platform (XCP), Oracle VM server, dan Microsoft Hyper-V \cite{cloudstackabout}.
 
-Pengguna dapat mengelola cloud mereka dengan antarmuka web yang mudah digunakan, alat \f{commandline}, dan/atau API RESTful yang lengkap. Selain itu, CloudStack menyediakan API yang kompatibel dengan AWS EC2 dan S3 untuk organisasi yang ingin mendeploy cloud secara hybrid\cite{cloudstackabout}.
+Pengguna dapat mengelola cloud mereka dengan antarmuka web yang mudah digunakan, alat \f{commandline}, dan/atau API RESTful yang lengkap. Selain itu, CloudStack menyediakan API yang kompatibel dengan AWS EC2 dan S3 untuk organisasi yang ingin mendeploy cloud secara hybrid \cite{cloudstackabout}.
 
-CloudStack, yang awalnya dikembangkan oleh Cloud.com, diakuisisi oleh Citrix pada tahun 2011 dan diserahkan kepada Apache Software Foundation pada tahun 2012. Pengembangan saat ini diatur oleh Apache Foundation dengan kode yang tersedia di bawah lisensi Apache 2.0\cite{techtargetcloudstack}.
+CloudStack, yang awalnya dikembangkan oleh Cloud.com, diakuisisi oleh Citrix pada tahun 2011 dan diserahkan kepada Apache Software Foundation pada tahun 2012. Pengembangan saat ini diatur oleh Apache Foundation dengan kode yang tersedia di bawah lisensi Apache 2.0 \cite{techtargetcloudstack}.
 
 
 %-----------------------------------------------------------------------------%
 \section{Hypervisor}
 %-----------------------------------------------------------------------------%
-Sebuah hypervisor adalah perangkat lunak atau perangkat keras yang digunakan untuk menciptakan dan mengelola mesin virtual. Juga dikenal sebagai \f{'Virtual Machine Monitor'} atau VMM, hypervisor memungkinkan satu server fisik menjalankan beberapa mesin virtual, mengatasi keterbatasan satu sistem operasi pada satu server. Hypervisor dapat berupa perangkat keras atau program, dan fungsinya adalah menciptakan, memonitor, dan mengelola mesin-mesin virtual\cite{MacPherson_2023}.
+Sebuah hypervisor adalah perangkat lunak atau perangkat keras yang digunakan untuk menciptakan dan mengelola mesin virtual. Juga dikenal sebagai \f{'Virtual Machine Monitor'} atau VMM, hypervisor memungkinkan satu server fisik menjalankan beberapa mesin virtual, mengatasi keterbatasan satu sistem operasi pada satu server. Hypervisor dapat berupa perangkat keras atau program, dan fungsinya adalah menciptakan, memonitor, dan mengelola mesin-mesin virtual \cite{MacPherson_2023}.
 
 \begin{figure}
 	\centering
@@ -59,7 +59,7 @@ Sebuah hypervisor adalah perangkat lunak atau perangkat keras yang digunakan unt
 	\label{fig:HypervisorType1vsType2}
 \end{figure}
 
-Pada Gambar \ref{fig:HypervisorType1vsType2} diperlihatkan diagram sederhana perbedaan daripada Hypervisor tipe 1 dan Hypervisor tipe 2. Hypervisor tipe 1 dan tipe 2 merupakan perangkat lunak yang digunakan untuk menjalankan satu atau lebih \vm\ (VM) pada satu mesin fisik. \vm\ adalah replika digital dari mesin fisik, menciptakan lingkungan komputasi terisolasi yang pengguna alami sebagai sepenuhnya independen dari perangkat keras yang mendasarinya\cite{hypervisor1vs2}. Hypervisor mengelola dan mengalokasikan sumber daya fisik ke VM dan berkomunikasi dengan perangkat keras di latar belakang. Hypervisor tipe 1 ditempatkan di atas server tanpa sistem operasi dan memiliki akses langsung ke sumber daya perangkat keras, sehingga dikenal juga sebagai \f{bare metal} hypervisor. Sebaliknya, hypervisor tipe 2 adalah aplikasi yang diinstal pada sistem operasi host dan juga dikenal sebagai \f{hosted} atau \f{embedded} hypervisor\cite{hypervisor1vs2}.
+Pada Gambar \ref{fig:HypervisorType1vsType2} diperlihatkan diagram sederhana perbedaan daripada Hypervisor tipe 1 dan Hypervisor tipe 2. Hypervisor tipe 1 dan tipe 2 merupakan perangkat lunak yang digunakan untuk menjalankan satu atau lebih \vm\ (VM) pada satu mesin fisik. \vm\ adalah replika digital dari mesin fisik, menciptakan lingkungan komputasi terisolasi yang pengguna alami sebagai sepenuhnya independen dari perangkat keras yang mendasarinya \cite{hypervisor1vs2}. Hypervisor mengelola dan mengalokasikan sumber daya fisik ke VM dan berkomunikasi dengan perangkat keras di latar belakang. Hypervisor tipe 1 ditempatkan di atas server tanpa sistem operasi dan memiliki akses langsung ke sumber daya perangkat keras, sehingga dikenal juga sebagai \f{bare metal} hypervisor. Sebaliknya, hypervisor tipe 2 adalah aplikasi yang diinstal pada sistem operasi host dan juga dikenal sebagai \f{hosted} atau \f{embedded} hypervisor \cite{hypervisor1vs2}.
 
 
 %-----------------------------------------------------------------------------%
@@ -72,7 +72,7 @@ KVM telah disatukan ke dalam kernel Linux utama pada versi 2.6.20, yang dirilis 
 
 KVM mendukung virtualisasi perangkat keras untuk berbagai sistem operasi guest, termasuk BSD, Solaris, Windows, Haiku, ReactOS, Plan 9, dan lainnya. Sebagai bagian dari kernel Linux, KVM langsung mengambil manfaat dari setiap fitur baru, perbaikan, dan kemajuan Linux tanpa perlu rekayasa tambahan.
 
-Dalam pengaturan KVM, CPU virtual dari VM diimplementasikan sebagai thread (disebut "virtual CPU" atau vcpu) yang dijadwalkan oleh \f{Linux Kernel Scheduler}. KVM pada dasarnya adalah pengemudi untuk ekstensi virtualisasi processor. Setiap kali \f{Linux Scheduler} memilih tugas untuk dijalankan pada CPU fisik, dan tugas tersebut dikerjakan oleh CPU virtual dari VM, KVM "dihubungi" untuk memastikan bahwa yang sebenarnya berjalan di perangkat keras adalah program dari OS guest\cite{Abeni2020}.
+Dalam pengaturan KVM, CPU virtual dari VM diimplementasikan sebagai thread (disebut "virtual CPU" atau vcpu) yang dijadwalkan oleh \f{Linux Kernel Scheduler}. KVM pada dasarnya adalah pengemudi untuk ekstensi virtualisasi processor. Setiap kali \f{Linux Scheduler} memilih tugas untuk dijalankan pada CPU fisik, dan tugas tersebut dikerjakan oleh CPU virtual dari VM, KVM "dihubungi" untuk memastikan bahwa yang sebenarnya berjalan di perangkat keras adalah program dari OS guest \cite{Abeni2020}.
 
 \begin{figure}
 	\centering
@@ -88,7 +88,7 @@ Pada Gambar \ref{fig:xen-kvm} adalah struktur daripada hypervisor KVM. KVM berja
 \section{\f{Virtual Machine}}
 %-----------------------------------------------------------------------------%
 
-Virtual Machine (VM) adalah sebuah lingkungan komputasi yang dibuat secara virtual di dalam sebuah komputer fisik (host)\cite{Pradilla2016}. VM ini berfungsi seperti sebuah komputer independen yang dapat menjalankan sistem operasi dan aplikasi seperti komputer fisik biasa, tetapi semuanya berjalan dalam lingkungan virtual yang terisolasi di dalam host fisik. Setiap \vm\ (VM) menjalankan sistem operasi secara independen dan beroperasi terpisah dari VM lainnya, bahkan ketika semuanya berjalan pada host yang sama. Perangkat lunak yang dikenal sebagai hypervisor atau \vmm\ (VMM) memungkinkan kita untuk menjalankan berbagai sistem operasi yang berbeda secara bersamaan pada \vm\ yang berbeda. VM memiliki beberapa keunggulan dibandingkan dengan mesin fisik, termasuk kemampuan untuk menjalankan beberapa lingkungan sistem operasi pada satu komputer fisik, mendukung aplikasi \f{legacy}, dan menyediakan opsi pemulihan dalam situasi bencana. VM digunakan untuk berbagai keperluan, seperti \cc, pengujian sistem operasi baru, dan menjalankan beberapa aplikasi pada satu mesin fisik\cite{ibmWhatVirtualMachine}.
+Virtual Machine (VM) adalah sebuah lingkungan komputasi yang dibuat secara virtual di dalam sebuah komputer fisik (host) \cite{Pradilla2016}. VM ini berfungsi seperti sebuah komputer independen yang dapat menjalankan sistem operasi dan aplikasi seperti komputer fisik biasa, tetapi semuanya berjalan dalam lingkungan virtual yang terisolasi di dalam host fisik. Setiap \vm\ (VM) menjalankan sistem operasi secara independen dan beroperasi terpisah dari VM lainnya, bahkan ketika semuanya berjalan pada host yang sama. Perangkat lunak yang dikenal sebagai hypervisor atau \vmm\ (VMM) memungkinkan kita untuk menjalankan berbagai sistem operasi yang berbeda secara bersamaan pada \vm\ yang berbeda. VM memiliki beberapa keunggulan dibandingkan dengan mesin fisik, termasuk kemampuan untuk menjalankan beberapa lingkungan sistem operasi pada satu komputer fisik, mendukung aplikasi \f{legacy}, dan menyediakan opsi pemulihan dalam situasi bencana. VM digunakan untuk berbagai keperluan, seperti \cc, pengujian sistem operasi baru, dan menjalankan beberapa aplikasi pada satu mesin fisik \cite{ibmWhatVirtualMachine}.
 
 \begin{figure}
 	\centering
@@ -103,11 +103,11 @@ Terdapat perbedaan dalam cara berjalan antara komputer tanpa virtualisasi (host)
 %-----------------------------------------------------------------------------%
 \section{\f{Advanced Encryption Standard} (AES)}
 %-----------------------------------------------------------------------------%
-\f{Advanced Encryption Standard} atau disingkat AES pertama kali diumumkan oleh NIST \f{(National Institute Of Standards and Technology)} pada tahun 2001 sebagai pengganti algoritma \f{Data Encryption Standard} atau DES yang semakin mudah diretas. AES merupakan hasil dari kompetisi yang diadakan oleh NIST pada tahun 1997 yang dimenangkan oleh tim dari belgium yang memiliki nama asli Rijndael. Rijndael dikembangkan oleh dua orang kriptografer dari belgium bernama Joan Daemen dan Vincent Rijmen. AES dipublikasikan oleh NIST pada tahun 2001 dan tersebar secara efektif pada bulan May 2002 setelah disetujui oleh Menteri Perdagan Amerika, Donald Evans\cite{Kaffahemailencryptaes}.
+\f{Advanced Encryption Standard} atau disingkat AES pertama kali diumumkan oleh NIST \f{(National Institute Of Standards and Technology)} pada tahun 2001 sebagai pengganti algoritma \f{Data Encryption Standard} atau DES yang semakin mudah diretas. AES merupakan hasil dari kompetisi yang diadakan oleh NIST pada tahun 1997 yang dimenangkan oleh tim dari belgium yang memiliki nama asli Rijndael. Rijndael dikembangkan oleh dua orang kriptografer dari belgium bernama Joan Daemen dan Vincent Rijmen. AES dipublikasikan oleh NIST pada tahun 2001 dan tersebar secara efektif pada bulan May 2002 setelah disetujui oleh Menteri Perdagan Amerika, Donald Evans \cite{Kaffahemailencryptaes}.
 
-AES merupakan metode enkripsi data dengan teknik enkripsi simetris, yang berarti menggunakan kunci yang sama untuk proses enkripsi dan dekripsi. Kunci pada AES tersedia dalam tiga varian ukuran, yakni 128 bit, 192 bit, dan 256 bit. Meskipun ukuran kuncinya bervariasi, ukuran blok data yang dienkripsi tetap sama, yaitu 128 bit. Ukuran blok mengacu pada cara data dienkripsi dengan memecah dan menyusunnya. Data disusun menjadi array 4x4 berukuran 16 byte, di mana setiap byte terdiri dari 8 bit, sehingga total setiap blok berjumlah 128 bit\cite{NistAes}.
+AES merupakan metode enkripsi data dengan teknik enkripsi simetris, yang berarti menggunakan kunci yang sama untuk proses enkripsi dan dekripsi. Kunci pada AES tersedia dalam tiga varian ukuran, yakni 128 bit, 192 bit, dan 256 bit. Meskipun ukuran kuncinya bervariasi, ukuran blok data yang dienkripsi tetap sama, yaitu 128 bit. Ukuran blok mengacu pada cara data dienkripsi dengan memecah dan menyusunnya. Data disusun menjadi array 4x4 berukuran 16 byte, di mana setiap byte terdiri dari 8 bit, sehingga total setiap blok berjumlah 128 bit \cite{NistAes}.
 
-Pada tahun 2010, Instruksi Intel® AES (AES-NI) diperkenalkan dengan prosesor Intel® Core™ terbaru berbasis mikroarsitektur 32nm Westmere, yang meningkatkan kecepatan dan keamanan enkripsi serta dekripsi data menggunakan \f{Advanced Encryption Standard} (AES). Instruksi ini terdiri dari enam instruksi: empat untuk enkripsi dan dekripsi, serta dua untuk \f{key expansion}. Instruksi ini menawarkan peningkatan kinerja yang signifikan dibandingkan implementasi perangkat lunak saja dan meningkatkan keamanan dengan menghilangkan serangan berbasis waktu dan cache. Selain itu, instruksi ini menyederhanakan implementasi AES, mengurangi ukuran kode, dan meminimalkan risiko keamanan\cite{aes-323641-001}.
+Pada tahun 2010, Instruksi Intel® AES (AES-NI) diperkenalkan dengan prosesor Intel® Core™ terbaru berbasis mikroarsitektur 32nm Westmere, yang meningkatkan kecepatan dan keamanan enkripsi serta dekripsi data menggunakan \f{Advanced Encryption Standard} (AES). Instruksi ini terdiri dari enam instruksi: empat untuk enkripsi dan dekripsi, serta dua untuk \f{key expansion}. Instruksi ini menawarkan peningkatan kinerja yang signifikan dibandingkan implementasi perangkat lunak saja dan meningkatkan keamanan dengan menghilangkan serangan berbasis waktu dan cache. Selain itu, instruksi ini menyederhanakan implementasi AES, mengurangi ukuran kode, dan meminimalkan risiko keamanan \cite{aes-323641-001}.
 
 
 %-----------------------------------------------------------------------------%
@@ -116,14 +116,14 @@ Pada tahun 2010, Instruksi Intel® AES (AES-NI) diperkenalkan dengan prosesor In
 \f{Cyclic Redundancy Check} (CRC) merupakan teknik yang digunakan untuk mendeteksi kesalahan dalam transmisi data digital. Teknik ini melibatkan penambahan kode pemeriksaan pada data untuk mengidentifikasi kesalahan yang mungkin terjadi selama proses transmisi. CRC didasarkan pada konsep pembagian polinomial, khususnya dengan menggunakan \f{Linear Feedback Shift Registers} (LFSRs).
 
 \begin{enumerate}
-	\item Gambaran Teknik CRC\cite{zhangLowComplexityCRC}:
+	\item Gambaran Teknik CRC \cite{zhangLowComplexityCRC}:
 	      \begin{itemize}
 		      \item CRC digunakan untuk mendeteksi kesalahan dalam data digital, terutama pada aplikasi yang beroperasi dengan kecepatan tinggi.
 		      \item CRC menggunakan \f{Linear Feedback Shift Registers} untuk deteksi kesalahan.
 		      \item Teknik ini melibatkan pembagian biner untuk menghasilkan sisa (CRC) yang kemudian ditambahkan ke data sebagai pemeriksaan kesalahan di penerima.
 	      \end{itemize}
 
-	\item Prinsip CRC\cite{SrideviCRCDataRecovery}:
+	\item Prinsip CRC \cite{SrideviCRCDataRecovery}:
 	      \begin{itemize}
 		      \item Teknik CRC menambahkan kode pemeriksaan r-bit ke kode informasi k-bit, membentuk kode (n, k) dengan panjang n(k + r) bit.
 		      \item Setiap kode (n, k) memiliki polinomial g(x) dengan kekuatan maksimum n-k=r terkait dengannya, dikenal sebagai polinomial yang dihasilkan dari kode CRC.
@@ -138,7 +138,7 @@ Pada tahun 2010, Instruksi Intel® AES (AES-NI) diperkenalkan dengan prosesor In
 \section{virsh}
 %-----------------------------------------------------------------------------%
 
-virsh adalah \f{command line tool} yang merupakan bagian dari \f{library} libvirt dan secara utama digunakan untuk mengelola dan berinteraksi dengan teknologi virtualisasi pada sistem Linux, khususnya KVM (Kernel-based Virtual Machine) dan QEMU (Quick Emulator), dan mendukung hypervisor lainnya seperti Xen, LXC, OpenVZ, VirtualBox, dan VMware ESX\cite{libvirtLibvirtVirsh}.
+virsh adalah \f{command line tool} yang merupakan bagian dari \f{library} libvirt dan secara utama digunakan untuk mengelola dan berinteraksi dengan teknologi virtualisasi pada sistem Linux, khususnya KVM (Kernel-based Virtual Machine) dan QEMU (Quick Emulator), dan mendukung hypervisor lainnya seperti Xen, LXC, OpenVZ, VirtualBox, dan VMware ESX \cite{libvirtLibvirtVirsh}.
 
 Secara sederhana penggunaan virsh adalah seperti ini
 \begin{center}
@@ -152,16 +152,16 @@ Pada command ini, domain adalah ID domain numerik, atau nama domain, atau UUID d
 %-----------------------------------------------------------------------------%
 \section{\f{Streaming SIMD Extensions}}
 %-----------------------------------------------------------------------------%
-Streaming SIMD Extensions (SSE) adalah instruksi yang dibawa oleh Intel pada tahun 1999 dengan prosesor Pentium III dengan tujuan untuk meningkatkan kinerja prosesor arsitektur x86. Awalnya dikenal sebagai Katmai New Instructions (KNI) selama pengembangan, SSE secara signifikan meningkatkan kemampuan pemrosesan multimedia dan grafis dibanding pendahulunya, MMX. SSE mencakup 70 instruksi baru yang dirancang untuk meningkatkan tugas seperti pengolahan gambar, video 3D, audio dan video streaming, serta pengenalan suara\cite{informitStreamingSIMD}.
+Streaming SIMD Extensions (SSE) adalah instruksi yang dibawa oleh Intel pada tahun 1999 dengan prosesor Pentium III dengan tujuan untuk meningkatkan kinerja prosesor arsitektur x86. Awalnya dikenal sebagai Katmai New Instructions (KNI) selama pengembangan, SSE secara signifikan meningkatkan kemampuan pemrosesan multimedia dan grafis dibanding pendahulunya, MMX. SSE mencakup 70 instruksi baru yang dirancang untuk meningkatkan tugas seperti pengolahan gambar, video 3D, audio dan video streaming, serta pengenalan suara \cite{informitStreamingSIMD}.
 
-Tidak seperti pendahulunya, MMX menggunakan unit floating-point standar yang sama, sedangkan SSE menggunakan unit terpisah dalam prosesor untuk perhitungan floating-point, yang memungkinkan pemrosesan yang lebih efisien. SSE mendukung operasi floating-point SIMD (Single Instruction Multiple Data) single precision, yang sangat penting untuk mengatasi bottleneck dalam pemrosesan grafis 3D. Teknologi ini memungkinkan satu instruksi untuk melakukan hingga empat operasi floating-point secara bersamaan, meningkatkan kecepatan dan efisiensi pemrosesan\cite{informitStreamingSIMD}.
+Tidak seperti pendahulunya, MMX menggunakan unit floating-point standar yang sama, sedangkan SSE menggunakan unit terpisah dalam prosesor untuk perhitungan floating-point, yang memungkinkan pemrosesan yang lebih efisien. SSE mendukung operasi floating-point SIMD (Single Instruction Multiple Data) single precision, yang sangat penting untuk mengatasi bottleneck dalam pemrosesan grafis 3D. Teknologi ini memungkinkan satu instruksi untuk melakukan hingga empat operasi floating-point secara bersamaan, meningkatkan kecepatan dan efisiensi pemrosesan \cite{informitStreamingSIMD}.
 
-Manfaat SSE yang utama terlihat dalam decoding MPEG2, format standar untuk video DVD, memungkinkan prosesor yang dilengkapi SSE untuk menangani decoding tersebut di perangkat lunak dengan kecepatan penuh tanpa perangkat keras tambahan. SSE juga meningkatkan penggunaan CPU dan kinerja perangkat lunak pengenalan suara, memberikan akurasi yang lebih tinggi dan waktu respons yang lebih cepat. Untuk sepenuhnya memanfaatkan kemampuan SSE, aplikasi harus diset secara khusus agar SSE-aware, sebuah fitur yang sekarang umum dalam banyak aplikasi grafis dan berhubungan dengan suara. SSE adalah perluasan dari MMX, yang berarti bahwa prosesor yang mendukung SSE juga kompatibel dengan instruksi MMX, hal ini memastikan \f{backward compatibility} dengan aplikasi yang mendukung MMX\cite{informitStreamingSIMD}.
+Manfaat SSE yang utama terlihat dalam decoding MPEG2, format standar untuk video DVD, memungkinkan prosesor yang dilengkapi SSE untuk menangani decoding tersebut di perangkat lunak dengan kecepatan penuh tanpa perangkat keras tambahan. SSE juga meningkatkan penggunaan CPU dan kinerja perangkat lunak pengenalan suara, memberikan akurasi yang lebih tinggi dan waktu respons yang lebih cepat. Untuk sepenuhnya memanfaatkan kemampuan SSE, aplikasi harus diset secara khusus agar SSE-aware, sebuah fitur yang sekarang umum dalam banyak aplikasi grafis dan berhubungan dengan suara. SSE adalah perluasan dari MMX, yang berarti bahwa prosesor yang mendukung SSE juga kompatibel dengan instruksi MMX, hal ini memastikan \f{backward compatibility} dengan aplikasi yang mendukung MMX \cite{informitStreamingSIMD}.
 
 SSE telah berkembang seiring waktu dengan versi seperti SSE2, SSE3, dan SSE4, masing-masing membawa fitur baru dan meningkatkan kemampuan pemrosesan secara keseluruhan. Ekstensi ini telah banyak diadopsi dalam pengembangan perangkat lunak, terutama dalam bidang di mana pemrosesan paralel sangat penting.
 
 \subsection{SSE2}
-SSE2 adalah perluasan dari kemampuan SIMD (Single Instruction, Multiple Data) yang awalnya diperkenalkan dengan set instruksi SSE (Streaming SIMD Extensions). Pertama kali diperkenalkan oleh Intel dengan prosesor Pentium 4\cite{SystemVAppBinaryInterfaceMichael}. Perbedaan utama dan peningkatan dalam SSE2 dibandingkan dengan pendahulunya SSE meliputi:
+SSE2 adalah perluasan dari kemampuan SIMD (Single Instruction, Multiple Data) yang awalnya diperkenalkan dengan set instruksi SSE (Streaming SIMD Extensions). Pertama kali diperkenalkan oleh Intel dengan prosesor Pentium 4 \cite{SystemVAppBinaryInterfaceMichael}. Perbedaan utama dan peningkatan dalam SSE2 dibandingkan dengan pendahulunya SSE meliputi:
 
 \begin{enumerate}
 	\item Rentang Jenis Data yang Lebih Luas
@@ -177,7 +177,7 @@ SSE2 adalah perluasan dari kemampuan SIMD (Single Instruction, Multiple Data) ya
 	      Dengan menyediakan operasi pada tipe data yang lebih besar dan set operasi yang lebih luas, SSE2 meningkatkan efisiensi dan kinerja aplikasi yang berhubungan dengan perhitungan matematika kompleks, grafik 3D, pengkodean video, dan tugas multimedia lainnya.
 \end{enumerate}
 
-Penggabungan SSE2 dalam arsitektur AMD64 menyoroti pentingnya dalam komputasi modern, terutama untuk aplikasi yang memerlukan kinerja tinggi dalam pengolahan numerik dan multimedia. Dokumen ABI kemungkinan mengasumsikan keakraban dengan konsep-konsep ini, lebih berfokus pada detail implementasi dalam arsitektur AMD64 daripada menjelaskan perbedaan fundamental antara SSE dan SSE2\cite{SystemVAppBinaryInterfaceMichael}.
+Penggabungan SSE2 dalam arsitektur AMD64 menyoroti pentingnya dalam komputasi modern, terutama untuk aplikasi yang memerlukan kinerja tinggi dalam pengolahan numerik dan multimedia. Dokumen ABI kemungkinan mengasumsikan keakraban dengan konsep-konsep ini, lebih berfokus pada detail implementasi dalam arsitektur AMD64 daripada menjelaskan perbedaan fundamental antara SSE dan SSE2 \cite{SystemVAppBinaryInterfaceMichael}.
 
 \subsection{SSE3}
 SSE3 (Streaming SIMD Extensions 3) merupakan ekstensi dari set instruksi SSE2, yang mana memperluas teknologi SSE (Streaming SIMD Extensions) asli. Perbedaan antara SSE3 dengan SSE2 antara lain:
@@ -185,19 +185,19 @@ SSE3 (Streaming SIMD Extensions 3) merupakan ekstensi dari set instruksi SSE2, y
 \begin{enumerate}
 	\item 13 Set Instruksi Baru
 
-	      SSE3 menambahkan tiga belas instruksi baru ke set instruksi SSE/SSE2 yang ada\cite{Hassaballah2008}.
+	      SSE3 menambahkan tiga belas instruksi baru ke set instruksi SSE/SSE2 yang ada \cite{Hassaballah2008}.
 
 	\item Dukungan untuk Model Eksekusi SIMD:
 
-	      Dari 13 instruksi ini, sepuluh dirancang untuk mendukung model eksekusi SIMD (Single Instruction, Multiple Data). Model ini merupakan aspek penting dari komputasi paralel, di mana beberapa titik data diproses secara bersamaan menggunakan satu instruksi. Ini sangat bermanfaat untuk tugas-tugas seperti pengolahan grafis, perhitungan ilmiah, dan aplikasi multimedia, di mana operasi pada set data besar adalah hal yang umum\cite{Hassaballah2008}.
+	      Dari 13 instruksi ini, sepuluh dirancang untuk mendukung model eksekusi SIMD (Single Instruction, Multiple Data). Model ini merupakan aspek penting dari komputasi paralel, di mana beberapa titik data diproses secara bersamaan menggunakan satu instruksi. Ini sangat bermanfaat untuk tugas-tugas seperti pengolahan grafis, perhitungan ilmiah, dan aplikasi multimedia, di mana operasi pada set data besar adalah hal yang umum \cite{Hassaballah2008}.
 
 	\item Konversi Floating-Point ke Integer:
 
-	      Salah satu instruksi SSE3 secara spesifik mempercepat pemrograman \f{x87-style}. Instruksi ini berfokus pada peningkatan efisiensi dalam mengkonversi nilai floating-point menjadi integer. Hal ini bisa sangat berguna dalam skenario di mana perhitungan melibatkan tipe data floating-point dan integer\cite{Hassaballah2008}.
+	      Salah satu instruksi SSE3 secara spesifik mempercepat pemrograman \f{x87-style}. Instruksi ini berfokus pada peningkatan efisiensi dalam mengkonversi nilai floating-point menjadi integer. Hal ini bisa sangat berguna dalam skenario di mana perhitungan melibatkan tipe data floating-point dan integer \cite{Hassaballah2008}.
 
 	\item Akselerasi Sinkronisasi Thread:
 
-	      Dua instruksi lain dalam set SSE3 ditujukan untuk meningkatkan sinkronisasi thread. Peningkatan ini sangat penting dalam aplikasi multi-thread, di mana pengelolaan eksekusi dan koordinasi beberapa thread adalah kunci untuk kinerja yang baik dan efisiensi\cite{Hassaballah2008}.
+	      Dua instruksi lain dalam set SSE3 ditujukan untuk meningkatkan sinkronisasi thread. Peningkatan ini sangat penting dalam aplikasi multi-thread, di mana pengelolaan eksekusi dan koordinasi beberapa thread adalah kunci untuk kinerja yang baik dan efisiensi \cite{Hassaballah2008}.
 \end{enumerate}
 
 Secara singkat, SSE3 memperluas kemampuan set instruksi SSE dan SSE2 dengan penekanan pada peningkatan eksekusi SIMD, konversi floating-point ke integer, serta sinkronisasi thread. Selain itu, SSE3 tetap mempertahankan kompatibilitas dengan jenis data dan lingkungan pemrograman yang sudah ada. Oleh karena itu, SSE3 menjadi alat yang sangat berguna bagi pengembang yang bekerja pada tugas komputasi berkinerja tinggi, terutama yang melibatkan pemrosesan paralel dan jenis data yang kompleks.
@@ -216,7 +216,7 @@ SSSE3 (Supplemental Streaming SIMD Extensions 3) adalah ekstensi dari set instru
 \end{enumerate}
 
 \subsection{SSE4}
-SSE4, yang merupakan singkatan dari Streaming SIMD Extensions 4, adalah serangkaian instruksi yang diperkenalkan oleh Intel dalam prosesor 64-bitnya yang dibuat dengan teknologi proses 45 nm. SSE4 terdiri dari dua subset: SSE4.1 dan SSE4.2\cite{sse4reference}.
+SSE4, yang merupakan singkatan dari Streaming SIMD Extensions 4, adalah serangkaian instruksi yang diperkenalkan oleh Intel dalam prosesor 64-bitnya yang dibuat dengan teknologi proses 45 nm. SSE4 terdiri dari dua subset: SSE4.1 dan SSE4.2 \cite{sse4reference}.
 
 \begin{table}[h]
 	\centering
@@ -234,6 +234,6 @@ SSE4, yang merupakan singkatan dari Streaming SIMD Extensions 4, adalah serangka
 	\label{table:perbandingan_sse4}
 \end{table}
 
-Berdasarkan informasi dalam tabel \ref{table:perbandingan_sse4}, SSE4.1 dirancang untuk meningkatkan performa dalam aplikasi media, pencitraan, dan 3D, serta menghadirkan 47 instruksi baru. Instruksi-instruksi ini berkontribusi pada peningkatan vektorisasi kompiler dan memberikan dukungan untuk perhitungan \f{packed dword}. Di sisi lain, SSE4.2, yang pertama kali diperkenalkan dalam prosesor dengan mikroarsitektur Nehalem, menambahkan tujuh instruksi tambahan. Fokus utama dari instruksi-instruksi tambahan ini adalah pada pemrosesan string dan teks, serta peningkatan dalam kemampuan integer SIMD\cite{sse4reference}.
+Berdasarkan informasi dalam tabel \ref{table:perbandingan_sse4}, SSE4.1 dirancang untuk meningkatkan performa dalam aplikasi media, pencitraan, dan 3D, serta menghadirkan 47 instruksi baru. Instruksi-instruksi ini berkontribusi pada peningkatan vektorisasi kompiler dan memberikan dukungan untuk perhitungan \f{packed dword}. Di sisi lain, SSE4.2, yang pertama kali diperkenalkan dalam prosesor dengan mikroarsitektur Nehalem, menambahkan tujuh instruksi tambahan. Fokus utama dari instruksi-instruksi tambahan ini adalah pada pemrosesan string dan teks, serta peningkatan dalam kemampuan integer SIMD \cite{sse4reference}.
 
-SSE4 tidak memperkenalkan tipe data baru tetapi mencakup berbagai tipe instruksi seperti perkalian dword, \f{floating-point dot-product}, \f{streaming load hint}, \f{packed blending}, dan instruksi MIN/MAX \f{packed integer}. Teknologi ini bertujuan untuk meningkatkan dukungan untuk perhitungan \f{packed dword} dan meningkatkan throughput memori untuk jenis memori tertentu. SSE4 sepenuhnya kompatibel dengan perangkat lunak dari generasi sebelumnya dari prosesor Intel dan tidak memerlukan dukungan OS baru di luar apa yang diperlukan untuk Streaming SIMD Extensions (SSE) sebelumnya\cite{sse4reference}.
+SSE4 tidak memperkenalkan tipe data baru tetapi mencakup berbagai tipe instruksi seperti perkalian dword, \f{floating-point dot-product}, \f{streaming load hint}, \f{packed blending}, dan instruksi MIN/MAX \f{packed integer}. Teknologi ini bertujuan untuk meningkatkan dukungan untuk perhitungan \f{packed dword} dan meningkatkan throughput memori untuk jenis memori tertentu. SSE4 sepenuhnya kompatibel dengan perangkat lunak dari generasi sebelumnya dari prosesor Intel dan tidak memerlukan dukungan OS baru di luar apa yang diperlukan untuk Streaming SIMD Extensions (SSE) sebelumnya \cite{sse4reference}.

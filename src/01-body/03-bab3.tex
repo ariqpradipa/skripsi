@@ -1,7 +1,7 @@
 %-----------------------------------------------------------------------------%
 \chapter{\babTiga}
 %-----------------------------------------------------------------------------%
-Penelitian ini bertujuan untuk mengevaluasi konfigurasi Hypervisor KVM yang disediakan secara langsung dalam konteks penggunaan \vm\ pada Apache Cloudstack. Tujuan utama adalah untuk memastikan bahwa \vm\ dapat mencapai kinerja yang optimal sesuai dengan spesifikasi sistem yang digunakan. Untuk mencapai tujuan ini, \saya\ akan melakukan penyesuaian konfigurasi atau tuning pada Hypervisor KVM dan kemudian membandingkannya dengan kondisi awal yang tidak mengalami tuning. Hasil pengujian akan dianalisis untuk menentukan apakah ada perbedaan signifikan dalam kinerja antara Hypervisor KVM yang telah dituning dengan yang belum dituning.
+Penelitian ini bertujuan untuk mengevaluasi konfigurasi Hypervisor KVM yang disediakan secara default dalam konteks penggunaan \vm\ pada Apache Cloudstack. Tujuan utama adalah untuk memastikan bahwa \vm\ dapat mencapai kinerja yang optimal sesuai dengan spesifikasi sistem yang digunakan. Untuk mencapai tujuan ini, \saya\ akan melakukan penyesuaian konfigurasi atau tuning pada Hypervisor KVM dan kemudian membandingkannya dengan kondisi awal yang tidak mengalami tuning. Hasil pengujian akan dianalisis untuk menentukan apakah ada perbedaan signifikan dalam kinerja antara Hypervisor KVM yang telah dituning dengan yang belum dituning.
 
 %-----------------------------------------------------------------------------%
 \section{Tahapan Penelitian}
@@ -427,9 +427,11 @@ Terlihat pada gambar \ref{fig:lscpu_original} sama dengan Gambar \ref{fig:flag_k
 
 Untuk melakukan tuning flag pada Hypervisor KVM, langkah pertama yang harus dilakukan adalah melihat daftar lengkap virtual machine yang sedang berjalan di sistem. Hal ini dapat dilakukan dengan menggunakan perintah:
 
-\begin{lstlisting}
-    virsh list
-\end{lstlisting}
+\begin{listing}[H]
+    \begin{minted}{bash}
+    $ sudo virsh list
+    \end{minted}
+\end{listing}
 
 Keluaran dari perintah ini adalah:
 \begin{figure}
@@ -493,15 +495,19 @@ Kode \ref{code:default_kvm_xml} menampilkan konfigurasi flag default dari hyperv
 
 Pada kode \ref{code:ssse3_kvm_xml}, fitur \texttt{ssse3} ditambahkan dengan menambahkan baris \texttt{<feature policy='require' name='ssse3'/>} pada kode tersebut. Setelah mengubah file \texttt{tuned\_kvm.xml}, \saya\ menyimpan perubahan pada file tersebut. Selanjutnya, mematikan mesin virtual dengan menggunakan perintah \texttt{destroy}:
 
-\begin{lstlisting}
-    virsh destroy i-2-16-VM
-\end{lstlisting}
+\begin{listing}[H]
+    \begin{minted}{bash}
+    $ sudo virsh destroy i-2-16-VM
+    \end{minted}
+\end{listing}
 
 Setelah virtual machine dimatikan, langkah selanjutnya adalah membuat virtual machine baru berdasarkan konfigurasi yang telah diubah sebelumnya. Hal ini dapat dilakukan dengan menggunakan perintah:
 
-\begin{lstlisting}
-    virsh create tuned_kvm.xml
-\end{lstlisting}
+\begin{listing}[H]
+    \begin{minted}{bash}
+    $ sudo  virsh create tuned_kvm.xml
+    \end{minted}
+\end{listing}
 
 Dengan perintah ini maka \vm\ \texttt{i-2-16-VM} akan dibuat menggunakan konfigurasi \texttt{tuned\_kvm.xml}. Kita dapat melihat perubahan pada \vm\ \texttt{i-2-16-VM} dengan menggunakan perintah \texttt{lscpu} pada console virtual machine.
 
@@ -637,7 +643,7 @@ Pada pengujian enkripsi AES akan dilakukan dengan menggunakan library cryptograp
 %-----------------------------------------------------------------------------%
 \section{Skenario Analisis}
 %-----------------------------------------------------------------------------%
-Analisis akan dilakukan dengan melakukan perhitungan menggunakan formula \texttt{speedup}. Diasumsikan bahwa T(1) adalah waktu eksekusi Test dengan konfigurasi default, dan T(p) adalah waktu eksekusi Test dengan konfigurasi yang telah dituning\cite{beuwolfCetin}.
+Analisis akan dilakukan dengan melakukan perhitungan menggunakan formula \texttt{speedup}. Diasumsikan bahwa T(1) adalah waktu eksekusi Test dengan konfigurasi default, dan T(p) adalah waktu eksekusi Test dengan konfigurasi yang telah dituning \cite{beuwolfCetin}.
 
 Formula \texttt{speedup} dinyatakan sebagai berikut:
 
