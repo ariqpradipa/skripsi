@@ -7,7 +7,7 @@ Pada bab ini, akan dijelaskan mengenai landasan teori yang menjadi dasar untuk m
 %-----------------------------------------------------------------------------%
 \section{\cc}
 %-----------------------------------------------------------------------------%
-\cc, menurut definisi National Institute of Standards and Technology (NIST), merupakan suatu model komputasi yang menyediakan akses dan konfigurasi sumber daya komputasi seperti jaringan, server, penyimpanan, aplikasi, dan layanan secara on-demand, memungkinkan pelepasan yang cepat tanpa interaksi yang kompleks dengan penyedia layanan \cite{mell2009nist}. \cc\ bukanlah suatu teknologi spesifik, melainkan sebuah model yang menggambarkan operasional dan ekonomi untuk penyediaan serta penggunaan infrastruktur IT dan layanan terkait. Beberapa definisi cloud memiliki karakteristik umum yang sama, seperti \f{pay-per-use} (pembayaran sesuai dengan penggunaan), kapasitas yang elastis, layanan mandiri, dan abstraksi atau virtualisasi sumber daya \cite{Buyya_Broberg_Goscinski_2011}. NIST membagi model layanan cloud menjadi \cite{mell2009nist}:
+\cc, menurut definisi National Institute of Standards and Technology (NIST), merupakan suatu model komputasi yang menyediakan akses dan konfigurasi sumber daya komputasi seperti jaringan, server, penyimpanan, aplikasi, dan layanan secara on-demand, memungkinkan deployment yang cepat tanpa interaksi yang kompleks dengan penyedia layanan \cite{mell2009nist}. \cc\ bukanlah suatu teknologi spesifik, melainkan sebuah model yang menggambarkan operasional dan ekonomi untuk penyediaan serta penggunaan infrastruktur IT dan layanan terkait. Beberapa definisi cloud memiliki karakteristik umum yang sama, seperti \f{pay-per-use} (pembayaran sesuai dengan penggunaan), kapasitas yang elastis, layanan mandiri, dan abstraksi atau virtualisasi sumber daya \cite{Buyya_Broberg_Goscinski_2011}. NIST membagi model layanan cloud menjadi \cite{mell2009nist}:
 \begin{enumerate}
 	\item Software As A Service (SaaS)
 
@@ -35,7 +35,7 @@ Pada bab ini, akan dijelaskan mengenai landasan teori yang menjadi dasar untuk m
 	\caption{Logo Apache CloudStack}
 	\label{fig:LogoApacheCloudStack}
 \end{figure}
-Apache CloudStack adalah perangkat lunak \oss\ yang dirancang untuk mendeploy dan mengelola jaringan besar mesin virtual, sebagai platform komputasi awan berbasis Infrastructure as a Service (IaaS) yang sangat tersedia dan dapat \f{scaleable} \cite{cloudstackabout}. Pada Gambar \ref{fig:LogoApacheCloudStack} adalah logo dari Apache Cloudstack. CloudStack digunakan oleh sejumlah penyedia layanan untuk menawarkan layanan cloud publik, dan oleh banyak perusahaan untuk menyediakan penawaran cloud \f{on-premise} (pribadi), atau sebagai bagian dari solusi cloud hybrid \cite{cloudstackabout}.
+Apache CloudStack adalah perangkat lunak \oss\ yang dirancang untuk mendeploy dan mengelola jaringan mesin virtual yang besar, sebagai platform komputasi awan berbasis Infrastructure as a Service (IaaS) yang sangat tersedia dan dapat \f{scaleable} \cite{cloudstackabout}. Pada Gambar \ref{fig:LogoApacheCloudStack} adalah logo dari Apache Cloudstack. CloudStack digunakan oleh sejumlah penyedia layanan untuk menawarkan layanan cloud publik, dan oleh banyak perusahaan untuk menyediakan penawaran cloud \f{on-premise} (pribadi), atau sebagai bagian dari solusi cloud hybrid \cite{cloudstackabout}.
 
 CloudStack adalah solusi siap pakai yang mencakup seluruh "stack" fitur yang paling diinginkan oleh organisasi dengan IaaS cloud: orkestrasi komputasi, Jaringan sebagai Layanan, manajemen pengguna dan akun, dan antarmuka Pengguna (UI) yang baik \cite{cloudstackabout}.
 
@@ -101,6 +101,21 @@ Virtual Machine (VM) adalah sebuah lingkungan komputasi yang dibuat secara virtu
 Terdapat perbedaan dalam cara berjalan antara komputer tanpa virtualisasi (host) dan komputer yang divirtualisasi (guest) atau \vm. Pada Gambar 2.4, dapat diperlihatkan bahwa pada komputer tanpa virtualisasi, sistem operasinya berjalan langsung di atas perangkat keras, dengan driver yang berfungsi sebagai jembatan, sehingga aplikasi dapat berjalan langsung di atas sistem operasi tersebut. Di sisi lain, pada komputer yang divirtualisasi, sistem operasinya berjalan di atas VMM atau Virtual Machine Monitor, di mana satu VMM dapat menjalankan banyak sistem operasi guest.
 
 %-----------------------------------------------------------------------------%
+\section{virsh}
+%-----------------------------------------------------------------------------%
+virsh adalah \f{command line tool} yang merupakan bagian dari \f{library} libvirt dan secara utama digunakan untuk mengelola dan berinteraksi dengan teknologi virtualisasi pada sistem Linux, khususnya KVM (Kernel-based Virtual Machine) dan QEMU (Quick Emulator), dan mendukung hypervisor lainnya seperti Xen, LXC, OpenVZ, VirtualBox, dan VMware ESX \cite{libvirtLibvirtVirsh}.
+
+Secara sederhana penggunaan virsh adalah seperti ini
+\begin{center}
+	\begin{verbatim}
+		virsh [OPTION]... <command> <domain> [ARG]...
+	\end{verbatim}
+\end{center}
+
+Pada command ini, domain adalah ID domain numerik, atau nama domain, atau UUID domain; dan ARGS adalah opsi khusus dari command. Setiap command yang dimulai dengan \# dianggap sebagai komentar dan diabaikan oleh sistem, semua perintah yang tidak dikenali akan didiagnosis.
+
+
+%-----------------------------------------------------------------------------%
 \section{\f{Advanced Encryption Standard} (AES)}
 %-----------------------------------------------------------------------------%
 \f{Advanced Encryption Standard} atau disingkat AES pertama kali diumumkan oleh NIST \f{(National Institute Of Standards and Technology)} pada tahun 2001 sebagai pengganti algoritma \f{Data Encryption Standard} atau DES yang semakin mudah diretas. AES merupakan hasil dari kompetisi yang diadakan oleh NIST pada tahun 1997 yang dimenangkan oleh tim dari belgium yang memiliki nama asli Rijndael. Rijndael dikembangkan oleh dua orang kriptografer dari belgium bernama Joan Daemen dan Vincent Rijmen. AES dipublikasikan oleh NIST pada tahun 2001 dan tersebar secara efektif pada bulan May 2002 setelah disetujui oleh Menteri Perdagan Amerika, Donald Evans \cite{Kaffahemailencryptaes}.
@@ -132,22 +147,6 @@ Pada tahun 2010, Instruksi Intel® AES (AES-NI) diperkenalkan dengan prosesor In
 		      \item Implementasi seperti CRC-5, CRC-8, dan CRC-32 menunjukkan optimasi dan efisiensi yang spesifik untuk protokol dan sistem yang berbeda.
 	      \end{itemize}
 \end{enumerate}
-
-
-%-----------------------------------------------------------------------------%
-\section{virsh}
-%-----------------------------------------------------------------------------%
-
-virsh adalah \f{command line tool} yang merupakan bagian dari \f{library} libvirt dan secara utama digunakan untuk mengelola dan berinteraksi dengan teknologi virtualisasi pada sistem Linux, khususnya KVM (Kernel-based Virtual Machine) dan QEMU (Quick Emulator), dan mendukung hypervisor lainnya seperti Xen, LXC, OpenVZ, VirtualBox, dan VMware ESX \cite{libvirtLibvirtVirsh}.
-
-Secara sederhana penggunaan virsh adalah seperti ini
-\begin{center}
-	\begin{verbatim}
-		virsh [OPTION]... <command> <domain> [ARG]...
-	\end{verbatim}
-\end{center}
-
-Pada command ini, domain adalah ID domain numerik, atau nama domain, atau UUID domain; dan ARGS adalah opsi khusus dari command. Setiap command yang dimulai dengan \# dianggap sebagai komentar dan diabaikan oleh sistem, semua perintah yang tidak dikenali akan didiagnosis.
 
 %-----------------------------------------------------------------------------%
 \section{\f{Streaming SIMD Extensions}}

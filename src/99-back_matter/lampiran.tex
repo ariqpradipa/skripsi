@@ -6,7 +6,7 @@
 \begin{listing}[H]
     \begin{minted}{bash}
     #!/bin/bash
-    
+
     # Specify the path to your input video file
     input_file="timessquaredaywide.mp4"
 
@@ -14,7 +14,10 @@
     output_directory="output"
 
     # Specify the number of times to run the benchmark
-    num_runs=10
+    num_runs=100
+
+    # Initialize total time to zero
+    total_time=0
 
     # Loop to run the benchmark command multiple times
     for i in $(seq 1 $num_runs)
@@ -31,7 +34,16 @@
         elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
         
         echo "Benchmark $i completed in $elapsed_time seconds. Log saved to $log_file."
+        
+        # Accumulate the elapsed time
+        total_time=$(awk "BEGIN {print $total_time + $elapsed_time}")
     done
+
+    # Calculate the average time
+    average_time=$(awk "BEGIN {print $total_time / $num_runs}")
+
+    # Print the total average time
+    echo "Total average time for $num_runs benchmarks: $average_time seconds."
     \end{minted}
     \caption{Kode Pengujian Kompresi Video}
     \label{code:kode_pengujian_kompresi_video}
@@ -42,6 +54,7 @@
     import os
     import time
     import crc32c
+
 
     def benchmark_crc32c(data, iterations):
         # Perform CRC32 calculation
@@ -54,21 +67,22 @@
         avg_time = (end_time - start_time) / iterations
         return avg_time
 
+
     def main():
         # Define parameters
         data_size = 10 * 1024 * 1024  # Size of the data (10 MB)
-        num_iterations = 1000  # Number of iterations to average the time
+        num_iterations = 100  # Number of iterations to average the time
 
-        for i in range(10):
-            # Generate random data
-            data = bytearray(os.urandom(data_size))
+        # Generate random data
+        data = bytearray(os.urandom(data_size))
 
-            # Run the benchmark
-            avg_time_crc32c = benchmark_crc32c(data, num_iterations)
-            print(
-                f"Run {i + 1} Average time for CRC32 calculation: {avg_time_crc32c * 1000} ms"
-            )
-            
+        # Run the benchmark
+        avg_time_crc32c = benchmark_crc32c(data, num_iterations)
+        print(
+            f"Average time for CRC32 calculation: {avg_time_crc32c * 1000} ms"
+        )  # convert to ms
+
+
     main()
     \end{minted}
     \caption{Kode Pengujian Validasi Integritas Data}
@@ -84,7 +98,8 @@
 
     # Generate a random AES key and plaintext
     key = b"sixteenbytekey12"
-    plaintext = # Gambar Potongan Plaintext Data untuk AES Encryption Benchmark
+    plaintext = b"The Advanced Encryption Standard (AES) is a symmetric-key encryption algorithm that has become the de facto standard for securing sensitive data worldwide. Developed by Belgian cryptographers Joan Daemen and Vincent Rijmen, AES was adopted by the U.S. National Institute of Standards and Technology (NIST) in 2001 after a rigorous evaluation process involving numerous submissions from around the globe. AES replaced the aging Data Encryption Standard (DES) and its variants, which were becoming increasingly vulnerable to brute-force attacks due to advances in computing power. AES operates on fixed block sizes of 128 bits and supports key lengths of 128, 192, or 256 bits, with the latter providing the highest level of security. Its sophisticated mathematical structure, based on substitution-permutation networks, makes it highly resistant to various cryptanalytic attacks, including differential and linear cryptanalysis. AES employs multiple rounds of substitution, permutation, and key mixing operations to scramble the plaintext data, making it virtually impossible to decrypt without the correct key. One of the key strengths of AES is its versatility and flexibility. It can be implemented in hardware or software, making it suitable for a wide range of applications, from securing communication channels to protecting data at rest. AES has been extensively studied and scrutinized by cryptographers worldwide, and its strength lies in its ability to withstand known attacks while maintaining high performance. Consequently, AES has been widely adopted in various industries, including government, finance, healthcare, and telecommunications, as well as in protocols and standards such as TLS/SSL, IPsec, and wireless encryption standards like WPA2."
+
 
     # Function to perform AES encryption benchmark
     def aes_encrypt_benchmark(key, plaintext):
@@ -100,6 +115,7 @@
         end_time = time.time()
 
         return ciphertext, end_time - start_time
+
 
     # Function to perform AES decryption benchmark
     def aes_decrypt_benchmark(key, ciphertext):
@@ -129,26 +145,27 @@
         # print(f"AES Decryption Time: {(aes_time_decrypt * 1000):.5f} ms")
         return aes_time_encrypt, aes_time_decrypt
 
-    def main():
-        iterations = 1000
 
-        for i in range(10):
-            encrypt_time = 0
-            decrypt_time = 0
-            for _ in range(iterations):
-                encrypt_time_iter, decrypt_time_iter = run_benchmark()
-                encrypt_time += encrypt_time_iter
-                decrypt_time += decrypt_time_iter
+    def main(i):
+        iterations = 100
 
-            avg_encrypt_time = encrypt_time / iterations
-            avg_decrypt_time = decrypt_time / iterations
+        encrypt_time = 0
+        decrypt_time = 0
+        for _ in range(iterations):
+            encrypt_time_iter, decrypt_time_iter = run_benchmark()
+            encrypt_time += encrypt_time_iter
+            decrypt_time += decrypt_time_iter
 
-            print(f"Run {i+1} Average AES Encryption Time: {(avg_encrypt_time * 1000):.5f} ms")
-            print(
-                f"Run {i+1} Average AES Decryption Time: {(avg_decrypt_time * 1000):.5f} ms\n"
-            )
+        avg_encrypt_time = encrypt_time / iterations
+        avg_decrypt_time = decrypt_time / iterations
 
-    main()
+        print(f"Run {i+1} Average AES Encryption Time: {(avg_encrypt_time * 1000):.5f} ms")
+        print(
+            f"Run {i+1} Average AES Decryption Time: {(avg_decrypt_time * 1000):.5f} ms\n"
+        )
+        
+    for i in range(1):
+        main(i)
     \end{minted}
     \caption{Kode Pengujian Enkripsi AES}
     \label{code:pengujian_enkripsi_aes}

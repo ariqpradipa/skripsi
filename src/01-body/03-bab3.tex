@@ -265,7 +265,7 @@ Kemudian \saya\ menambahkan konfigurasi berikut ini di \texttt{/etc/sysctl.conf}
     \end{minted}
 \end{listing}
 
-Pad perintah ini pertama, akan dibuka file \texttt{/etc/sysctl.conf} menggunakan teks editor nano. Kemudian, dengan menambahkan baris \texttt{net.bridge.bridge-nf-call-arptables = 0} dan \texttt{net.bridge.bridge-nf-call-iptables = 0} ke dalam file tersebut, Ini akan mematikan fungsi kernel yang biasanya dipanggil saat menggunakan Docker dan jembatan jaringan (bridge). Ini penting karena beberapa layanan, seperti Docker, kadang memerlukan konfigurasi khusus agar berjalan dengan lancar di lingkungan host. Terakhir, dengan menjalankan perintah \texttt{sysctl -p}, perubahan konfigurasi yang telah dibuat akan diterapkan tanpa harus me-reboot sistem, sehingga memungkinkan kernel untuk memuat ulang konfigurasi yang baru diterapkan.
+Pada perintah ini pertama, akan dibuka file \texttt{/etc/sysctl.conf} menggunakan teks editor nano. Kemudian, dengan menambahkan baris \texttt{net.bridge.bridge-nf-call-arptables = 0} dan \texttt{net.bridge.bridge-nf-call-iptables = 0} ke dalam file tersebut, Ini akan mematikan fungsi kernel yang biasanya dipanggil saat menggunakan Docker dan jembatan jaringan (bridge). Ini penting karena beberapa layanan, seperti Docker, kadang memerlukan konfigurasi khusus agar berjalan dengan lancar di lingkungan host. Terakhir, dengan menjalankan perintah \texttt{sysctl -p}, perubahan konfigurasi yang telah dibuat akan diterapkan tanpa harus me-reboot sistem, sehingga memungkinkan kernel untuk memuat ulang konfigurasi yang baru diterapkan.
 
 Setelah itu \saya\ akan mengenerate host id dengan uuid, hal ini dapat dilakukan dengan perintah:
 
@@ -573,7 +573,7 @@ Untuk melakukan pengujian dengan validasi integritas data akan digunakan konfigu
 \end{listing}
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi Hypervisor KVM untuk Enkripsi AES}
+\subsection{Konfigurasi Hypervisor KVM untuk Enkripsi dan Dekripsi AES}
 %-----------------------------------------------------------------------------%
 Untuk melakukan pengujian dengan enkripsi AES akan digunakan konfigurasi seperti pada kode \ref{code:tuned_enkripsi_aes}. Flag yang akan digunakan adalah aes. Flag ini dipilih dikarenakan salah satu kemampuan yang dimiliki oleh flag ini adalah mendukung instruksi AES yang akan digunakan untuk enkripsi AES.
 
@@ -628,7 +628,7 @@ Pada pengujian kompresi video akan dilakukan dengan menggunakan perangkat lunak 
 Pada pengujian validasi integritas data akan dilakukan dengan menggunakan library crc32c dari python untuk melakukan validasi pada sebuah data. Flow untuk melakukan pengujian validasi integritas data dapat dilihat pada gambar \ref{fig:flowchart_crc32}. Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan perhitungan CRC32 pada data bytearray yang berukuran 10 MB. Pengujian ini akan dijalankan sebanyak 100 kali per tuning kemudian diukur waktu yang diperlukan untuk menyelesaikan proses perhitungan CRC32. Kode python lengkap yang digunakan untuk melakukan pengujian validasi integritas data dapat dilihat di \textbf{kode \ref{code:kode_pengujian_validasi_integritas_data}} pada lampirn.
 
 %-----------------------------------------------------------------------------%
-\subsection{Skenario Pengujian Enkripsi AES}
+\subsection{Skenario Pengujian Enkripsi dan Dekripsi AES}
 %-----------------------------------------------------------------------------%
 \begin{figure}
     \centering
@@ -638,7 +638,7 @@ Pada pengujian validasi integritas data akan dilakukan dengan menggunakan librar
     \label{fig:flowchart_aes}
 \end{figure}
 
-Pada pengujian enkripsi AES akan dilakukan dengan menggunakan library cryptography dari python untuk melakukan enkripsi AES. Flow untuk melakukan pengujian dengan enkripsi dan dekripsi AES dapat dilihat pada gambar \ref{fig:flowchart_aes} Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan enkripsi AES pada data teks yang dapat dilihat pada Gambar \ref{fig:aesPlaintextData}. Pengujian ini akan dijalankan sebanyak 100 kali per tuning dan diukur waktu yang diperlukan untuk menyelesaikan proses enkripsi dan dekripsi AES. Kode python yang digunakan untuk melakukan pengujian enkripsi AES dapat dilihat di \textbf{kode \ref{code:pengujian_enkripsi_aes}} pada lampiran.
+Pada pengujian enkripsi dan dekripsi AES akan dilakukan dengan menggunakan library cryptography dari python untuk melakukan enkripsi AES. Flow untuk melakukan pengujian dengan enkripsi dan dekripsi AES dapat dilihat pada gambar \ref{fig:flowchart_aes} Pengujian ini akan mengukur waktu yang diperlukan untuk melakukan enkripsi AES pada data teks yang dapat dilihat pada Gambar \ref{fig:aesPlaintextData}. Pengujian ini akan dijalankan sebanyak 100 kali per tuning dan diukur waktu yang diperlukan untuk menyelesaikan proses enkripsi dan dekripsi AES. Kode python yang digunakan untuk melakukan pengujian enkripsi AES dapat dilihat di \textbf{kode \ref{code:pengujian_enkripsi_aes}} pada lampiran.
 
 %-----------------------------------------------------------------------------%
 \section{Skenario Analisis}
