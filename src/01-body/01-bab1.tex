@@ -13,7 +13,7 @@ Pengguna dapat membuat sistem \cc nya sendiri dengan menggunakan \f{Cloud Manage
 
 Untuk menjalankan Apache Cloudstack diperlukan sebuah hypervisor. Hypervisor atau biasa juga dikenal sebagai \f{Virtual Machine Monitor} adalah komponen virtualisasi yang mengawasi dan mengelola sistem operasi \f{guest} pada sistem \f{host} \cite{scarfone2009nist}. Hypervisor mengontrol komunikasi instruksi antara sistem operasi \f{guest} dan \f{hardware} dari \f{host} \cite{scarfone2009nist}.
 
-Penggunaan KVM sebagai hypervisor untuk menjalankan \vm\ pada Apache Cloudstack telah menjadi praktik umum. Hypervisor KVM \f{(Kernel-based Virtual Machine)} adalah sebuah hypervisor berbasis kernel yang memungkinkan virtualisasi pada sistem operasi Linux \cite{whatiskvm}. KVM memanfaatkan modul kernel untuk menyediakan dukungan langsung untuk virtualisasi dengan menggunakan instruksi \f{hardware} yang mendukung teknologi virtualisasi, seperti Intel VT atau AMD-V. Namun, pertanyaan mendasar muncul: apakah hypervisor ini telah dikonfigurasi secara optimal untuk menjalankan \vm\ dan mengerjakan tugas yang diberikan dengan baik? Penelitian ini bertujuan untuk menganalisis apakah konfigurasi hypervisor KVM telah diatur dengan tepat dan baik. Pada penelitian ini, \saya\ akan menguji performa hypervisor dengan melakukan beberapa tugas komputasi, seperti kompresi video, enkripsi, dekripsi, dan juga validasi integritas data. Selanjutnya, waktu yang diperlukan untuk menyelesaikan proses komputasi ini akan diukur dan dibandingkan dalam rangka evaluasi performa.
+Penggunaan KVM sebagai hypervisor untuk menjalankan \vm\ pada Apache Cloudstack telah menjadi praktik umum. Hypervisor KVM \f{(Kernel-based Virtual Machine)} adalah sebuah hypervisor berbasis kernel yang memungkinkan virtualisasi pada sistem operasi Linux \cite{whatiskvm}. KVM memanfaatkan modul kernel untuk menyediakan dukungan langsung untuk virtualisasi dengan menggunakan instruksi \f{hardware} yang mendukung teknologi virtualisasi, seperti Intel VT atau AMD-V. Namun, pertanyaan mendasar muncul: apakah hypervisor ini telah dikonfigurasi secara optimal untuk menjalankan \vm\ dan mengerjakan tugas yang diberikan dengan baik? Penelitian ini bertujuan untuk menganalisis apakah konfigurasi hypervisor KVM telah diatur dengan tepat dan baik. Pada penelitian ini, \saya\ akan menguji performa hypervisor dengan melakukan beberapa tugas komputasi, seperti kompresi video \cite{Folgar2014eg}, enkripsi, dekripsi, dan juga validasi integritas data. Selanjutnya, waktu yang diperlukan untuk menyelesaikan proses komputasi ini akan diukur dan dibandingkan dalam rangka evaluasi performa.
 
 
 %-----------------------------------------------------------------------------%
@@ -44,7 +44,7 @@ Karena berbagai kendala yang dihadapi pada skripsi ini dilakukan pembatasan masa
             \end{itemize}
       \item Sistem operasi yang digunakan adalah Ubuntu Server 22.04 LTS.
       \item Karena perangkat menggunakan CPU AMD, implementasi teknologi virtualisasi yang diadopsi adalah AMD-V.
-      \item Parameter yang menjadi fokus analisis dalam penelitian ini adalah rata-rata perbedaan waktu kompresi video, waktu enkrispsi dengan AES, dan waktu validasi integritas data dengan CRC32 antara hypervisor default dan hypervisor yang telah dituning.
+      \item Parameter yang menjadi fokus analisis dalam penelitian ini adalah waktu kompresi video, waktu enkrispsi dan dekripsi dengan AES, dan waktu validasi integritas data dengan CRC32 antara hypervisor default dan hypervisor yang telah dituning.
 \end{enumerate}
 
 
@@ -97,7 +97,7 @@ Beberapa metodologi yang dilakukan pada penelitian ini, antara lain:
 %-----------------------------------------------------------------------------%
 \section{Sistematika Penulisan}
 %-----------------------------------------------------------------------------%
-Pada penulisan skripsi ini terdiri dari 3 bab dengan pokok bahasan yang berbeda-beda untuk setiap bab.
+Pada penulisan skripsi ini terdiri dari 5 bab dengan pokok bahasan yang berbeda-beda untuk setiap bab.
 \begin{itemize}
       \item BAB I PENDAHULUAN
 
