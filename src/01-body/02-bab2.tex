@@ -45,6 +45,11 @@ Pengguna dapat mengelola cloud mereka dengan antarmuka web yang mudah digunakan,
 
 CloudStack, yang awalnya dikembangkan oleh Cloud.com, diakuisisi oleh Citrix pada tahun 2011 dan diserahkan kepada Apache Software Foundation pada tahun 2012. Pengembangan saat ini diatur oleh Apache Foundation dengan kode yang tersedia di bawah lisensi Apache 2.0 \cite{techtargetcloudstack}.
 
+Terdapat \f{Cloud Management Platform} lain selain Apache CloudStack seperti OpenStack dan OpenNebula. Namun, pada penelitian ini, digunakan Apache CloudStack karena platform ini merupakan solusi cloud yang kuat dan matang yang menyediakan berbagai fitur dan kemampuan yang diperlukan untuk mendeploy dan mengelola infrastruktur cloud.
+
+CloudStack mendukung berbagai hypervisor, termasuk KVM, yang akan digunakan dalam penelitian ini. Dukungan untuk berbagai hypervisor ini memungkinkan fleksibilitas dalam memilih dan mengonfigurasi lingkungan virtualisasi sesuai dengan kebutuhan spesifik penelitian. Selain itu, CloudStack memiliki mekanisme integrasi yang mulus dengan perangkat keras dan perangkat lunak jaringan serta penyimpanan, menjadikannya platform yang handal untuk implementasi skala besar.
+
+Keunggulan lain dari Apache CloudStack adalah antarmuka pengguna yang ramah serta API yang memiliki banyak fungsi, memungkinkan pengguna untuk mengelola cloud mereka dengan mudah dan efisien. Antarmuka yang intuitif ini mengurangi kompleksitas pengelolaan infrastruktur cloud dan meminimalkan kurva pembelajaran, yang sangat menguntungkan dalam konteks penelitian di mana efisiensi waktu sangat penting. Dengan dukungan komunitas yang kuat dan fitur yang lengkap, Apache CloudStack juga menawarkan stabilitas dan reliabilitas yang tinggi.
 
 %-----------------------------------------------------------------------------%
 \section{Hypervisor}
@@ -84,6 +89,8 @@ Dalam pengaturan KVM, CPU virtual dari VM diimplementasikan sebagai thread (dise
 
 Pada Gambar \ref{fig:xen-kvm} adalah struktur daripada hypervisor KVM. KVM berjalan langsung pada kernel linux host dan membagikan resourcenya kepada guest \vm, sedangkan sistem operasi host berjalan langsung diatas kernel host. Sistem operasi host dapat melakukan konfigurasi kepada \vm\ yang menggunakan hypervisor miliknya.
 
+Pada penelitian ini digunakan Hypervisor KVM karena KVM adalah hypervisor tipe 1 yang berjalan langsung di atas kernel Linux host dan membagikan sumber dayanya kepada guest \vm\. Hal ini dapat meningkatkan performa dan efisiensi \vm\ yang berjalan di atasnya. Selain itu, KVM sudah terintegrasi dengan kernel Linux, sehingga tidak memerlukan instalasi tambahan. KVM juga dikenal memiliki dukungan komunitas yang luas dan fitur keamanan yang kuat, menjadikannya pilihan yang andal dan terpercaya untuk virtualisasi.
+
 %-----------------------------------------------------------------------------%
 \section{\f{Virtual Machine}}
 %-----------------------------------------------------------------------------%
@@ -114,6 +121,17 @@ Secara sederhana penggunaan virsh adalah seperti ini
 
 Pada command ini, domain adalah ID domain numerik, atau nama domain, atau UUID domain; dan ARGS adalah opsi khusus dari command. Setiap command yang dimulai dengan \# dianggap sebagai komentar dan diabaikan oleh sistem, semua perintah yang tidak dikenali akan didiagnosis.
 
+%-----------------------------------------------------------------------------%
+\section{\f{CPU Feature Flags}}
+%-----------------------------------------------------------------------------%
+
+\f{CPU feature flags} adalah indikator kemampuan atau fitur khusus yang dimiliki oleh sebuah CPU. Mereka terdiri dari bit-bit status yang menunjukkan dukungan untuk berbagai instruksi dan teknologi. Feature flags ini membantu sistem operasi dan perangkat lunak untuk memanfaatkan fitur-fitur spesifik dari prosesor, seperti instruksi SIMD (Single Instruction, Multiple Data), kemampuan virtualisasi, dan fitur keamanan \cite{torvaldsLinux}.
+
+Salah satu contoh feature flag adalah SSE (Streaming SIMD Extensions), yang menunjukkan dukungan untuk instruksi SIMD yang mempercepat pemrosesan data vektor, meningkatkan kinerja aplikasi multimedia dan scientific. Contoh lain adalah AVX (Advanced Vector Extensions), yang meningkatkan kinerja komputasi floating-point, sangat berguna dalam aplikasi yang memerlukan perhitungan numerik intensif. Ada juga VT-x (Intel Virtualization Technology), yang menunjukkan dukungan untuk fitur virtualisasi dari Intel, memungkinkan sistem untuk menjalankan beberapa sistem operasi dalam satu waktu dengan efisien. NX (No-eXecute) bit adalah feature flag lain yang menunjukkan dukungan untuk mencegah eksekusi kode dari halaman memori tertentu, meningkatkan keamanan sistem dari serangan berbahaya.
+
+Sistem operasi menggunakan CPU feature flags untuk mengoptimalkan penggunaan prosesor dan memastikan kompatibilitas dengan perangkat lunak. Perangkat lunak juga memeriksa feature flags ini untuk memutuskan apakah fitur tertentu dapat digunakan atau jika fallback (alternatif) diperlukan. Misalnya, jika sebuah aplikasi membutuhkan instruksi AVX untuk kinerja optimal tetapi tidak menemukan dukungan tersebut, aplikasi tersebut mungkin akan menggunakan metode alternatif yang lebih lambat. Dengan cara ini, feature flags memungkinkan perangkat lunak untuk beradaptasi dengan berbagai konfigurasi perangkat keras.
+
+Pada konfigurasi default KVM di Apache CloudStack, tidak semua fitur flag dari CPU host diwariskan ke VM yang berjalan di atasnya. Untuk mengaktifkan fitur-fitur tertentu, seperti VT-x atau AMD-V, perlu dilakukan konfigurasi tambahan pada VM tersebut. Jika fitur-fitur tersebut diaktifkan secara default, VM akan dapat mengakses sumber daya perangkat keras secara langsung, yang dapat membahayakan keamanan sistem. Selain itu, hal ini akan menyulitkan proses migrasi karena setiap CPU host memiliki fitur flag yang berbeda-beda \cite{apacheHostInstallation}.
 
 %-----------------------------------------------------------------------------%
 \section{\f{Advanced Encryption Standard} (AES)}

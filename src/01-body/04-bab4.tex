@@ -1,14 +1,14 @@
 %-----------------------------------------------------------------------------%
 \chapter{\babEmpat}
 %-----------------------------------------------------------------------------%
-Pada bab ini, hasil dari pengujian tuning Hypervisor KVM akan dijelaskan. Proses pengujian tersebut melibatkan penggunaan program benchmark yang telah dijelaskan secara rinci pada bab 3. Dalam pengujian ini, \saya\ mengeksplorasi berbagai parameter dan konfigurasi yang dapat diterapkan pada Hypervisor KVM untuk meningkatkan kinerja dan efisiensi sistem secara keseluruhan. Selain itu, \saya\ juga melakukan analisis terhadap data pengujian.
+Pada bab ini, hasil dari pengujian konfigurasi Hypervisor KVM akan dijelaskan. Proses pengujian tersebut melibatkan penggunaan program benchmark yang telah dijelaskan secara rinci pada bab 3. Dalam pengujian ini, \saya\ mengeksplorasi berbagai parameter dan konfigurasi yang dapat diterapkan pada Hypervisor KVM untuk meningkatkan kinerja dan efisiensi sistem secara keseluruhan. Selain itu, \saya\ juga melakukan analisis terhadap data pengujian.
 
 %-----------------------------------------------------------------------------%
-\section{Hasil Tuning Hypervisor KVM dengan Kompresi Video}
+\section{Hasil Konfigurasi Hypervisor KVM dengan Kompresi Video}
 %-----------------------------------------------------------------------------%
-Pada bagian ini akan dijelaskan hasil pengujian tuning Hypervisor KVM dengan menggunakan program benchmark yang telah dibuat sebelumnya dengan melakukan kompresi video.
+Pada bagian ini akan dijelaskan hasil pengujian konfigurasi Hypervisor KVM dengan menggunakan program benchmark yang telah dibuat sebelumnya dengan melakukan kompresi video.
 
-Dibawah ini merupakan daftar konfigurasi yang digunakan dalam pengujian tuning Hypervisor KVM dengan kompresi video:
+Dibawah ini merupakan daftar konfigurasi yang digunakan dalam pengujian konfigurasi Hypervisor KVM dengan kompresi video:
 
 \begin{multicols}{2}
     \begin{enumerate}
@@ -143,11 +143,11 @@ Grafik \ref{fig:video_compression_test_average_graph} menampilkan rata-rata wakt
 Grafik \ref{fig:video_compression_test_graph} menampilkan \f{speedup} dari berbagai konfigurasi berdasarkan gambar gambar \ref{fig:video_compression_test_configuration}. Dari grafik tersebut, terlihat bahwa konfigurasi dengan \f{speedup} tertinggi adalah SSSE3 + SSE4.1 + SSE4.2 + SSE4a dengan nilai \f{speedup} 2.4, disertai dengan rata-rata waktu kompresi selama 57.7 detik. Keempat flag ini memberikan peningkatan performa yang signifikan untuk melakukan kompresi video. Namun jika dilihat dari hasil lainnya, flag yang sangat berpengaruh adalah SSSE3 dan SSE4.1, dimana untuk SSSE3 saja memiliki nilai \f{speedup} sebesar 1.12, dan untuk SSE4.1 saja memiliki nilai \f{speedup} paling besar yaitu di 1.95. SSSE3 memberikan peningkatan performa karena fiturnya yang dirancang khusus untuk HD audio/video decoding/encoding, sementara SSE4.1 menambahkan instruksi baru seperti \texttt{MPSADBW}, penting untuk beberapa codec \f{High Definition}, dan memungkinkan perhitungan perbedaan blok 8×8 dalam waktu kurang dari tujuh siklus.
 
 %-----------------------------------------------------------------------------%
-\section{Hasil Tuning Hypervisor KVM dengan Validasi Integritas Data}
+\section{Hasil Konfigurasi Hypervisor KVM dengan Validasi Integritas Data}
 %-----------------------------------------------------------------------------%
-Pada bagian ini akan dijelaskan hasil pengujian tuning hypervisor KVM dengan validasi integritas data dengan menggunakan program benchmark kode \ref{code:kode_pengujian_validasi_integritas_data}.
+Pada bagian ini akan dijelaskan hasil pengujian konfigurasi hypervisor KVM dengan validasi integritas data dengan menggunakan program benchmark kode \ref{code:kode_pengujian_validasi_integritas_data}.
 
-Flag yang digunakan untuk konfigurasi dalam pengujian tuning Hypervisor KVM dengan validasi integritas data adalah SSE4.2.
+Flag yang digunakan untuk konfigurasi dalam pengujian konfigurasi Hypervisor KVM dengan validasi integritas data adalah SSE4.2.
 
 \begin{figure}
     \centering
@@ -228,11 +228,11 @@ Grafik \ref{fig:file_integrity_test_average_graph} menunjukkan rata-rata waktu y
 Grafik \ref{fig:file_integrity_test_graph} menunjukkan \f{speedup} dari setiap konfigurasi yang diuji. Dari grafik tersebut, dapat dilihat bahwa konfigurasi yang memiliki \f{speedup} tertinggi adalah konfigurasi SSE4.2 dengan nilai \f{speedup} 7.56, dengan rata-rata waktu untuk melakukan validasi integritas data selama 0.55 ms. Flag SSE4.2 terbukti meningkatkan performa dalam perhitungan CRC32 karena SSE4.2 memiliki fungsi yang dibuat secara khusus untuk melakukan perhitungan CRC32.
 
 %-----------------------------------------------------------------------------%
-\section{Hasil Tuning Hypervisor KVM dengan Enkripsi dan Dekripsi AES}
+\section{Hasil Konfigurasi Hypervisor KVM dengan Enkripsi dan Dekripsi AES}
 %-----------------------------------------------------------------------------%
-Pada bagian ini akan dijelaskan hasil pengujian tuning hypervisor KVM dengan enkripsi AES dengan menggunakan program benchmark kode \ref{code:pengujian_enkripsi_aes}.
+Pada bagian ini akan dijelaskan hasil pengujian konfigurasi hypervisor KVM dengan enkripsi AES dengan menggunakan program benchmark kode \ref{code:pengujian_enkripsi_aes}.
 
-Flag yang digunakan untuk konfigurasi dalam pengujian tuning Hypervisor KVM dengan enkripsi dan dekripsi AES adalah AES-NI.
+Flag yang digunakan untuk konfigurasi dalam pengujian konfigurasi Hypervisor KVM dengan enkripsi dan dekripsi AES adalah AES-NI.
 
 \begin{figure}
     \centering
